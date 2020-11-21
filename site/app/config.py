@@ -1,14 +1,12 @@
 import os
-import logging
 from pathlib import Path
 
 from dotenv import load_dotenv
-from jinja2 import select_autoescape
 
 env = Path("..") / ".env"
 load_dotenv(dotenv_path=env)
 
-from app.utils import randomString, randomKey, ConsoleFormat
+from app.utils.auth import randomString, randomKey
 
 
 def loadConfig(config, app):
@@ -20,41 +18,9 @@ def loadConfig(config, app):
     app.config.from_object(configs[config])
 
 
-class AppFormatter(logging.Formatter):
-    colours = {
-        logging.DEBUG: ConsoleFormat.Blue,
-        logging.INFO: ConsoleFormat.Green,
-        logging.WARNING: ConsoleFormat.Yellow,
-        logging.ERROR: ConsoleFormat.Red,
-    }
-
-    def format(self, record):
-        l = f"[%(asctime)s][{ self.colours[record.levelno] }{ ConsoleFormat.Bold }%(levelname)s{ ConsoleFormat.Reset}] %(message)s"
-        f = logging.Formatter(l)
-        return f.format(record)
-
-
-def setupLogging():
-    level = os.getenv("LOG_LEVEL", "INFO")
-
-    logger = logging.getLogger("app")
-    logger.setLevel(level)
-
-    handler = logging.StreamHandler()
-    handler.setLevel(level)
-    handler.setFormatter(AppFormatter())
-
-    logger.addHandler(handler)
-
-
-def enableAutoescape(app):
-    app.jinja_env.autoescape = select_autoescape(default_for_string=True, default=True)
-
-
 class Config:
     NAME = os.getenv("NAME", "Flask App")
     SECRET_KEY = os.getenv("SECRET_KEY", randomString(25))
-    ROOT_KEY = os.getenv("ROOT_KEY", randomKey(8))
 
     CSP = {
         "default-src": [
@@ -97,13 +63,10 @@ class Config:
 
 
 class DevConfig(Config):
-    STREAM_AUTH_KEY = "WOW"
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{ os.getenv('DEV_DB_FILE', '')}"
 
 
 class ProdConfig(Config):
-    STREAM_AUTH_KEY = os.getenv("STREAM_AUTH_KEY")
-
     user = os.getenv("DB_USER")
     password = os.getenv("DB_PASS")
     server = os.getenv("DB_HOST", "127.0.0.1")

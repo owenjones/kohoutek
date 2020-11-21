@@ -65,7 +65,7 @@
 #     u = User.query.filter_by(username=username).first()
 #
 #     if u and not u.hasPermission(Permission.LOGIN):
-#         flash("This user is not permitted to login", "danger")
+# flash("This user is not permitted to login", "danger")
 #         return render_template("auth/login.jinja", back=request.form["return"])
 #
 #     if u and u.validateKey(request.form["key"]):

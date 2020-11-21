@@ -8,7 +8,9 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_json import FlaskJSON
 
-from app.config import loadConfig, setupLogging, enableAutoescape
+from app.config import loadConfig
+from app.utils import enableAutoescape
+from app.utils.logging import setupLogging
 
 talisman = Talisman()
 compress = Compress()
