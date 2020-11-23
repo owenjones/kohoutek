@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app import db
-from app.models import User, Group, Role, Message
+from app.models import Organisation, County, District
 
 
 def seed(app):
@@ -15,48 +15,43 @@ def seed(app):
         db.create_all()
 
         app.logger.info("...created!")
-        app.logger.info("Adding root user...")
 
-        rkey = os.getenv("ROOT_KEY", None)
-        u = User(username="admin", key=rkey, role=Role.ADMIN)
-        db.session.add(u)
+        app.logger.info("Adding District/Division data...")
 
-        app.logger.info(f"...root user added, key: { rkey }")
-        app.logger.info("Adding Group data...")
-
-        groups = [
-            "1st Bishopston",
-            "3rd Bristol",
-            "4th Bristol (1st Southmead)",
-            "7th Bristol (Christ Church Clifton)",
-            "18th Bristol (1st Redland Green)",
-            "26th Bristol (North Cote)",
-            "43rd Bristol (St. Mary's Stoke Bishop)",
-            "44th Bristol (White Tree)",
-            "62nd Bristol (Horfield Methodist and Parish Church)",
-            "63rd Bristol (St. Andrew's with St. Bartholomew's)",
-            "77th Bristol (Redland Park)",
-            "90th Bristol (Westbury Methodists)",
-            "91st Bristol (Horfield Baptist)",
-            "126th Bristol (Sea Mills)",
-            "167th Bristol (Westbury Baptist)",
-            "169th Bristol (Brentry)",
-            "191st Bristol (St. Mary's Shirehampton)",
-            "227th Bristol (St. Peter's)",
-            "Cabot Explorers",
-            "Gromit Network",
+        districts = [
+            ("Axe", County.avon),
+            ("Bath", County.avon),
+            ("Bristol South", County.avon),
+            ("Brunel", County.avon),
+            ("Cabot", County.avon),
+            ("Cotswold Edge", County.avon),
+            ("Gordano", County.avon),
+            ("Kingswood", County.avon),
+            ("Wansdyke", County.avon),
+            ("Bristol North East", County.bsg),
+            ("Bristol North West", County.bsg),
+            ("Bristol South", County.bsg),
+            ("Bristol South West", County.bsg),
+            ("Concorde", County.bsg),
+            ("Frome Valley", County.bsg),
+            ("Kingswood North", County.bsg),
+            ("Kingswood South", County.bsg),
+            ("Severnvale", County.bsg),
+            ("South Cotswold", County.bsg),
+            ("Avon Valley South", County.sn),
+            ("Bath", County.sn),
+            ("Cam Valley", County.sn),
+            ("Portishead", County.sn),
+            ("Weston-super-Mare", County.sn),
+            ("Wraxhall", County.sn),
+            ("Yeo Vale", County.sn),
         ]
-        for group in groups:
-            g = Group(name=group)
-            db.session.add(g)
-            app.logger.info(f" - added { g.name }")
+        for name, county in districts:
+            d = District(name=name, county=county)
+            db.session.add(d)
+            app.logger.info(f" - added { d.name }")
 
-        app.logger.info("...Groups added!")
-
-        app.logger.info("Adding livestream message...")
-        m = Message(message="", updated_by=0)
-        db.session.add(m)
-        app.logger.info("...message added")
+        app.logger.info("...Districts/Divisions added!")
 
         db.session.commit()
 
