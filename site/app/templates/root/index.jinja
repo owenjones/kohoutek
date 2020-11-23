@@ -1,9 +1,9 @@
-{% extends "root/layout.jinja" %}
+{% extends "root/template.jinja" %}
 {% block body %}
-{% include "root/s/menu.jinja" %}
-{% include "root/s/home.jinja" %}
-{% include "root/s/about.jinja" %}
-{% include "root/s/signup.jinja" %}
-{#}{% include "root/s/history.jinja" %}{#}
-{#}{% include "root/s/footer.jinja" %}{#}
+  {% include "root/section/menu.jinja" %}
+  {% include "root/section/home.jinja" %}
+  {% include "root/section/about.jinja" %}
+  {% include "root/section/signup.jinja" %}
+  {% include "root/section/history.jinja" %}
+  {#}{% include "root/section/footer.jinja" %}{#}
 {% endblock %}
