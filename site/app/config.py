@@ -20,6 +20,7 @@ def loadConfig(config, app):
 
 class Config:
     NAME = os.getenv("NAME", "Flask App")
+    ROOT_KEY = os.getenv("ROOT_KEY", randomKey(12))
     SECRET_KEY = os.getenv("SECRET_KEY", randomString(25))
 
     MAIL = {
@@ -31,14 +32,8 @@ class Config:
     }
 
     CSP = {
-        # "default-src": [
-        #     "'self'",
-        #     "fonts.googleapis.com",
-        #     "fonts.gstatic.com",
-        #     "docs.google.com",
-        #     "*.youtube.com",
-        # ],
-        # "img-src": ["*", "data:"],
+        "default-src": ["'self'", "fonts.googleapis.com", "fonts.gstatic.com"],
+        "img-src": ["*", "data:"],
     }
 
     COMPRESS_MIMETYPES = [
