@@ -59,7 +59,7 @@ class Entry(db.Model):
 
     def sendConfirmationEmail(self):
         send = sendmail(
-            "owen@owenjones.net",  # REPLACE WITH self.contact_email
+            self.contact_email,
             "Kohoutek 2021 Entry",
             "signup-confirmation",
             confirmation_link=self.portal_link,
