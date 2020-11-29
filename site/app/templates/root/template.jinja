@@ -3,14 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="Kohoutek 2021"/>
+    <meta property="og:description" content="Kohoutek is (normally) a competition and activity day for Scouts in Avon County, and Guides in Bristol and South Gloucestershire, and Somerset North counties, organised by students from the University of Bristol Guides and Scouts society (UOBGAS). Due to the uncertainty over the coming months around being able to run large events in person, for 2021 we're planning to run Kohoutek as an online event!" />
+    <meta property="og:image" content="{{ url_for('static', filename='img/og.jpg', _external=True)}}" />
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png')}}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}" />
     <script src="{{ url_for('static', filename='js/uikit.min.js')}}" defer></script>
     <script src="{{ url_for('static', filename='js/uikit-icons.min.js')}}" defer></script>
-    <script src="{{ url_for('static', filename='js/sign-up.js')}}" defer></script>
+    {% block headjs %}{% endblock %}
     <title>Kohoutek 2021</title>
   </head>
-  <body class="uk-height-viewport">
+  <body class="under-the-sea uk-height-viewport">
     {% block body %}{% endblock %}
   </body>
 </html>

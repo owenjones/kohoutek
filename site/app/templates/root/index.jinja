@@ -1,4 +1,7 @@
 {% extends "root/template.jinja" %}
+{% block headjs %}
+<script src="{{ url_for('static', filename='js/sign-up.js')}}" defer></script>
+{% endblock %}
 {% block body %}
   {% include "root/section/menu.jinja" %}
   {% include "root/section/home.jinja" %}

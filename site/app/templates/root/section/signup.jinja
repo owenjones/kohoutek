@@ -1,4 +1,4 @@
-<div id="sign-up" class="uk-section uk-section-primary uk-height-viewport uk-preserve-color">
+<div id="sign-up" class="uk-section uk-section-primary uk-height-viewport avoid-sticky-nav uk-preserve-color">
   <div class="uk-container uk-container-xsmall">
     <div class="uk-light">
       <h1 class="uk-text-center">Sign up for Kohoutek 2021</h1>
@@ -6,11 +6,11 @@
         For 2021, Kohoutek is open to any Scout Troops or Guide Units that wish to enter, with no limit to the number of teams you can have.
       </p>
       <p>
-        Only Scouts in <strong>Avon County</strong>, and Guides in <strong>Bristol and South Gloucestershire</strong> or <strong>Somerset North</strong> Counties, will be eligable to compete for the Kohoutek trophies however.
+        Only Scouts in <strong>Avon</strong> County, and Guides in <strong>Bristol and South Gloucestershire</strong> or <strong>Somerset North</strong> Counties, will be eligable to compete for the Kohoutek trophies however.
       </p>
     </div>
 
-    <form id="sign-up-form" method="POST" action="{{ url_for('root.processSignup') }}" novalidate>
+    <form id="sign-up-form" method="POST" action="{{ url_for('root.processSignup') }}">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <div class="uk-card uk-card-default uk-card-body">
         <h3 class="uk-card-title">Are you a member of Scouting or Guiding?</h3>
@@ -193,7 +193,7 @@
         Your sign up for Kohoutek 2021 has been successfully received!
       </p>
       <p>
-        We've sent you a confirmation email with some further information - please have a read, and click the verification link so we know you've gotten it ok (your sign up won't be complete until you do!).
+        We've sent you a confirmation email with some further information - please have a read, and click the verification link so we know you've received it (your sign up won't be complete until you do!).
       </p>
       <p class="uk-text-small">
         If our confirmation email doesn't make it to you, please get in touch with us at contact@kohoutek.co.uk so we can make sure you receive one.
