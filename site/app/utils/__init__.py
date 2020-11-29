@@ -1,6 +1,8 @@
 import os
 from datetime import datetime
 import math
+import string
+import random
 
 import inflect
 
@@ -61,3 +63,13 @@ def timeAgo(then):
 
 def getFileExtension(filename):
     return filename.rsplit(".", 1)[1].lower()
+
+
+def randomKey(length):
+    numbers = string.digits
+    return "".join(random.choice(numbers) for x in range(length))
+
+
+def randomString(length):
+    letters = string.ascii_letters
+    return "".join(random.choice(letters) for x in range(length))
