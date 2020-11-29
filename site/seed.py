@@ -12,6 +12,7 @@ def seed(app):
     with app.app_context():
         app.logger.info("Creating app database...")
 
+        db.drop_all()
         db.create_all()
 
         app.logger.info("...created!")
