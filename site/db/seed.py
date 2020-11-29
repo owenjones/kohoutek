@@ -16,6 +16,13 @@ def seed(app):
         db.create_all()
 
         app.logger.info("...created!")
+        app.logger.info("Adding root user...")
+
+        rkey = os.getenv("ROOT_KEY", None)
+        u = User(username="root", key=rkey, role=Role.ADMIN)
+        db.session.add(u)
+
+        app.logger.info(f"...root user added, key: { rkey }")
 
         app.logger.info("Adding District/Division data...")
 
