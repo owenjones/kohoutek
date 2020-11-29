@@ -6,6 +6,19 @@ $font-space-grotesk: 'Space Grotesk', sans-serif;
 $global-font-family: $font-rubik;
 $global-font-size: 18px;
 $inverse-global-color: rgba(#fff, 0.85);
+
+$alert-primary-background: #1e87f0;
+$alert-primary-color: #fff;
+
+$alert-success-background: #32d296;
+$alert-success-color: #fff;
+
+$alert-warning-background: #faa05a;
+$alert-warning-color: #fff;
+
+$alert-danger-background: #f0506e;
+$alert-danger-color: #fff;
+
 $base-heading-font-family: $font-space-grotesk;
 $base-heading-font-weight: 700;
 $navbar-nav-item-font-family: $font-space-grotesk;
@@ -16,10 +29,14 @@ $navbar-nav-item-height: 60px;
 @import "../node_modules/uikit/src/scss/uikit-theme.scss";
 
 body {
+  overscroll-behavior: none;
+}
+
+body.under-the-sea {
   background-image: url('../img/bg.jpg');
   background-size: cover;
   background-attachment: fixed;
-  overscroll-behavior: none;
+  background-position: bottom center;
 }
 
 h1 {
@@ -36,7 +53,7 @@ h1 {
   padding-right: 30px;
 }
 
-.uk-section {
+.uk-section.avoid-sticky-nav {
   padding-top: $navbar-nav-item-height + 25px;
 }
 
