@@ -1,22 +1,10 @@
 from urllib.parse import urlparse, urljoin
-import string
-import random
 from functools import wraps
 
 from flask import current_app, redirect, url_for, abort
 from flask_login import current_user
 
-# from app.models import Permission
-
-
-def randomKey(length):
-    numbers = string.digits
-    return "".join(random.choice(numbers) for x in range(length))
-
-
-def randomString(length):
-    letters = string.ascii_letters
-    return "".join(random.choice(letters) for x in range(length))
+from app.models import Permission
 
 
 def isSafeUrl(target, request):
@@ -32,15 +20,15 @@ def allowedFile(filename):
     )
 
 
-def needs_group(f):
+def needs_team(f):
     @wraps(f)
     def inner(*args, **kwargs):
-        if current_user.hasPermission(Permission.GROUP):
+        if current_user.hasPermission(Permission.TEAM):
             return f(*args, **kwargs)
 
         elif current_user.get_id() == None:
-            # Not logged in - redirect to form
-            return redirect(url_for("group.login"))
+            # Not logged in - redirect to form to resend link
+            return redirect(url_for("portal.login"))
 
         else:
             # Logged in but not a Group User
@@ -69,14 +57,6 @@ def needs(permission):
 
 def needs_login(f):
     return needs(Permission.LOGIN)(f)
-
-
-def needs_curate(f):
-    return needs(Permission.CURATE)(f)
-
-
-def needs_manage(f):
-    return needs(Permission.MANAGE)(f)
 
 
 def needs_admin(f):

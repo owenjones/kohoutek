@@ -32,7 +32,7 @@ def create_app(config):
     talisman.init_app(app, content_security_policy=app.config["CSP"])
     compress.init_app(app)
     db.init_app(app)
-    # login_manager.init_app(app)
+    login_manager.init_app(app)
     csrf.init_app(app)
     limiter.init_app(app)
     json.init_app(app)
