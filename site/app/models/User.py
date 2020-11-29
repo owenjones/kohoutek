@@ -33,6 +33,23 @@ class User(UserMixin, db.Model):
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
 
+        if "key" not in kwargs:
+            self.generateKey()
+
+    @property
+    def key(self):
+        return False if self.id == 1 else self.loginKey
+
+    @key.setter
+    def key(self, key):
+        self.loginKey = key
+
+    def generateKey(self):
+        self.loginKey = randomKey(8)
+
+    def validateKey(self, key):
+        return key == self.loginKey
+
     def hasPermission(self, permission):
         return (self.role & permission) > 0
 
