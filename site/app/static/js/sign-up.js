@@ -98,7 +98,6 @@ document.body.onload = function() {
 
   form.onsubmit = function (ev) {
     if(!submitLock) {
-      console.log("submit")
       submitLock = true;
       ev.preventDefault();
       submitButton.setAttribute("hidden", true);
@@ -129,8 +128,8 @@ document.body.onload = function() {
             });
             submitLock = false;
           })
-        } else {
-          res.text().then(text => console.log(text));
+        } else if(res.status == 400) {
+          console.log("Probably a CSRF error?")
         }
       })
     }
