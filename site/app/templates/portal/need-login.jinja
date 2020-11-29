@@ -1,0 +1,20 @@
+{% extends "portal/template.jinja" %}
+{% block background %}secondary{% endblock %}
+{% block body %}
+<div class="uk-position-center">
+  <div class="uk-card uk-card-default uk-width-1-2@m uk-margin-auto">
+    <div class="uk-card-body">
+      <h4 class="uk-card-title">Team Portal Access</h4>
+      <p>
+        To access the team portal you need to use the secure link emailed to you when you signed up.
+      </p>
+      <p>
+        We can <a href="{{ url_for('portal.resendLink') }}">resend your team portal link</a> if you can't find it (but please look first, we have to pay if we send too many emails!).
+      </p>
+      <p>
+        If you haven't received a sign up confirmation email, or can't remember the email address you signed up with, please contact us at <a href="mailto:contact@kohoutek.co.uk">contact@kohoutek.co.uk</a>.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

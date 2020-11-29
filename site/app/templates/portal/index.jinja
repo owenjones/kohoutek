@@ -1,0 +1,111 @@
+{% extends "portal/template.jinja" %}
+{% block background %}primary{% endblock %}
+{% block body %}
+<div class="uk-section uk-section-primary uk-section-small uk-text-center">
+  <h1>Kohoutek Team Portal</h1>
+</div>
+<div class="uk-section uk-section-default uk-section-small">
+  <div class="uk-container uk-container-medium">
+    <div class="uk-flex uk-flex-stretch" uk-grid>
+      <div class="uk-width-1-1 uk-text-center">
+        <h2>{{ entry.group_name }}{% if entry.hasTroop() %} - {{ entry.troop_name }}{% endif %}</h2>
+        {% include "portal/components/alerts.jinja" %}
+      </div>
+      <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
+        <div>
+          <div class="uk-background-primary uk-light uk-padding">
+            <h4>Activities</h4>
+            <p>
+              The activity pack will be available to download here on 14<sup>th</sup> February 2021!
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="uk-background-secondary uk-light uk-padding">
+            <h4>Badges</h4>
+            <p>
+              Kohoutek 2021 badges, and badges from previous events, will be available to order from 1<sup>st</sup> January 2021.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="uk-background-muted uk-padding">
+            <h4>Scores</h4>
+            <p>
+              You'll be able to enter your team scores here from 1<sup>st</sup> March 2021.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-width-1-2@l">
+        <h3>Your Entry</h3>
+        <table class="uk-table uk-table-striped">
+          <tbody>
+            {% if entry.hasTroop() %}
+            <tr>
+              <th>Troop</th>
+              <td>{{ entry.troop_name }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+              <th class="uk-table-shrink">{{ entry.group_label }}</th>
+              <td>{{ entry.group_name }}</td>
+            </tr>
+            <tr>
+              <th>{{ entry.district_label }}</td>
+              <td>{{ entry.district }}</td>
+            </tr>
+            {% if entry.hasCounty() %}
+            <tr>
+              <th>County</th>
+              <td>{{ entry.county_name }}</td>
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
+        {#}<p>
+          <a class="uk-button uk-button-default" href="#">Update Entry Information</a>
+        </p>{#}
+        <hr class="uk-divider-icon uk-hidden@l" />
+      </div>
+
+      <div class="uk-width-1-2@l">
+        <h3>Contact Information</h3>
+        <table class="uk-table uk-table-striped">
+          <tbody>
+            <tr>
+              <th class="uk-table-shrink">Name</th>
+              <td>{{ entry.contact_name }}</td>
+            </tr>
+            <tr>
+              <th>Contact Email</th>
+              <td>{{ entry.contact_email }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="uk-margin uk-text-small">
+          If you need to get in touch with the Kohoutek planning team for any reason we can be reached at <a href="mailto:contact@kohoutek.co.uk">contact@kohoutek.co.uk</a>.
+        </p>
+      </div>
+
+      {#}<div class="uk-width-1-3@l">
+        <h3>Event Updates</h3>
+
+      </div>{#}
+    </div>
+  </div>
+</div>
+<div class="uk-section uk-section-primary uk-section-small">
+  <div class="uk-container uk-container-small uk-text-center">
+    <p class="uk-text-small">
+      Kohoutek is organised by students at the University of Bristol, with support from the <a href="https://www.facebook.com/UoBGaS" target="_blank" rel="noreferrer noopener">University of Bristol Guides and Scouts (UOBGAS)</a> society, part of the <a href="https://ssago.org" target="_blank" rel="noreferrer noopener">Student Scout and Guide Organisation (SSAGO)</a>.
+    </p>
+    <p class="uk-text-small">
+      More information about the organisation and history of the event can be found on the <a href="{{ url_for('root.index') }}#about">home page</a>.
+    </p>
+  </div>
+</div>
+{% endblock %}
