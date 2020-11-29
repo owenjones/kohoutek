@@ -59,17 +59,18 @@ def processLogin():
     username = request.form["user"].lower()
     u = User.query.filter_by(username=username).first()
 
-    if u and not u.hasPermission(Permission.LOGIN):
-        flash("This user is not permitted to login", "danger")
-        return render_template("auth/login.jinja")
+    if u and u.validateKey(request.form["key"]):
+        if u.hasPermission(Permission.LOGIN):
+            login_user(u)
+            current_app.logger.info(
+                f"user login ({ u.username }) from { request.remote_addr }"
+            )
+            flash("Successfully logged in", "success")
+            return redirect(url_for("portal.index"))
 
-    elif u and u.validateKey(request.form["key"]):
-        login_user(u)
-        current_app.logger.info(
-            f"user login ({ u.username }) from { request.remote_addr }"
-        )
-        flash("Successfully logged in", "success")
-        return redirect(url_for("portal.index"))
+        else:
+            flash("This user is not permitted to login", "danger")
+            return render_template("auth/login.jinja")
 
     else:
         current_app.logger.error(f"incorrect username/key from { request.remote_addr }")
