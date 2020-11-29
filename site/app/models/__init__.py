@@ -1,1 +1,2 @@
+from .User import Role, Permission, User
 from .Entry import Entry, Organisation, County, District
