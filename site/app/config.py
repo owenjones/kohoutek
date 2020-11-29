@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 env = Path("..") / ".env"
 load_dotenv(dotenv_path=env)
 
-from app.utils.auth import randomString, randomKey
+from app.utils import randomString, randomKey
 
 
 def loadConfig(config, app):
@@ -22,15 +22,23 @@ class Config:
     NAME = os.getenv("NAME", "Flask App")
     SECRET_KEY = os.getenv("SECRET_KEY", randomString(25))
 
+    MAIL = {
+        "url": "https://api.eu.mailgun.net/v3/",
+        "domain": os.getenv("MAIL_DOMAIN"),
+        "key": os.getenv("MAIL_KEY"),
+        "from": os.getenv("MAIL_FROM_ADDRESS"),
+        "reply-to": os.getenv("MAIL_REPLY_ADDRESS"),
+    }
+
     CSP = {
-        "default-src": [
-            "'self'",
-            "fonts.googleapis.com",
-            "fonts.gstatic.com",
-            "docs.google.com",
-            "*.youtube.com",
-        ],
-        "img-src": ["*", "data:"],
+        # "default-src": [
+        #     "'self'",
+        #     "fonts.googleapis.com",
+        #     "fonts.gstatic.com",
+        #     "docs.google.com",
+        #     "*.youtube.com",
+        # ],
+        # "img-src": ["*", "data:"],
     }
 
     COMPRESS_MIMETYPES = [
@@ -72,6 +80,4 @@ class ProdConfig(Config):
     server = os.getenv("DB_HOST", "127.0.0.1")
     database = os.getenv("DB_NAME")
 
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql://{ user }:{ password }@{ server }/{ database }?ssl=true"
-    )
+    SQLALCHEMY_DATABASE_URI = f"mysql://{ user }:{ password }@{ server }/{ database }?ssl=true&charset=utf8mb4"
