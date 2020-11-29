@@ -1,6 +1,4 @@
-import time
-
-from flask import Blueprint, render_template, request, jsonify, url_for
+from flask import Blueprint, render_template, request, redirect, url_for
 
 from app import db
 from app.models import Entry, Organisation, County, District
@@ -9,19 +7,21 @@ blueprint = Blueprint("root", __name__)
 
 
 @blueprint.route("/")
-@blueprint.route("/sign-up", methods=["GET"])
 def index():
     avon = District.query.filter_by(county=County.avon).all()
     bsg = District.query.filter_by(county=County.bsg).all()
     sn = District.query.filter_by(county=County.sn).all()
-    print(avon)
     return render_template("root/index.jinja", avon=avon, bsg=bsg, sn=sn)
+
+
+@blueprint.route("/sign-up", methods=["GET"])
+def signupRedirect():
+    # just in case - sometimes form ends up sending people here?
+    return redirect(url_for("root.index") + "#sign-up")
 
 
 @blueprint.route("/sign-up", methods=["POST"])
 def processSignup():
-    time.sleep(10)
-
     if ("organisation" not in request.form) or (
         request.form["organisation"] not in ["scouting", "guiding"]
     ):
@@ -145,14 +145,9 @@ def processSignup():
         db.session.add(e)
         db.session.commit()
 
+        e.sendConfirmationEmail()
+
         return ("OK", 200)
 
-    except:
-        return ("There was a problem processing the sign up", 422)
-
-
-@blueprint.route("/mail")
-def mail():
-    return render_template(
-        "mail/signup-confirmation.jinja", confirmation_link="https://abc"
-    )
+    except Exception as e:
+        return (f"There was a problem processing the sign up - {e}", 422)
