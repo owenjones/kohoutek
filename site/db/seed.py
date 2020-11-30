@@ -1,11 +1,15 @@
 import os
+import sys
+
+sys.path.append(os.path.abspath(""))
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
 from app import db
-from app.models import Organisation, County, District
+from app.models import User, Role, Organisation, County, District
+from app.utils import randomKey
 
 
 def seed(app):
@@ -18,7 +22,7 @@ def seed(app):
         app.logger.info("...created!")
         app.logger.info("Adding root user...")
 
-        rkey = os.getenv("ROOT_KEY", None)
+        rkey = os.getenv("ROOT_KEY", randomKey(12))
         u = User(username="root", key=rkey, role=Role.ADMIN)
         db.session.add(u)
 
