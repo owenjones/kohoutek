@@ -1,6 +1,7 @@
 from flask_login import UserMixin, AnonymousUserMixin
 
 from app import db, login_manager
+from app.utils import randomKey
 
 
 class Permission:
