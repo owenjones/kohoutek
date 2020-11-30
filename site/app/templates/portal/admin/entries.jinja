@@ -1,0 +1,29 @@
+{% extends "portal/admin/template.jinja" %}
+{% block content %}
+<div class="uk-container uk-container-large">
+  <table class="uk-table uk-table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Group/Unit (Troop)</th>
+        <th>District/Division</th>
+        <th>County</th>
+        <th>Organisation</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in entries %}
+      <tr>
+        <td>{{ entry.id }}</td>
+        <td>{{ entry.group_name }}{% if entry.hasTroop() %} ({{ entry.troop_name }}){% endif %}</td>
+        <td>{{ entry.district }}</td>
+        <td>{{ entry.county_name }}</td>
+        <td>{{ entry.organisation_name }}</td>
+        <td>-</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

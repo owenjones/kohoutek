@@ -4,8 +4,8 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_user, logout_user
 
 from app import limiter
-from app.models import Entry, Permission
-from app.utils.auth import needs_team
+from app.models import Entry, Organisation, Permission
+from app.utils.auth import needs_team, needs_admin
 
 blueprint = Blueprint("portal", __name__, url_prefix="/portal")
 
@@ -15,6 +15,16 @@ def index():
     if current_user.hasPermission(Permission.TEAM):
         entry = current_user.entry
         return render_template("portal/index.jinja", entry=entry)
+    elif current_user.hasPermission(Permission.ADMIN):
+        entries = Entry.query.all()
+        scouts = Entry.query.filter_by(organisation=Organisation.scouting).all()
+        guides = Entry.query.filter_by(organisation=Organisation.guiding).all()
+        return render_template(
+            "portal/admin/index.jinja",
+            total_entries=entries,
+            scout_entries=scouts,
+            guide_entries=guides,
+        )
     else:
         return redirect(url_for("portal.login"))
 
@@ -70,9 +80,22 @@ def resendLinkProcess():
     return render_template("portal/resend-link.jinja")
 
 
-## DEV ROUTES
-@blueprint.route("/test/<int:id>")
-def test(id):
-    e = Entry.query.get(id)
-    e.sendConfirmationEmail()
-    return "OK?"
+# Team Portal Routes
+@blueprint.route("/badges")
+@needs_team
+def orderBadges():
+    pass
+
+
+@blueprint.route("/badges/order/new", methods=["POST"])
+@needs_team
+def orderBadgesn():
+    pass
+
+
+# Admin Portal Routes
+@blueprint.route("/entries")
+@needs_admin
+def listEntries():
+    entries = Entry.query
+    return render_template("portal/admin/entries.jinja", entries=entries)
