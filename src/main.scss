@@ -1,11 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap');
 
+$new-blue: #0077b6;
+$global-primary-background: $new-blue;
+$global-link-color: $new-blue;
+$global-link-hover-color: lighten($new-blue, 10%);
+$form-radio-checked-focus-background: lighten($new-blue, 10%);
+
+$global-secondary-background: darken(#031927, 2%);
+$global-muted-background: #fcfcfc;
+
 $font-rubik: 'Rubik', sans-serif;
 $font-space-grotesk: 'Space Grotesk', sans-serif;
 
 $global-font-family: $font-rubik;
 $global-font-size: 18px;
 $inverse-global-color: rgba(#fff, 0.85);
+$inverse-text-primary-color: rgba(#fff, 0.9);
 
 $alert-primary-background: #1e87f0;
 $alert-primary-color: #fff;
@@ -37,17 +47,23 @@ h1 {
   margin-bottom: 40px;
 }
 
-.uk-navbar-nav li a {
+#menu .uk-navbar-nav li a {
   font-size: 1.2rem;
   font-weight: 500;
 }
 
-.uk-navbar-nav a.uk-totop {
+#menu .uk-navbar-nav a.uk-totop {
   padding-right: 30px;
 }
 
+#portal .uk-navbar-nav li a {
+  font-size: 1rem;
+  font-weight: 500;
+  min-height: 0;
+}
+
 .uk-section.avoid-sticky-nav {
-  padding-top: $navbar-nav-item-height + 25px;
+  padding-top: $navbar-nav-item-height + 40px;
 }
 
 .uk-form-label {
@@ -85,6 +101,6 @@ form label.uk-width-1-1 {
 }
 
 .kohoutek-frontactive .kohoutek-illuminate, .kohoutek-mobile-illuminate {
-  color: $global-link-color !important;
+  color: $global-link-hover-color !important;
   font-weight: 700;
 }
