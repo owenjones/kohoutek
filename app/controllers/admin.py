@@ -31,8 +31,8 @@ def listEntries():
     return render_template("admin/entries.jinja", entries=entries)
 
 
-# @blueprint.route("/entry/<int: id>")
-# @needs_admin
-# def displayEntry(id):
-#     entry = Entry.query.get(id)
-#     return render_template("admin/entry.jinja", entry=entry)
+@blueprint.route("/entry/<int:id>")
+@needs_admin
+def displayEntry(id):
+    entry = Entry.query.get_or_404(id)
+    return render_template("admin/entry.jinja", entry=entry)
