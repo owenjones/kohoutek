@@ -33,7 +33,7 @@ def injectAuthChecks():
 
 @blueprint.app_template_filter("roleName")
 def roleName(role):
-    roles = {0: "Guest", 1: "User", 3: "Curator", 7: "Manager", 15: "Admin"}
+    roles = {0: "Guest", 1: "User", 3: "Admin", 4: "Team"}
     return roles[role] if role in roles else "UNKNOWN"
 
 
@@ -47,7 +47,7 @@ def loadUser(id):
 @limiter.limit("50/hour")
 def login():
     if current_user.is_authenticated and current_user.hasPermission(Permission.LOGIN):
-        return redirect(url_for("portal.index"))
+        return redirect(url_for("admin.index"))
     else:
         return render_template("auth/login.jinja", back=request.referrer)
 
@@ -66,7 +66,7 @@ def processLogin():
                 f"user login ({ u.username }) from { request.remote_addr }"
             )
             flash("Successfully logged in", "success")
-            return redirect(url_for("portal.index"))
+            return redirect(url_for("admin.index"))
 
         else:
             flash("This user is not permitted to login", "danger")
@@ -81,4 +81,4 @@ def processLogin():
 @blueprint.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for("root.index"))
+    return redirect(url_for("auth.login"))
