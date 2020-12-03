@@ -76,13 +76,25 @@ form label.uk-width-1-1 {
 
 #under-the-sea {
   background-image: url('../img/bg.jpg');
-  background-size: cover;
-  background-attachment: fixed;
   background-position: bottom center;
 }
 
+@media screen and (max-width: 823px) {
+  #under-the-sea {
+    background-attachment: scroll;
+  }
+
+}
+
+@media screen and (min-width: 824px) {
+  #under-the-sea {
+    background-size: cover;
+    background-attachment: fixed;
+  }
+}
+
 #home {
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 #kohoutek-badge {
