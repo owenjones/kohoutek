@@ -19,18 +19,16 @@
     <div class="uk-section uk-section-default uk-section-xsmall uk-padding-remove-bottom">
       <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
         <div class="uk-navbar-center">
-          <ul class="uk-navbar-nav">
+          <ul class="uk-navbar-nav uk-flex uk-flex-wrap">
             <li><a href="{{ url_for('admin.index') }}">Home</a></li>
             <li><a href="{{ url_for('admin.listEntries') }}">Entries</a></li>
-            <!-- <li><a href="">Badges</a></li> -->
-            <!-- <li><a href="">Scores</a></li> -->
+            <li><a href="">Orders</a></li>
+            <li><a href="">Scores</a></li>
             <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
           </ul>
         </div>
       </nav>
     </div>
-    <div class="uk-section uk-section-default uk-section-xsmall">
     {% block body %}{% endblock %}
-    </div>
   </body>
 </html>

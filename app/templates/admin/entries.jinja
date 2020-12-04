@@ -1,29 +1,38 @@
 {% extends "admin/template.jinja" %}
 {% block body %}
-<div class="uk-container uk-container-large">
-  <table class="uk-table uk-table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Group/Unit (Troop)</th>
-        <th>District/Division</th>
-        <th>County</th>
-        <th>Organisation</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for entry in entries %}
-      <tr>
-        <td>{{ entry.id }}</td>
-        <td>{{ entry.group_name }}{% if entry.hasTroop() %} ({{ entry.troop_name }}){% endif %}</td>
-        <td>{{ entry.district }}</td>
-        <td>{{ entry.county_name }}</td>
-        <td>{{ entry.organisation_name }}</td>
-        <td>-</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="uk-section uk-section-default uk-section-xsmall">
+  <div class="uk-container uk-container-xlarge">
+    {% include "portal/components/alerts.jinja" %}
+    <table class="uk-table uk-table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Group/Unit (Troop)</th>
+          <th class="uk-table-shrink">District/Division</th>
+          <th class="uk-table-shrink">County</th>
+          <th class="uk-table-shrink">Organisation</th>
+          <th class="uk-table-shrink">Verified</th>
+          <th class="uk-table-shrink">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in entries %}
+        <tr>
+          <td class="uk-text-small">
+            <a href="{{ url_for('admin.entry', id=entry.id)}}">{{ entry.code }}</a>
+          </td>
+          <td>{{ entry.group_name }}{% if entry.hasTroop() %} ({{ entry.troop_name }}){% endif %}</td>
+          <td>{{ entry.district }}</td>
+          <td>{{ entry.county_name }}</td>
+          <td>{{ entry.organisation_name }}</td>
+          <td>{% if entry.verified %}<span class="uk-text-success" uk-icon="check"></span>{% else %}<span class="uk-text-danger" uk-icon="close"></span>{% endif %}</td>
+          <td class="uk-table-shrink">
+            <a href="{{ url_for('admin.entry', id=entry.id)}}" class="uk-icon-link" uk-icon="cog" uk-tooltip="title: Manage Entry; pos: left;"></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}

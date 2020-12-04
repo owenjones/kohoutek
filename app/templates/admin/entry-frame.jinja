@@ -1,0 +1,28 @@
+{% extends "admin/template.jinja" %}
+{% block body %}
+<div class="uk-section uk-section-default uk-section-small">
+  <div class="uk-container uk-container-medium">
+    <div class="uk-flex uk-flex-stretch" uk-grid>
+      <div class="uk-width-1-1 uk-text-center">
+        <h1>{{ entry.group_name }}{% if entry.hasTroop() %} - {{ entry.troop_name }}{% endif %}</h1>
+        {% include "portal/components/alerts.jinja" %}
+      </div>
+      <div class="uk-card uk-card-secondary uk-card-body uk-width-1-5@m uk-text-right">
+        <h4 class="uk-card-title">Actions</h4>
+        <ul class="uk-nav uk-nav-default" uk-nav>
+          <li><a href="{{ url_for('admin.entry', id=entry.id) }}">Entry Information</a></li>
+          <!-- <li><a href="#">View Orders</a></li> -->
+          <li><a href="{{ url_for('admin.contactEntry', id=entry.id) }}">Send Email</a></li>
+          <li><a href="{{ url_for('admin.resendLink', id=entry.id) }}">Resend Portal Link</a></li>
+          <li><a href="{{ url_for('admin.cancelEntry', id=entry.id) }}">Cancel Entry</a></li>
+        </ul>
+      </div>
+      <div class="uk-width-4-5@m uk-grid-item-match">
+        <div uk-grid>
+          {% block module %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

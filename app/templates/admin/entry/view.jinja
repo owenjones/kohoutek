@@ -1,0 +1,69 @@
+{% extends "admin/entry-frame.jinja" %}
+{% block module %}
+<div class="uk-card uk-card-default uk-card-body uk-width-1-1">
+  <div uk-grid>
+    <div class="uk-width-1-2@s">
+      <h3>Entry Information</h3>
+      <table class="uk-table uk-table-striped">
+        <tbody>
+          <tr>
+            <th class="uk-table-shrink">Entry ID</th>
+            <td>{{ entry.code }}</td>
+          </tr>
+          {% if entry.hasTroop() %}
+          <tr>
+            <th>Troop</th>
+            <td>{{ entry.troop_name }}</td>
+          </tr>
+          {% endif %}
+          <tr>
+            <th>{{ entry.group_label }}</th>
+            <td>{{ entry.group_name }}</td>
+          </tr>
+          <tr>
+            <th>{{ entry.district_label }}</td>
+            <td>{{ entry.district }}</td>
+          </tr>
+          <tr>
+            <th>County</th>
+            <td>{{ entry.county_name }}</td>
+          </tr>
+          <tr>
+            <th>Organisation</th>
+            <td>{{ entry.organisation_name }}</td>
+          </tr>
+          <tr>
+            <th>Signed Up</th>
+            <td>{{ entry.created_at }}</td>
+          </tr>
+          <tr>
+            <th>Verified</th>
+            <td>{% if entry.verified %}<span class="uk-text-success" uk-icon="check"></span>{% else %}<span class="uk-text-danger" uk-icon="close"></span>{% endif %}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="uk-width-1-2@s">
+      <h3>Contact Information</h3>
+      <table class="uk-table uk-table-striped">
+        <tbody>
+          <tr>
+            <th class="uk-table-shrink">Name</th>
+            <td>{{ entry.contact_name }}</td>
+          </tr>
+          <tr>
+            <th>Contact Email</th>
+            <td>{{ entry.contact_email }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Portal Link</h3>
+      <p>
+        <input class="uk-input" type="text" value="{{ entry.portal_link }}?noverify" disabled></input>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
