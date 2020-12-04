@@ -1,14 +1,14 @@
 {% extends "portal/template.jinja" %}
 {% block background %}primary{% endblock %}
 {% block body %}
-<div class="uk-section uk-section-primary uk-section-small uk-text-center">
-  <h1>Kohoutek Team Portal</h1>
+<div class="uk-section uk-section-primary uk-section-xsmall uk-text-center">
+  <h2>Kohoutek Team Portal</h2>
 </div>
 <div class="uk-section uk-section-default uk-section-small">
   <div class="uk-container uk-container-medium">
     <div class="uk-flex uk-flex-stretch" uk-grid>
       <div class="uk-width-1-1 uk-text-center">
-        <h2>{{ entry.group_name }}{% if entry.hasTroop() %} - {{ entry.troop_name }}{% endif %}</h2>
+        <h1>{{ entry.group_name }}{% if entry.hasTroop() %} - {{ entry.troop_name }}{% endif %}</h1>
         {% include "portal/components/alerts.jinja" %}
       </div>
       <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
@@ -44,6 +44,10 @@
         <h3>Your Entry</h3>
         <table class="uk-table uk-table-striped">
           <tbody>
+            <tr>
+              <th class="uk-table-shrink">Entry ID</th>
+              <td>{{ entry.code }}</td>
+            </tr>
             {% if entry.hasTroop() %}
             <tr>
               <th>Troop</th>
@@ -51,7 +55,7 @@
             </tr>
             {% endif %}
             <tr>
-              <th class="uk-table-shrink">{{ entry.group_label }}</th>
+              <th>{{ entry.group_label }}</th>
               <td>{{ entry.group_name }}</td>
             </tr>
             <tr>
