@@ -32,8 +32,14 @@ class Config:
     }
 
     CSP = {
-        "default-src": ["'self'", "fonts.googleapis.com", "fonts.gstatic.com"],
+        "default-src": [
+            "'self'",
+            "'unsafe-inline'",
+            "fonts.googleapis.com",
+            "fonts.gstatic.com",
+        ],
         "img-src": ["*", "data:"],
+        "script-src": ["'self'", "'unsafe-inline'", "cdnjs.cloudflare.com"],
     }
 
     COMPRESS_MIMETYPES = [
