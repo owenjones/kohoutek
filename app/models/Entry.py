@@ -38,7 +38,7 @@ class Entry(db.Model):
     organisation = db.Column(db.Enum(Organisation))
     county = db.Column(db.Enum(County))
     district_id = db.Column(db.Integer(), db.ForeignKey("district.id"), nullable=True)
-    district_rel = db.relationship("District")
+    district_rel = db.relationship("District", backref=db.backref("entries"))
     district_name = db.Column(db.String(250), nullable=True)
     group_name = db.Column(db.String(250))
     troop_name = db.Column(db.String(250), nullable=True)
@@ -65,6 +65,8 @@ class Entry(db.Model):
             confirmation_link=self.portal_link,
         )
 
+        return send
+
     def verify(self, code):
         if code == self.verification_code and not self.verified:
             self.verified = True
@@ -73,6 +75,10 @@ class Entry(db.Model):
             return True
         else:
             return False
+
+    @property
+    def code(self):
+        return f"K21-{self.id}"
 
     # Translate data back into organisation relevant terms
     def hasTroop(self):
@@ -99,6 +105,7 @@ class Entry(db.Model):
             County.avon: "Avon",
             County.bsg: "Bristol and South Gloucestershire",
             County.sn: "Somerset North",
+            County.other: "Other",
         }
 
         return map[self.county] if self.county in map else None
