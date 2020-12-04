@@ -21,12 +21,13 @@ def login():
 def verify(entry, code):
     entry = Entry.query.filter_by(id=entry, verification_code=code).first()
     if entry:
-        verify = entry.verify(code)
-        if verify:
-            flash(
-                "Thank you for verifying your email, your Kohoutek 2021 entry is now confirmed!",
-                "success",
-            )
+        if request.args.get("noverify") == None:
+            verify = entry.verify(code)
+            if verify:
+                flash(
+                    "Thank you for verifying your email, your Kohoutek 2021 entry is now confirmed!",
+                    "success",
+                )
 
         login_user(entry.user)
         return redirect(url_for("portal.index"))
@@ -44,6 +45,7 @@ def resendLink():
 def resendLinkProcess():
     e = Entry.query.filter_by(contact_email=request.form.get("email")).first()
     if e:
+        # TODO: add exception handling around this!
         e.sendConfirmationEmail()
     else:
         time.sleep(1)  # crap attempt to avoid a timing attack
