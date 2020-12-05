@@ -24,6 +24,7 @@ def index():
     )
 
 
+# Entry Routes
 @blueprint.route("/entries")
 @needs_admin
 def listEntries():
@@ -64,9 +65,15 @@ def cancelEntry(id):
 def cancelEntryProcess(id):
     entry = Entry.query.get_or_404(id)
     if request.form.get("code").lower() == entry.code.lower():
-        # entry.cancel()
-        flash("Entry has been cancelled", "success")
-        return redirect(url_for("admin.listEntries"))
+        error = entry.cancel()
+
+        if error:
+            flash(f"Something went wrong cancelling the entry - { error }", "danger")
+            return redirect(url_for("admin.cancelEntry", id=id))
+        else:
+            flash("Entry has been cancelled", "success")
+            return redirect(url_for("admin.listEntries"))
+
     else:
         flash(
             "Incorrect entry code (are you sure you know what you're doing?).",
@@ -87,13 +94,17 @@ def resendLink(id):
 @needs_admin
 def resendLinkProcess(id):
     entry = Entry.query.get_or_404(id)
-    try:
-        r = entry.sendConfirmationEmail()
-        if r.status_code == 200:
-            flash("Team portal link resent", "success")
-        else:
-            flash(f"Something went wrong resending the link - { r.text }", "danger")
-    except Exception as e:
-        flash(f"Something went wrong resending the link - { e }", "danger")
+
+    r = entry.sendConfirmationEmail()
+    if r.status_code == 200:
+        flash("Team portal link resent", "success")
+    else:
+        flash(f"Something went wrong resending the link - { r.text }", "danger")
 
     return redirect(url_for("admin.entry", id=id))
+
+
+# Order Routes
+
+
+# Score Routes

@@ -67,6 +67,28 @@ class Entry(db.Model):
 
         return send
 
+    def cancel(self):
+        email = self.contact_email
+
+        try:
+            db.session.delete(self)
+            db.session.commit()
+
+        except Exception as e:
+            return e
+
+        send = sendmail(
+            self.contact_email,
+            "Kohoutek 2021 - Entry Cancelled",
+            "entry-cancelled",
+            entry_name=self.name,
+        )
+
+        if send.status_code != 200:
+            return send.text
+        else:
+            return False  # No error
+
     def verify(self, code):
         if code == self.verification_code and not self.verified:
             self.verified = True
@@ -79,6 +101,13 @@ class Entry(db.Model):
     @property
     def code(self):
         return f"K21-{self.id}"
+
+    @property
+    def name(self):
+        if self.hasTroop():
+            return f"{ self.group_name } ({ self.troop_name })"
+        else:
+            return self.group_name
 
     # Translate data back into organisation relevant terms
     def hasTroop(self):
