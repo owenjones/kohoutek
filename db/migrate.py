@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app import db
-from app.models import Badge, BadgeOrder
 
 
 def seed(app):
