@@ -23,7 +23,7 @@ json = FlaskJSON()
 
 def create_app(config):
     setupLogging()
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="../static")
     loadConfig(config, app)
 
     app.logger.info(f" --- { app.config['NAME'] } --- ")
