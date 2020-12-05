@@ -65,7 +65,9 @@ def cancelEntry(id):
 def cancelEntryProcess(id):
     entry = Entry.query.get_or_404(id)
     if request.form.get("code").lower() == entry.code.lower():
-        error = entry.cancel()
+        silent = True if (request.form.get("silent") == "true") else False
+        print(silent)
+        error = entry.cancel(silent=silent)
 
         if error:
             flash(f"Something went wrong cancelling the entry - { error }", "danger")

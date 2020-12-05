@@ -7,7 +7,10 @@
   <form method="POST" action="{{ url_for('admin.cancelEntryProcess', id=entry.id) }}">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <input type="text" name="code" class="uk-input uk-form-large" placeholder="Entry ID" required />
-    <button type="submit" class="uk-button uk-button-danger uk-margin">Cancel Entry</button>
+    <div class="uk-margin">
+      <label><input type="checkbox" name="silent" value="true" class="uk-checkbox"> - cancel silently</label>
+    </div>
+    <button type="submit" class="uk-button uk-button-danger">Cancel Entry</button>
   </form>
 </div>
 {% endblock %}

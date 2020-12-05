@@ -1,6 +1,6 @@
 from enum import Enum
 
-from flask import url_for
+from flask import url_for, flash
 
 from app import db
 from app.models import User, Role
@@ -67,9 +67,7 @@ class Entry(db.Model):
 
         return send
 
-    def cancel(self):
-        email = self.contact_email
-
+    def cancel(self, silent):
         try:
             db.session.delete(self)
             db.session.commit()
@@ -77,17 +75,18 @@ class Entry(db.Model):
         except Exception as e:
             return e
 
-        send = sendmail(
-            self.contact_email,
-            "Kohoutek 2021 - Entry Cancelled",
-            "entry-cancelled",
-            entry_name=self.name,
-        )
+        if not silent:
+            send = sendmail(
+                self.contact_email,
+                "Kohoutek 2021 - Entry Cancelled",
+                "entry-cancelled",
+                entry_name=self.name,
+            )
 
-        if send.status_code != 200:
-            return send.text
-        else:
-            return False  # No error
+            if send.status_code != 200:
+                return send.text
+
+        return False  # No error
 
     def verify(self, code):
         if code == self.verification_code and not self.verified:
