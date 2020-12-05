@@ -21,7 +21,7 @@
           <td class="uk-text-small">
             <a href="{{ url_for('admin.entry', id=entry.id)}}">{{ entry.code }}</a>
           </td>
-          <td>{{ entry.group_name }}{% if entry.hasTroop() %} ({{ entry.troop_name }}){% endif %}</td>
+          <td>{{ entry.name }}</td>
           <td>{{ entry.district }}</td>
           <td>{{ entry.county_name }}</td>
           <td>{{ entry.organisation_name }}</td>

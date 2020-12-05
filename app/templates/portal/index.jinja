@@ -8,7 +8,7 @@
   <div class="uk-container uk-container-medium">
     <div class="uk-flex uk-flex-stretch" uk-grid>
       <div class="uk-width-1-1 uk-text-center">
-        <h1>{{ entry.group_name }}{% if entry.hasTroop() %} - {{ entry.troop_name }}{% endif %}</h1>
+        <h1>{{ entry.name }}</h1>
         {% include "portal/components/alerts.jinja" %}
       </div>
       <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
