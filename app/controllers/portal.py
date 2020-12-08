@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_user, logout_user
 
 from app import limiter
-from app.models import Entry
+from app.models import Entry, Item
 from app.utils.auth import needs_team, needs_admin
 
 blueprint = Blueprint("portal", __name__, url_prefix="/portal")
@@ -67,11 +67,13 @@ def index():
 
 @blueprint.route("/badges")
 @needs_team
-def orderBadges():
-    pass
+def listOrders():
+    orders = current_user.orders
+    items = Item.query.all()
+    return render_template("portal/orders/index.jinja", orders=orders)
 
 
 @blueprint.route("/badges/order/new", methods=["POST"])
 @needs_team
-def orderBadgesn():
+def processOrder():
     pass
