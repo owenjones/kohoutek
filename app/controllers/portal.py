@@ -9,7 +9,14 @@ from app.utils.auth import needs_team, needs_admin
 
 blueprint = Blueprint("portal", __name__, url_prefix="/portal")
 
-# Auth Flow
+
+@blueprint.route("")
+@needs_team
+def index():
+    entry = current_user.entry
+    return render_template("portal/index.jinja", entry=entry)
+
+
 @blueprint.route("/login")
 def login():
     return render_template("portal/need-login.jinja")
@@ -36,6 +43,12 @@ def verify(entry, code):
         return redirect(url_for("portal.login"))
 
 
+@blueprint.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("root.index"))
+
+
 @blueprint.route("/resend-link", methods=["GET"])
 def resendLink():
     return render_template("portal/resend-link.jinja")
@@ -57,20 +70,12 @@ def resendLinkProcess():
     return render_template("portal/resend-link.jinja")
 
 
-# Portal Routes
-@blueprint.route("")
-@needs_team
-def index():
-    entry = current_user.entry
-    return render_template("portal/index.jinja", entry=entry)
-
-
 @blueprint.route("/badges")
 @needs_team
 def listOrders():
-    orders = current_user.orders
+    orders = current_user.entry.orders
     items = Item.query.all()
-    return render_template("portal/orders/index.jinja", orders=orders)
+    return render_template("portal/orders/index.jinja", orders=orders, items=items)
 
 
 @blueprint.route("/badges/order/new", methods=["POST"])
