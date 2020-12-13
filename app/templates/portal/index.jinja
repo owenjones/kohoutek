@@ -1,5 +1,4 @@
 {% extends "portal/template.jinja" %}
-{% block background %}primary{% endblock %}
 {% block body %}
 <div class="uk-section uk-section-primary uk-section-xsmall uk-text-center">
   <h2>Kohoutek Team Portal</h2>
@@ -24,9 +23,7 @@
         <div>
           <div class="uk-background-secondary uk-light uk-padding">
             <h4>Badges</h4>
-            <p>
-              Kohoutek 2021 badges, and badges from previous events, will be available to order from 1<sup>st</sup> January 2021.
-            </p>
+            <a class="uk-button uk-button-primary uk-button-large" href="{{ url_for('portal.listOrders') }}">Order Badges</a>
           </div>
         </div>
 
@@ -94,11 +91,6 @@
           If you need to get in touch with the Kohoutek planning team for any reason we can be reached at <a href="mailto:contact@kohoutek.co.uk">contact@kohoutek.co.uk</a>.
         </p>
       </div>
-
-      {#}<div class="uk-width-1-3@l">
-        <h3>Event Updates</h3>
-
-      </div>{#}
     </div>
   </div>
 </div>
