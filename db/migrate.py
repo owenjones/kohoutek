@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app import db
-from app.models import Order, Item
 
 
 def seed(app):
