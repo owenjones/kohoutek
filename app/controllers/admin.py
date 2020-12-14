@@ -11,7 +11,7 @@ blueprint = Blueprint("admin", __name__, url_prefix="/admin")
 @blueprint.route("")
 @needs_admin
 def index():
-    districts = District.query.all()
+    districts = District.query.order_by(District.county, District.name).all()
     entries = Entry.query.all()
     scouts = Entry.query.filter_by(organisation=Organisation.scouting).all()
     guides = Entry.query.filter_by(organisation=Organisation.guiding).all()
