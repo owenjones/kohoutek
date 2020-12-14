@@ -8,9 +8,9 @@ blueprint = Blueprint("root", __name__)
 
 @blueprint.route("/")
 def index():
-    avon = District.query.filter_by(county=County.avon).all()
-    bsg = District.query.filter_by(county=County.bsg).all()
-    sn = District.query.filter_by(county=County.sn).all()
+    avon = District.query.filter_by(county=County.avon).order_by(District.name).all()
+    bsg = District.query.filter_by(county=County.bsg).order_by(District.name).all()
+    sn = District.query.filter_by(county=County.sn).order_by(District.name).all()
     return render_template("root/index.jinja", avon=avon, bsg=bsg, sn=sn)
 
 
