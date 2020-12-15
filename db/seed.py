@@ -57,6 +57,7 @@ def seed(app):
             ("Weston-super-Mare", County.sn),
             ("Wraxhall", County.sn),
             ("Yeo Vale", County.sn),
+            ("Bristol West", County.bsg),
         ]
         for name, county in districts:
             d = District(name=name, county=county)
