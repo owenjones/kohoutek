@@ -11,6 +11,9 @@ from app import db
 from app.models import User, Role, Organisation, County, District
 from app.utils import randomKey
 
+from add_items import addItems
+from add_postage_options import addPostageOptions
+
 
 def seed(app):
     with app.app_context():
@@ -76,3 +79,5 @@ if __name__ == "__main__":
 
     app = create_app(os.getenv("ENVIRONMENT"))
     seed(app)
+    addItems(app)
+    addPostageOptions(app)

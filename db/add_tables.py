@@ -10,9 +10,9 @@ load_dotenv()
 from app import db
 
 
-def seed(app):
+def addTables(app):
     with app.app_context():
-        app.logger.info("Migrating app database...")
+        app.logger.info("Adding all tables...")
         db.create_all()
         db.session.commit()
         app.logger.info("...done!")
@@ -22,4 +22,4 @@ if __name__ == "__main__":
     from app import create_app
 
     app = create_app(os.getenv("ENVIRONMENT"))
-    seed(app)
+    addTables(app)

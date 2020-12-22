@@ -11,7 +11,7 @@ from app import db
 from app.models import Item
 
 
-def seed(app):
+def addItems(app):
     with app.app_context():
         app.logger.info("Adding order items...")
 
@@ -20,6 +20,7 @@ def seed(app):
                 name="2021 Badge",
                 description="The badge for the 2021 online event",
                 unit_cost=1,
+                index=1,
             )
         )
 
@@ -30,6 +31,7 @@ def seed(app):
                 unit_cost=1,
                 limited=True,
                 stock=100,
+                index=2,
             )
         )
 
@@ -40,6 +42,7 @@ def seed(app):
                 unit_cost=1,
                 limited=True,
                 stock=100,
+                index=3,
             )
         )
 
@@ -51,4 +54,4 @@ if __name__ == "__main__":
     from app import create_app
 
     app = create_app(os.getenv("ENVIRONMENT"))
-    seed(app)
+    addItems(app)
