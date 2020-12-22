@@ -31,3 +31,14 @@ class Payment(db.Model):
     amount_net = db.Column(db.Float, nullable=False)
     reference = db.Column(db.String, nullable=True)
     received_at = db.Column(db.DateTime, nullable=True)
+
+    @property
+    def type(self):
+        map = {
+            PaymentMethod.cheque: "Cheque",
+            PaymentMethod.BACS: "Bank Transfer",
+            PaymentMethod.stripe: "Online Payment",
+            PaymentMethod.manual: "Manual Payment",
+        }
+
+        return map[self.method]
