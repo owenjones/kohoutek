@@ -26,12 +26,20 @@ class Item(db.Model):
     def status(self):
         return (
             ItemStock.in_stock
-            if (self.limited == False or (self.limited == True and self.stock > 0))
+            if (self.limited == False or (self.limited == True and self.remaining > 0))
             else ItemStock.out_of_stock
         )
 
-    def checkStock(self, quantity):
-        return self.stock >= quantity
+    @property
+    def sold(self):
+        return sum([item.quantity for item in self.ordered])
+
+    @property
+    def remaining(self):
+        return (self.stock - self.sold) if self.limited else 0
+
+    def hasStock(self, quantity):
+        return (not self.limited) or (self.remaining >= quantity)
 
 
 class OrderItem(db.Model):
@@ -39,7 +47,7 @@ class OrderItem(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey("order.id"))
     item_id = db.Column(db.Integer, db.ForeignKey("item.id"))
     item = db.relationship(
-        "Item", backref=db.backref("orders"), lazy=True, uselist=False
+        "Item", backref=db.backref("ordered"), lazy=True, uselist=False
     )
     quantity = db.Column(db.Integer, default=1, nullable=False)
 
