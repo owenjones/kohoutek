@@ -1,10 +1,10 @@
 import time
 
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
 from flask_login import current_user, login_user, logout_user
 
 from app import limiter
-from app.models import Entry, Item
+from app.models import Entry, Item, Order, ItemStock
 from app.utils.auth import needs_team, needs_admin
 
 blueprint = Blueprint("portal", __name__, url_prefix="/portal")
@@ -70,15 +70,52 @@ def resendLinkProcess():
     return render_template("portal/resend-link.jinja")
 
 
+# Badge Order Routes
 @blueprint.route("/badges")
 @needs_team
 def listOrders():
     orders = current_user.entry.orders
+    return render_template("portal/orders/index.jinja", orders=orders)
+
+
+@blueprint.route("/badges/order")
+@needs_team
+def placeOrder():
     items = Item.query.all()
-    return render_template("portal/orders/index.jinja", orders=orders, items=items)
+    return render_template("portal/orders/new.jinja", items=items)
 
 
-@blueprint.route("/badges/order/new", methods=["POST"])
+@blueprint.route("/badges/order", methods=["POST"])
 @needs_team
 def processOrder():
+    return "Process"
+
+
+@blueprint.route("/badges/order/<int:id>")
+@needs_team
+def viewOrder(id):
     pass
+
+
+@blueprint.route("/badges/order/<int:id>/postage")
+@needs_team
+def addPostageToOrder(id):
+    return "Add Postage"
+
+
+@blueprint.route("/badges/order/<int:id>/postage", methods=["POST"])
+@needs_team
+def processPostage(id):
+    return "Process"
+
+
+@blueprint.route("/badges/order/<int:id>/payment")
+@needs_team
+def addPaymentToOrder(id):
+    return "Add Payment"
+
+
+@blueprint.route("/badges/order/<int:id>/payment", methods=["POST"])
+@needs_team
+def processPayment(id):
+    return "Process"

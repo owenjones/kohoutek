@@ -4,25 +4,77 @@
   <div class="uk-container uk-container-small">
     <div class="uk-flex uk-flex-stretch" uk-grid>
       <div class="uk-width-1-1 uk-text-center">
-        <h1>Order Badges</h1>
+        <h1>Badge Orders</h1>
         {% include "portal/components/alerts.jinja" %}
       </div>
 
-      <div class="uk-width-2-3@l">
-        <h3>Section</h3>
-        <hr class="uk-divider-icon uk-hidden@l" />
-        {% for item in items %}
-          {{ item.name }} - {{ item.limited }} ({{ item.stock }}) - {{ item.orders | count }}<br />
-        {% endfor %}
+      {% if orders %}
+      <div class="uk-width-1-1">
+        <div class="uk-child-width-1-2@l uk-grid-match" uk-grid uk-height-match="target: div > .uk-card > .uk-card-body">
+          {% for order in orders %}
+          <div>
+            <div class="uk-card uk-card-default">
+              <div class="uk-card-body">
+                <div class="uk-card-badge uk-background-default uk-label uk-text-{{ order.status_colour }}">
+                  {{ order.status_name }}
+                </div>
+                <h4 class="uk-card-title">Order #{{ loop.index }}</h4>
+                {% for item in order.items %}
+                <div class="uk-grid-small" uk-grid>
+                  <div class="uk-width-expand" uk-leader><span uk-icon="icon: cart"></span> {{ item.item.name }} ({{ item.quantity }})</div>
+                  <div>{{ "£{:,.2f}".format(item.amount) }}</div>
+                </div>
+                {% endfor %}
+                {% if order.postage %}
+                <div class="uk-grid-small" uk-grid>
+                  <div class="uk-width-expand" uk-leader><span uk-icon="icon: mail"></span> {{ order.postage.name }}</div>
+                  <div>{{ "£{:,.2f}".format(order.postage.cost) }}</div>
+                </div>
+                {% endif %}
+                {% if order.payment.fee %}
+                <div class="uk-grid-small" uk-grid>
+                  <div class="uk-width-expand" uk-leader><span uk-icon="icon: credit-card"></span> {{ order.payment.method }}</div>
+                  <div>{{ "£{:,.2f}".format(order.payment.fee) }}</div>
+                </div>
+                {% endif %}
+                {% if order.statusIs("complete") %}
+                <div class="uk-grid-small uk-text-primary uk-text-bold" uk-grid>
+                  <div class="uk-width-expand" uk-leader>Total</div>
+                  <div>{{ "£{:,.2f}".format(order.total) }}</div>
+                </div>
+                {% elif order.statusIs("incomplete") or order.statusIs("payment_pending") %}
+                <div class="uk-grid-small uk-text-primary" uk-grid>
+                  <div class="uk-width-expand" uk-leader>Subtotal</div>
+                  <div>{{ "£{:,.2f}".format(order.subtotal) }}</div>
+                </div>
+                {% endif %}
+              </div>
+              {% if order.statusIs("incomplete") %}
+              <div class="uk-card-footer uk-text-right">
+                <p class="uk-text-meta">You need to let us know where to send the badges</p>
+                <form method="POST" action="{{ url_for('portal.index') }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                  <input type="hidden" name="id" value="{{ order.id }}" />
+                  <button type="submit" class="uk-button uk-button-default">Add Postage</button>
+                </form>
+              </div>
+              {% elif order.statusIs("payment_pending") and order.payment == None %}
+              <div class="uk-card-footer uk-text-right">
+                <p class="uk-text-meta">You need to send payment for your badge order.</p>
+                <a class="uk-button uk-button-default">Make Payment</a>
+              </div>
+              {% elif order.statusIs("payment_pending") %}
+              <div class="uk-card-footer uk-text-right">
+                <p class="uk-text-meta">Your payment is currently being processed, your order will be complete once this has come through.</p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <hr class="uk-divider-icon uk-hidden@m" />
       </div>
-
-      <div class="uk-width-1-3@l">
-        <h3>Orders</h3>
-        <hr class="uk-divider-icon uk-hidden@l" />
-        {% for order in orders %}
-          {{ order.status }}<br />
-        {% endfor %}
-      </div>
+      {% endif %}
     </div>
   </div>
 </div>
