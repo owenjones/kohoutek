@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_user, logout_user
 
 from app import limiter
-from app.models import Entry, Organisation, District
+from app.models import Entry, Organisation, District, Order
 from app.utils.auth import needs_admin
 
 blueprint = Blueprint("admin", __name__, url_prefix="/admin")
@@ -106,6 +106,11 @@ def resendLinkProcess(id):
 
 
 # Order Routes
+@blueprint.route("/orders")
+@needs_admin
+def listOrders():
+    orders = Order.query
+    return render_template("admin/orders.jinja", orders=orders)
 
 
 # Score Routes

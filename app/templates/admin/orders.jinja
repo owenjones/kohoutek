@@ -1,0 +1,35 @@
+{% extends "admin/template.jinja" %}
+{% block body %}
+<div class="uk-section uk-section-default uk-section-xsmall">
+  <div class="uk-container uk-container-xlarge">
+    {% include "portal/components/alerts.jinja" %}
+    <table class="uk-table uk-table-responsive uk-table-striped uk-table-middle">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Entry</th>
+          <th>Items</th>
+          <th>Order Total</th>
+          <th>Order Status</th>
+          <th>Payment Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td class="uk-text-small uk-table-link">
+            <a href="{{ url_for('admin.entry', id=order.id)}}">{{ order.id }}</a></td>
+          </td>
+          <td class="uk-table-link">
+            <a href="{{ url_for('admin.entry', id=order.entry.id)}}">{{ order.entry.code }}</a></td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ "£{:,.2f}".format(order.total) }}</td>
+          <td class="uk-text-{{ order.status_colour }}">{{ order.status_name }}</td>
+          <td>{{ order.payment.status }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
