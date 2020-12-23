@@ -39,7 +39,15 @@ class Config:
             "fonts.gstatic.com",
         ],
         "img-src": ["*", "data:"],
-        "script-src": ["'self'", "'unsafe-inline'", "cdnjs.cloudflare.com"],
+        "script-src": [
+            "'self'",
+            "'unsafe-inline'",
+            "cdnjs.cloudflare.com",
+            "js.stripe.com",
+        ],
+        "frame-src": [
+            "js.stripe.com",
+        ],
     }
 
     COMPRESS_MIMETYPES = [
