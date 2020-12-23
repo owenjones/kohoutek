@@ -12,5 +12,6 @@
   </head>
   <body id="portal" class="uk-height-viewport uk-background-{% if self.background() %}{% block background %}{% endblock %}{% else %}secondary{% endif %}">
     {% block body %}{% endblock %}
+    {% block bodyjs %}{% endblock %}
   </body>
 </html>
