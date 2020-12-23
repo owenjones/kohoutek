@@ -11,6 +11,7 @@
           <th>Items</th>
           <th>Order Total</th>
           <th>Order Status</th>
+          <th>Payment Method</th>
           <th>Payment Status</th>
         </tr>
       </thead>
@@ -25,6 +26,7 @@
           <td>{{ order.quantity }}</td>
           <td>{{ "£{:,.2f}".format(order.total) }}</td>
           <td class="uk-text-{{ order.status_colour }}">{{ order.status_name }}</td>
+          <td>{{ order.payment.method }}</td>
           <td>{{ order.payment.status }}</td>
         </tr>
         {% endfor %}
