@@ -1,0 +1,30 @@
+<div class="uk-width-1-1">
+  <div class="uk-card uk-card-default uk-card-body">
+    <div class="uk-grid-small uk-flex uk-flex-middle" uk-grid>
+      <div class="uk-width-expand">
+        <h4 class="uk-card-title">Order #{{ order.id }}</h4>
+      </div>
+      <div class="uk-text-small uk-text-{{ order.status_colour }}">
+        {{ order.status_name }}
+      </div>
+    </div>
+    <div class="uk-margin">
+      {% include "portal/orders/partials/order_item_list.jinja" %}
+    </div>
+
+    <div>
+      <div class="uk-grid-small uk-flex uk-flex-right" uk-grid>
+        {% if order.statusIs("incomplete") and (not order.payment or order.payment.statusIs("new")) %}
+        <div>
+          <a href="{{ url_for('portal.cancelOrder', id=order.id) }}" class="uk-button uk-button-default">Cancel Order</a>
+        </div>
+        {% endif %}
+        {% if order.payment %}
+        <div>
+          <a href="{{ url_for('portal.viewInvoice', id=order.id) }}" target="_blank" class="uk-button uk-button-default">Download Invoice</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

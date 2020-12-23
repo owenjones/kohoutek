@@ -1,0 +1,28 @@
+{% extends "portal/portal-frame.jinja" %}
+{% block module %}
+<div class="uk-section uk-section-default uk-section-small">
+  <div class="uk-container uk-container-small">
+    <div class="uk-flex uk-flex-stretch" uk-grid>
+      <div class="uk-width-1-1 uk-text-center">
+        <h1>Order #{{ order.id }}</h1>
+        {% include "portal/components/alerts.jinja" %}
+      </div>
+
+      {% include "portal/orders/partials/order_summary.jinja" %}
+
+      <div class="uk-width-1-2@m uk-text-center uk-text-left@m">
+        <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}">
+          <span uk-icon="arrow-left"></span> Change Payment Method
+        </a>
+      </div>
+
+      <div class="uk-width-1-1">
+        <div class="uk-card uk-card-default uk-card-body">
+          <h3>{% block name %}{% endblock %}</h3>
+          {% block instructions %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

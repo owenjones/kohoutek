@@ -1,0 +1,21 @@
+{% extends "portal/orders/payment/template.jinja" %}
+{% block name %}Pay by Cheque{% endblock %}
+{% block instructions %}
+<form method="POST" action="{{ url_for('portal.completePayment', id=order.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+  <input type="hidden" name="id" value="{{ order.id }}" />
+  <p>Whilst we are able to take cheques, please only use this method if you really have no other options (it is 2021 after all!).</p>
+  <p>Once you've posted your cheque, please mark your payment as sent using the button below, so we know to look out for it.</p>
+  <p>Cheques should be made payable to <strong>Kohoutek Competition</strong> and sent to the following address:</p>
+
+  <div class="uk-width-1-2@m uk-margin uk-card uk-card-secondary uk-card-small uk-card-body">
+  Kohoutek<br />
+  The Flat<br />
+  10 Etloe Road<br />
+  Bristol<br />
+  BS6 7PB<br />
+  (United Kingdom)
+  </div>
+  <button type="submit" class="uk-button uk-button-primary ">Payment Sent</a>
+</form>
+{% endblock %}

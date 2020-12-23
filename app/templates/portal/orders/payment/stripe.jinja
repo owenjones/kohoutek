@@ -1,0 +1,36 @@
+{% extends "portal/orders/payment/template.jinja" %}
+{% block name %}Online Payment{% endblock %}
+{% block headjs %}<script src="https://js.stripe.com/v3/"></script>{% endblock %}
+{% block bodyjs %}
+<script type="text/javascript">
+  var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+  var button = document.getElementById('checkout');
+
+  button.addEventListener('click', function() {
+    fetch('{{ url_for("portal.stripeGenerateCheckout", id=order.id) }}', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+      body: 'csrf_token={{ csrf_token() }}'
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(session) {
+      return stripe.redirectToCheckout({ sessionId: session.id });
+    })
+    .then(function(result) {
+      if (result.error) {
+        alert(result.error.message);
+      }
+    })
+    .catch(function(error) {
+      console.error('Error:', error);
+    });
+  });
+</script>
+{% endblock %}
+{% block instructions %}
+<button id="checkout" class="uk-button uk-button-primary">Checkout</button>
+{% endblock %}

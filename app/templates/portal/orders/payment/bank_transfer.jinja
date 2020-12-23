@@ -1,0 +1,28 @@
+{% extends "portal/orders/payment/template.jinja" %}
+{% block name %}Bank Transfer{% endblock %}
+{% block instructions %}
+<form method="POST" action="{{ url_for('portal.completePayment', id=order.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+  <input type="hidden" name="id" value="{{ order.id }}" />
+  <p>Please send your payment, using the reference <strong>{{ order.entry.code }}</strong> to the details below.</p>
+
+  <p>Once you've completed the transfer mark it as sent below so we know to look out for it.</p>
+
+  <table class="uk-table uk-table-divider uk-table-small">
+    <tr>
+      <th>Account name</th>
+      <td>Kohoutek Competition</td>
+    </tr>
+    <tr>
+      <th>Account number</th>
+      <td>0000</td>
+    </tr>
+    <tr>
+      <th>Sort code</th>
+      <td>00-00-00</td>
+    </tr>
+  </table>
+  <p>If paying internationally...</p>
+  <button type="submit" class="uk-button uk-button-primary">Payment Sent</a>
+</form>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "portal/portal-frame.jinja" %}
+{% block module %}
+<div class="uk-section uk-section-default uk-section-small">
+  <div class="uk-container uk-container-small">
+    <div class="uk-flex uk-flex-stretch" uk-grid>
+      {% include "portal/orders/partials/order_summary.jinja" %}
+
+      <div class="uk-width-1-2@m uk-text-center uk-text-left@m">
+        {#}<a href="{{ url_for('portal.placeOrder', id=order.id) }}">
+          <span uk-icon="arrow-left"></span> Choose Items
+        </a>{#}
+      </div>
+      <div class="uk-width-1-2@m uk-text-center uk-text-right@m">
+        {% if order.postage and order.statusIs("complete") == False %}
+        <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}">
+          Add Payment Method <span uk-icon="arrow-right"></span>
+        </a>
+        {% endif %}
+      </div>
+
+      <div class="uk-width-1-1">
+        <div class="uk-card uk-card-default uk-card-body">
+          {% include "portal/components/alerts.jinja" %}
+          <form method="POST" action="{{ url_for('portal.processPostage', id=order.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <input type="hidden" name="id" value="{{ order.id }}" />
+            <div>
+              <div class="uk-grid-divider" uk-grid>
+                <div class="uk-width-1-1 uk-width-1-2@m">
+                  <h3>Choose Postage</h3>
+                  {% if options|count == 0 %}
+                    <p>There don't appear to be any valid postage options for your order size ({{ order.quantity }} items).</p>
+                  {% endif %}
+                  {% for option in options %}
+                    <div>
+                      <div class="uk-grid-medium" uk-grid>
+                        <div class="uk-width-expand" uk-leader><label><input type="radio" name="option" value="{{ option.id }}" class="uk-radio uk-margin-small-right" required> {{ option.name }}</label></div>
+                        <div>{{ "£{:,.2f}".format(option.cost) }}</div>
+                      </div>
+                      <p class="uk-text-meta">{{ option.description }}</p>
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="uk-width-1-1 uk-width-1-2@m">
+                  <h3>Delivery Address</h3>
+                  <fieldset class="uk-fieldset uk-form-stacked">
+                    {% include "portal/orders/partials/address_form.jinja" %}
+                  </fieldset>
+                </div>
+
+                <div class="uk-width-1-1">
+                  <button type="submit" class="uk-button uk-button-primary uk-button-large">Continue to Payment</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
