@@ -1,11 +1,24 @@
 import time
+import math
 
+import stripe
 from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
 from flask_login import current_user, login_user, logout_user
 
-from app import limiter
-from app.models import Entry, Item, Order, ItemStock
+from app import db, limiter
+from app.models import (
+    Entry,
+    Item,
+    ItemStock,
+    Order,
+    OrderStatus,
+    Postage,
+    Payment,
+    PaymentMethod,
+    PaymentStatus,
+)
 from app.utils.auth import needs_team, needs_admin
+from app.utils.form import form_input_array
 
 blueprint = Blueprint("portal", __name__, url_prefix="/portal")
 
@@ -88,34 +101,294 @@ def placeOrder():
 @blueprint.route("/badges/order", methods=["POST"])
 @needs_team
 def processOrder():
-    return "Process"
+    items = form_input_array(request.form, "item")
 
+    order = Order(entry_id=current_user.entry.id)
 
-@blueprint.route("/badges/order/<int:id>")
-@needs_team
-def viewOrder(id):
-    pass
+    for id, quantity in items:
+        if quantity != "":
+            try:
+                quantity = int(quantity)
+                added = order.addItem(id, quantity)
+
+                if not added:
+                    flash(
+                        "There was a problem adding one of your items, please try again",
+                        "warning",
+                    )
+                    return redirect(url_for("portal.placeOrder"))
+
+                elif added == ItemStock("out_of_stock"):
+                    flash(
+                        "One of the items you have tried to order doesn't have enough stock, please check your order and try again",
+                        "warning",
+                    )
+                    return redirect(url_for("portal.placeOrder"))
+
+            except ValueError:
+                flash(
+                    "There was a problem adding one of your items, please try again",
+                    "warning",
+                )
+                return redirect(url_for("portal.placeOrder"))
+
+    order.save()
+    return redirect(url_for("portal.addPostageToOrder", id=order.id))
 
 
 @blueprint.route("/badges/order/<int:id>/postage")
 @needs_team
 def addPostageToOrder(id):
-    return "Add Postage"
+    order = Order.query.get_or_404(id)
+    if order.entry != current_user.entry:
+        abort(403)
+
+    options = (
+        Postage.query.filter(
+            (Postage.item_min == 0) | (order.quantity >= Postage.item_min)
+        )
+        .filter((Postage.item_max == 0) | (order.quantity <= Postage.item_max))
+        .all()
+    )
+
+    return render_template("portal/orders/postage.jinja", order=order, options=options)
 
 
 @blueprint.route("/badges/order/<int:id>/postage", methods=["POST"])
 @needs_team
 def processPostage(id):
-    return "Process"
+    order = Order.query.get_or_404(request.form.get("id"))
+    if order.entry != current_user.entry:
+        abort(403)
+
+    if not order.statusIs("complete"):
+        added = order.addPostage(request.form.get("option"))
+
+        # do some validation here
+
+        order.postage_name = request.form.get("name")
+        order.postage_address_1 = request.form.get("address_1")
+        order.postage_address_2 = request.form.get("address_2")
+        order.postage_city = request.form.get("city")
+        order.postage_postcode = request.form.get("postcode")
+        order.postage_country = request.form.get("country")
+        order.save()
+
+        return redirect(url_for("portal.addPaymentToOrder", id=order.id))
 
 
 @blueprint.route("/badges/order/<int:id>/payment")
 @needs_team
 def addPaymentToOrder(id):
-    return "Add Payment"
+    order = Order.query.get_or_404(id)
+    if order.entry != current_user.entry:
+        abort(403)
+
+    if order.postage:
+        return render_template("portal/orders/payment.jinja", order=order)
+
+    else:
+        return redirect(url_for("portal.addPostageToOrder", id=order.id))
 
 
 @blueprint.route("/badges/order/<int:id>/payment", methods=["POST"])
 @needs_team
 def processPayment(id):
-    return "Process"
+    order = Order.query.get_or_404(request.form.get("id"))
+    if order.entry != current_user.entry:
+        abort(403)
+
+    payment = order.payment if order.payment else Payment(order=order)
+    method = request.form.get("method")
+
+    if method == "online":
+        payment.method = PaymentMethod.stripe
+        payment.fee = math.ceil(((order.subtotal * 0.014) + 0.22) * 100) / 100
+
+    elif method == "bank":
+        payment.method = PaymentMethod.BACS
+        payment.fee = 0
+
+    elif method == "cheque":
+        payment.method = PaymentMethod.cheque
+        payment.fee = 0
+
+    else:
+        flash("Invalid payment method selected", "danger")
+        return redirect(url_for("portal.addPaymentToOrder", id=order.id))
+
+    db.session.add(payment)
+    db.session.commit()
+
+    return redirect(url_for("portal.completePayment", id=order.id))
+
+
+@blueprint.route("/badges/order/<int:id>/payment/complete")
+@needs_team
+def completePayment(id):
+    order = Order.query.get_or_404(id)
+    if order.entry != current_user.entry:
+        abort(403)
+
+    if order.payment.method == PaymentMethod.stripe:
+        return render_template("portal/orders/payment/stripe.jinja", order=order)
+
+    elif order.payment.method == PaymentMethod.BACS:
+        return render_template("portal/orders/payment/bank_transfer.jinja", order=order)
+
+    elif order.payment.method == PaymentMethod.cheque:
+        return render_template("portal/orders/payment/cheque.jinja", order=order)
+
+    else:
+        flash("Invalid payment method selected", "danger")
+        return redirect(url_for("portal.addPaymentToOrder", id=order.id))
+
+
+@blueprint.route("/badges/order/<int:id>/payment/generate", methods=["POST"])
+@needs_team
+def stripeGenerateCheckout(id):
+    order = Order.query.get_or_404(id)
+    if order.entry != current_user.entry:
+        abort(403)
+
+    if order.payment.method == PaymentMethod.stripe:
+        stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+
+        items = [
+            {
+                "price_data": {
+                    "currency": "gbp",
+                    "product_data": {
+                        "name": item.item.name,
+                        "description": item.item.description,
+                        "images": ["https://kohoutek.co.uk/static/img/badge.png"],
+                    },
+                    "unit_amount": int(item.item.unit_cost * 100),
+                },
+                "quantity": item.quantity,
+            }
+            for item in order.items
+        ]
+
+        items.append(
+            {
+                "price_data": {
+                    "currency": "gbp",
+                    "product_data": {"name": order.postage.name},
+                    "unit_amount": int(order.postage.cost * 100),
+                },
+                "quantity": 1,
+            }
+        )
+
+        items.append(
+            {
+                "price_data": {
+                    "currency": "gbp",
+                    "product_data": {"name": "Online Payment Fee"},
+                    "unit_amount": int(order.payment.fee * 100),
+                },
+                "quantity": 1,
+            }
+        )
+
+        session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            line_items=items,
+            mode="payment",
+            success_url=url_for(
+                "portal.stripePaymentSuccess", id=order.id, _external=True
+            ),
+            cancel_url=url_for("portal.completePayment", id=order.id, _external=True),
+        )
+
+        order.payment.reference = session.id
+        order.payment.amount = float(session.amount_total) / 100
+        order.save()
+
+        return jsonify(id=session.id)
+
+    else:
+        return jsonify([])
+
+
+@blueprint.route("/badges/order/<int:id>/payment/success")
+@needs_team
+def stripePaymentSuccess(id):
+    order = Order.query.get_or_404(id)
+    if order.entry != current_user.entry:
+        abort(403)
+
+    if order.payment.method == PaymentMethod.stripe:
+        stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+        session = stripe.checkout.Session.retrieve(order.payment.reference)
+        if session.payment_status == "paid":
+            order.payment.received_at = db.func.now()
+            order.payment.status = PaymentStatus.confirmed
+            order.status = OrderStatus.complete
+            order.save()
+
+            flash("Payment successfully received", "success")
+            return redirect(url_for("portal.viewOrder", id=order.id))
+
+        else:
+            # We should never get to here - Stripe handles any issues when charging the card
+            flash("There was a problem with your payment", "warning")
+            return redirect(url_for("portal.completePayment", id=order.id))
+
+
+@blueprint.route("/badges/order/<int:id>/payment/complete", methods=["POST"])
+@needs_team
+def recordPayment(id):
+    order = Order.query.get_or_404(request.form.get("id"))
+    if order.entry != current_user.entry:
+        abort(403)
+
+    if order.payment.method in [PaymentMethod.BACS, PaymentMethod.cheque]:
+        order.payment.status = PaymentStatus.pending
+        order.save()
+        flash(
+            "Thank you for arranging payment for your badge order, once we receive the payment your order will be updated.",
+            "success",
+        )
+
+    return redirect(url_for("portal.viewOrder", id=order.id))
+
+
+@blueprint.route("/badges/order/<int:id>/cancel")
+@needs_team
+def cancelOrder(id):
+    order = Order.query.get_or_404(id)
+    if order.entry != current_user.entry:
+        abort(403)
+
+    if not (order.statusIs("complete") or order.statusIs("dispatched")):
+        db.session.delete(order)
+        db.session.commit()
+
+        flash("Your order has been cancelled", "danger")
+        return redirect(url_for("portal.listOrders"))
+
+    else:
+        flash("You can't cancel this order as it has been completed", "warning")
+        return redirect(url_for("portal.listOrders"))
+
+
+@blueprint.route("/badges/order/<int:id>")
+@needs_team
+def viewOrder(id):
+    order = Order.query.get_or_404(id)
+    if order.entry != current_user.entry:
+        abort(403)
+
+    return render_template("portal/orders/order.jinja", order=order)
+
+
+@blueprint.route("/badges/order/<int:id>/invoice")
+@needs_team
+def viewInvoice(id):
+    order = Order.query.get_or_404(id)
+    if order.entry != current_user.entry:
+        abort(403)
+
+    return render_template("portal/orders/payment/invoice.jinja", order=order)
