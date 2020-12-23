@@ -3,7 +3,7 @@
 {% block headjs %}<script src="https://js.stripe.com/v3/"></script>{% endblock %}
 {% block bodyjs %}
 <script type="text/javascript">
-  var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+  var stripe = Stripe('{{ stripe_key }}');
   var button = document.getElementById('checkout');
 
   button.addEventListener('click', function() {

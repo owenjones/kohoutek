@@ -2,7 +2,16 @@ import time
 import math
 
 import stripe
-from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
+from flask import (
+    current_app,
+    Blueprint,
+    render_template,
+    redirect,
+    url_for,
+    flash,
+    request,
+    jsonify,
+)
 from flask_login import current_user, login_user, logout_user
 
 from app import db, limiter
@@ -231,7 +240,11 @@ def completePayment(id):
         abort(403)
 
     if order.payment.method == PaymentMethod.stripe:
-        return render_template("portal/orders/payment/stripe.jinja", order=order)
+        return render_template(
+            "portal/orders/payment/stripe.jinja",
+            order=order,
+            stripe_key=current_app.config["STRIPE"]["publishable_key"],
+        )
 
     elif order.payment.method == PaymentMethod.BACS:
         return render_template("portal/orders/payment/bank_transfer.jinja", order=order)
@@ -252,7 +265,7 @@ def stripeGenerateCheckout(id):
         abort(403)
 
     if order.payment.method == PaymentMethod.stripe:
-        stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+        stripe.api_key = current_app.config["STRIPE"]["secret_key"]
 
         items = [
             {
@@ -320,8 +333,9 @@ def stripePaymentSuccess(id):
         abort(403)
 
     if order.payment.method == PaymentMethod.stripe:
-        stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+        stripe.api_key = current_app.config["STRIPE"]["secret_key"]
         session = stripe.checkout.Session.retrieve(order.payment.reference)
+
         if session.payment_status == "paid":
             order.payment.received_at = db.func.now()
             order.payment.status = PaymentStatus.confirmed
@@ -332,8 +346,8 @@ def stripePaymentSuccess(id):
             return redirect(url_for("portal.viewOrder", id=order.id))
 
         else:
-            # We should never get to here - Stripe handles any issues when charging the card
-            flash("There was a problem with your payment", "warning")
+            # We should never get to here - Stripe handles issues when charging the card
+            flash("There was a problem with your payment, please try again", "warning")
             return redirect(url_for("portal.completePayment", id=order.id))
 
 

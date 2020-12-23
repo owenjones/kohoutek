@@ -23,6 +23,11 @@ class Config:
     ROOT_KEY = os.getenv("ROOT_KEY", randomKey(12))
     SECRET_KEY = os.getenv("SECRET_KEY", randomString(25))
 
+    STRIPE = {
+        "publishable_key": os.getenv("STRIPE_PUBLISHABLE_KEY"),
+        "secret_key": os.getenv("STRIPE_SECRET_KEY"),
+    }
+
     MAIL = {
         "url": "https://api.eu.mailgun.net/v3/",
         "domain": os.getenv("MAIL_DOMAIN"),
