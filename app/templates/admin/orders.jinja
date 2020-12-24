@@ -3,11 +3,23 @@
 <div class="uk-section uk-section-default uk-section-xsmall">
   <div class="uk-container uk-container-xlarge">
     {% include "portal/components/alerts.jinja" %}
+    
+    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+      <div class="uk-navbar-center">
+        <ul class="uk-navbar-nav uk-flex uk-flex-wrap">
+          <li><a href="{{ url_for('admin.listOrders') }}">All</a></li>
+          <li><a href="{{ url_for('admin.listOrders') }}/incomplete">Incomplete</a></li>
+          <li><a href="{{ url_for('admin.listOrders') }}/payment_pending">Payment Pending</a></li>
+          <li><a href="{{ url_for('admin.listOrders') }}/complete">Complete</a></li>
+          <li><a href="{{ url_for('admin.listOrders') }}/dispatched">Dispatched</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <table class="uk-table uk-table-responsive uk-table-striped uk-table-middle">
       <thead>
         <tr>
-          <th>Order ID</th>
-          <th>Entry</th>
+          <th>Order</th>
           <th>Items</th>
           <th>Order Total</th>
           <th>Order Status</th>
@@ -19,15 +31,13 @@
         {% for order in orders %}
         <tr>
           <td class="uk-text-small uk-table-link">
-            <a href="{{ url_for('admin.entry', id=order.id)}}">{{ order.id }}</a></td>
+            <a href="{{ url_for('admin.entry', id=order.id)}}">{{ order.code }}</a></td>
           </td>
-          <td class="uk-table-link">
-            <a href="{{ url_for('admin.entry', id=order.entry.id)}}">{{ order.entry.code }}</a></td>
           <td>{{ order.quantity }}</td>
           <td>{{ "£{:,.2f}".format(order.total) }}</td>
           <td class="uk-text-{{ order.status_colour }}">{{ order.status_name }}</td>
-          <td>{{ order.payment.method }}</td>
-          <td>{{ order.payment.status }}</td>
+          <td>{{ order.payment.type }}</td>
+          <td class="uk-text-{{ order.payment.status_colour }}">{{ order.payment.status_message }}</td>
         </tr>
         {% endfor %}
       </tbody>
