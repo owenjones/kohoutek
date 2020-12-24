@@ -131,7 +131,7 @@ class Order(db.Model):
                     ).first()
 
                     if item:
-                        item.quantity += quantity
+                        item.quantity = quantity
 
                     else:
                         item = OrderItem(item_id=item_id, quantity=quantity)
