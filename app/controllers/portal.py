@@ -373,7 +373,7 @@ def cancelOrder(id):
         db.session.delete(order)
         db.session.commit()
 
-        flash("Your order has been cancelled", "danger")
+        flash(f"Order #{ order.id } has been cancelled", "success")
         return redirect(url_for("portal.index"))
 
     else:
