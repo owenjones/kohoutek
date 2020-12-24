@@ -104,38 +104,47 @@ def placeOrder():
 @needs_team
 def processOrder():
     items = form_input_array(request.form, "item")
+    count = sum([int(v) for k, v in items if v != ""])
 
-    order = Order(entry_id=current_user.entry.id)
+    if count > 0:
+        order = Order(entry_id=current_user.entry.id)
+        for id, quantity in items:
+            if quantity != "":
+                try:
+                    quantity = int(quantity)
+                    added = order.addItem(id, quantity)
 
-    for id, quantity in items:
-        if quantity != "":
-            try:
-                quantity = int(quantity)
-                added = order.addItem(id, quantity)
+                    if not added:
+                        flash(
+                            "There was a problem adding one of your items, please try again",
+                            "warning",
+                        )
+                        return redirect(url_for("portal.placeOrder"))
 
-                if not added:
+                    elif added == ItemStock("out_of_stock"):
+                        flash(
+                            "One of the items you have tried to order doesn't have enough stock, please check your order and try again",
+                            "warning",
+                        )
+                        return redirect(url_for("portal.placeOrder"))
+
+                except ValueError:
                     flash(
                         "There was a problem adding one of your items, please try again",
                         "warning",
                     )
                     return redirect(url_for("portal.placeOrder"))
 
-                elif added == ItemStock("out_of_stock"):
-                    flash(
-                        "One of the items you have tried to order doesn't have enough stock, please check your order and try again",
-                        "warning",
-                    )
-                    return redirect(url_for("portal.placeOrder"))
+        order.save()
+        return redirect(url_for("portal.addPostageToOrder", id=order.id))
 
-            except ValueError:
-                flash(
-                    "There was a problem adding one of your items, please try again",
-                    "warning",
-                )
-                return redirect(url_for("portal.placeOrder"))
+    else:
+        flash(
+            "You haven't chosen any items, please add some and try again",
+            "warning",
+        )
 
-    order.save()
-    return redirect(url_for("portal.addPostageToOrder", id=order.id))
+        return redirect(url_for("portal.placeOrder"))
 
 
 @blueprint.route("/order/<int:id>/postage")
