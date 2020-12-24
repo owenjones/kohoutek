@@ -92,19 +92,11 @@ def resendLinkProcess():
     return render_template("portal/resend-link.jinja")
 
 
-# Badge Order Routes
-@blueprint.route("/badges")
-@needs_team
-def listOrders():
-    orders = current_user.entry.orders
-    return render_template("portal/orders/index.jinja", orders=orders)
-
-
 @blueprint.route("/badges/order")
 @needs_team
 def placeOrder():
     items = Item.query.all()
-    return render_template("portal/orders/new.jinja", items=items)
+    return render_template("portal/orders/items.jinja", items=items)
 
 
 @blueprint.route("/badges/order", methods=["POST"])
@@ -342,7 +334,7 @@ def stripePaymentSuccess(id):
             order.status = OrderStatus.complete
             order.save()
 
-            flash("Payment successfully received", "success")
+            flash("Online payment successfully received", "success")
             return redirect(url_for("portal.viewOrder", id=order.id))
 
         else:
@@ -381,11 +373,11 @@ def cancelOrder(id):
         db.session.commit()
 
         flash("Your order has been cancelled", "danger")
-        return redirect(url_for("portal.listOrders"))
+        return redirect(url_for("portal.index"))
 
     else:
         flash("You can't cancel this order as it has been completed", "warning")
-        return redirect(url_for("portal.listOrders"))
+        return redirect(url_for("portal.index"))
 
 
 @blueprint.route("/badges/order/<int:id>")
