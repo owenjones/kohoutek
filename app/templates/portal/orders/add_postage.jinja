@@ -11,13 +11,13 @@
           <span uk-icon="arrow-left"></span> Choose Items
         </a>
       </div>
+      {% if order.postage %}
       <div class="uk-width-1-2@m uk-text-center uk-text-right@m">
-        {% if order.postage %}
         <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}">
           Add Payment Method <span uk-icon="arrow-right"></span>
         </a>
-        {% endif %}
       </div>
+      {% endif %}
 
       <div class="uk-width-1-1">
         <div class="uk-card uk-card-default uk-card-body">

@@ -12,13 +12,13 @@
         </a>
       </div>
 
+      {% if order.payment %}
       <div class="uk-width-1-2@m uk-text-center uk-text-right@m">
-        {% if order.payment %}
         <a href="{{ url_for('portal.completePayment', id=order.id) }}">
           Complete Payment <span uk-icon="arrow-right"></span>
         </a>
-        {% endif %}
       </div>
+      {% endif %}
 
       <div class="uk-width-1-1">
         <div class="uk-card uk-card-default uk-card-body">
