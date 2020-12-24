@@ -93,14 +93,14 @@ def resendLinkProcess():
     return render_template("portal/resend-link.jinja")
 
 
-@blueprint.route("/badges/order")
+@blueprint.route("/badges")
 @needs_team
 def placeOrder():
     items = Item.query.all()
     return render_template("portal/orders/items.jinja", items=items)
 
 
-@blueprint.route("/badges/order", methods=["POST"])
+@blueprint.route("/badges", methods=["POST"])
 @needs_team
 def processOrder():
     items = form_input_array(request.form, "item")
@@ -138,7 +138,7 @@ def processOrder():
     return redirect(url_for("portal.addPostageToOrder", id=order.id))
 
 
-@blueprint.route("/badges/order/<int:id>/postage")
+@blueprint.route("/order/<int:id>/postage")
 @needs_team
 def addPostageToOrder(id):
     order = Order.query.get_or_404(id)
@@ -156,7 +156,7 @@ def addPostageToOrder(id):
     return render_template("portal/orders/postage.jinja", order=order, options=options)
 
 
-@blueprint.route("/badges/order/<int:id>/postage", methods=["POST"])
+@blueprint.route("/order/<int:id>/postage", methods=["POST"])
 @needs_team
 def processPostage(id):
     order = Order.query.get_or_404(request.form.get("id"))
@@ -179,7 +179,7 @@ def processPostage(id):
         return redirect(url_for("portal.addPaymentToOrder", id=order.id))
 
 
-@blueprint.route("/badges/order/<int:id>/payment")
+@blueprint.route("/order/<int:id>/payment")
 @needs_team
 def addPaymentToOrder(id):
     order = Order.query.get_or_404(id)
@@ -193,7 +193,7 @@ def addPaymentToOrder(id):
         return redirect(url_for("portal.addPostageToOrder", id=order.id))
 
 
-@blueprint.route("/badges/order/<int:id>/payment", methods=["POST"])
+@blueprint.route("/order/<int:id>/payment", methods=["POST"])
 @needs_team
 def processPayment(id):
     order = Order.query.get_or_404(request.form.get("id"))
@@ -225,7 +225,7 @@ def processPayment(id):
     return redirect(url_for("portal.completePayment", id=order.id))
 
 
-@blueprint.route("/badges/order/<int:id>/payment/complete")
+@blueprint.route("/order/<int:id>/payment/complete")
 @needs_team
 def completePayment(id):
     order = Order.query.get_or_404(id)
@@ -250,7 +250,7 @@ def completePayment(id):
         return redirect(url_for("portal.addPaymentToOrder", id=order.id))
 
 
-@blueprint.route("/badges/order/<int:id>/payment/generate", methods=["POST"])
+@blueprint.route("/order/<int:id>/payment/generate", methods=["POST"])
 @needs_team
 def stripeGenerateCheckout(id):
     order = Order.query.get_or_404(id)
@@ -318,7 +318,7 @@ def stripeGenerateCheckout(id):
         return jsonify([])
 
 
-@blueprint.route("/badges/order/<int:id>/payment/success")
+@blueprint.route("/order/<int:id>/payment/success")
 @needs_team
 def stripePaymentSuccess(id):
     order = Order.query.get_or_404(id)
@@ -344,7 +344,7 @@ def stripePaymentSuccess(id):
             return redirect(url_for("portal.completePayment", id=order.id))
 
 
-@blueprint.route("/badges/order/<int:id>/payment/complete", methods=["POST"])
+@blueprint.route("/order/<int:id>/payment/complete", methods=["POST"])
 @needs_team
 def recordPayment(id):
     order = Order.query.get_or_404(request.form.get("id"))
@@ -362,7 +362,7 @@ def recordPayment(id):
     return redirect(url_for("portal.viewOrder", id=order.id))
 
 
-@blueprint.route("/badges/order/<int:id>/cancel")
+@blueprint.route("/order/<int:id>/cancel")
 @needs_team
 def cancelOrder(id):
     order = Order.query.get_or_404(id)
@@ -381,7 +381,7 @@ def cancelOrder(id):
         return redirect(url_for("portal.index"))
 
 
-@blueprint.route("/badges/order/<int:id>")
+@blueprint.route("/order/<int:id>")
 @needs_team
 def viewOrder(id):
     order = Order.query.get_or_404(id)
@@ -391,7 +391,7 @@ def viewOrder(id):
     return render_template("portal/orders/order.jinja", order=order)
 
 
-@blueprint.route("/badges/order/<int:id>/invoice")
+@blueprint.route("/order/<int:id>/invoice")
 @needs_team
 def viewInvoice(id):
     order = Order.query.get_or_404(id)
