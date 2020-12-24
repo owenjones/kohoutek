@@ -147,12 +147,30 @@ def processOrder():
         return redirect(url_for("portal.placeOrder"))
 
 
+@blueprint.route("/order/<int:id>/items")
+@needs_team
+def updateItems(id):
+    order = Order.query.get_or_404(id)
+    if order.entry != current_user.entry:
+        abort(403)
+
+    if order.status != OrderStatus.incomplete:
+        return redirect(url_for("portal.viewOrder", id=order.id))
+
+    items = Item.query.all()
+
+    return render_template("portal/orders/update_items.jinja", order=order, items=items)
+
+
 @blueprint.route("/order/<int:id>/postage")
 @needs_team
 def addPostageToOrder(id):
     order = Order.query.get_or_404(id)
     if order.entry != current_user.entry:
         abort(403)
+
+    if order.status != OrderStatus.incomplete:
+        return redirect(url_for("portal.viewOrder", id=order.id))
 
     options = (
         Postage.query.filter(
@@ -174,7 +192,7 @@ def processPostage(id):
     if order.entry != current_user.entry:
         abort(403)
 
-    if not order.statusIs("complete"):
+    if order.statusIs("incomplete"):
         added = order.addPostage(request.form.get("option"))
 
         # do some validation here
@@ -197,6 +215,9 @@ def addPaymentToOrder(id):
     if order.entry != current_user.entry:
         abort(403)
 
+    if order.status != OrderStatus.incomplete:
+        return redirect(url_for("portal.viewOrder", id=order.id))
+
     if order.postage:
         return render_template("portal/orders/add_payment.jinja", order=order)
 
@@ -210,6 +231,9 @@ def processPayment(id):
     order = Order.query.get_or_404(request.form.get("id"))
     if order.entry != current_user.entry:
         abort(403)
+
+    if order.status != OrderStatus.incomplete:
+        return redirect(url_for("portal.viewOrder", id=order.id))
 
     payment = order.payment if order.payment else Payment(order=order)
     method = request.form.get("method")
@@ -243,18 +267,25 @@ def completePayment(id):
     if order.entry != current_user.entry:
         abort(403)
 
+    if order.status != OrderStatus.incomplete:
+        return redirect(url_for("portal.viewOrder", id=order.id))
+
     if order.payment.method == PaymentMethod.stripe:
         return render_template(
-            "portal/orders/payment/stripe.jinja",
+            "portal/orders/payment_methods/stripe.jinja",
             order=order,
             stripe_key=current_app.config["STRIPE"]["publishable_key"],
         )
 
     elif order.payment.method == PaymentMethod.BACS:
-        return render_template("portal/orders/payment/bank_transfer.jinja", order=order)
+        return render_template(
+            "portal/orders/payment_methods/bank_transfer.jinja", order=order
+        )
 
     elif order.payment.method == PaymentMethod.cheque:
-        return render_template("portal/orders/payment/cheque.jinja", order=order)
+        return render_template(
+            "portal/orders/payment_methods/cheque.jinja", order=order
+        )
 
     else:
         flash("Invalid payment method selected", "danger")
@@ -267,6 +298,9 @@ def stripeGenerateCheckout(id):
     order = Order.query.get_or_404(id)
     if order.entry != current_user.entry:
         abort(403)
+
+    if order.status != OrderStatus.incomplete:
+        return jsonify([])  # format error message in this
 
     if order.payment.method == PaymentMethod.stripe:
         stripe.api_key = current_app.config["STRIPE"]["secret_key"]
@@ -336,6 +370,9 @@ def stripePaymentSuccess(id):
     if order.entry != current_user.entry:
         abort(403)
 
+    if order.status != OrderStatus.incomplete:
+        return redirect(url_for("portal.viewOrder", id=order.id))
+
     if order.payment.method == PaymentMethod.stripe:
         stripe.api_key = current_app.config["STRIPE"]["secret_key"]
         session = stripe.checkout.Session.retrieve(order.payment.reference)
@@ -361,6 +398,9 @@ def recordPayment(id):
     order = Order.query.get_or_404(request.form.get("id"))
     if order.entry != current_user.entry:
         abort(403)
+
+    if order.status != OrderStatus.incomplete:
+        return redirect(url_for("portal.viewOrder", id=order.id))
 
     if order.payment.method in [PaymentMethod.BACS, PaymentMethod.cheque]:
         order.payment.status = PaymentStatus.pending
@@ -388,7 +428,10 @@ def cancelOrder(id):
         return redirect(url_for("portal.index"))
 
     else:
-        flash("You can't cancel this order as it has been completed", "warning")
+        flash(
+            "You can't cancel this order online as we've already received payment for it, please get in touch with us at contact@kohoutek.co.uk if you wish to cancel",
+            "warning",
+        )
         return redirect(url_for("portal.index"))
 
 
@@ -409,4 +452,7 @@ def viewInvoice(id):
     if order.entry != current_user.entry:
         abort(403)
 
-    return render_template("portal/orders/payment/invoice.jinja", order=order)
+    if order.status == OrderStatus.incomplete:
+        return redirect(url_for("portal.viewOrder", id=order.id))
+
+    return render_template("portal/orders/invoice.jinja", order=order)
