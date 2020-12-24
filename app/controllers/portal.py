@@ -97,7 +97,7 @@ def resendLinkProcess():
 @needs_team
 def placeOrder():
     items = Item.query.all()
-    return render_template("portal/orders/items.jinja", items=items)
+    return render_template("portal/orders/new_order.jinja", items=items)
 
 
 @blueprint.route("/badges", methods=["POST"])
@@ -162,7 +162,9 @@ def addPostageToOrder(id):
         .all()
     )
 
-    return render_template("portal/orders/postage.jinja", order=order, options=options)
+    return render_template(
+        "portal/orders/add_postage.jinja", order=order, options=options
+    )
 
 
 @blueprint.route("/order/<int:id>/postage", methods=["POST"])
@@ -196,7 +198,7 @@ def addPaymentToOrder(id):
         abort(403)
 
     if order.postage:
-        return render_template("portal/orders/payment.jinja", order=order)
+        return render_template("portal/orders/add_payment.jinja", order=order)
 
     else:
         return redirect(url_for("portal.addPostageToOrder", id=order.id))
@@ -397,7 +399,7 @@ def viewOrder(id):
     if order.entry != current_user.entry:
         abort(403)
 
-    return render_template("portal/orders/order.jinja", order=order)
+    return render_template("portal/orders/view_order.jinja", order=order)
 
 
 @blueprint.route("/order/<int:id>/invoice")
