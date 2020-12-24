@@ -36,7 +36,8 @@ blueprint = Blueprint("portal", __name__, url_prefix="/portal")
 @needs_team
 def index():
     entry = current_user.entry
-    return render_template("portal/index.jinja", entry=entry)
+    orders = entry.orders
+    return render_template("portal/index.jinja", entry=entry, orders=orders)
 
 
 @blueprint.route("/login")
