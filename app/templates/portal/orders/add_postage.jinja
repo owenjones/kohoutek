@@ -34,7 +34,9 @@
                   {% for option in options %}
                     <div>
                       <div class="uk-grid-medium" uk-grid>
-                        <div class="uk-width-expand" uk-leader><label><input type="radio" name="option" value="{{ option.id }}" class="uk-radio uk-margin-small-right" required> {{ option.name }}</label></div>
+                        <div class="uk-width-expand" uk-leader>
+                          <label><input type="radio" name="option" value="{{ option.id }}" class="uk-radio uk-margin-small-right" required {% if option.id == order.postage.id %}checked{% endif %}> {{ option.name }}</label>
+                        </div>
                         <div>{{ "£{:,.2f}".format(option.cost) }}</div>
                       </div>
                       <p class="uk-text-meta">{{ option.description }}</p>
