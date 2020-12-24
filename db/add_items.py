@@ -19,7 +19,7 @@ def addItems(app):
             Item(
                 name="2021 Badge",
                 description="The badge for the 2021 Kohoutek Online event",
-                image="2021",
+                image="2021.png",
                 unit_cost=1,
                 index=1,
             )
@@ -29,7 +29,7 @@ def addItems(app):
             Item(
                 name="2020 Badge",
                 description="For the collectors, the 2020 event badge",
-                image="2020",
+                image="2020.png",
                 unit_cost=1,
                 limited=True,
                 stock=100,
@@ -41,7 +41,7 @@ def addItems(app):
             Item(
                 name="2019 Badge",
                 description="For the collectors, the 2019 event badge",
-                image="2019",
+                image="2019.png",
                 unit_cost=1,
                 limited=True,
                 stock=150,
