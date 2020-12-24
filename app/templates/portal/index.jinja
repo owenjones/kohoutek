@@ -70,13 +70,9 @@
             {% endif %}
           </tbody>
         </table>
-        {#}<p>
-          <a class="uk-button uk-button-default" href="#">Update Entry Information</a>
-        </p>{#}
-        <hr class="uk-divider-icon uk-hidden@l" />
-      </div>
 
-      <div class="uk-width-1-2@l">
+        <hr class="uk-divider-icon" />
+
         <h3>Contact Information</h3>
         <table class="uk-table uk-table-resonsive uk-table-middle uk-table-striped">
           <tbody>
@@ -93,6 +89,14 @@
         <p class="uk-margin uk-text-small">
           If you need to get in touch with the Kohoutek planning team for any reason we can be reached at <a href="mailto:contact@kohoutek.co.uk">contact@kohoutek.co.uk</a>.
         </p>
+        <hr class="uk-divider-icon uk-hidden@l" />
+      </div>
+
+      <div class="uk-width-1-2@l">
+        <h3>Badge Orders</h3>
+        <div>
+          {% include "portal/orders/partials/order_list.jinja" %}
+        </div>
       </div>
     </div>
   </div>
