@@ -18,8 +18,8 @@ def addPostageOptions(app):
         db.session.add(
             Postage(
                 name="UK Postage",
-                description="Postage within the UK for 20 badges or fewer",
-                cost=1,
+                description="Postage within the UK for 1-20 badges",
+                cost=2,
                 item_min=0,
                 item_max=20,
             )
@@ -28,7 +28,7 @@ def addPostageOptions(app):
         db.session.add(
             Postage(
                 name="UK Postage",
-                description="Postage within the UK for between 20 and 40 badges",
+                description="Postage within the UK for 20+ badges",
                 cost=3.50,
                 item_min=21,
                 item_max=0,
@@ -38,7 +38,7 @@ def addPostageOptions(app):
         db.session.add(
             Postage(
                 name="International Postage",
-                description="Postage outside the UK for 20 badges or fewer",
+                description="Postage outside the UK for 1-20 badges",
                 cost=5,
                 item_min=0,
                 item_max=20,
@@ -48,8 +48,8 @@ def addPostageOptions(app):
         db.session.add(
             Postage(
                 name="International Postage",
-                description="Postage outside the UK for 20 badges or fewer",
-                cost=12,
+                description="Postage outside the UK for 20+ badges",
+                cost=10,
                 item_min=21,
                 item_max=0,
             )
