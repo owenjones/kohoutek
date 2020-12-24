@@ -3,6 +3,7 @@
 <div class="uk-section uk-section-default uk-section-small">
   <div class="uk-container uk-container-small">
     <div class="uk-flex uk-flex-stretch" uk-grid>
+      {% include "portal/components/alerts.jinja" %}
       {% include "portal/orders/partials/order_summary.jinja" %}
 
       <div class="uk-width-1-2@m uk-text-center uk-text-left@m">
@@ -22,7 +23,6 @@
       <div class="uk-width-1-1">
         <div class="uk-card uk-card-default uk-card-body">
           <h3>Choose Payment Method</h3>
-          {% include "portal/components/alerts.jinja" %}
           <form method="POST" action="{{ url_for('portal.processPayment', id=order.id) }}">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <input type="hidden" name="id" value="{{ order.id }}" />
@@ -34,7 +34,7 @@
                 <p class="uk-text-meta">Online payments have a small processing fee (about 60p).</p>
               </div>
               <div class="uk-width-1-3@m uk-text-right@m">
-                <button type="submit" name="method" value="online" class="uk-button uk-button-primary">Pay Online</button>
+                <button type="submit" name="method" value="online" class="uk-button uk-button-primary uk-button-large">Pay Online</button>
               </div>
             </div>
             <hr />
@@ -44,7 +44,7 @@
                 <p>Transfer money to the Kohoutek account (IBAN details available for international entries).</p>
               </div>
               <div class="uk-width-1-3@m uk-text-right@m">
-                <button type="submit" name="method" value="bank" class="uk-button uk-button-primary">Bank Details</button>
+                <button type="submit" name="method" value="bank" class="uk-button uk-button-primary uk-button-large">Bank Details</button>
               </div>
             </div>
             <hr />
@@ -54,7 +54,7 @@
                 <p>Pay by cheque, if you really, really, must.</p>
               </div>
               <div class="uk-width-1-3@m uk-text-right@m">
-                <button type="submit" name="method" value="cheque" class="uk-button uk-button-primary">Cheque Details</button>
+                <button type="submit" name="method" value="cheque" class="uk-button uk-button-primary uk-button-large">Cheque Details</button>
               </div>
             </div>
 

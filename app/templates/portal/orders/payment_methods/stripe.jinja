@@ -1,4 +1,4 @@
-{% extends "portal/orders/payment/template.jinja" %}
+{% extends "portal/orders/make_payment.jinja" %}
 {% block name %}Online Payment{% endblock %}
 {% block headjs %}<script src="https://js.stripe.com/v3/"></script>{% endblock %}
 {% block bodyjs %}
@@ -32,5 +32,9 @@
 </script>
 {% endblock %}
 {% block instructions %}
-<button id="checkout" class="uk-button uk-button-primary">Checkout</button>
+<p>We use Stripe as our online payment provider. On the Stripe checkout page you can check your order details, and provide an email address the payment receipt will be sent to.</p>
+
+<div class="uk-text-center">
+  <button id="checkout" class="uk-button uk-button-primary uk-button-large">Stripe Checkout</button>
+</div>
 {% endblock %}

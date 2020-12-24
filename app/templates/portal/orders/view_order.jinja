@@ -3,10 +3,7 @@
 <div class="uk-section uk-section-default uk-section-small">
   <div class="uk-container uk-container-small">
     <div class="uk-flex uk-flex-stretch" uk-grid>
-      <div class="uk-width-1-1">
-        {% include "portal/components/alerts.jinja" %}
-      </div>
-
+      {% include "portal/components/alerts.jinja" %}
       {% include "portal/orders/partials/order_summary.jinja" %}
 
       <div class="uk-width-1-1">
@@ -19,7 +16,7 @@
                 <table class="uk-table uk-table-divider uk-table-small">
                   {% if order.postage_name %}
                   <tr>
-                    <th>Full Name</th>
+                    <th>Name</th>
                     <td>{{ order.postage_name }}
                   </tr>
                   {% endif %}

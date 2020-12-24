@@ -1,4 +1,4 @@
-{% extends "portal/orders/payment/template.jinja" %}
+{% extends "portal/orders/make_payment.jinja" %}
 {% block name %}Bank Transfer{% endblock %}
 {% block instructions %}
 <form method="POST" action="{{ url_for('portal.completePayment', id=order.id) }}">
@@ -23,6 +23,9 @@
     </tr>
   </table>
   <p>If paying internationally...</p>
-  <button type="submit" class="uk-button uk-button-primary">Payment Sent</a>
+  
+  <div class="uk-text-center">
+    <button type="submit" class="uk-button uk-button-primary uk-button-large">Payment Sent</a>
+  </div>
 </form>
 {% endblock %}
