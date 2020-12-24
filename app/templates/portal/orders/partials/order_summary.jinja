@@ -2,7 +2,7 @@
   <div class="uk-card uk-card-default uk-card-body">
     <div class="uk-grid-small uk-flex uk-flex-middle" uk-grid>
       <div class="uk-width-expand">
-        <h4 class="uk-card-title">Order #{{ order.id }}</h4>
+        <h4 class="uk-card-title">Order {{ order.code }}</h4>
       </div>
       <div class="uk-text-small uk-text-{{ order.status_colour }}">
         {{ order.status_name }}
@@ -16,12 +16,12 @@
       <div class="uk-grid-small uk-flex uk-flex-right" uk-grid>
         {% if order.statusIs("incomplete") and (not order.payment or order.payment.statusIs("new")) %}
         <div>
-          <a href="{{ url_for('portal.cancelOrder', id=order.id) }}" class="uk-button uk-button-default">Cancel Order</a>
+          <a href="{{ url_for('orders.cancelOrder', id=order.id) }}" class="uk-button uk-button-default">Cancel Order</a>
         </div>
         {% endif %}
         {% if order.payment %}
         <div>
-          <a href="{{ url_for('portal.viewInvoice', id=order.id) }}" target="_blank" class="uk-button uk-button-default">Download Invoice</a>
+          <a href="{{ url_for('orders.viewInvoice', id=order.id) }}" target="_blank" class="uk-button uk-button-default">Download Invoice</a>
         </div>
         {% endif %}
       </div>

@@ -1,0 +1,39 @@
+{% extends "portal/template.jinja" %}
+{% block background %}default{% endblock %}
+{% block body %}
+<div class="uk-section">
+  <div class="uk-container uk-container-small">
+    <div class="uk-flex uk-flex-middle" uk-grid>
+      <div class="uk-width-2-3">
+        <h2>Kohoutek Online 2021</h2>
+        <p class="uk-text-meta">Kohoutek is organised by students at the University of Bristol, with support from the University of Bristol Guides and Scouts (UOBGAS) society, part of the Student Scout and Guide Organisation (SSAGO).</p>
+        <p class="uk-text-meta">More information about the organisation and history of the event can be found on our website: <a href="https://kohoutek.co.uk" class="uk-text-primary">https://kohoutek.co.uk</a></p>
+      </div>
+      <div class="uk-width-1-3 uk-text-center">
+        <img class="uk-width-2-3" src="{{ url_for('static', filename='img/badge.png') }}">
+        <div class="uk-margin uk-text-left uk-text-small">
+          <table class="uk-table uk-table-small uk-table-justify uk-table-divider">
+            <tr>
+              <th>Order No</th>
+              <td>{{ order.code }}</td>
+            </tr>
+
+            <tr>
+              <th>Date</th>
+              <td>{{ order.payment.created_at.strftime('%d-%m-%Y') }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="uk-width-1-1">
+        <hr />
+      </div>
+    </div>
+
+    <div uk-grid>
+    {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}

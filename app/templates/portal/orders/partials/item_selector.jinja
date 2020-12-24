@@ -1,6 +1,6 @@
 <div class="uk-width-1-1">
   <div class="uk-card uk-card-default uk-card-body">
-    <form method="post" action="{{ url_for('portal.processOrder') }}">
+    <form method="post" action="{{ url_for('orders.processOrder') }}">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <p>Badges are £1 each. Postage within the UK is £2 for orders of 1-20 badges, £3.50 for larger orders. Postage to international teams will be higher, please choose the most suitable option for you on the next page.</p>
 

@@ -7,7 +7,7 @@
       {% include "portal/orders/partials/order_summary.jinja" %}
 
       <div class="uk-width-1-1 uk-text-center uk-text-left@m">
-        <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}">
+        <a href="{{ url_for('orders.addPaymentToOrder', id=order.id) }}">
           <span uk-icon="arrow-left"></span> Choose Payment Method
         </a>
       </div>

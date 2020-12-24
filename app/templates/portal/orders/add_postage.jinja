@@ -7,13 +7,13 @@
       {% include "portal/orders/partials/order_summary.jinja" %}
 
       <div class="uk-width-1-2@m uk-text-center uk-text-left@m">
-        <a href="{{ url_for('portal.updateItems', id=order.id) }}">
+        <a href="{{ url_for('orders.updateItems', id=order.id) }}">
           <span uk-icon="arrow-left"></span> Choose Items
         </a>
       </div>
       {% if order.postage %}
       <div class="uk-width-1-2@m uk-text-center uk-text-right@m">
-        <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}">
+        <a href="{{ url_for('orders.addPaymentToOrder', id=order.id) }}">
           Add Payment Method <span uk-icon="arrow-right"></span>
         </a>
       </div>
@@ -21,7 +21,7 @@
 
       <div class="uk-width-1-1">
         <div class="uk-card uk-card-default uk-card-body">
-          <form method="POST" action="{{ url_for('portal.processPostage', id=order.id) }}">
+          <form method="POST" action="{{ url_for('orders.processPostage', id=order.id) }}">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <input type="hidden" name="id" value="{{ order.id }}" />
             <div>

@@ -1,7 +1,7 @@
 {% extends "portal/orders/make_payment.jinja" %}
 {% block name %}Pay by Cheque{% endblock %}
 {% block instructions %}
-<form method="POST" action="{{ url_for('portal.completePayment', id=order.id) }}">
+<form method="POST" action="{{ url_for('orders.completePayment', id=order.id) }}">
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
   <input type="hidden" name="id" value="{{ order.id }}" />
   <p>Whilst we are able to take cheques, please only use this method if you really have no other options (it is 2021 after all!).</p>

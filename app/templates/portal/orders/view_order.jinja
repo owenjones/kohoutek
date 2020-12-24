@@ -1,10 +1,12 @@
 {% extends "portal/portal-frame.jinja" %}
 {% block module %}
 <div class="uk-section uk-section-default uk-section-small">
-  <div class="uk-container uk-container-small">
+  <div class="uk-container uk-container-medium">
     <div class="uk-flex uk-flex-stretch" uk-grid>
       {% include "portal/components/alerts.jinja" %}
       {% include "portal/orders/partials/order_summary.jinja" %}
+
+      {#} TODO: turn this into a two column layout - summary on left, postage/payment on right {#}
 
       <div class="uk-width-1-1">
         <div class="uk-card uk-card-default uk-card-body">
@@ -54,13 +56,13 @@
                 {% if order.statusIs("incomplete") %}
                 <hr />
                 <div>
-                  <a href="{{ url_for('portal.addPostageToOrder', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Update</a>
+                  <a href="{{ url_for('orders.addPostageToOrder', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Update</a>
                 </div>
                 {% endif %}
                 {% else %}
                 <p class="uk-text-meta">You need to add postage information</p>
                 <div>
-                  <a href="{{ url_for('portal.addPostageToOrder', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Add Postage</a>
+                  <a href="{{ url_for('orders.addPostageToOrder', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Add Postage</a>
                 </div>
                 {% endif %}
               </div>
@@ -86,14 +88,14 @@
                   {% if order.payment.statusIs("new") %}
                   <hr />
                   <p class="uk-text-meta">You need to complete your payment</p>
-                  <a href="{{ url_for('portal.completePayment', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Complete Payment</a>
+                  <a href="{{ url_for('orders.completePayment', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Complete Payment</a>
                   {% elif order.payment.statusIs("pending") %}
                   <p class="uk-text-meta">Your payment is currently being processed, your order will be completed once this has been received.</p>
                   {% endif %}
                 {% elif order.postage %}
                 <p class="uk-text-meta">You need to choose a payment method</p>
                 <div>
-                  <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Add Payment</a>
+                  <a href="{{ url_for('orders.addPaymentToOrder', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Add Payment</a>
                 </div>
                 {% else %}
                 <p class="uk-text-meta">Postage information must be added before payment can be taken</p>

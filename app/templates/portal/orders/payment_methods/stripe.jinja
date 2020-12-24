@@ -7,7 +7,7 @@
   var button = document.getElementById('checkout');
 
   button.addEventListener('click', function() {
-    fetch('{{ url_for("portal.stripeGenerateCheckout", id=order.id) }}', {
+    fetch('{{ url_for("orders.stripeGenerateCheckout", id=order.id) }}', {
       method: 'POST',
       headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -32,7 +32,7 @@
 </script>
 {% endblock %}
 {% block instructions %}
-<p>We use Stripe as our online payment provider. On the Stripe checkout page you can check your order details, and provide an email address the payment receipt will be sent to.</p>
+<p>We use Stripe as our online payment provider. On the Stripe checkout page you can check your order details, and provide an email address for a payment receipt.</p>
 
 <div class="uk-text-center">
   <button id="checkout" class="uk-button uk-button-primary uk-button-large">Stripe Checkout</button>

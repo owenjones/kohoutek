@@ -7,7 +7,7 @@
         <div class="uk-margin">
           <div class="uk-grid-small uk-flex uk-flex-middle" uk-grid>
             <div class="uk-width-expand">
-              <a href="{{ url_for('portal.viewOrder', id=order.id) }}" class="uk-card-title uk-h4">Order #{{ order.id }}</a>
+              <a href="{{ url_for('orders.viewOrder', id=order.id) }}" class="uk-card-title uk-h4">Order {{ order.code }}</a>
             </div>
             <div class="uk-text-small uk-text-{{ order.status_colour }}">
               {{ order.status_name }}
@@ -18,23 +18,23 @@
           {% include "portal/orders/partials/order_item_list.jinja" %}
         </div>
         <div>
-          <a href="{{ url_for('portal.viewOrder', id=order.id) }}" class="uk-button uk-button-text">View Order</a>
+          <a href="{{ url_for('orders.viewOrder', id=order.id) }}" class="uk-button uk-button-text">View Order</a>
         </div>
       </div>
       {% if order.statusIs("incomplete") and order.postage == None %}
       <div class="uk-card-footer uk-text-right">
         <p class="uk-text-meta">You need to add postage information</p>
-        <a href="{{ url_for('portal.addPostageToOrder', id=order.id) }}" class="uk-button uk-button-default">Add Postage</a>
+        <a href="{{ url_for('orders.addPostageToOrder', id=order.id) }}" class="uk-button uk-button-default">Add Postage</a>
       </div>
       {% elif order.statusIs("incomplete") and order.payment == None %}
       <div class="uk-card-footer uk-text-right">
         <p class="uk-text-meta">You need to choose a payment method</p>
-        <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}" class="uk-button uk-button-default">Make Payment</a>
+        <a href="{{ url_for('orders.addPaymentToOrder', id=order.id) }}" class="uk-button uk-button-default">Make Payment</a>
       </div>
       {% elif order.statusIs("incomplete") and order.payment.statusIs("new") %}
       <div class="uk-card-footer uk-text-right">
         <p class="uk-text-meta">You need to complete your payment</p>
-        <a href="{{ url_for('portal.completePayment', id=order.id) }}" class="uk-button uk-button-default">Complete Payment</a>
+        <a href="{{ url_for('orders.completePayment', id=order.id) }}" class="uk-button uk-button-default">Complete Payment</a>
       </div>
       {% elif order.statusIs("payment_pending") %}
       <div class="uk-card-footer uk-text-right">
