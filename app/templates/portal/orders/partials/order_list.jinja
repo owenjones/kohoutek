@@ -36,9 +36,9 @@
         <p class="uk-text-meta">You need to complete your payment</p>
         <a href="{{ url_for('portal.completePayment', id=order.id) }}" class="uk-button uk-button-default">Complete Payment</a>
       </div>
-      {% elif order.statusIs("complete") and order.payment.statusIs("pending") %}
+      {% elif order.statusIs("payment_pending") %}
       <div class="uk-card-footer uk-text-right">
-        <p class="uk-text-meta">Your payment is currently being processed, your order will be complete once this has been received.</p>
+        <p class="uk-text-meta">Your payment is currently being processed, your order will be completed once this has been received.</p>
       </div>
       {% endif %}
     </div>

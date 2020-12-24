@@ -67,27 +67,29 @@
               <div class="uk-width-1-1 uk-width-1-2@m">
                 <h3>Payment</h3>
                 {% if order.payment %}
-                <table class="uk-table uk-table-divider uk-table-small">
-                  <tr>
-                    <th>Payment Method</th>
-                    <td>{{ order.payment.type }}
-                  </tr>
-                  <tr>
-                    <th>Status</th>
-                    <td class="uk-text-{{ order.payment.status_colour }}">{{ order.payment.status_message }}
-                  </tr>
-                  {% if order.payment.statusIs("received") %}
-                  <tr>
-                    <th>Received</th>
-                    <td>{{ order.payment.received_at }}
-                  </tr>
+                  <table class="uk-table uk-table-divider uk-table-small">
+                    <tr>
+                      <th>Payment Method</th>
+                      <td>{{ order.payment.type }}
+                    </tr>
+                    <tr>
+                      <th>Status</th>
+                      <td class="uk-text-{{ order.payment.status_colour }}">{{ order.payment.status_message }}
+                    </tr>
+                    {% if order.payment.statusIs("received") %}
+                    <tr>
+                      <th>Received</th>
+                      <td>{{ order.payment.received_at }}
+                    </tr>
+                    {% endif %}
+                  </table>
+                  {% if order.payment.statusIs("new") %}
+                  <hr />
+                  <p class="uk-text-meta">You need to complete your payment</p>
+                  <a href="{{ url_for('portal.completePayment', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Complete Payment</a>
+                  {% elif order.payment.statusIs("pending") %}
+                  <p class="uk-text-meta">Your payment is currently being processed, your order will be completed once this has been received.</p>
                   {% endif %}
-                </table>
-                {% if order.payment.statusIs("new") %}
-                <hr />
-                <p class="uk-text-meta">You need to complete your payment</p>
-                <a href="{{ url_for('portal.completePayment', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Complete Payment</a>
-                {% endif %}
                 {% elif order.postage %}
                 <p class="uk-text-meta">You need to choose a payment method</p>
                 <div>

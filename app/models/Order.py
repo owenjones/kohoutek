@@ -15,6 +15,7 @@ class Postage(db.Model):
 
 class OrderStatus(Enum):
     incomplete = "incomplete"
+    payment_pending = "payment_pending"
     complete = "complete"
     dispatched = "dispatched"
     cancelled = "cancelled"
@@ -95,6 +96,7 @@ class Order(db.Model):
     def status_name(self):
         map = {
             OrderStatus.incomplete: "In Progress",
+            OrderStatus.payment_pending: "Payment Pending",
             OrderStatus.complete: "Payment Received",
             OrderStatus.dispatched: "Dispatched",
             OrderStatus.cancelled: "Cancelled",
@@ -106,6 +108,7 @@ class Order(db.Model):
     def status_colour(self):
         map = {
             OrderStatus.incomplete: "warning",
+            OrderStatus.payment_pending: "warning",
             OrderStatus.complete: "success",
             OrderStatus.dispatched: "success",
             OrderStatus.cancelled: "danger",

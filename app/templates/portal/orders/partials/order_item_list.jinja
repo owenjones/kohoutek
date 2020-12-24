@@ -16,7 +16,7 @@
   <div>{{ "£{:,.2f}".format(order.payment.fee) }}</div>
 </div>
 {% endif %}
-{% if order.statusIs("complete") or (order.statusIs("incomplete") and order.payment) %}
+{% if not order.statusIs("incomplete") or (order.statusIs("incomplete") and order.payment) %}
 <div class="uk-grid-small uk-text-primary uk-text-bold" uk-grid>
   <div class="uk-width-expand" uk-leader>Total</div>
   <div>{{ "£{:,.2f}".format(order.total) }}</div>

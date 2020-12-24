@@ -403,6 +403,7 @@ def recordPayment(id):
         return redirect(url_for("portal.viewOrder", id=order.id))
 
     if order.payment.method in [PaymentMethod.BACS, PaymentMethod.cheque]:
+        order.status = OrderStatus.payment_pending
         order.payment.status = PaymentStatus.pending
         order.save()
         flash(
@@ -420,7 +421,7 @@ def cancelOrder(id):
     if order.entry != current_user.entry:
         abort(403)
 
-    if not (order.statusIs("complete") or order.statusIs("dispatched")):
+    if order.statusIs("incomplete"):
         db.session.delete(order)
         db.session.commit()
 
@@ -429,7 +430,7 @@ def cancelOrder(id):
 
     else:
         flash(
-            "You can't cancel this order online as we've already received payment for it, please get in touch with us at contact@kohoutek.co.uk if you wish to cancel",
+            "You can't cancel this order online as payment has been sent, please get in touch with us at contact@kohoutek.co.uk if you want to cancel.",
             "warning",
         )
         return redirect(url_for("portal.index"))
