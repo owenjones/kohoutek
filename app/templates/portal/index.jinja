@@ -24,9 +24,6 @@
           <div class="uk-background-secondary uk-light uk-padding">
             <h4>Badges</h4>
             <a class="uk-button uk-button-default uk-button-large" href="{{ url_for('portal.placeOrder') }}">Order Badges</a>
-            {% if entry.orders %}
-            <a class="uk-button uk-button-default uk-button-large uk-margin-small-top" href="{{ url_for('portal.listOrders') }}">Current Orders</a>
-            {% endif %}
           </div>
         </div>
 
@@ -96,7 +93,7 @@
         <h3>Badge Orders</h3>
         <div>
           {% include "portal/orders/partials/order_list.jinja" %}
-          {% if entry.orders|count == 0 %}
+          {% if orders|count == 0 %}
           <p>You don't have any badge orders yet, place an order using the button above.</p>
           {% endif %}
         </div>
