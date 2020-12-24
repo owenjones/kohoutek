@@ -1,45 +1,43 @@
 {% if orders %}
 <div class="uk-width-1-1">
-  <div class="uk-child-width-1-2@l uk-grid-match" uk-grid uk-height-match="target: div > .uk-card > .uk-card-body">
-    {% for order in orders %}
-    <div>
-      <div class="uk-card uk-card-default">
-        <div class="uk-card-body">
-          <div class="uk-margin">
-            <div class="uk-grid-small uk-flex uk-flex-middle" uk-grid>
-              <div class="uk-width-expand">
-                <a href="{{ url_for('portal.viewOrder', id=order.id) }}" class="uk-card-title uk-h4">Order #{{ order.id }}</a>
-              </div>
-              <div class="uk-text-small uk-text-{{ order.status_colour }}">
-                {{ order.status_name }}
-              </div>
+  {% for order in orders %}
+  <div>
+    <div class="uk-card uk-card-default">
+      <div class="uk-card-body">
+        <div class="uk-margin">
+          <div class="uk-grid-small uk-flex uk-flex-middle" uk-grid>
+            <div class="uk-width-expand">
+              <a href="{{ url_for('portal.viewOrder', id=order.id) }}" class="uk-card-title uk-h4">Order #{{ order.id }}</a>
+            </div>
+            <div class="uk-text-small uk-text-{{ order.status_colour }}">
+              {{ order.status_name }}
             </div>
           </div>
-          {% include "portal/orders/partials/order_item_list.jinja" %}
         </div>
-        {% if order.statusIs("incomplete") and order.postage == None %}
-        <div class="uk-card-footer uk-text-right">
-          <p class="uk-text-meta">You need to add postage information</p>
-          <a href="{{ url_for('portal.addPostageToOrder', id=order.id) }}" class="uk-button uk-button-default">Add Postage</a>
-        </div>
-        {% elif order.statusIs("incomplete") and order.payment == None %}
-        <div class="uk-card-footer uk-text-right">
-          <p class="uk-text-meta">You need to choose a payment method</p>
-          <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}" class="uk-button uk-button-default">Make Payment</a>
-        </div>
-        {% elif order.statusIs("incomplete") and order.payment.statusIs("new") %}
-        <div class="uk-card-footer uk-text-right">
-          <p class="uk-text-meta">You need to complete your payment</p>
-          <a href="{{ url_for('portal.completePayment', id=order.id) }}" class="uk-button uk-button-default">Complete Payment</a>
-        </div>
-        {% elif order.statusIs("complete") and order.payment.statusIs("pending") %}
-        <div class="uk-card-footer uk-text-right">
-          <p class="uk-text-meta">Your payment is currently being processed, your order will be complete once this has been received.</p>
-        </div>
-        {% endif %}
+        {% include "portal/orders/partials/order_item_list.jinja" %}
       </div>
+      {% if order.statusIs("incomplete") and order.postage == None %}
+      <div class="uk-card-footer uk-text-right">
+        <p class="uk-text-meta">You need to add postage information</p>
+        <a href="{{ url_for('portal.addPostageToOrder', id=order.id) }}" class="uk-button uk-button-default">Add Postage</a>
+      </div>
+      {% elif order.statusIs("incomplete") and order.payment == None %}
+      <div class="uk-card-footer uk-text-right">
+        <p class="uk-text-meta">You need to choose a payment method</p>
+        <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}" class="uk-button uk-button-default">Make Payment</a>
+      </div>
+      {% elif order.statusIs("incomplete") and order.payment.statusIs("new") %}
+      <div class="uk-card-footer uk-text-right">
+        <p class="uk-text-meta">You need to complete your payment</p>
+        <a href="{{ url_for('portal.completePayment', id=order.id) }}" class="uk-button uk-button-default">Complete Payment</a>
+      </div>
+      {% elif order.statusIs("complete") and order.payment.statusIs("pending") %}
+      <div class="uk-card-footer uk-text-right">
+        <p class="uk-text-meta">Your payment is currently being processed, your order will be complete once this has been received.</p>
+      </div>
+      {% endif %}
     </div>
-    {% endfor %}
   </div>
+  {% endfor %}
 </div>
 {% endif %}
