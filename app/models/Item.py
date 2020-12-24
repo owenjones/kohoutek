@@ -1,5 +1,7 @@
 from enum import Enum
 
+from flask import url_for
+
 from app import db
 
 
@@ -40,6 +42,10 @@ class Item(db.Model):
 
     def hasStock(self, quantity):
         return (not self.limited) or (self.remaining >= quantity)
+
+    @property
+    def image_url(self):
+        return url_for("static", filename=f"img/badges/{ self.image }", _external=True)
 
 
 class OrderItem(db.Model):

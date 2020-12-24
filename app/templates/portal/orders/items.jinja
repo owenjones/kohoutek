@@ -16,7 +16,7 @@
           {% for item in items %}
             <div class="uk-grid-small uk-flex uk-flex-middle uk-margin-medium" uk-grid>
               <div class="uk-visible@s uk-width-1-5">
-                <img src="{{ url_for('static', filename='img/badge.png') }}" class="uk-padding-small" />
+                <img src="{{ item.image_url }}" class="uk-padding-small" />
               </div>
               <div class="uk-width-expand">
                 <h4>{{ item.name }}</h4>

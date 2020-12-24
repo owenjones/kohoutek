@@ -267,7 +267,7 @@ def stripeGenerateCheckout(id):
                     "product_data": {
                         "name": item.item.name,
                         "description": item.item.description,
-                        "images": ["https://kohoutek.co.uk/static/img/badge.png"],
+                        "images": [item.item.image_url],
                     },
                     "unit_amount": int(item.item.unit_cost * 100),
                 },
