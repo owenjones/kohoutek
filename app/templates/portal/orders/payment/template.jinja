@@ -3,12 +3,11 @@
 <div class="uk-section uk-section-default uk-section-small">
   <div class="uk-container uk-container-small">
     <div class="uk-flex uk-flex-stretch" uk-grid>
+      {% include "portal/orders/partials/order_summary.jinja" %}
+
       <div class="uk-width-1-1 uk-text-center">
-        <h1>Order #{{ order.id }}</h1>
         {% include "portal/components/alerts.jinja" %}
       </div>
-
-      {% include "portal/orders/partials/order_summary.jinja" %}
 
       <div class="uk-width-1-2@m uk-text-center uk-text-left@m">
         <a href="{{ url_for('portal.addPaymentToOrder', id=order.id) }}">
