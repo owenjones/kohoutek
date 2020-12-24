@@ -14,7 +14,12 @@
             </div>
           </div>
         </div>
-        {% include "portal/orders/partials/order_item_list.jinja" %}
+        <div class="uk-margin">
+          {% include "portal/orders/partials/order_item_list.jinja" %}
+        </div>
+        <div>
+          <a href="{{ url_for('portal.viewOrder', id=order.id) }}" class="uk-button uk-button-text">View Order</a>
+        </div>
       </div>
       {% if order.statusIs("incomplete") and order.postage == None %}
       <div class="uk-card-footer uk-text-right">
