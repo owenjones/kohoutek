@@ -64,3 +64,6 @@ class Payment(db.Model):
 
     def statusIs(self, status):
         return self.status == PaymentStatus(status)
+
+    def isBy(self, method):
+        return self.method == PaymentMethod(method)
