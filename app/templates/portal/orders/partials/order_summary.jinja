@@ -19,9 +19,14 @@
           <a href="{{ url_for('orders.cancelOrder', id=order.id) }}" class="uk-button uk-button-default">Cancel Order</a>
         </div>
         {% endif %}
-        {% if order.payment %}
+        {% if order.payment and (order.payment.statusIs("new") or order.payment.statusIs("pending")) %}
         <div>
           <a href="{{ url_for('orders.viewInvoice', id=order.id) }}" target="_blank" class="uk-button uk-button-default">Download Invoice</a>
+        </div>
+        {% endif %}
+        {% if order.payment and order.payment.statusIs("received") %}
+        <div>
+          <a href="{{ url_for('orders.viewReceipt', id=order.id) }}" target="_blank" class="uk-button uk-button-default">Download Receipt</a>
         </div>
         {% endif %}
       </div>

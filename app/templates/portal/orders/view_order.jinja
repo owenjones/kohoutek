@@ -81,7 +81,7 @@
                     {% if order.payment.statusIs("received") %}
                     <tr>
                       <th>Received</th>
-                      <td>{{ order.payment.received_at }}
+                      <td>{{ order.payment.received_at.strftime('%d-%m-%Y') }}
                     </tr>
                     {% endif %}
                   </table>

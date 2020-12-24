@@ -17,8 +17,8 @@
         <div class="uk-margin">
           {% include "portal/orders/partials/order_item_list.jinja" %}
         </div>
-        <div>
-          <a href="{{ url_for('orders.viewOrder', id=order.id) }}" class="uk-button uk-button-text">View Order</a>
+        <div class="uk-text-right">
+          <a href="{{ url_for('orders.viewOrder', id=order.id) }}" class="uk-button uk-button-default">View Order</a>
         </div>
       </div>
       {% if order.statusIs("incomplete") and order.postage == None %}

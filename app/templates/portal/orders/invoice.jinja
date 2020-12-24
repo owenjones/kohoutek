@@ -1,60 +1,14 @@
 {% extends "portal/orders/partials/paperwork_template.jinja" %}
 {% block content %}
 <div class="uk-width-2-3 uk-text-small">
-<h4>Invoice for: {{ order.entry.name }} ({{ order.entry.code }})</h4>
-<table class="uk-table uk-table-small uk-table-justify uk-table-striped">
-  <thead>
-    <tr>
-      <th class="uk-width-1-2">Item</th>
-      <th class="uk-width-1-6">Quantity</th>
-      <th class="uk-text-right">Unit Cost</th>
-      <th class="uk-text-right">Total</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in order.items %}
-    <tr>
-      <td>{{ item.item.name }}</td>
-      <td>{{ item.quantity }}</td>
-      <td class="uk-text-right">{{ "£{:,.2f}".format(item.item.unit_cost) }}</td>
-      <td class="uk-text-right">{{ "£{:,.2f}".format(item.amount) }}</td>
-    </tr>
-    {% endfor %}
-
-    {% if order.postage %}
-    <tr>
-      <td>{{ order.postage.name }}</td>
-      <td>1</td>
-      <td class="uk-text-right">{{ "£{:,.2f}".format(order.postage.cost) }}</td>
-      <td class="uk-text-right">{{ "£{:,.2f}".format(order.postage.cost) }}</td>
-    </tr>
-    {% endif %}
-
-    {% if order.payment.isBy("stripe") %}
-    <tr>
-      <td>Online Payment Fee</td>
-      <td>1</td>
-      <td class="uk-text-right">{{ "£{:,.2f}".format(order.payment.fee) }}</td>
-      <td class="uk-text-right">{{ "£{:,.2f}".format(order.payment.fee) }}</td>
-    </tr>
-    {% endif %}
-
-    <tr>
-      <td colspan="3" class="uk-text-right uk-text-bold">
-        Total:
-      </td>
-      <td class="uk-text-right">
-        {{ "£{:,.2f}".format(order.total) }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <h4>Invoice for {{ order.entry.name }} ({{ order.entry.code }})</h4>
+  {% include "portal/orders/partials/paperwork_item_list.jinja" %}
 </div>
 
 <div class="uk-width-1-3 uk-text-small">
   {% if order.payment.isBy("BACS") %}
-  <h4>Bank Transfer</h4>
-  <table class="uk-table uk-table-small uk-table-justify uk-table-divider">
+  <h5>Bank Details</h5>
+  <table class="uk-table uk-table-small uk-table-justify uk-table-divider uk-table-middle">
     <tr>
       <th>Account Name</th>
       <td>Kohoutek Competition</td>
@@ -62,18 +16,18 @@
 
     <tr>
       <th>Account Number</th>
-      <td>00000000</td>
+      <td>65981360</td>
     </tr>
 
     <tr>
       <th>Sort Code</th>
-      <td>00-00-00</td>
+      <td>30-98-97</td>
     </tr>
   </table>
   {% endif %}
 
   {% if order.payment.isBy("cheque") %}
-  <h4>Cheque</h4>
+  <h5>Cheque Details</h5>
   <p>Please make cheques payable to <strong>Kohoutek Competition</strong> and include the order number on the back.</p>
   <p>Cheques should be sent to -</p>
   <div class="uk-inline uk-margin-auto uk-text-uppercase">
@@ -87,7 +41,7 @@
   {% endif %}
 
   {% if order.payment.isBy("stripe") %}
-  <h4>Online Payment</h4>
+  <h5>Online Payment</h5>
   <p>Pay using the Stripe Checkout from the order page on the team portal.</p>
   {% endif %}
 </div>
