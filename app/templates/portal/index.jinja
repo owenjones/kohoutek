@@ -96,6 +96,9 @@
         <h3>Badge Orders</h3>
         <div>
           {% include "portal/orders/partials/order_list.jinja" %}
+          {% if entry.orders|count == 0 %}
+          <p>You don't have any badge orders yet, place an order using the button above.</p>
+          {% endif %}
         </div>
       </div>
     </div>
