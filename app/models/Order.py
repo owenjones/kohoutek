@@ -61,6 +61,10 @@ class Order(db.Model):
         cascade="all, delete-orphan",
     )
 
+    @property
+    def code(self):
+        return f"{ self.entry.code }-{ self.id }"
+
     def save(self):
         db.session.add(self)
         db.session.commit()
