@@ -331,7 +331,7 @@ def stripePaymentSuccess(id):
 
         if session.payment_status == "paid":
             order.payment.received_at = db.func.now()
-            order.payment.status = PaymentStatus.confirmed
+            order.payment.status = PaymentStatus.received
             order.status = OrderStatus.complete
             order.save()
 
