@@ -1,5 +1,6 @@
 import math
 
+import pycountry
 import stripe
 from flask import (
     current_app,
@@ -19,6 +20,7 @@ from app.models import (
     Item,
     ItemStock,
     Order,
+    OrderItem,
     OrderStatus,
     Postage,
     Payment,
@@ -41,40 +43,65 @@ def placeOrder():
 @blueprint.route("/badges", methods=["POST"])
 @needs_team
 def processOrder():
+    if "id" in request.form:
+        order = Order.query.get(request.form.get("id"))
+        if order.entry != current_user.entry:
+            abort(403)
+
+        if order.status != OrderStatus.incomplete:
+            flash(
+                "You can't modify an order that has been completed, or has a payment pending",
+                "danger",
+            )
+            return redirect(url_for("orders.viewOrder", id=order.id))
+    else:
+        order = None
+
+    redirect_to = (
+        url_for("orders.updateItems", id=order.id)
+        if order
+        else url_for("orders.placeOrder")
+    )
+
     items = form_input_array(request.form, "item")
-    count = sum([int(v) for k, v in items if v != ""])
+    submitted = sum([int(v) for k, v in items if v != ""])
+    count = submitted + (order.quantity if order else 0)
 
     if count > 0:
-        order = Order(entry_id=current_user.entry.id)
+        order = order or Order(entry_id=current_user.entry.id)
         for id, quantity in items:
-            if quantity != "":
-                try:
-                    quantity = int(quantity)
-                    added = order.addItem(id, quantity)
+            try:
+                quantity = int(quantity)
 
-                    if not added:
-                        flash(
-                            "There was a problem adding one of your items, please try again",
-                            "warning",
-                        )
-                        return redirect(url_for("orders.placeOrder"))
+            except ValueError:
+                quantity = 0
 
-                    elif added == ItemStock("out_of_stock"):
-                        flash(
-                            "One of the items you have tried to order doesn't have enough stock, please check your order and try again",
-                            "warning",
-                        )
-                        return redirect(url_for("orders.placeOrder"))
+            added = order.addItem(id, quantity)
 
-                except ValueError:
-                    flash(
-                        "There was a problem adding one of your items, please try again",
-                        "warning",
-                    )
-                    return redirect(url_for("orders.placeOrder"))
+            if not added:
+                flash(
+                    "There was a problem adding one of your items, please try again",
+                    "warning",
+                )
+                return redirect(redirect_to)
 
-        order.save()
-        return redirect(url_for("orders.addPostageToOrder", id=order.id))
+            elif added == ItemStock("out_of_stock"):
+                flash(
+                    "One of the items you have tried to order doesn't have enough stock, please check your order and try again",
+                    "warning",
+                )
+                return redirect(redirect_to)
+
+        if len(order.items) > 0:
+            order.save()
+            return redirect(url_for("orders.addPostageToOrder", id=order.id))
+
+        else:
+            db.session.delete(order)
+            db.session.commit()
+
+            flash(f"Your order was cancelled as all the items were removed", "success")
+            return redirect(url_for("portal.index"))
 
     else:
         flash(
@@ -82,7 +109,7 @@ def processOrder():
             "warning",
         )
 
-        return redirect(url_for("orders.placeOrder"))
+        return redirect(redirect_to)
 
 
 @blueprint.route("/order/<int:id>/items")
@@ -93,11 +120,20 @@ def updateItems(id):
         abort(403)
 
     if order.status != OrderStatus.incomplete:
+        flash(
+            "You can't modify an order that has been completed, or has a payment pending",
+            "danger",
+        )
         return redirect(url_for("orders.viewOrder", id=order.id))
 
     items = Item.query.all()
+    matched = {
+        k: v for (k, v) in [(item.item_id, item.quantity) for item in order.items]
+    } or []
 
-    return render_template("portal/orders/update_items.jinja", order=order, items=items)
+    return render_template(
+        "portal/orders/update_items.jinja", order=order, items=items, matched=matched
+    )
 
 
 @blueprint.route("/order/<int:id>/postage")
@@ -108,6 +144,10 @@ def addPostageToOrder(id):
         abort(403)
 
     if order.status != OrderStatus.incomplete:
+        flash(
+            "You can't modify an order that has been completed, or has a payment pending",
+            "danger",
+        )
         return redirect(url_for("orders.viewOrder", id=order.id))
 
     options = (
@@ -119,7 +159,11 @@ def addPostageToOrder(id):
     )
 
     return render_template(
-        "portal/orders/add_postage.jinja", order=order, options=options
+        "portal/orders/add_postage.jinja",
+        order=order,
+        options=options,
+        countries=sorted(list(pycountry.countries), key=lambda x: x.name),
+        selected_country=(order.postage_country or "GB"),
     )
 
 
@@ -130,19 +174,33 @@ def processPostage(id):
     if order.entry != current_user.entry:
         abort(403)
 
-    if order.statusIs("incomplete"):
-        added = order.addPostage(request.form.get("option"))
+    if order.status != OrderStatus.incomplete:
+        flash(
+            "You can't modify an order that has been completed, or has a payment pending",
+            "danger",
+        )
+        return redirect(url_for("orders.viewOrder", id=order.id))
 
-        # do some validation here
+    added = order.addPostage(request.form.get("option"))
 
-        order.postage_name = request.form.get("name")
-        order.postage_address_1 = request.form.get("address_1")
-        order.postage_address_2 = request.form.get("address_2")
-        order.postage_city = request.form.get("city")
-        order.postage_postcode = request.form.get("postcode")
-        order.postage_country = request.form.get("country")
-        order.save()
+    order.postage_name = request.form.get("name")
+    order.postage_address_1 = request.form.get("address_1")
+    order.postage_address_2 = request.form.get("address_2")
+    order.postage_city = request.form.get("city")
+    order.postage_postcode = request.form.get("postcode")
+    order.postage_country = request.form.get("country")
+    order.save()
 
+    if "" in [
+        order.postage_address_1,
+        order.postage_city,
+        order.postage_postcode,
+        order.postage_country,
+    ]:
+        flash("A required delivery field has been left blank", "warning")
+        return redirect(url_for("orders.addPostageToOrder", id=order.id))
+
+    else:
         return redirect(url_for("orders.addPaymentToOrder", id=order.id))
 
 
@@ -154,6 +212,10 @@ def addPaymentToOrder(id):
         abort(403)
 
     if order.status != OrderStatus.incomplete:
+        flash(
+            "You can't modify an order that has been completed, or has a payment pending",
+            "danger",
+        )
         return redirect(url_for("orders.viewOrder", id=order.id))
 
     if order.postage:
@@ -171,6 +233,10 @@ def processPayment(id):
         abort(403)
 
     if order.status != OrderStatus.incomplete:
+        flash(
+            "You can't modify an order that has been completed, or has a payment pending",
+            "danger",
+        )
         return redirect(url_for("orders.viewOrder", id=order.id))
 
     payment = order.payment if order.payment else Payment(order=order)
@@ -206,6 +272,10 @@ def completePayment(id):
         abort(403)
 
     if order.status != OrderStatus.incomplete:
+        flash(
+            "You can't modify an order that has been completed, or has a payment pending",
+            "danger",
+        )
         return redirect(url_for("orders.viewOrder", id=order.id))
 
     if order.payment.method == PaymentMethod.stripe:
@@ -309,6 +379,10 @@ def stripePaymentSuccess(id):
         abort(403)
 
     if order.status != OrderStatus.incomplete:
+        flash(
+            "You can't modify an order that has been completed, or has a payment pending",
+            "danger",
+        )
         return redirect(url_for("orders.viewOrder", id=order.id))
 
     if order.payment.method == PaymentMethod.stripe:
@@ -338,6 +412,10 @@ def recordPayment(id):
         abort(403)
 
     if order.status != OrderStatus.incomplete:
+        flash(
+            "You can't modify an order that has been completed, or has a payment pending",
+            "danger",
+        )
         return redirect(url_for("orders.viewOrder", id=order.id))
 
     if order.payment.method in [PaymentMethod.BACS, PaymentMethod.cheque]:
