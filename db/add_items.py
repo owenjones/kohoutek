@@ -28,7 +28,7 @@ def addItems(app):
         db.session.add(
             Item(
                 name="2020 Badge",
-                description="For the collectors, the 2020 event badge",
+                description="The 2020 event badge",
                 image="2020.png",
                 unit_cost=1,
                 limited=True,
@@ -40,12 +40,24 @@ def addItems(app):
         db.session.add(
             Item(
                 name="2019 Badge",
-                description="For the collectors, the 2019 event badge",
+                description="The 2019 event badge",
                 image="2019.png",
                 unit_cost=1,
                 limited=True,
                 stock=150,
                 index=3,
+            )
+        )
+
+        db.session.add(
+            Item(
+                name="UOBGAS Badge",
+                description="The 'UOBGAS' (University of Bristol Guides and Scouts) club badge",
+                image="uobgas.png",
+                unit_cost=0.8,
+                limited=True,
+                stock=40,
+                index=4,
             )
         )
 

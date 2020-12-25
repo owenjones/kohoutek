@@ -1,5 +1,7 @@
 from enum import Enum
 
+import pycountry
+
 from app import db
 from app.models import Item, OrderItem, ItemStock, Payment
 
@@ -120,32 +122,37 @@ class Order(db.Model):
 
         return map[self.status]
 
+    @property
+    def postage_country_name(self):
+        return pycountry.countries.get(alpha_2=self.postage_country).name or "Unknown"
+
     def addItem(self, item_id, quantity):
-        if quantity > 0:
-            stock_item = Item.query.get(item_id)
+        stock_item = Item.query.get(item_id)
 
-            if stock_item:
-                if stock_item.hasStock(quantity):
-                    item = OrderItem.query.filter_by(
-                        order_id=self.id, item_id=item_id
-                    ).first()
+        if stock_item:
+            if stock_item.hasStock(quantity):
+                item = OrderItem.query.filter_by(
+                    order_id=self.id, item_id=item_id
+                ).first()
 
-                    if item:
+                if item:
+                    if quantity > 0:
                         item.quantity = quantity
 
                     else:
+                        self.items.remove(item)
+
+                else:
+                    if quantity > 0:
                         item = OrderItem(item_id=item_id, quantity=quantity)
                         self.items.append(item)
 
-                    return True
+                return True
 
-                return ItemStock.out_of_stock
-
-            else:
-                return False
+            return ItemStock.out_of_stock
 
         else:
-            return True  # technically true
+            return False
 
     def addPostage(self, id):
         self.postage_id = id

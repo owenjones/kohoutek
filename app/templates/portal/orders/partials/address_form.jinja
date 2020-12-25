@@ -1,5 +1,5 @@
 <div class="uk-margin">
-  <label class="uk-form-label">Name*</label>
+  <label class="uk-form-label">Name</label>
   <div class="uk-form-controls"><input type="text" name="name" class="uk-input" placeholder="Name" value="{{ order.postage_name or "" }}" required></div>
 </div>
 
@@ -25,5 +25,11 @@
 
 <div>
   <label class="uk-form-label">Country</label>
-  <div class="uk-form-controls">{% include "portal/orders/partials/country_select.jinja" %}</div>
+  <div class="uk-form-controls">
+    <select id="country" name="country" class="uk-select">
+    {% for country in countries %}
+      <option value="{{ country.alpha_2 }}"{% if country.alpha_2 == selected_country %} selected{% endif %}>{{ country.name }}</option>
+    {% endfor %}
+    </select>
+  </div>
 </div>
