@@ -11,7 +11,7 @@
         <h4 class="uk-card-title">Actions</h4>
         <ul class="uk-nav uk-nav-default" uk-nav>
           <li><a href="{{ url_for('admin.entry', id=entry.id) }}">Entry Information</a></li>
-          <!-- <li><a href="#">View Orders</a></li> -->
+          <li><a href="{{ url_for('admin.listEntryOrders', id=entry.id) }}">View Orders</a></li>
           <li><a href="{{ url_for('admin.contactEntry', id=entry.id) }}">Send Email</a></li>
           <li><a href="{{ url_for('admin.resendLink', id=entry.id) }}">Resend Portal Link</a></li>
           <li><a href="{{ url_for('admin.cancelEntry', id=entry.id) }}">Cancel Entry</a></li>
