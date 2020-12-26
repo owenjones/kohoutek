@@ -3,6 +3,17 @@
 <div class="uk-section uk-section-default uk-section-xsmall">
   <div class="uk-container uk-container-xlarge">
     {% include "portal/components/alerts.jinja" %}
+
+    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+      <div class="uk-navbar-center">
+        <ul class="uk-navbar-nav uk-flex uk-flex-wrap">
+          <li><a href="{{ url_for('admin.listEntries') }}">All</a></li>
+          <li><a href="{{ url_for('admin.listEntries') }}/verified">Verified</a></li>
+          <li><a href="{{ url_for('admin.listEntries') }}/unverified">Unverified</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <table class="uk-table uk-table-responsive uk-table-striped uk-table-middle">
       <thead>
         <tr>
