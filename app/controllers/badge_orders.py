@@ -64,7 +64,7 @@ def processOrder():
     )
 
     items = form_input_array(request.form, "item")
-    submitted = sum([int(v) for k, v in items if v != ""])
+    submitted = sum([abs(int(v)) for k, v in items if v != ""])
     count = submitted + (order.quantity if order else 0)
 
     if count > 0:
@@ -96,12 +96,21 @@ def processOrder():
             order.save()
             return redirect(url_for("orders.addPostageToOrder", id=order.id))
 
-        else:
+        elif order.id:
+            # ID tests if order has been persisted (i.e. it's not a new order)
             db.session.delete(order)
             db.session.commit()
 
             flash(f"Your order was cancelled as all the items were removed", "success")
             return redirect(url_for("portal.index"))
+
+        else:
+            flash(
+                "You haven't chosen any items, please add some and try again",
+                "warning",
+            )
+
+            return redirect(url_for("orders.placeOrder"))
 
     else:
         flash(
@@ -181,8 +190,17 @@ def processPostage(id):
         )
         return redirect(url_for("orders.viewOrder", id=order.id))
 
-    added = order.addPostage(request.form.get("option"))
+    postage = Postage.query.get(request.form.get("option"))
 
+    if (
+        not postage
+        or (order.quantity < postage.item_min)
+        or (order.quantity > postage.item_max and postage.item_max > 0)
+    ):
+        flash("You need to select a valid delivery option", "warning")
+        return redirect(url_for("orders.addPostageToOrder", id=order.id))
+
+    order.postage = postage
     order.postage_name = request.form.get("name")
     order.postage_address_1 = request.form.get("address_1")
     order.postage_address_2 = request.form.get("address_2")
