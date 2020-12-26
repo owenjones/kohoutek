@@ -47,7 +47,7 @@ def verify(entry, code):
                 )
 
         login_user(entry.user)
-        return redirect(url_for("portal.index"))
+        return redirect(request.args.get("next") or url_for("portal.index"))
 
     else:
         return redirect(url_for("portal.login"))
