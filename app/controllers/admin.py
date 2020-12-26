@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash, request, abort
 from flask_login import current_user, login_user, logout_user
 
 from app import limiter
@@ -25,10 +25,16 @@ def index():
 
 
 # Entry Routes
-@blueprint.route("/entries")
+@blueprint.route("/entries", defaults={"status": False})
+@blueprint.route("/entries/<string:status>")
 @needs_admin
-def listEntries():
-    entries = Entry.query
+def listEntries(status):
+    if status in ["verified", "unverified"]:
+        entries = Entry.query.filter(Entry.verified == (status == "verified"))
+
+    else:
+        entries = Entry.query
+
     return render_template("admin/entries.jinja", entries=entries)
 
 
@@ -111,8 +117,12 @@ def resendLinkProcess(id):
 @needs_admin
 def listOrders(status):
     if status:
-        status = OrderStatus(status)
-        orders = Order.query.filter(Order.status == status)
+        try:
+            status = OrderStatus(status)
+            orders = Order.query.filter(Order.status == status)
+
+        except ValueError:
+            abort(404)
 
     else:
         orders = Order.query
