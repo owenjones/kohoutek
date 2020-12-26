@@ -48,21 +48,25 @@ class Entry(db.Model):
         self.verification_code = randomString(35)
         self.user = User(role=Role.TEAM)
 
-    @property
-    def portal_link(self):
-        return url_for(
+    def portal_link(self, next=False, **kwargs):
+        portal = url_for(
             "portal.verify",
             entry=self.id,
             code=self.verification_code,
             _external=True,
         )
 
+        next = url_for(next, **kwargs) if next else False
+        next = f"?next={next}" if next else ""
+
+        return portal + next
+
     def sendConfirmationEmail(self):
         send = sendmail(
             self.contact_email,
             "Kohoutek 2021 Entry",
             "signup-confirmation",
-            confirmation_link=self.portal_link,
+            confirmation_link=self.portal_link(),
         )
 
         return send
