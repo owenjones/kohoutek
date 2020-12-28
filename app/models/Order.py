@@ -165,6 +165,3 @@ class Order(db.Model):
 
         else:
             return False
-
-    def addPostage(self, id):
-        self.postage_id = id
