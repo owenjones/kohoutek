@@ -170,7 +170,6 @@ class Order(db.Model):
 
     def markDispatched(self):
         self.status = OrderStatus.dispatched
-        # send dispatch email
 
         sent = sendmail(
             self.entry.contact_email,
@@ -179,3 +178,9 @@ class Order(db.Model):
             order=self,
             order_link=self.entry.portal_link("orders.viewOrder", id=self.id),
         )
+
+        if sent.status_code == 200:
+            return True
+
+        else:
+            return False

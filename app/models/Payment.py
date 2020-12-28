@@ -1,6 +1,7 @@
 from enum import Enum
 
 from app import db
+from app.utils.mail import sendmail
 
 
 class PaymentMethod(Enum):
@@ -89,3 +90,20 @@ class Payment(db.Model):
 
     def isBy(self, method):
         return self.method == PaymentMethod(method)
+
+    def markReceived(self):
+        self.status = PaymentStatus.received
+
+        sent = sendmail(
+            self.order.entry.contact_email,
+            "Payment Received",
+            "order-payment-received",
+            order=self.order,
+            order_link=self.order.entry.portal_link("orders.viewOrder", id=self.id),
+        )
+
+        if sent.status_code == 200:
+            return True
+
+        else:
+            return False
