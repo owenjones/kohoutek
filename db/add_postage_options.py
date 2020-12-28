@@ -19,7 +19,7 @@ def addPostageOptions(app):
             Postage(
                 name="UK Postage",
                 description="Postage within the UK for 1-20 badges",
-                cost=2,
+                cost=1.50,
                 item_min=0,
                 item_max=20,
             )
@@ -29,7 +29,7 @@ def addPostageOptions(app):
             Postage(
                 name="UK Postage",
                 description="Postage within the UK for 20+ badges",
-                cost=3.50,
+                cost=3,
                 item_min=21,
                 item_max=0,
             )
@@ -37,9 +37,9 @@ def addPostageOptions(app):
 
         db.session.add(
             Postage(
-                name="International Postage",
-                description="Postage outside the UK for 1-20 badges",
-                cost=5,
+                name="International Postage (Europe)",
+                description="Postage within Europe for 1-20 badges",
+                cost=3,
                 item_min=0,
                 item_max=20,
             )
@@ -47,11 +47,51 @@ def addPostageOptions(app):
 
         db.session.add(
             Postage(
-                name="International Postage",
-                description="Postage outside the UK for 20+ badges",
-                cost=10,
+                name="International Postage (Europe)",
+                description="Postage within Europe for 20-40 badges",
+                cost=5,
                 item_min=21,
-                item_max=0,
+                item_max=40,
+            )
+        )
+
+        db.session.add(
+            Postage(
+                name="International Postage (Europe)",
+                description="Postage within Europe for 40-100 badges",
+                cost=6,
+                item_min=41,
+                item_max=100,
+            )
+        )
+
+        db.session.add(
+            Postage(
+                name="International Postage (North America)",
+                description="Postage to Canada/USA for 1-20 badges",
+                cost=4,
+                item_min=0,
+                item_max=20,
+            )
+        )
+
+        db.session.add(
+            Postage(
+                name="International Postage (North America)",
+                description="Postage to Canada/USA for 20-40 badges",
+                cost=6.50,
+                item_min=21,
+                item_max=40,
+            )
+        )
+
+        db.session.add(
+            Postage(
+                name="International Postage (North America)",
+                description="Postage to Canada/USA for 40-100 badges",
+                cost=8.5,
+                item_min=41,
+                item_max=100,
             )
         )
 

@@ -54,9 +54,9 @@ def addItems(app):
                 name="UOBGAS Badge",
                 description="The 'UOBGAS' (University of Bristol Guides and Scouts) club badge",
                 image="uobgas.png",
-                unit_cost=0.8,
+                unit_cost=1,
                 limited=True,
-                stock=40,
+                stock=30,
                 index=4,
             )
         )
