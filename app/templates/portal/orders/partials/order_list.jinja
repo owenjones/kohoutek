@@ -10,7 +10,7 @@
               <a href="{{ url_for('orders.viewOrder', id=order.id) }}" class="uk-card-title uk-h4">Order {{ order.code }}</a>
             </div>
             <div class="uk-text-small uk-text-{{ order.status_colour }}">
-              {{ order.status_name }}
+              {{ order.status_message }}
             </div>
           </div>
         </div>

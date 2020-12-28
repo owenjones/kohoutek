@@ -101,6 +101,18 @@ class Order(db.Model):
     @property
     def status_name(self):
         map = {
+            OrderStatus.incomplete: "incomplete",
+            OrderStatus.payment_pending: "payment_pending",
+            OrderStatus.complete: "complete",
+            OrderStatus.dispatched: "dispatched",
+            OrderStatus.cancelled: "cancelled",
+        }
+
+        return map[self.status]
+
+    @property
+    def status_message(self):
+        map = {
             OrderStatus.incomplete: "In Progress",
             OrderStatus.payment_pending: "Payment Pending",
             OrderStatus.complete: "Payment Received",

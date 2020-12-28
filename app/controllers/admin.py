@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Blueprint, render_template, redirect, url_for, flash, request, abort
 from flask_login import current_user, login_user, logout_user
 
@@ -111,6 +113,13 @@ def resendLinkProcess(id):
     return redirect(url_for("admin.entry", id=id))
 
 
+@blueprint.route("/entry/<int:id>/entries")
+@needs_admin
+def listEntryOrders(id):
+    entry = Entry.query.get_or_404(id)
+    return render_template("admin/entry/orders.jinja", entry=entry)
+
+
 # Order Routes
 @blueprint.route("/orders", defaults={"status": False})
 @blueprint.route("/orders/<string:status>")
@@ -128,6 +137,108 @@ def listOrders(status):
         orders = Order.query
 
     return render_template("admin/orders.jinja", orders=orders)
+
+
+@blueprint.route("/order/<int:id>")
+@needs_admin
+def order(id):
+    order = Order.query.get_or_404(id)
+    return render_template("admin/order/view.jinja", order=order)
+
+
+@blueprint.route("/order/<int:id>/payment")
+@needs_admin
+def recordPayment(id):
+    order = Order.query.get_or_404(id)
+    return render_template("admin/order/record_payment.jinja", order=order)
+
+
+@blueprint.route("/order/<int:id>/payment", methods=["POST"])
+@needs_admin
+def recordPaymentProcess(id):
+    order = Order.query.get_or_404(request.form.get("id"))
+
+    order.payment.method = request.form.get("method")
+    order.payment.reference = request.form.get("reference")
+
+    status = request.form.get("status")
+    order.payment.status = status
+
+    if status == "received":
+        order.status = "complete"
+        # send received email
+
+    elif status in ["new", "error"]:
+        order.status = "incomplete"
+
+    elif status == "pending":
+        order.status = "payment_pending"
+
+    amount = request.form.get("amount")
+    order.payment.amount = float(amount) if amount != "" else 0
+
+    date = request.form.get("received_date")
+    date = date if date != "" else "2000-01-01"
+    order.payment.received_at = datetime.strptime(date, "%Y-%m-%d")
+
+    order.save()
+
+    flash("Payment data saved", "success")
+    return render_template("admin/order/record_payment.jinja", order=order)
+
+
+@blueprint.route("/order/<int:id>/dispatch")
+@needs_admin
+def dispatchOrder(id):
+    order = Order.query.get_or_404(id)
+    return render_template("admin/order/dispatch.jinja", order=order)
+
+
+@blueprint.route("/order/<int:id>/dispatch/info")
+@needs_admin
+def dispatchOrderInfo(id):
+    order = Order.query.get_or_404(id)
+    return render_template("admin/order/dispatch.jinja", order=order)
+
+
+@blueprint.route("/order/<int:id>/dispatch", methods=["POST"])
+@needs_admin
+def dispatchOrderProcess(id):
+    order = Order.query.get_or_404(request.form.get("id"))
+
+    order.status = "dispatched"
+    # send dispatched email
+    order.save()
+
+    flash("Marked as dispatched", "success")
+    return render_template("admin/order/dispatch.jinja", order=order)
+
+
+@blueprint.route("/order/<int:id>/cancel")
+@needs_admin
+def cancelOrder(id):
+    order = Order.query.get_or_404(id)
+    return render_template("admin/order/cancel.jinja", order=order)
+
+
+@blueprint.route("/order/<int:id>/cancel", methods=["POST"])
+@needs_admin
+def cancelOrderProcess(id):
+    order = Order.query.get_or_404(request.form.get("id"))
+    if request.form.get("code").lower() == order.code.lower():
+        db.session.delete(order)
+        db.session.commit()
+
+        flash("Order has been cancelled", "success")
+        return redirect(url_for("admin.listOrders"))
+
+    else:
+        flash(
+            "Incorrect order code (are you sure you know what you're doing?).",
+            "warning",
+        )
+
+        return redirect(url_for("admin.cancelOrder", id=id))
 
 
 # Score Routes

@@ -41,6 +41,28 @@ class Payment(db.Model):
         return map[self.method]
 
     @property
+    def type_name(self):
+        map = {
+            PaymentMethod.cheque: "cheque",
+            PaymentMethod.BACS: "BACS",
+            PaymentMethod.stripe: "stripe",
+            PaymentMethod.manual: "manual",
+        }
+
+        return map[self.method]
+
+    @property
+    def status_name(self):
+        map = {
+            PaymentStatus.new: "new",
+            PaymentStatus.pending: "pending",
+            PaymentStatus.received: "received",
+            PaymentStatus.error: "error",
+        }
+
+        return map[self.status]
+
+    @property
     def status_message(self):
         map = {
             PaymentStatus.new: "Pending",

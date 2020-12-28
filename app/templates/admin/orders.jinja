@@ -3,7 +3,7 @@
 <div class="uk-section uk-section-default uk-section-xsmall">
   <div class="uk-container uk-container-xlarge">
     {% include "portal/components/alerts.jinja" %}
-    
+
     <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
       <div class="uk-navbar-center">
         <ul class="uk-navbar-nav uk-flex uk-flex-wrap">
@@ -31,11 +31,11 @@
         {% for order in orders %}
         <tr>
           <td class="uk-text-small uk-table-link">
-            <a href="{{ url_for('admin.entry', id=order.id)}}">{{ order.code }}</a></td>
+            <a href="{{ url_for('admin.order', id=order.id)}}">{{ order.code }}</a></td>
           </td>
           <td>{{ order.quantity }}</td>
           <td>{{ "£{:,.2f}".format(order.total) }}</td>
-          <td class="uk-text-{{ order.status_colour }}">{{ order.status_name }}</td>
+          <td class="uk-text-{{ order.status_colour }}">{{ order.status_message }}</td>
           <td>{{ order.payment.type }}</td>
           <td class="uk-text-{{ order.payment.status_colour }}">{{ order.payment.status_message }}</td>
         </tr>
