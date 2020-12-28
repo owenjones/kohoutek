@@ -1,0 +1,29 @@
+{% import "mail/component/header.jinja" as header %}
+{% import "mail/component/button.jinja" as button %}
+{% extends "mail/template.jinja" %}
+{% block title %}Payment Received{% endblock %}
+{% block preview %}
+We've received payment for your badge order ({{ order.code }}), we'll let you know once we've these dispatched these so you know to keep an eye out.
+{% endblock %}
+{% block body %}
+<tr>
+  <td style="padding: 40px 40px 30px 40px; font-family: 'Rubik', sans-serif; font-size: 18px; line-height: 28px; color: #666; font-weight: 400;">
+    {{ header.title('Payment Received') }}
+    <p>We've received payment for your badge order ({{ order.code }}), we'll let you know once we've these dispatched these so you know to keep an eye out.</p>
+    <p style="margin: 0;">You can view your order, and download a receipt, using the following link:</p>
+  </td>
+</tr>
+{{ button.button("View Order", order_link) }}
+<tr>
+  <td style="padding: 15px 40px 40px 40px; font-family: 'Rubik', sans-serif; font-size: 18px; line-height: 28px; color: #666; font-weight: 400;">
+    <p style="margin: 0">
+      This link is unique to your entry so please don't forward on this email or share it outside of your group.
+    </p>
+  </td>
+</tr>
+{% endblock %}
+{% block footer %}
+<p>
+  You've received this email as you signed up to take part in Kohoutek 2021. If you no longer wish to receive these emails please contact us at <strong>contact@kohoutek.co.uk</strong> so we can remove your group's competition entry.
+</p>
+{% endblock %}
