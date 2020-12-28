@@ -26,7 +26,7 @@ class Payment(db.Model):
     )
     amount = db.Column(db.Float, nullable=True)
     fee = db.Column(db.Float, nullable=True)
-    reference = db.Column(db.String, nullable=True)
+    reference = db.Column(db.Text, nullable=True)
     received_at = db.Column(db.DateTime, nullable=True)
 
     @property
