@@ -166,7 +166,7 @@ def recordPaymentProcess(id):
 
     if status == "received":
         order.status = "complete"
-        # send received email
+        order.payment.markReceived()
 
     elif status in ["new", "error"]:
         order.status = "incomplete"
@@ -207,7 +207,7 @@ def dispatchOrderProcess(id):
     order = Order.query.get_or_404(request.form.get("id"))
 
     order.status = "dispatched"
-    # send dispatched email
+    order.markDispatched()
     order.save()
 
     flash("Marked as dispatched", "success")
