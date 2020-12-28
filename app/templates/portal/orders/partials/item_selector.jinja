@@ -1,4 +1,5 @@
 <div class="uk-width-1-1">
+  {% if items %}
   <form method="post" action="{{ url_for('orders.processOrder') }}">
     {% if order %}
     <input type="hidden" name="id" value="{{ order.id }}" />
@@ -31,4 +32,7 @@
       </div>
     </div>
   </form>
+  {% else %}
+  <p>There aren't any items available for you to order yet.</p>
+  {% endif %}
 </div>
