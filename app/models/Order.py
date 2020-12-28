@@ -4,6 +4,7 @@ import pycountry
 
 from app import db
 from app.models import Item, OrderItem, ItemStock, Payment
+from app.utils.mail import sendmail
 
 
 class Postage(db.Model):
@@ -48,6 +49,7 @@ class Order(db.Model):
     postage_address_1 = db.Column(db.Text, nullable=True)
     postage_address_2 = db.Column(db.Text, nullable=True)
     postage_city = db.Column(db.Text, nullable=True)
+    postage_region = db.Column(db.Text, nullable=True)
     postage_postcode = db.Column(db.Text, nullable=True)
     postage_country = db.Column(db.Text, nullable=True)
 
@@ -165,3 +167,15 @@ class Order(db.Model):
 
         else:
             return False
+
+    def markDispatched(self):
+        self.status = OrderStatus.dispatched
+        # send dispatch email
+
+        sent = sendmail(
+            self.entry.contact_email,
+            "Badge Order Dispatched",
+            "order-dispatched",
+            order=self,
+            order_link=self.entry.portal_link("orders.viewOrder", id=self.id),
+        )

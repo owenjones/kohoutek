@@ -4,13 +4,11 @@
 </div>
 
 <div class="uk-margin">
-  <label class="uk-form-label">Address Line 1*</label>
-  <div class="uk-form-controls"><input type="text" name="address_1" class="uk-input" placeholder="Address Line 1" value="{{ order.postage_address_1 or "" }}" required></div>
-</div>
-
-<div class="uk-margin">
-  <label class="uk-form-label">Address Line 2</label>
-  <div class="uk-form-controls"><input type="text" name="address_2" class="uk-input" placeholder="Address Line 2" value="{{ order.postage_address_2 or "" }}" /></div>
+  <label class="uk-form-label">Street Address*</label>
+  <div class="uk-form-controls">
+    <input type="text" name="address_1" class="uk-input" placeholder="Address Line 1" value="{{ order.postage_address_1 or "" }}" required>
+    <input type="text" name="address_2" class="uk-input uk-margin-small-top" placeholder="Address Line 2" value="{{ order.postage_address_2 or "" }}" />
+  </div>
 </div>
 
 <div class="uk-margin">
@@ -19,12 +17,17 @@
 </div>
 
 <div class="uk-margin">
-  <label class="uk-form-label">Postcode*</label>
+  <label class="uk-form-label">State/Province/Region</label>
+  <div class="uk-form-controls"><input type="text" name="region" class="uk-input" placeholder="State/Province/Region" value="{{ order.postage_region or "" }}" required /></div>
+</div>
+
+<div class="uk-margin">
+  <label class="uk-form-label">ZIP/Postcode*</label>
   <div class="uk-form-controls"><input type="text" name="postcode" class="uk-input" value="{{ order.postage_postcode or "" }}" placeholder="Postcode" required /></div>
 </div>
 
 <div>
-  <label class="uk-form-label">Country</label>
+  <label class="uk-form-label">Country*</label>
   <div class="uk-form-controls">
     <select id="country" name="country" class="uk-select">
     {% for country in countries %}

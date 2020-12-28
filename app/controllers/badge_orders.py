@@ -205,6 +205,7 @@ def processPostage(id):
     order.postage_address_1 = request.form.get("address_1")
     order.postage_address_2 = request.form.get("address_2")
     order.postage_city = request.form.get("city")
+    order.postage_city = request.form.get("region")
     order.postage_postcode = request.form.get("postcode")
     order.postage_country = request.form.get("country")
     order.save()

@@ -29,7 +29,7 @@
                 <div class="uk-width-1-1 uk-width-1-2@m">
                   <h3>Choose Postage</h3>
                   {% if options|count == 0 %}
-                    <p>There don't appear to be any valid postage options for your order size ({{ order.quantity }} items).</p>
+                    <p>There don't appear to be any valid postage options for your order size ({{ order.quantity }} items)</p>
                   {% endif %}
                   {% for option in options %}
                     <div>
@@ -42,6 +42,8 @@
                       <p class="uk-text-meta">{{ option.description }}</p>
                     </div>
                   {% endfor %}
+                  <hr />
+                  <p class="uk-text-small">If you're outside of Europe/North America, or ordering over 100 badges from outside the UK, please get in touch with us (contact@kohoutek.co.uk) so we can investigate postage options.</p>
                 </div>
                 <div class="uk-width-1-1 uk-width-1-2@m">
                   <h3>Delivery Address</h3>
