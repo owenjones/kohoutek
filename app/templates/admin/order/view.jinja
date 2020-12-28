@@ -1,0 +1,69 @@
+{% extends "admin/order/frame.jinja" %}
+{% block module %}
+<div class="uk-card uk-card-default uk-card-body uk-width-1-1">
+  <div uk-grid>
+    <div class="uk-width-1-2">
+      <h3>Items</h3>
+      <div>
+        {% include "portal/orders/partials/order_item_list.jinja" %}
+      </div>
+      {#}<hr />
+      <h3>Status</h3>
+      <div>
+        <form method="post" action="">
+          <input type="hidden" name="id" value="{{ order.id }}" />
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <select name="status" class="uk-select">
+            <option value="{{ order.status_name }}" selected>{{ order.status_message }}</option>
+            <option disabled>----</option>
+            <option value="incomplete">Incomplete</option>
+            <option value="payment_pending">Payment Pending</option>
+            <option value="complete">Payment Received</option>
+            <option value="dispatched">Dispatched</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <button type="submit" class="uk-margin uk-button uk-button-default uk-button-large">Update Status</button>
+        </form>
+      </div>{#}
+    </div>
+    <div class="uk-width-1-2">
+      <h3>Payment</h3>
+      {% if order.payment %}
+        <table class="uk-table uk-table-divider uk-table-small uk-table-middle">
+          <tr>
+            <th>Payment Method</th>
+            <td>{{ order.payment.type }}
+          </tr>
+          <tr>
+            <th>Status</th>
+            <td class="uk-text-{{ order.payment.status_colour }}">{{ order.payment.status_message }}
+          </tr>
+          {% if order.payment.statusIs("received") %}
+          <tr>
+            <th>Received</th>
+            <td>{{ order.payment.received_at.strftime('%d-%m-%Y') }}
+          </tr>
+          <tr>
+            <th class="uk-table-middle">Reference</th>
+            <td class="uk-text-break">{{ order.payment.reference }}
+          </tr>
+          {% endif %}
+        </table>
+        {% if order.payment.statusIs("new") %}
+        <hr />
+        <p class="uk-text-meta">Waiting for the entry to finish their payment</p>
+        {% elif order.payment.statusIs("pending") %}
+        <p class="uk-text-meta">The entry has sent in their payment - check for it then record it</p>
+        <div>
+          <a href="{{ url_for('admin.recordPayment', id=order.id) }}" class="uk-button uk-button-default uk-button-large">Record Payment</a>
+        </div>
+        {% endif %}
+      {% elif order.postage %}
+      <p class="uk-text-meta">Waiting for the entry to choose a payment method</p>
+      {% else %}
+      <p class="uk-text-meta">Waiting for the entry to add postage information</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "admin/order/frame.jinja" %}
+{% block module %}
+<div class="uk-card uk-card-default uk-card-body uk-width-1-1">
+  <form method="post" action="" class="uk-form uk-form-stacked">
+    <input type="hidden" name="id" value="{{ order.id }}" />
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <div>
+      <h3>Record Payment</h3>
+        <div class="uk-margin">
+          <label class="uk-form-label">Method</label>
+          <div class="uk-form-controls">
+            <select name="method" class="uk-select"{% if order.payment.isBy('stripe') %} disabled{% endif %}>
+              {% if order.payment %}
+                <option value="{{ order.payment.type_name }}">{{ order.payment.type }}</option>
+                <option disabled>----</option>
+              {% endif %}
+              <option value="stripe">Online Payment</option>
+              <option value="BACS"{% if not order.payment %} selected{% endif %}>Bank Transfer</option>
+              <option value="cheque">Cheque</option>
+              <option value="manual">Manual Payment</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label">Payment Status</label>
+          <div class="uk-form-controls">
+            <select name="status" class="uk-select"{% if order.payment.isBy('stripe') %} disabled{% endif %}>
+              {% if order.payment %}
+                <option value="{{ order.payment.status_name }}" selected>{{ order.payment.status_message }}</option>
+                <option disabled>----</option>
+              {% endif %}
+              <option value="new">New</option>
+              <option value="pending">Pending</option>
+              <option value="received"{% if not order.payment %} selected{% endif %}>Received</option>
+              <option value="error">Error</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label">Reference</label>
+          <div class="uk-form-controls"><input type="text" name="reference" class="uk-input" placeholder="Reference" value="{{ order.payment.reference or "" }}"{% if order.payment.isBy('stripe') %} disabled{% endif %}></div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label">Amount</label>
+          <div class="uk-form-controls"><input type="text" name="amount" class="uk-input" placeholder="Amount" value="{{ order.payment.amount or "" }}"{% if order.payment.isBy('stripe') %} disabled{% endif %}/></div>
+        </div>
+
+        <div class="uk-margin">
+          <label class="uk-form-label">Date Received</label>
+          <div class="uk-form-controls"><input type="date" name="received_date" class="uk-input" placeholder="Date Received" value="{% if not (order.payment.statusIs('new') or order.payment.statusIs('pending')) %}{{ order.payment.received_at.strftime('%Y-%m-%d') }}{% endif %}"{% if order.payment.isBy('stripe') %} disabled{% endif %}/></div>
+        </div>
+
+        <div class="uk-margin">
+          <button type="submit" class="uk-button uk-button-secondary" {% if order.payment.isBy('stripe') %}disabled{% endif %}>Record Payment</button>
+        </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
