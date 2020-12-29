@@ -33,16 +33,16 @@
                   {% endif %}
                   {% for option in options %}
                     <div>
-                      <div class="uk-grid-medium" uk-grid>
-                        <div class="uk-width-expand" uk-leader>
+                      <div class="uk-grid-large" uk-grid>
+                        <div class="uk-width-expand">
                           <label><input type="radio" name="option" value="{{ option.id }}" class="uk-radio uk-margin-small-right" required {% if option.id == order.postage.id %}checked{% endif %}> {{ option.name }}</label>
+                          <p class="uk-text-meta">{{ option.description }}</p>
                         </div>
                         <div>{{ "£{:,.2f}".format(option.cost) }}</div>
                       </div>
-                      <p class="uk-text-meta">{{ option.description }}</p>
                     </div>
+                    <hr />
                   {% endfor %}
-                  <hr />
                   <p class="uk-text-small">If you're outside of Europe/North America, or ordering over 100 badges from outside the UK, please get in touch with us (contact@kohoutek.co.uk) so we can investigate postage options.</p>
                 </div>
                 <div class="uk-width-1-1 uk-width-1-2@m">
