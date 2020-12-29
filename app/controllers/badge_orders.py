@@ -27,13 +27,14 @@ from app.models import (
     PaymentMethod,
     PaymentStatus,
 )
-from app.utils.auth import needs_team
+from app.utils.auth import needs_team, needs_dev
 from app.utils.form import form_input_array
 
 blueprint = Blueprint("orders", __name__, url_prefix="/portal")
 
 
 @blueprint.route("/badges")
+@needs_dev
 @needs_team
 def placeOrder():
     items = Item.query.all()

@@ -20,6 +20,22 @@ def allowedFile(filename):
     )
 
 
+def needs_dev(f):
+    @wraps(f)
+    def inner(*args, **kwargs):
+        if current_app.config["ENVIRONMENT"] == "development" or (
+            current_app.config["ENVIRONMENT"] == "production"
+            and current_user.entry.district_name == "xTestx"
+        ):
+            return f(*args, **kwargs)
+
+        else:
+            # Not a DEV user
+            return abort(403)
+
+    return inner
+
+
 def needs_team(f):
     @wraps(f)
     def inner(*args, **kwargs):
