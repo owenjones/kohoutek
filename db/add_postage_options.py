@@ -19,7 +19,7 @@ def addPostageOptions(app):
             Postage(
                 name="UK Postage",
                 description="Postage within the UK for 1-20 badges",
-                cost=1.50,
+                cost=1,
                 item_min=0,
                 item_max=20,
             )
