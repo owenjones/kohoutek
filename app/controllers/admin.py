@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, flash, request, abort
 from flask_login import current_user, login_user, logout_user
 
-from app import limiter
+from app import limiter, db
 from app.models import Entry, Organisation, District, Order, OrderStatus
 from app.utils.auth import needs_admin
 
