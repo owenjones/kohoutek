@@ -13,24 +13,24 @@
         {% include "portal/components/alerts.jinja" %}
       </div>
 
-      <div class="uk-width-1-1 uk-width-3-4@l">
-        <div id="map" class="uk-width-1-1" style="height: 500px;"></div>
-      </div>
+      <div id="map" class="uk-width-1-1 uk-width-3-4@l" style="height: 500px;"></div>
 
-      <div class="uk-width-1-1 uk-width-1-4@l uk-background-secondary uk-light uk-flex uk-flex-column uk-flex-between uk-padding">
+      <div class="uk-width-1-1 uk-width-1-4@l uk-background-secondary uk-light uk-flex uk-flex-column uk-flex-between uk-padding" style="max-height: 500px;">
+        {% if matches|count > 0 %}
         <div>
-          {% if matches|count > 0 %}
-          <p class="uk-text-small uk-text-center">There are <strong>{{ matches|count }}</strong> other groups taking part in Kohoutek at the same time as you!</p>
-          {#}<ul>
-            {% for m in matches %}
-            <li>{{ m.entry.name }}</li>
-            {% endfor %}
-          </ul>{#}
-          {% else %}
-          <p class="uk-text-small uk-text-center">There aren't currently any other groups who've said they'te taking part at the same time as you - sorry!</p>
-          {% endif %}
+          <p class="uk-text-small uk-text-center">There {{ "are" if matches|count > 1 else "is" }} <strong>{{ matches|count }}</strong> other {{ "groups" if matches|count > 1 else "group" }} taking part in Kohoutek at the same time as you!</p>
         </div>
-        <div class="uk-text-center">
+        <div uk-overflow-auto>
+          <ul class="uk-list uk-list-divider uk-column-1-3@s uk-column-1-1@l uk-column-divider">
+            {% for m in matches %}
+            <li><a href="#" onmouseover="markers[{{ loop.index }}].togglePopup()" onmouseout="markers[{{ loop.index }}].togglePopup()">{{ m.entry.name }} <span class="uk-text-small">({{ m.distanceTo(match) }}km)</span></a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% else %}
+        <div><p class="uk-text-small uk-text-center">There aren't currently any other groups who've said they'te taking part at the same time as you - sorry!</p></div>
+        {% endif %}
+        <div class="uk-text-center uk-margin-top">
           <a href="{{ url_for('matchmake.details') }}" class="uk-button uk-button-default">Update Details</a>
         </div>
       </div>
@@ -46,18 +46,32 @@ mapboxgl.accessToken = '{{ mapbox_key }}';
 var map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/streets-v11',
-center: {{ match.lngLat }},
-zoom: 6
+pinchWithRotate: false,
+trackResize: true,
 });
 
-var us = new mapboxgl.Marker({color: "#faa05a"})
-  .setLngLat({{ match.lngLat }})
-  .setPopup(new mapboxgl.Popup().setHTML("<div class='uk-padding-small uk-margin-remove uk-text-center uk-text-middle uk-text-bold uk-text-primary'>{{ match.entry.name }}</div>"))
-  .addTo(map);
-
 var markers = new Array()
-{% for m in matches %}
+var popupOptions = {closeButton: false, focusAfterOpen: false};
 
+markers.push(new mapboxgl.Marker({color: "#faa05a"})
+  .setLngLat({{ match.lngLat }})
+  .setPopup(new mapboxgl.Popup(popupOptions).setHTML("<div class='uk-text-bold uk-text-primary'>{{ match.entry.name }}</div>"))
+  .addTo(map));
+
+{% for m in matches %}
+markers.push(new mapboxgl.Marker({color: "#0077b6"})
+  .setLngLat({{ m.lngLat }})
+  .setPopup(new mapboxgl.Popup(popupOptions).setHTML("<div class='uk-text-bold'>{{ m.entry.name }}</div>"))
+  .addTo(map));
 {% endfor %}
+
+var bounds = new mapboxgl.LngLatBounds()
+markers.forEach((marker) => bounds.extend(marker.getLngLat()))
+map.setCenter(bounds.getCenter());
+
+map.on('load', function() {
+  map.resize();
+  map.fitBounds(bounds, {padding: 80});
+});
 </script>
 {% endblock %}
