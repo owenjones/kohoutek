@@ -78,6 +78,7 @@ def detailsProcess():
 
     match = current_user.entry.match or Matchmake(entry=current_user.entry)
     match.date = date
+    match.number = request.form.get("number")
     match.contact = contact
     match.longitude = request.form.get("longitude")
     match.latitude = request.form.get("latitude")
@@ -92,7 +93,12 @@ def detailsProcess():
 @blueprint.route("/match/details/remove", methods=["POST"])
 @needs_team
 def detailsRemove():
-    pass
+    if current_user.entry.match:
+        db.session.delete(current_user.entry.match)
+        db.session.commit()
+        flash("Your matchmaking details have been removed", "success")
+
+    return redirect(url_for("portal.index"))
 
 
 @blueprint.route("/match/contact/<int:id>")
