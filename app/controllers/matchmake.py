@@ -22,7 +22,7 @@ blueprint = Blueprint("matchmake", __name__, url_prefix="/portal")
 @blueprint.route("/match")
 @needs_team
 def index():
-    # show all teams on <date> if details entered - or redirect
+    # TODO: sort matches by distance from current entry
     match = current_user.entry.match
     matches = (
         Matchmake.query.filter(Matchmake.date == match.date)
