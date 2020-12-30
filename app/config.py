@@ -44,7 +44,7 @@ class Config:
             "fonts.gstatic.com",
             "api.mapbox.com",
         ],
-        "img-src": ["*", "data:"],
+        "img-src": ["*", "data:", "blob:"],
         "script-src": [
             "'self'",
             "'unsafe-inline'",
@@ -57,6 +57,7 @@ class Config:
         ],
         "worker-src": ["blob:"],
         "child-src": ["blob:"],
+        "connect-src": ["*.tiles.mapbox.com", "api.mapbox.com", "events.mapbox.com"],
     }
 
     COMPRESS_MIMETYPES = [
