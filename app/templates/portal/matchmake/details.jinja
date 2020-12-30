@@ -17,20 +17,20 @@
           <h3>When are you taking part?</h3>
           <form class="uk-form-stacked" method="post" action="{{ url_for('matchmake.detailsProcess') }}">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-            <input type="hidden" name="longitude" id="longitude" value="" />
-            <input type="hidden" name="latitude" id="latitude" value="" />
+            <input type="hidden" name="longitude" id="longitude" value="{% if match %}{{ match.longitude }}{% endif %}" />
+            <input type="hidden" name="latitude" id="latitude" value="{% if match %}{{ match.latitude }}{% endif %}" />
             <div class="uk-grid-small" uk-grid>
               <div class="uk-width-1-1 uk-width-4-5@m">
                 <label class="uk-form-label">Date Participating</label>
-                <input type="date" name="date" placeholder="2021-03-01" class="uk-input" />
+                <input type="date" name="date" value="{% if match %}{{ match.date_string }}{% endif %}" class="uk-input" />
               </div>
               <div class="uk-width-1-1 uk-width-1-5@m">
                 <label class="uk-form-label">Rough Numbers</label>
-                <input type="number" name="number" placeholder="1" class="uk-input" />
+                <input type="number" name="number" placeholder="0" value="{% if match %}{{ match.number }}{% endif %}" class="uk-input" />
               </div>
             </div>
             <div class="uk-width-1-1 uk-margin-medium">
-              <label><input type="checkbox" name="contact" class="uk-checkbox uk-margin-small-right" checked /> Can other teams taking part on the same day contact you?</label>
+              <label><input type="checkbox" name="contact" class="uk-checkbox uk-margin-small-right" {% if match %}{{ 'checked' if match.contact else '' }}{% else %}checked{% endif %} /> Can other teams taking part on the same day contact you?</label>
               <p class="uk-text-meta uk-margin-small-top uk-margin-remove-bottom">Initial contact is through the team portal, other teams won't be given access to your personal info!</p>
             </div>
             <div class="uk-width-1-1 uk-margin">
@@ -44,7 +44,8 @@
           </form>
           {% if match %}
           <hr />
-          <form>
+          <form method="post" action="{{ url_for('matchmake.detailsRemove') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="uk-width-1-1">
               <p>If you no longer wish to appear on the matchmaking map you can remove your details below</p>
               <button type="submit" class="uk-button uk-button-secondary uk-button-large">Remove details</button>
