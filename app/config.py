@@ -83,6 +83,12 @@ class Config:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    MAP = {
+        "mapbox_key": os.getenv("MAPBOX_KEY", ""),
+        "default_lat": os.getenv("MAP_DEFAULT_LAT", 0),
+        "default_lon": os.getenv("MAP_DEFAULT_LON", 0),
+    }
+
 
 class DevConfig(Config):
     ENVIRONMENT = "development"
