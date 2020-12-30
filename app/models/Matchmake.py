@@ -4,7 +4,7 @@ from app import db
 class Matchmake(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime, nullable=True)
-    number = db.Column(db.Integer, nullable=True)
+    number = db.Column(db.Integer, default=0)
     contact = db.Column(db.Boolean, default=False)
     longitude = db.Column(db.String(15), nullable=True)
     latitude = db.Column(db.String(15), nullable=True)
