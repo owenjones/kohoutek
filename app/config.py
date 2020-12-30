@@ -42,6 +42,7 @@ class Config:
             "'unsafe-inline'",
             "fonts.googleapis.com",
             "fonts.gstatic.com",
+            "api.mapbox.com",
         ],
         "img-src": ["*", "data:"],
         "script-src": [
@@ -49,10 +50,13 @@ class Config:
             "'unsafe-inline'",
             "cdnjs.cloudflare.com",
             "js.stripe.com",
+            "api.mapbox.com",
         ],
         "frame-src": [
             "js.stripe.com",
         ],
+        "worker-src": ["blob:"],
+        "child-src": ["blob:"],
     }
 
     COMPRESS_MIMETYPES = [
