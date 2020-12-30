@@ -1,0 +1,63 @@
+{% extends "portal/portal-frame.jinja" %}
+{% block headjs %}
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+{% endblock %}
+{% block module %}
+{% if match %}
+<div class="uk-section uk-section-default uk-section-small">
+  <div class="uk-container uk-container-medium">
+    <div class="uk-grid-collapse" uk-grid>
+      <div class="uk-width-1-1 uk-text-center uk-margin">
+        <h1>Matchmaker</h1>
+        {% include "portal/components/alerts.jinja" %}
+      </div>
+
+      <div class="uk-width-1-1 uk-width-3-4@l">
+        <div id="map" class="uk-width-1-1" style="height: 500px;"></div>
+      </div>
+
+      <div class="uk-width-1-1 uk-width-1-4@l uk-background-secondary uk-light uk-flex uk-flex-column uk-flex-between uk-padding">
+        <div>
+          {% if matches|count > 0 %}
+          <p class="uk-text-small uk-text-center">There are <strong>{{ matches|count }}</strong> other groups taking part in Kohoutek at the same time as you!</p>
+          {#}<ul>
+            {% for m in matches %}
+            <li>{{ m.entry.name }}</li>
+            {% endfor %}
+          </ul>{#}
+          {% else %}
+          <p class="uk-text-small uk-text-center">There aren't currently any other groups who've said they'te taking part at the same time as you - sorry!</p>
+          {% endif %}
+        </div>
+        <div class="uk-text-center">
+          <a href="{{ url_for('matchmake.details') }}" class="uk-button uk-button-default">Update Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+{% block bodyjs %}
+<script>
+mapboxgl.accessToken = '{{ mapbox_key }}';
+
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11',
+center: {{ match.lngLat }},
+zoom: 6
+});
+
+var us = new mapboxgl.Marker({color: "#faa05a"})
+  .setLngLat({{ match.lngLat }})
+  .setPopup(new mapboxgl.Popup().setHTML("<div class='uk-padding-small uk-margin-remove uk-text-center uk-text-middle uk-text-bold uk-text-primary'>{{ match.entry.name }}</div>"))
+  .addTo(map);
+
+var markers = new Array()
+{% for m in matches %}
+
+{% endfor %}
+</script>
+{% endblock %}
