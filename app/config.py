@@ -57,7 +57,12 @@ class Config:
         ],
         "worker-src": ["blob:"],
         "child-src": ["blob:"],
-        "connect-src": ["*.tiles.mapbox.com", "api.mapbox.com", "events.mapbox.com"],
+        "connect-src": [
+            "'self'",
+            "*.tiles.mapbox.com",
+            "api.mapbox.com",
+            "events.mapbox.com",
+        ],
     }
 
     COMPRESS_MIMETYPES = [
