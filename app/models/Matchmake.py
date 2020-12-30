@@ -17,3 +17,7 @@ class Matchmake(db.Model):
     @property
     def lngLat(self):
         return f"[{ self.longitude }, { self.latitude }]"
+
+    @property
+    def date_string(self):
+        return self.date.strftime("%Y-%m-%d")
