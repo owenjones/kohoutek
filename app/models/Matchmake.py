@@ -1,3 +1,5 @@
+from haversine import haversine
+
 from app import db
 
 
@@ -21,3 +23,11 @@ class Matchmake(db.Model):
     @property
     def date_string(self):
         return self.date.strftime("%Y-%m-%d")
+
+    def distanceTo(self, point):
+        return round(
+            haversine(
+                (float(self.longitude), float(self.latitude)),
+                (float(point.longitude), float(point.latitude)),
+            )
+        )
