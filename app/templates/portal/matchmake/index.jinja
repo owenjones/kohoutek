@@ -17,13 +17,12 @@
 
       <div class="uk-width-1-1 uk-width-1-4@l uk-background-secondary uk-light uk-flex uk-flex-column uk-flex-between uk-padding" style="max-height: 500px;">
         {% if matches|count > 0 %}
-        <div>
-          <p class="uk-text-small uk-text-center">There {{ "are" if matches|count > 1 else "is" }} <strong>{{ matches|count }}</strong> other {{ "groups" if matches|count > 1 else "group" }} taking part in Kohoutek at the same time as you!</p>
-        </div>
         <div uk-overflow-auto>
+          <p class="uk-text-small uk-text-center">There {{ "are" if matches|count > 1 else "is" }} <strong>{{ matches|count }}</strong> other {{ "groups" if matches|count > 1 else "group" }} taking part in Kohoutek at the same time as you!</p>
+
           <ul class="uk-list uk-list-divider uk-column-1-3@s uk-column-1-1@l uk-column-divider">
             {% for m in matches %}
-            <li><a href="#" onmouseover="markers[{{ loop.index }}].togglePopup()" onmouseout="markers[{{ loop.index }}].togglePopup()">{{ m.entry.name }} <span class="uk-text-small">({{ m.distanceTo(match) }}km)</span></a></li>
+            <li><a onclick="markers[{{ loop.index }}].togglePopup()">{{ m.entry.name }} <span class="uk-text-small">({{ m.distanceTo(match) }}km)</span></a></li>
             {% endfor %}
           </ul>
         </div>
@@ -51,17 +50,19 @@ trackResize: true,
 });
 
 var markers = new Array()
-var popupOptions = {closeButton: false, focusAfterOpen: false};
+var popupOptions = {closeButton: false, focusAfterOpen: false, width: "auto", className: "map-popup"};
 
 markers.push(new mapboxgl.Marker({color: "#faa05a"})
   .setLngLat({{ match.lngLat }})
-  .setPopup(new mapboxgl.Popup(popupOptions).setHTML("<div class='uk-text-bold uk-text-primary'>{{ match.entry.name }}</div>"))
+  .setPopup(new mapboxgl.Popup(popupOptions)
+  .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">{{ match.entry.name }}</h4></div>"))
   .addTo(map));
 
 {% for m in matches %}
 markers.push(new mapboxgl.Marker({color: "#0077b6"})
   .setLngLat({{ m.lngLat }})
-  .setPopup(new mapboxgl.Popup(popupOptions).setHTML("<div class='uk-text-bold'>{{ m.entry.name }}</div>"))
+  .setPopup(new mapboxgl.Popup(popupOptions)
+  .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-{{ 'small' if m.contact else 'remove' }}-bottom\">{{ m.entry.name }}</h4>{% if m.contact %}<a class=\"uk-button uk-button-small uk-button-primary\" href=\"{{ url_for('matchmake.contact', id=m.id)}}\" target=\"_blank\">Contact</a>{% endif %}</div>"))
   .addTo(map));
 {% endfor %}
 

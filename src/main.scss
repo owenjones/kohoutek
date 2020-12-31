@@ -116,3 +116,11 @@ form label.uk-width-1-1 {
   color: $global-link-hover-color !important;
   font-weight: 700;
 }
+
+.map-popup {
+  font-family: $font-rubik;
+
+  button {
+    font-family: $font-space-grotesk;
+  }
+}
