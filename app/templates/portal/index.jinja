@@ -22,8 +22,10 @@
 
         <div>
           <div class="uk-background-secondary uk-light uk-padding uk-flex uk-flex-column uk-flex-between">
-            <div><h4>Badges</h4></div>
-            <div><p>Order badges for your team</p></div>
+            <div>
+              <h4>Badges</h4>
+              <p>Order badges for your team</p>
+            </div>
             <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('orders.placeOrder') }}">Order Badges</a></div>
             <!-- <p>
               Kohoutek 2021 badges, and badges from previous events, will be available to order from 1st January 2021.
@@ -32,13 +34,18 @@
         </div>
 
         <div>
-          <div class="uk-background-primary uk-light uk-padding uk-flex uk-flex-column uk-flex-between">
-            <div><h4>Matchmaker</h4></div>
-            <div><p>
-              Find other groups taking part at the same time as you
-            </p></div>
-            <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('matchmake.details') }}">Add Details</a></div>
-            <!-- <a class="uk-button uk-button-default uk-button-large" href="{{ url_for('orders.placeOrder') }}">Matchmake</a> -->
+          <div class="uk-background-secondary uk-light uk-padding uk-flex uk-flex-column uk-flex-between">
+            <div>
+              <h4>Matchmaker</h4>
+              <p>Find other groups taking part at the same time as you</p>
+            </div>
+            <div>
+              {% if not entry.match %}
+              <a class="uk-button uk-button-default uk-button-large" href="{{ url_for('matchmake.details') }}">Add Details</a>
+              {% else %}
+              <a class="uk-button uk-button-default uk-button-large" href="{{ url_for('matchmake.index') }}">Matchmake</a>
+              {% endif %}
+            </div>
           </div>
         </div>
 
