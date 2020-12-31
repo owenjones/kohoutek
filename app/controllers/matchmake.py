@@ -80,10 +80,15 @@ def detailsProcess():
 
     date = datetime.strptime(request.form.get("date"), "%Y-%m-%d")
     contact = "contact" in request.form and request.form.get("contact") == "on"
+    number = (
+        0
+        if ("number" not in request.form or request.form.get("number") == "")
+        else request.form.get("number")
+    )
 
     match = current_user.entry.match or Matchmake(entry=current_user.entry)
     match.date = date
-    match.number = request.form.get("number")
+    match.number = number
     match.contact = contact
     match.longitude = request.form.get("longitude")
     match.latitude = request.form.get("latitude")
