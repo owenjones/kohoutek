@@ -31,3 +31,10 @@ class Matchmake(db.Model):
                 (float(point.longitude), float(point.latitude)),
             )
         )
+
+
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sent_from_id = db.Column(db.Integer, db.ForeignKey("entry.id"), nullable=False)
+    sent_to_id = db.Column(db.Integer, db.ForeignKey("entry.id"), nullable=False)
+    message = db.Column(db.Text)
