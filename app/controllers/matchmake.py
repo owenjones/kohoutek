@@ -23,6 +23,10 @@ blueprint = Blueprint("matchmake", __name__, url_prefix="/portal")
 @blueprint.route("/match")
 @needs_team
 def index():
+    if not current_user.entry.match:
+        flash("You need to add your details before you can matchmake", "warning")
+        return redirect(url_for("matchmake.details"))
+
     # TODO: sort matches by distance from current entry
     match = current_user.entry.match
     matches = (
