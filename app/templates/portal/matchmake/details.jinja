@@ -66,7 +66,7 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v11',
   center: {{ center }},
-  zoom: {% if match %}8{% else %}4{% endif %},
+  zoom: {% if match %}12{% else %}4{% endif %},
   pinchWithRotate: false,
   trackResize: true,
 });
