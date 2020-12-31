@@ -8,8 +8,8 @@ class Matchmake(db.Model):
     date = db.Column(db.DateTime, nullable=True)
     number = db.Column(db.Integer, default=0)
     contact = db.Column(db.Boolean, default=False)
-    longitude = db.Column(db.String(15), nullable=True)
-    latitude = db.Column(db.String(15), nullable=True)
+    longitude = db.Column(db.String(50), nullable=True)
+    latitude = db.Column(db.String(50), nullable=True)
 
     entry_id = db.Column(db.Integer, db.ForeignKey("entry.id"), nullable=False)
     entry = db.relationship(
