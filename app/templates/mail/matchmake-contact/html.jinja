@@ -1,0 +1,32 @@
+{% import "mail/component/header.jinja" as header %}
+{% import "mail/component/button.jinja" as button %}
+{% extends "mail/template.jinja" %}
+{% block title %}Kohoutek Matchmaker{% endblock %}
+{% block preview %}
+A Kohoutek 2021 team has been in touch.
+{% endblock %}
+{% block body %}
+<tr>
+  <td style="padding: 40px 40px 30px 40px; font-family: 'Rubik', sans-serif; font-size: 18px; line-height: 28px; color: #666; font-weight: 400;">
+    {{ header.title('Kohoutek Matchmaker') }}
+    <p>{{ entry_name }} has sent you a message:</p>
+    {% for m in message %}
+    <p><em>{{ m }}</em></p>
+    {% endfor %}
+    <p style="margin: 0;">You can send a reply to {{ entry_name }} using the following link:</p>
+  </td>
+</tr>
+{{ button.button("Send Reply", reply_link) }}
+<tr>
+  <td style="padding: 15px 40px 40px 40px; font-family: 'Rubik', sans-serif; font-size: 18px; line-height: 28px; color: #666; font-weight: 400;">
+    <p style="margin: 0">
+      This link is unique to your entry so please don't forward on this email or share it outside of your group.
+    </p>
+  </td>
+</tr>
+{% endblock %}
+{% block footer %}
+<p>
+  You've received this email as you signed up to take part in Kohoutek 2021. If you no longer wish to receive these emails please contact us at <strong>contact@kohoutek.co.uk</strong> so we can remove your group's competition entry.
+</p>
+{% endblock %}
