@@ -1,10 +1,19 @@
 from datetime import datetime
 
-from flask import Blueprint, render_template, redirect, url_for, flash, request, abort
+from flask import (
+    Blueprint,
+    current_app,
+    render_template,
+    redirect,
+    url_for,
+    flash,
+    request,
+    abort,
+)
 from flask_login import current_user, login_user, logout_user
 
 from app import limiter, db
-from app.models import Entry, Organisation, District, Order, OrderStatus
+from app.models import Entry, Organisation, District, Order, OrderStatus, Matchmake
 from app.utils.auth import needs_admin
 
 blueprint = Blueprint("admin", __name__, url_prefix="/admin")
@@ -38,6 +47,22 @@ def listEntries(status):
         entries = Entry.query
 
     return render_template("admin/entries.jinja", entries=entries)
+
+
+@blueprint.route("/entries/map")
+@needs_admin
+def mapEntries():
+
+    matches = Matchmake.query.all()
+
+    center = f"[{ current_app.config['MAP']['default_lon']}, { current_app.config['MAP']['default_lat']}]"
+
+    return render_template(
+        "admin/entries_map.jinja",
+        matches=matches,
+        center=center,
+        mapbox_key=current_app.config["MAP"]["mapbox_key"],
+    )
 
 
 @blueprint.route("/entry/<int:id>")
