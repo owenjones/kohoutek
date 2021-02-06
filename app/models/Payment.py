@@ -99,7 +99,9 @@ class Payment(db.Model):
             "Payment Received",
             "order-payment-received",
             order=self.order,
-            order_link=self.order.entry.portal_link("orders.viewOrder", id=self.id),
+            order_link=self.order.entry.portal_link(
+                "orders.viewOrder", id=self.order.id
+            ),
         )
 
         if sent.status_code == 200:
