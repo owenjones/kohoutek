@@ -20,6 +20,7 @@ def loadConfig(config, app):
 
 class Config:
     NAME = os.getenv("NAME", "Flask App")
+    SERVER_NAME = os.getenv("SERVER_NAME", "")
     ROOT_KEY = os.getenv("ROOT_KEY", randomKey(12))
     SECRET_KEY = os.getenv("SECRET_KEY", randomString(25))
 
