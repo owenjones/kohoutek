@@ -19,20 +19,6 @@
     </xml>
     <![endif]-->
 
-    <!--[if mso]>
-        <style>
-            * {
-                font-family: sans-serif !important;
-            }
-        </style>
-    <![endif]-->
-
-    <!--[if !mso]><!-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-    <!--<![endif]-->
-
     <style>
         :root {
           color-scheme: light;
@@ -48,6 +34,7 @@
         }
 
         * {
+            font-family: sans-serif !important;
             -ms-text-size-adjust: 100%;
             -webkit-text-size-adjust: 100%;
         }
@@ -155,10 +142,6 @@
   {% if self.preview() %}
   <div style="max-height:0; overflow:hidden; mso-hide:all;" aria-hidden="true">
   {% block preview %}{% endblock %}
-  </div>
-
-  <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
-  &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
   </div>
   {% endif %}
 
