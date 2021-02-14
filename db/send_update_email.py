@@ -27,6 +27,7 @@ def sendUpdateEmail(app, subject, template):
                 portal_link=entry.portal_link("portal.index"),
                 badge_link=entry.portal_link("orders.placeOrder"),
                 match_link=entry.portal_link("matchmake.index"),
+                activity_link=entry.portal_link("portal.downloadActivities"),
             )
 
             if sent.status_code == 200:
@@ -42,6 +43,6 @@ if __name__ == "__main__":
     from app import create_app
 
     app = create_app(os.getenv("ENVIRONMENT"))
-    subject = "Kohoutek 2021 Update"
-    template = "teams-update"
+    subject = "Kohoutek 2021 Activities"
+    template = "activities-available"
     sendUpdateEmail(app, subject, template)
