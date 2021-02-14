@@ -12,11 +12,12 @@
       </div>
       <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
         <div>
-          <div class="uk-background-primary uk-light uk-padding">
-            <h4>Activities</h4>
-            <p>
-              The activity pack will be available to download here on 14<sup>th</sup> February 2021!
-            </p>
+          <div class="uk-background-primary uk-light uk-padding uk-flex uk-flex-column uk-flex-between">
+            <div>
+              <h4>Activities</h4>
+              <p>Download the Kohoutek activity pack</p>
+            </div>
+            <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('portal.downloadActivities') }}">Activities</a></div>
           </div>
         </div>
 
@@ -27,9 +28,6 @@
               <p>Order badges for your team</p>
             </div>
             <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('orders.placeOrder') }}">Order Badges</a></div>
-            <!-- <p>
-              Kohoutek 2021 badges, and badges from previous events, will be available to order from 1st January 2021.
-            </p> -->
           </div>
         </div>
 

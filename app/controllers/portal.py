@@ -78,3 +78,9 @@ def resendLinkProcess():
         "success",
     )
     return render_template("portal/resend-link.jinja")
+
+
+@blueprint.route("/activities")
+def downloadActivities():
+    match = current_user.entry.match or False
+    return render_template("portal/download-activities.jinja", matchPrompt=(not match))
