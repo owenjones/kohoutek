@@ -13,7 +13,7 @@ from flask import (
 from flask_login import current_user, login_user, logout_user
 
 from app import db, limiter
-from app.models import Entry
+from app.models import Entry, Permission
 from app.utils.auth import needs_team
 
 blueprint = Blueprint("portal", __name__, url_prefix="/portal")
@@ -29,12 +29,13 @@ def index():
 
 @blueprint.route("/login")
 def login():
+    if current_user.is_authenticated and current_user.hasPermission(Permission.TEAM):
+        return redirect(url_for("portal.index"))
+
     return render_template("portal/need-login.jinja")
 
 
 @blueprint.route("login/<int:entry>/<string:code>")
-@limiter.limit("5/minute")
-@limiter.limit("20/hour")
 def verify(entry, code):
     entry = Entry.query.filter_by(id=entry, verification_code=code).first()
     if entry:
@@ -54,6 +55,7 @@ def verify(entry, code):
 
 
 @blueprint.route("/logout")
+@needs_team
 def logout():
     logout_user()
     return redirect(url_for("root.index"))
