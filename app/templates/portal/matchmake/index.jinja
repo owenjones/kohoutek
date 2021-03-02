@@ -73,11 +73,10 @@ markers.push(new mapboxgl.Marker({color: "#0077b6"})
 {% if matches|count > 0 %}
 var bounds = new mapboxgl.LngLatBounds()
 markers.forEach((marker) => bounds.extend(marker.getLngLat()))
-{% endif %}
-
 map.on('load', function() {
   map.resize();
   map.fitBounds(bounds, {padding: 80});
 });
+{% endif %}
 </script>
 {% endblock %}
