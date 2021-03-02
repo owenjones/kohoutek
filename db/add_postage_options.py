@@ -17,6 +17,16 @@ def addPostageOptions(app):
 
         db.session.add(
             Postage(
+                name="Passed on to group",
+                description="Passed on to the group where we're able to do so. Please only choose this if you've spoken to us first!",
+                cost=0,
+                item_min=0,
+                item_max=0,
+            )
+        )
+
+        db.session.add(
+            Postage(
                 name="UK Postage",
                 description="Postage within the UK for 1-20 badges",
                 cost=1,
