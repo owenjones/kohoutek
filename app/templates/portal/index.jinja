@@ -48,11 +48,16 @@
         </div>
 
         <div>
-          <div class="uk-background-secondary uk-light uk-padding">
-            <h4>Scores</h4>
-            <p>
-              You'll be able to enter your team scores here from 6<sup>th</sup> March 2021.
-            </p>
+          <div class="uk-background-secondary uk-light uk-padding uk-flex uk-flex-column uk-flex-between">
+            <div>
+              <h4>Scores</h4>
+              <p>
+                Enter your teams' scores
+              </p>
+            </div>
+            <div>
+              <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('scoring.index') }}">Enter Scores</a></div>
+            </div>
           </div>
         </div>
       </div>
