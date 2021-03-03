@@ -39,7 +39,10 @@ def roleName(role):
 
 @login_manager.user_loader
 def loadUser(id):
-    return User.query.get(id)
+    if id is not None:
+        return User.query.get(id)
+
+    return None
 
 
 @blueprint.route("/login")

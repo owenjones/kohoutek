@@ -9,6 +9,7 @@ from flask import (
     url_for,
     flash,
     request,
+    make_response,
 )
 from flask_login import current_user, login_user, logout_user
 
@@ -20,19 +21,22 @@ blueprint = Blueprint("portal", __name__, url_prefix="/portal")
 
 
 @blueprint.route("")
-@needs_team
 def index():
-    entry = current_user.entry
-    orders = entry.orders
-    return render_template("portal/index.jinja", entry=entry, orders=orders)
+    if current_user.is_authenticated and current_user.hasPermission(Permission.TEAM):
+        entry = current_user.entry
+        orders = entry.orders
+        return render_template("portal/index.jinja", entry=entry, orders=orders)
+
+    else:
+        response = make_response(render_template("portal/need-login.jinja"))
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        return response
 
 
 @blueprint.route("/login")
 def login():
-    if current_user.is_authenticated and current_user.hasPermission(Permission.TEAM):
-        return redirect(url_for("portal.index"))
-
-    return render_template("portal/need-login.jinja")
+    return redirect(url_for("portal.index"))
 
 
 @blueprint.route("login/<int:entry>/<string:code>")
@@ -51,11 +55,10 @@ def verify(entry, code):
         return redirect(request.args.get("next") or url_for("portal.index"))
 
     else:
-        return redirect(url_for("portal.login"))
+        return redirect(url_for("portal.index"))
 
 
 @blueprint.route("/logout")
-@needs_team
 def logout():
     logout_user()
     return redirect(url_for("root.index"))
