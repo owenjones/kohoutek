@@ -60,7 +60,6 @@ def listEntries(status):
 @blueprint.route("/entries/map")
 @needs_admin
 def mapEntries():
-
     matches = Matchmake.query.all()
 
     center = f"[{ current_app.config['MAP']['default_lon']}, { current_app.config['MAP']['default_lat']}]"
