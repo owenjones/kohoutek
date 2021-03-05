@@ -1,19 +1,4 @@
-{% macro activity_dropdown(id, activities, selected=False) %}
-<div class="uk-margin-top">
-  <select name="activity[{{ id }}]" class="uk-select">
-    {% if selected %}
-    <option value="{{ selected.id }}" selected>{{ selected.name }}</option>
-    {% else %}
-    <option value="" selected disabled>Choose activity</option>
-    {% endif %}
-    <option disabled>----</option>
-    {% for activity in activities %}
-    <option value="{{ activity.id }}">{{ activity.name }}</option>
-    {% endfor %}
-  </select>
-</div>
-{% endmacro %}
-
+{% from "portal/scores/activity_dropdown.jinja" import activity_dropdown %}
 {% extends "portal/portal-frame.jinja" %}
 {% block module %}
 <div class="uk-section uk-section-default uk-section-small">
@@ -68,29 +53,73 @@
             <hr />
             {% for team in teams %}
               {% if team.submitted %}
-              submitted
+              <div class="uk-grid uk-margin-top">
+                <div class="uk-width-expand">
+                  <h3 class="uk-text-primary">Team {{ loop.index }}{% if team.name %} - {{ team.name }}{% endif %}</h3>
+                </div>
+                <div>
+                    <button type="submit" name="delete" value="{{ team.id }}" class="uk-button uk-button-text uk-text-danger" uk-tooltip="title: Remove this team and its scores; pos: bottom;">Remove Team</button>
+                </div>
+              </div>
+
+              <div class="uk-width-1-1 uk-margin">
+                <div class="uk-grid-small uk-margin-medium" uk-grid>
+                  <div class="uk-width-1-1 uk-width-1-4@s">
+                    <h5>Section</h5>
+                  </div>
+                  <div class="uk-width-expand">
+                    {{ team.section.value }}
+                  </div>
+                </div>
+
+                <div class="uk-grid-small uk-margin-medium" uk-grid>
+                  <div class="uk-width-1-1 uk-width-1-4@s">
+                    <h5>Number of Team Members</h5>
+                  </div>
+                  <div class="uk-width-expand">
+                    {{ team.members }}
+                  </div>
+                </div>
+
+                <h4 class="uk-text-primary">Activity Scores</h4>
+                {% for score in team.scores %}
+                <div class="uk-grid-small uk-margin-medium" uk-grid>
+                  <div class="uk-width-1-1 uk-width-1-4@s">
+                    <h5>{{ score.activity.name }}</h5>
+                  </div>
+                  <div class="uk-width-expand">
+                    <strong>{{ score.score }}</strong> / 50
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
               {% else %}
               <div class="uk-grid uk-margin-top">
                 <div class="uk-width-expand">
-                  <h3>Team {{ loop.index }}</h3>
+                  <h3 class="uk-text-primary">Team {{ loop.index }}</h3>
                 </div>
                 <div>
-                    <button type="submit" name="delete" value="{{ team.id }}" class="uk-button uk-button-text uk-text-danger" uk-tooltip="title: Remove this team and its scores; pos: bottom;">Delete Team</button>
+                    <button type="submit" name="delete" value="{{ team.id }}" class="uk-button uk-button-text uk-text-danger" uk-tooltip="title: Remove this team and its scores; pos: bottom;">Remove Team</button>
                 </div>
               </div>
 
               <div class="uk-width-1-1 uk-margin">
                 <fieldset class="uk-fieldset uk-form-horizontal">
-                  <div>
-                    <label class="uk-form-label">Team Name</label>
-                    <div class="uk-form-controls">
+                  <div class="uk-grid-small uk-margin-medium" uk-grid>
+                    <div class="uk-width-1-1 uk-width-1-4@s">
+                      <h5>Team Name</h5>
+                    </div>
+                    <div class="uk-width-expand">
                       <input type="text" class="uk-input" name="team-{{ team.id }}[name]" placeholder="Team Name" {% if team.name %}value="{{ team.name }}" {% endif %}/>
                       <p class="uk-text-meta">If your teams had names - no worries if they didn't!</p>
                     </div>
                   </div>
-                  <div class="uk-margin">
-                    <label class="uk-form-label">Section</label>
-                    <div class="uk-form-controls">
+
+                  <div class="uk-grid-small uk-margin-medium" uk-grid>
+                    <div class="uk-width-1-1 uk-width-1-4@s">
+                      <h5>Section</h5>
+                    </div>
+                    <div class="uk-width-expand">
                       <select name="team-{{ team.id }}[section]" class="uk-select">
                         {% if team.section %}
                         <option value="{{ team.section.value }}" selected>{{ team.section.value }}</option>
@@ -107,18 +136,24 @@
                       <p class="uk-text-meta">If you're from outside the UK, <a href="https://en.wikipedia.org/wiki/Age_groups_in_Scouting_and_Guiding#United_Kingdom" target="_blank" rel="nofollow noreferrer" class="uk-text-primary">match your sections age</a> as best you can with '{% if current_user.entry.organisation_name == "Scouting" %}The Scout Association{% else %}Girlguiding UK{% endif %}'.</p>
                     </div>
                   </div>
-                  <div class="uk-margin">
-                    <label class="uk-form-label">Number of Team Members</label>
-                    <div class="uk-form-controls">
+
+                  <div class="uk-grid-small uk-margin-medium" uk-grid>
+                    <div class="uk-width-1-1 uk-width-1-4@s">
+                      <h5>Number of Team Members</h5>
+                    </div>
+                    <div class="uk-width-expand">
                       <input type="number" class="uk-input" name="team-{{ team.id }}[number]" placeholder="Number in team" {% if team.members %}value="{{ team.members }}" {% endif %}/>
                     </div>
                   </div>
-                  <h4>Activity Scores</h4>
+
+                  <h4 class="uk-text-primary">Activity Scores</h4>
                   {% for activity in entry.activities %}
-                  <div class="uk-margin">
-                    <label class="uk-form-label uk-width-3-5">{{ activity.activity.name }}</label>
-                    <div class="uk-form-controls">
-                      <input type="number" class="uk-input uk-width-1-5" name="team-{{ team.id }}[activity-{{ loop.index }}]" placeholder="Score" {% if team.scores[loop.index0].score %}value="{{ team.scores[loop.index0].score }}" {% endif %}/> / 50
+                  <div class="uk-grid-small uk-margin-medium" uk-grid>
+                    <div class="uk-width-1-1 uk-width-1-4@s">
+                      <h5>{{ activity.activity.name }}</h5>
+                    </div>
+                    <div class="uk-width-expand">
+                      <input type="number" class="uk-input uk-width-3-4 uk-width-1-5@m" name="team-{{ team.id }}[activity-{{ loop.index }}]" placeholder="Score" {% if team.scores[loop.index0].score %}value="{{ team.scores[loop.index0].score }}" {% endif %}/> / 50
                     </div>
                   </div>
                   {% endfor %}
