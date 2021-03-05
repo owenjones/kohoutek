@@ -19,7 +19,7 @@
 
       <div class="uk-width-1-1">
         <div class="uk-card uk-card-default uk-card-body">
-          {% if not teams %}
+          {% if teams.count() == 0 %}
           <form method="POST" action="{{ url_for('scoring.create')}}" class="uk-form-stacked">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div>
@@ -39,7 +39,7 @@
               <p class="uk-text-meta">If you ran less than four activities, choose any from the list then enter 0 as the score for each team.</p>
             </div>
 
-            <div class="uk-text-right">
+            <div>
               <button type="submit" class="uk-button uk-button-large uk-button-primary">Enter Scores</button>
             </div>
           </form>
@@ -47,7 +47,7 @@
           <form action="{{ url_for('scoring.update')}}" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="uk-text-right">
-              <a href="" class="uk-button uk-button-default">Change Activities</a>
+              <a href="{{ url_for('scoring.changeActivities') }}" class="uk-button uk-button-default">Change Activities</a>
               <button type="submit" name="add" value="1" class="uk-button uk-button-default">Add Another Team</button>
             </div>
             <hr />
@@ -99,7 +99,7 @@
                   <h3 class="uk-text-primary">Team {{ loop.index }}</h3>
                 </div>
                 <div>
-                    <button type="submit" name="delete" value="{{ team.id }}" class="uk-button uk-button-text uk-text-danger" uk-tooltip="title: Remove this team and its scores; pos: bottom;">Remove Team</button>
+                    <button type="submit" name="delete" value="{{ team.id }}" class="uk-button uk-button-text uk-text-danger">Remove Team</button>
                 </div>
               </div>
 

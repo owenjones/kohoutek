@@ -156,12 +156,49 @@ def update():
     return redirect(url_for("scoring.index"))
 
 
-@blueprint.route("/change-activties", methods=["GET"])
+@blueprint.route("/change-activities", methods=["GET"])
 @needs_team
 def changeActivities():
-    pass
+    if current_user.entry.teams.count() == 0:
+        flash("You don't currently have any teams entered", "warning")
+        return redirect(url_for("scoring.index"))
+
+    choices = Activity.query.order_by("name")
+    activities = current_user.entry.activities
+
+    return render_template(
+        "portal/scores/change_activities.jinja", choices=choices, activities=activities
+    )
 
 
 @blueprint.route("/change-activities", methods=["POST"])
 def changeActivitiesProcess():
-    pass
+    teams = current_user.entry.teams.count()
+    activities = form_input_array(request.form, "activity")
+
+    # TODO: sort cascades properly (can't test on SQLite)
+    for team in current_user.entry.teams:
+        team.clearScores()
+
+    current_user.entry.teams.delete()
+    current_user.entry.activities.delete()
+    db.session.commit()
+
+    if len(activities) != 4:
+        flash("Please select four activities", "warning")
+        return redirect(url_for("scoring.changeActivities"))
+
+    for activity in activities:
+        obj = Activity.query.get(activity[1])
+        if obj:
+            current_user.entry.activities.append(EntryActivities(activity=obj))
+        else:
+            flash("Please select a valid activity", "warning")
+            return redirect(url_for("scoring.changeActivities"))
+
+    for team in range(1, teams + 1):
+        current_user.entry.teams.append(Team())
+
+    db.session.commit()
+
+    return redirect(url_for("scoring.index"))

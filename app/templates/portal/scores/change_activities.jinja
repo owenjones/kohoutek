@@ -1,0 +1,37 @@
+{% from "portal/scores/activity_dropdown.jinja" import activity_dropdown %}
+{% extends "portal/portal-frame.jinja" %}
+{% block module %}
+<div class="uk-section uk-section-default uk-section-small">
+  <div class="uk-container uk-container-small">
+    <div class="uk-flex uk-flex-stretch" uk-grid>
+      <div class="uk-width-1-1 uk-text-center">
+        <h1>Change Your Activities</h1>
+      </div>
+
+      {% include "portal/components/alerts.jinja" %}
+
+      <div class="uk-width-1-1">
+        <div class="uk-card uk-card-default uk-card-body">
+          <p class="uk-text-danger">Warning - changing your activities will remove any teams and scores you have already entered.</p>
+          <form action="" method="POST" class="uk-form-stacked">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div class="uk-margin">
+              <label class="uk-form-label">Which activities did you run?</label>
+              <div class="uk-form-controls">
+                {% for entryActivity in activities %}
+                {{ activity_dropdown(loop.index, choices, entryActivity.activity) }}
+                {% endfor %}
+              </div>
+              <p class="uk-text-meta">If you ran less than four activities, choose any from the list then enter 0 as the score for each team.</p>
+            </div>
+
+            <div>
+              <button type="submit" class="uk-button uk-button-large uk-button-danger">Change Activities</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
