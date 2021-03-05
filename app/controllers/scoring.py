@@ -108,7 +108,14 @@ def update():
 
             for i, entryActivity in enumerate(current_user.entry.activities):
                 team.scores[i].activity_id = entryActivity.activity.id
-                team.scores[i].score = fields.get(f"activity-{i+1}", 0)
+
+                try:
+                    score = int(fields.get(f"activity-{i+1}", 0))
+
+                except ValueError:
+                    score = 0
+
+                team.scores[i].score = score
 
     if save:
         flash("Your scores have been saved", "success")
