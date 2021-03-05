@@ -10,7 +10,8 @@
           <th>ID</th>
           <th>Group/Unit (Troop)</th>
           <th class="uk-table-shrink">District/Division</th>
-          <th class="uk-table-shrink">County</th>
+          <th>Team Name</th>
+          <th class="uk-table-shrink">Section</th>
           <th class="uk-table-shrink"># Members</th>
           <th class="uk-table-shrink">Raw Score</th>
           <th class="uk-table-shrink">Weighted Score</th>
@@ -25,7 +26,8 @@
           </td>
           <td>{{ team.entry.name }}</td>
           <td>{{ team.entry.district }}</td>
-          <td>{{ team.entry.county_name }}</td>
+          <td>{{ team.name }}</td>
+          <td>{{ team.section.value }}</td>
           <td>{{ team.members }}</td>
           <td>{{ team.rawScore }}</td>
           <td>{{ team.weightedScore }}</td>

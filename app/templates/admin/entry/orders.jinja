@@ -18,7 +18,7 @@
         </td>
         <td>{{ order.quantity }}</td>
         <td>{{ "£{:,.2f}".format(order.total) }}</td>
-        <td class="uk-text-{{ order.status_colour }}">{{ order.status_name }}</td>
+        <td class="uk-text-{{ order.status_colour }}">{{ order.status_message }}</td>
       </tr>
       {% endfor %}
     </tbody>
