@@ -13,7 +13,15 @@ from flask import (
 from flask_login import current_user, login_user, logout_user
 
 from app import limiter, db
-from app.models import Entry, Organisation, District, Order, OrderStatus, Matchmake
+from app.models import (
+    Entry,
+    Organisation,
+    District,
+    Order,
+    OrderStatus,
+    Team,
+    Matchmake,
+)
 from app.utils.auth import needs_admin
 
 blueprint = Blueprint("admin", __name__, url_prefix="/admin")
@@ -267,3 +275,10 @@ def cancelOrderProcess(id):
 
 
 # Score Routes
+@blueprint.route("/scores")
+@needs_admin
+def scores():
+    teams = (
+        Team.query.filter(Team.submitted == True).order_by(Team.rawScore.desc()).all()
+    )
+    return render_template("admin/scores.jinja", teams=teams)
