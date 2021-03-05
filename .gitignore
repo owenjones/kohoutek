@@ -4,3 +4,4 @@ node_modules
 .env
 *.sqlite
 __pycache__
+nocommit
