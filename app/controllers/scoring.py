@@ -123,13 +123,13 @@ def update():
 
         for team in current_user.entry.teams:
             if team.submitted == False:
+                scores = Score.query.filter_by(team_id=team.id)
+
                 validNumbers = team.members > 0
                 validSection = team.section in Section
-                validScores = (
-                    Score.query.filter_by(team_id=team.id)
-                    .filter((Score.score < 0) | (Score.score > 50))
-                    .count()
-                ) == 0
+                validScores = scores.count() == 4 and (
+                    scores.filter((Score.score < 0) | (Score.score > 50)).count() == 0
+                )
 
                 if not validNumbers:
                     success = False
@@ -155,6 +155,7 @@ def update():
                     )
                     break
 
+                team.rawScore = sum([int(score.score) for score in scores.all()])
                 team.submitted = True
 
         if success:
