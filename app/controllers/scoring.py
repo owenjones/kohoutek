@@ -87,7 +87,7 @@ def update():
 
             else:
                 db.session.delete(team)
-                flash("Team deleted", "success")
+                flash("The team was removed", "success")
 
         else:
             flash("This isn't your team to delete", "danger")
@@ -119,24 +119,28 @@ def update():
 
     if submit:
         # TODO: See if this can be less intensive?
+        success = True
+
         for team in current_user.entry.teams:
             if team.submitted == False:
                 validNumbers = team.members > 0
                 validSection = team.section in Section
                 validScores = (
                     Score.query.filter_by(team_id=team.id)
-                    .filter((Score.score <= 0) | (Score.score > 50))
+                    .filter((Score.score < 0) | (Score.score > 50))
                     .count()
                 ) == 0
 
                 if not validNumbers:
+                    success = False
                     flash(
-                        "There was a problem submitting your scores: the number of members in a team cannot be negative",
+                        "There was a problem submitting your scores: the number of members in a team must be greater than 0",
                         "warning",
                     )
                     break
 
                 if not validSection:
+                    success = False
                     flash(
                         "There was a problem submitting your scores: one of your teams has an invalid section",
                         "warning",
@@ -144,6 +148,7 @@ def update():
                     break
 
                 if not validScores:
+                    success = False
                     flash(
                         "There was a problem submitting your scores: activity scores must be between 0 and 50",
                         "warning",
@@ -151,6 +156,9 @@ def update():
                     break
 
                 team.submitted = True
+
+        if success:
+            flash("Scores submitted", "success")
 
     db.session.commit()
     return redirect(url_for("scoring.index"))
