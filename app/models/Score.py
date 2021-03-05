@@ -42,6 +42,7 @@ class Team(db.Model):
         "Score", backref=db.backref("team", lazy=True), cascade="all, delete-orphan"
     )
     submitted = db.Column(db.Boolean, default=False)
+    rawScore = db.Column(db.Integer, default=0)
 
     def __init__(self, **kwargs):
         super(Team, self).__init__(**kwargs)
@@ -55,14 +56,14 @@ class Team(db.Model):
     def clearScores(self):
         Score.query.filter(Score.team_id == self.id).delete()
 
-    # @property
-    # def rawScore(self):
-    #     return sum([score.score for score in self.scores])
-    #
-    # @property
-    # def weightedScore(self):
-    #     # TODO: work out a better calculation to weight by!
-    #     return float(self.rawScore / self.members) * 5
+    @property
+    def weightedScore(self):
+        # TODO: work out a better calculation to weight by!
+        if self.members > 0:
+            weight = max(5, self.members)
+            return round(float(self.rawScore / weight) * 5, 2)
+
+        return self.rawScore
 
 
 class Score(db.Model):
@@ -70,4 +71,4 @@ class Score(db.Model):
     activity_id = db.Column(db.Integer, db.ForeignKey("activity.id"), nullable=True)
     activity = db.relationship("Activity", backref=db.backref("scores", lazy=True))
     team_id = db.Column(db.Integer, db.ForeignKey("team.id"), nullable=False)
-    score = db.Column(db.Integer, nullable=True)
+    score = db.Column(db.Integer, default=0)
