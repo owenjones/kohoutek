@@ -150,3 +150,7 @@ class Entry(db.Model):
         }
 
         return map[self.organisation] if self.organisation in map else None
+
+    @property
+    def eligable(self):
+        return self.county != County.other
