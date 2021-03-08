@@ -33,7 +33,19 @@
           <td class="uk-text-small uk-table-link">
             <a href="{{ url_for('admin.order', id=order.id)}}">{{ order.code }}</a></td>
           </td>
-          <td>{{ order.quantity }}</td>
+          <td>
+            <div class="uk-inline">
+              <a href="#">{{ order.quantity }}</a>
+              <div uk-drop="mode: hover; pos: right; delay-hide: 150;">
+                <div class="uk-card uk-card-small uk-card-body uk-card-default">
+                  <ul class="uk-list">
+                  {% for item in order.items %}
+                    <li><strong>{{ item.item.name }}</strong> - {{ item.quantity }}</li>
+                  {% endfor %}
+                  </ul>
+                </div>
+              </div>
+          </td>
           <td>{{ "£{:,.2f}".format(order.total) }}</td>
           <td class="uk-text-{{ order.status_colour }}">{{ order.status_message }}</td>
           <td>{{ order.payment.type }}</td>
