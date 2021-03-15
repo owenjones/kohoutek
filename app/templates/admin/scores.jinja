@@ -7,6 +7,7 @@
     <table class="uk-table uk-table-responsive uk-table-striped uk-table-middle">
       <thead>
         <tr>
+          <th class="uk-table-shrink">Position</th>
           <th>ID</th>
           <th>Group/Unit (Troop)</th>
           <th class="uk-table-shrink">District/Division</th>
@@ -21,6 +22,7 @@
       <tbody>
         {% for team in teams %}
         <tr>
+          <td>{{ loop.index }}</td>
           <td class="uk-text-small uk-table-link">
             <a href="{{ url_for('admin.entry', id=team.entry.id)}}">{{ team.entry.code }}</a>
           </td>
