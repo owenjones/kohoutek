@@ -264,7 +264,7 @@ def processPayment(id):
 
     if method == "online":
         payment.method = PaymentMethod.stripe
-        payment.fee = math.ceil(((order.subtotal * 0.014) + 0.22) * 100) / 100
+        payment.fee = math.ceil(((order.subtotal * 0.014) + 0.20) * 100) / 100
 
     elif method == "bank":
         payment.method = PaymentMethod.BACS
