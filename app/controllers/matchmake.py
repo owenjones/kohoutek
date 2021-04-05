@@ -78,7 +78,15 @@ def detailsProcess():
         flash("You haven't added a location to the map", "warning")
         return redirect(url_for("matchmake.details"))
 
-    date = datetime.strptime(request.form.get("date"), "%Y-%m-%d")
+    try:
+        date = datetime.strptime(request.form.get("date"), "%Y-%m-%d")
+
+    except ValueError:
+        flash(
+            "Please enter your date in the correct format (year-month-day)", "warning"
+        )
+        return redirect(url_for("matchmake.details"))
+
     contact = "contact" in request.form and request.form.get("contact") == "on"
     number = (
         0
