@@ -1,4 +1,12 @@
-from flask import Blueprint, flash, render_template, redirect, request, url_for
+from flask import (
+    Blueprint,
+    current_app,
+    flash,
+    render_template,
+    redirect,
+    request,
+    url_for,
+)
 from flask_login import current_user
 
 from app import db
@@ -32,6 +40,10 @@ def index():
 @blueprint.route("/create", methods=["POST"])
 @needs_team
 def create():
+    if current_user.entry.activities.count() > 0:
+        # Catch accidental double submission of form
+        return redirect(url_for("scoring.index"))
+
     teams = request.form.get("teams", False)
     if not teams:
         flash("You haven't entered how many teams you have", "warning")
