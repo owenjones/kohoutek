@@ -20,6 +20,9 @@ blueprint = Blueprint("scoring", __name__, url_prefix="/portal/scores")
 @blueprint.route("", methods=["GET"])
 @needs_team
 def index():
+    flash("Entering scores has now been closed as the competition has ended", "warning")
+    return redirect(url_for("portal.index"))
+
     entry = current_user.entry
     match = current_user.entry.match or False
     teams = current_user.entry.teams or False
@@ -40,6 +43,9 @@ def index():
 @blueprint.route("/create", methods=["POST"])
 @needs_team
 def create():
+    flash("Entering scores has now been closed as the competition has ended", "warning")
+    return redirect(url_for("portal.index"))
+
     if current_user.entry.activities.count() > 0:
         # Catch accidental double submission of form
         return redirect(url_for("scoring.index"))
@@ -85,6 +91,9 @@ def create():
 @blueprint.route("/update", methods=["POST"])
 @needs_team
 def update():
+    flash("Entering scores has now been closed as the competition has ended", "warning")
+    return redirect(url_for("portal.index"))
+
     add = request.form.get("add", False)
     delete = request.form.get("delete", False)
     save = request.form.get("save", False)
@@ -187,6 +196,9 @@ def update():
 @blueprint.route("/change-activities", methods=["GET"])
 @needs_team
 def changeActivities():
+    flash("Entering scores has now been closed as the competition has ended", "warning")
+    return redirect(url_for("portal.index"))
+
     if current_user.entry.teams.count() == 0:
         flash("You don't currently have any teams entered", "warning")
         return redirect(url_for("scoring.index"))
@@ -201,6 +213,9 @@ def changeActivities():
 
 @blueprint.route("/change-activities", methods=["POST"])
 def changeActivitiesProcess():
+    flash("Entering scores has now been closed as the competition has ended", "warning")
+    return redirect(url_for("portal.index"))
+
     teams = current_user.entry.teams.count()
     activities = form_input_array(request.form, "activity")
 
