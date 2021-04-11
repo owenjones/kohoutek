@@ -1,31 +1,110 @@
 <div id="under-the-sea">
-  <div id="home" class="uk-height-viewport">
-    <div class="uk-container uk-flex uk-flex-center">
-      <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
-        <div>
-          <div class="uk-background-secondary uk-light uk-padding-small">
-            <h2>100</h2>
-            <p class="uk-margin-remove-bottom">
-              <strong>Groups</strong>
-            </p>
+  <div class="overlay">
+    {#}<div id="home" class="uk-section uk-height-viewport">
+      <div class="uk-container uk-flex uk-flex-center">
+        <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
+          <div>
+            <div class="uk-background-secondary uk-light uk-padding-small">
+              <h2>100</h2>
+              <p class="uk-margin-remove-bottom">
+                <strong>Groups</strong>
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="uk-background-secondary uk-light uk-padding-small">
+              <h2>500</h2>
+              <p class="uk-margin-remove-bottom">
+                <strong>Teams</strong>
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="uk-background-primary uk-light uk-padding-small">
+              <h2>2000</h2>
+              <p class="uk-margin-remove-bottom">
+                <strong>Participants</strong>
+              </p>
+            </div>
           </div>
         </div>
+      </div>
+    </div>{#}
 
-        <div>
-          <div class="uk-background-secondary uk-light uk-padding-small">
-            <h2>500</h2>
-            <p class="uk-margin-remove-bottom">
-              <strong>Teams</strong>
-            </p>
+    <div id="scores" class="uk-section uk-height-viewport avoid-sticky-nav">
+      <div class="uk-container uk-flex uk-flex-center">
+        <div class="uk-width-1-4 uk-margin-medium-bottom">
+          <img src="{{ url_for('static', filename='img/badge.png')}}" alt="the kohoutek 2021 badge">
+        </div>
+      </div>
+      <div class="uk-container uk-flex uk-flex-center">
+        <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@s uk-grid-match uk-text-center" uk-grid>
+          <div class="uk-margin-medium-top">
+            <div class="uk-background-secondary uk-padding-small uk-light uk-flex uk-flex-column uk-flex-around">
+              <h1 class="uk-margin-small-bottom uk-heading-medium">🥈</h1>
+              <div>
+                <h3 class="uk-margin-small-top uk-margin-small-bottom">{{ teams[1].entry.group_name }}</h3>
+                <h4 class="uk-margin-remove">{{ teams[1].name }}</h4>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="uk-background-primary uk-padding-small uk-light uk-flex uk-flex-column uk-flex-around">
+              <h1 class="uk-margin-small-bottom uk-heading-medium">🥇</h1>
+              <div>
+                <h3 class="uk-margin-small-top uk-margin-small-bottom">{{ teams[0].entry.group_name }}</h3>
+                <h4 class="uk-margin-remove">{{ teams[0].name }}</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="uk-margin-large-top">
+            <div class="uk-background-secondary uk-padding-small uk-light mt-4 uk-flex uk-flex-column uk-flex-around">
+              <h1 class="uk-margin-small-bottom uk-heading-medium">🥉</h1>
+              <div>
+                <h3 class="uk-margin-small-top uk-margin-small-bottom">{{ teams[2].entry.group_name }}</h3>
+                <h4 class="uk-margin-remove">{{ teams[2].name }}</h4>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div>
-          <div class="uk-background-primary uk-light uk-padding-small">
-            <h2>2000</h2>
-            <p class="uk-margin-remove-bottom">
-              <strong>Participants</strong>
-            </p>
+      </div>
+      <div class="uk-container uk-flex uk-flex-center">
+        <div class="uk-width-1-1 uk-background-default uk-flex">
+          <div class="uk-width-1-1 uk-width-1-2@m uk-padding">
+            <h3>All Teams</h3>
+            <p class="uk-text-meta">We had {{ teams|count }} teams from {{ total_entered }} different groups take part in Kohoutek 2021, with {{ total_participants }} total participants!</p>
+            <table class="uk-table uk-table-small uk-table-middle uk-table-striped">
+              {% for team in teams %}
+              <tr>
+                <td>{% if loop.previtem and loop.previtem.rawScore == team.rawScore %}-{% else %}{{ loop.index }}{% endif %}</td>
+                <td>
+                  {{ team.entry.group_name }}<br />
+                  <span class="uk-text-small uk-text-bold">{{ team.name }}</span>
+                </td>
+                <td>{{ team.rawScore }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </div>
+          <div class="uk-width-1-1 uk-width-1-2@m uk-padding">
+            <h3>Kohoutek Trophy</h3>
+            <p class="uk-text-meta">The Kohoutek trophy is open to teams from Avon, Bristol and South Gloucestershire, and Somerset North counties.</p>
+            <table class="uk-table uk-table-small uk-table-middle uk-table-striped">
+              {% for team in trophy %}
+              <tr>
+                <td>{% if loop.previtem and loop.previtem.rawScore == team.rawScore %}-{% else %}{{ loop.index }}{% endif %}</td>
+                <td>
+                  {{ team.group_name }}<br />
+                  <span class="uk-text-small uk-text-bold">{{ team.name }}</span>
+                </td>
+                <td>{{ team.rawScore }}</td>
+              </tr>
+              {% endfor %}
+            </table>
           </div>
         </div>
       </div>

@@ -1,17 +1,44 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
 from app import db
-from app.models import Entry, Organisation, County, District
+from app.models import Entry, Organisation, County, District, Team
 
 blueprint = Blueprint("root", __name__)
 
 
 @blueprint.route("/")
 def index():
-    avon = District.query.filter_by(county=County.avon).order_by(District.name).all()
-    bsg = District.query.filter_by(county=County.bsg).order_by(District.name).all()
-    sn = District.query.filter_by(county=County.sn).order_by(District.name).all()
-    return render_template("root/index.jinja", avon=avon, bsg=bsg, sn=sn)
+    teams = (
+        Team.query.filter(Team.submitted == True).order_by(Team.rawScore.desc()).all()
+    )
+
+    groups = (
+        db.session.execute(
+            "SELECT COUNT(DISTINCT `entry`.`id`) AS `total` FROM `entry` JOIN `team` ON `entry`.`id` = `team`.`entry_id` WHERE `team`.`submitted` = 1"
+        )
+        .first()
+        .total
+    )
+
+    participants = (
+        db.session.execute(
+            "SELECT SUM(`team`.`members`) AS `total` FROM `team` WHERE `team`.`submitted` = 1"
+        )
+        .first()
+        .total
+    )
+
+    trophy = db.session.execute(
+        "SELECT * FROM `team` JOIN `entry` ON `entry`.`id` = `team`.`entry_id` WHERE `entry`.`county` != 'other' AND `team`.`submitted` = 1 ORDER BY `team`.`rawScore` DESC"
+    ).fetchall()
+
+    return render_template(
+        "root/index.jinja",
+        teams=teams,
+        total_entered=groups,
+        total_participants=participants,
+        trophy=trophy,
+    )
 
 
 @blueprint.route("/sign-up", methods=["GET"])
@@ -22,6 +49,8 @@ def signupRedirect():
 
 @blueprint.route("/sign-up", methods=["POST"])
 def processSignup():
+    return ("Signups for Kohoutek 2021 are now closed", 422)
+
     if ("organisation" not in request.form) or (
         request.form["organisation"] not in ["scouting", "guiding"]
     ):
