@@ -1,12 +1,53 @@
 {% extends "root/template.jinja" %}
-{#}{% block headjs %}
-<script src="{{ url_for('static', filename='js/sign-up.js')}}" defer></script>
-{% endblock %}{#}
+{% block headjs %}
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+{% endblock %}
+
 {% block body %}
   {% include "root/section/menu.jinja" %}
   {% include "root/section/summary.jinja" %}
-  {#}{% include "root/section/about.jinja" %}{#}
-  {#}{% include "root/section/signup.jinja" %}{#}
   {% include "root/section/history.jinja" %}
   {% include "root/section/footer.jinja" %}
+{% endblock %}
+
+{% block bodyjs %}
+<script>
+mapboxgl.accessToken = '{{ mapbox_key }}';
+
+var map = new mapboxgl.Map({
+container: 'map-container',
+style: 'mapbox://styles/mapbox/streets-v11',
+pinchWithRotate: false,
+trackResize: true,
+{% if locations|count == 0 %}
+center: {{ center }},
+zoom: 4,
+{% endif %}
+});
+
+map.scrollZoom.disable()
+map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+
+var markers = new Array()
+var popupOptions = {closeButton: false, focusAfterOpen: false, width: "auto", className: "map-popup"};
+
+{% for m in locations %}
+markers.push(new mapboxgl.Marker({color: "#0077b6"})
+  .setLngLat({{ m.lngLat }})
+  .setPopup(new mapboxgl.Popup(popupOptions)
+  .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">{{ m.entry.name }}</h4></div>"))
+  .addTo(map));
+{% endfor %}
+
+{% if locations|count > 0 %}
+var bounds = new mapboxgl.LngLatBounds()
+markers.forEach((marker) => bounds.extend(marker.getLngLat()))
+{% endif %}
+
+map.on('load', function() {
+  map.resize();
+  map.fitBounds(bounds, {padding: 80});
+});
+</script>
 {% endblock %}

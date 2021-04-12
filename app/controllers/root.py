@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, current_app, render_template, request, redirect, url_for
 
 from app import db
-from app.models import Entry, Organisation, County, District, Team
+from app.models import Entry, Organisation, County, District, Team, Matchmake
 
 blueprint = Blueprint("root", __name__)
 
@@ -32,12 +32,18 @@ def index():
         "SELECT * FROM `team` JOIN `entry` ON `entry`.`id` = `team`.`entry_id` WHERE `entry`.`county` != 'other' AND `team`.`submitted` = 1 ORDER BY `team`.`rawScore` DESC"
     ).fetchall()
 
+    locations = Matchmake.query.all()
+    center = f"[{ current_app.config['MAP']['default_lon']}, { current_app.config['MAP']['default_lat']}]"
+
     return render_template(
         "root/index.jinja",
         teams=teams,
         total_entered=groups,
         total_participants=participants,
         trophy=trophy,
+        locations=locations,
+        center=center,
+        mapbox_key=current_app.config["MAP"]["mapbox_key"],
     )
 
 

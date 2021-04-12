@@ -1,6 +1,6 @@
 <div id="under-the-sea">
   <div class="overlay">
-    <div id="scores" class="uk-section uk-height-viewport avoid-sticky-nav">
+    <div id="scores" class="uk-section uk-height-viewport">
       <div class="uk-container uk-flex uk-flex-center">
         <div class="uk-width-1-2 uk-width-1-3@m uk-margin-medium-bottom">
           <img src="{{ url_for('static', filename='img/badge.png')}}" alt="the kohoutek 2021 badge">
@@ -76,5 +76,13 @@
         </div>
       </div>
     </div>
-  </div>
+    <div id="map" style="padding-top: 60px;">
+      <div class="uk-inline uk-width-1-1">
+        <div id="map-container" class="uk-width-1-1" uk-height-viewport="offset-bottom: 60px"></div>
+        <div class="uk-overlay uk-position-top uk-text-center">
+          <h3 class="uk-inline uk-padding-small uk-background-default">{{ locations|count }} groups told us where they were from!</h3>
+        </div>
+      </div>
+    </div>
+    </div>
 </div>
