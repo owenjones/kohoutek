@@ -44,6 +44,6 @@ if __name__ == "__main__":
     from app import create_app
 
     app = create_app(os.getenv("ENVIRONMENT"))
-    subject = "Kohoutek 2021 Scores"
-    template = "enter-scores"
+    subject = "Kohoutek 2021 Final Scores"
+    template = "scores-online"
     sendUpdateEmail(app, subject, template)

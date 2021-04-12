@@ -1,0 +1,31 @@
+{% import "mail/component/header.jinja" as header %}
+{% import "mail/component/button.jinja" as button %}
+{% extends "mail/template.jinja" %}
+{% block title %}Kohoutek 2021 Update{% endblock %}
+{% block preview %}
+Hello Kohoutekers, a big thank you to everyone that took part in this year's online event - we had an amazing 156 teams enter, with 716 young people taking part in total! The scores are in (insert your own drumroll here)...
+{% endblock %}
+{% block body %}
+<tr>
+  <td style="padding: 40px 40px 30px 40px; font-family: 'Rubik', sans-serif; font-size: 18px; line-height: 28px; color: #666; font-weight: 400;">
+    <p>Hello Kohoutekers, a big thank you to everyone that took part in this year's online event - we had an amazing 156 teams enter, with 716 young people taking part in total!</p>
+
+    <p>The scores are in (insert your own drumroll here)...</p>
+
+    <p>Congratulations to <strong>Luís Vaz de Camões</strong> from 1240 Murtal in Portugal, who were the overall winners of Kohoutek 2021 with 186 points!</p>
+
+    <p>The winners of the Kohoutek Trophy (open to teams who would normally be taking part in the in-person event) were <strong>OSR Team One</strong> from 1st Stoke Gifford Scout Group with 185 points (so narrowly missing out on the overall win too) - well done!</p>
+
+    <p>The full scores for both the overall competition and the Kohoutek Trophy are now up <a href="https://kohoutek.co.uk">on the website</a> - if you haven't added yourself to the map yet you can still do so <a href="{{ match_link }}">through the portal</a>.</p>
+
+    <p>Badges should be with us this week, we'll let groups know as we send them out (we're aiming to get them out as quickly as we can!).</p>
+
+    <p style="margin: 0">Thank you all again for taking part in Kohoutek 2021, and we hope to see some of you for an in-person event in 2022!<br />The Kohoutek 2021 Team (Josie, Annabelle, Freya, and Owen)</p>
+  </td>
+</tr>
+{% endblock %}
+{% block footer %}
+<p>
+  You've received this email as you signed up to take part in Kohoutek 2021. If you no longer wish to receive these emails please contact us at <strong>contact@kohoutek.co.uk</strong> so we can remove your group's competition entry.
+</p>
+{% endblock %}
