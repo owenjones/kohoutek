@@ -125,7 +125,7 @@ form label.uk-width-1-1 {
   }
 }
 
-@media screen and (min-width: $breakpoint-large) {
+@media screen and (min-width: $breakpoint-small) {
   .first-place {
     :first-child {
       border-radius: 6px 6px 0 0;
