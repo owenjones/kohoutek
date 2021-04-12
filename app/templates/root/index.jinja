@@ -20,13 +20,9 @@ container: 'map-container',
 style: 'mapbox://styles/mapbox/streets-v11',
 pinchWithRotate: false,
 trackResize: true,
-{% if locations|count == 0 %}
-center: {{ center }},
-zoom: 4,
-{% endif %}
+scrollZoom: false,
 });
 
-map.scrollZoom.disable()
 map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
 
 var markers = new Array()
@@ -37,17 +33,14 @@ markers.push(new mapboxgl.Marker({color: "#0077b6"})
   .setLngLat({{ m.lngLat }})
   .setPopup(new mapboxgl.Popup(popupOptions)
   .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">{{ m.entry.name }}</h4></div>"))
-  .addTo(map));
+  .addTo(map))
 {% endfor %}
 
-{% if locations|count > 0 %}
 var bounds = new mapboxgl.LngLatBounds()
-markers.forEach((marker) => bounds.extend(marker.getLngLat()))
-{% endif %}
+markers.forEach((marker) => bounds.extend(marker.getLngLat()));
 
 map.on('load', function() {
-  map.resize();
-  map.fitBounds(bounds, {padding: 80});
+  map.resize().fitBounds(bounds, {padding: {top: 100, bottom: 100, left: 200, right: 200}});
 });
 </script>
 {% endblock %}
