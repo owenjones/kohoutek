@@ -17,6 +17,8 @@ This repository contains the complete source for the online event, including an 
 It also includes a static 'splash page' which was used in the run up to the event, a set of scripts for creating and managing the database, and the Apache configuration file.
 
 ## Database
-The current build of the app uses SQLite for development, and MySQL for the production version.
+The current build of the app uses SQLite for development, and MySQL for the production version of the site.
+
+The database can be built and seeded using the seeding script: `python3 db/seed.py`.
 
 ![The database schema](db/db_schema.png)
