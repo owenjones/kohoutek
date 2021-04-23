@@ -1,7 +1,7 @@
 # Kohoutek Competition
 Kohoutek is a competition and activity day run for Scouts and Guides, organised by students at the University of Bristol, with support from the [University of Bristol Guides and Scouts (UOBGAS)](https://www.facebook.com/UoBGaS) society, part of the [Student Scout and Guide Organisation (SSAGO)](https://ssago.org).
 
-![Kohoutek Online 2021](static/img/og.png)
+![Kohoutek Online 2021](static/img/og.jpg)
 
 In 2021 the competition was organised online in response to the global COVID-19 pandemic, which prevented Guides and Scouts from coming together to compete. Teams chose four 'Under The Sea' themed activities to complete during March 2021 from a pack put together by UOBGAS members and submitted their scores through the online portal.
 
