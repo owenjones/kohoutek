@@ -37,9 +37,6 @@ blueprint = Blueprint("orders", __name__, url_prefix="/portal")
 @blueprint.route("/badges")
 @needs_team
 def placeOrder():
-    flash("Ordering badges has now been closed as the competition has ended", "warning")
-    return redirect(url_for("portal.index"))
-
     items = Item.query.all()
     return render_template("portal/orders/new_order.jinja", items=items)
 
@@ -47,9 +44,6 @@ def placeOrder():
 @blueprint.route("/badges", methods=["POST"])
 @needs_team
 def processOrder():
-    flash("Ordering badges has now been closed as the competition has ended", "warning")
-    return redirect(url_for("portal.index"))
-
     if "id" in request.form:
         order = Order.query.get(request.form.get("id"))
         if order.entry != current_user.entry:
