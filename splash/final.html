@@ -1,0 +1,2631 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="Kohoutek 2021">
+    <meta property="og:description" content="Kohoutek is (normally) a competition and activity day for Scouts in Avon County, and Guides in Bristol and South Gloucestershire, and Somerset North counties, organised by students from the University of Bristol Guides and Scouts society (UOBGAS). Due to the uncertainty over the coming months around being able to run large events in person, for 2021 we&#39;re planning to run Kohoutek as an online event!">
+    <meta property="og:image" content="https://kohoutek.co.uk/static/img/og.jpg">
+
+    <link rel="icon" type="image/png" href="https://kohoutek.co.uk/static/img/favicon.png">
+    <link rel="stylesheet" href="https://kohoutek.co.uk/static/css/main.css">
+    <script src="https://kohoutek.co.uk/static/js/uikit.min.js" defer=""></script>
+    <script src="https://kohoutek.co.uk/static/js/uikit-icons.min.js" defer=""></script>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+
+    <title>Kohoutek 2021</title>
+  </head>
+
+  <body class="uk-background-secondary">
+    <div id="menu" class="uk-background-secondary">
+      <div uk-sticky="animation: uk-animation-fade; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light kohoutek-frontactive; top: 100vh;">
+        <nav class="uk-navbar-container" uk-navbar>
+          <div class="uk-navbar-left uk-hidden@s">
+            <button class="uk-navbar-toggle" uk-toggle="target: #mobile-menu" type="button" uk-navbar-toggle-icon></button>
+          </div>
+          <div class="uk-navbar-center uk-visible@s">
+            <ul class="uk-navbar-nav" uk-scrollspy-nav="closest: li; scroll: true; overflow: false">
+              <li>
+                <a href="#scores" class="kohoutek-illuminate">Scores</a>
+              </li>
+              <li>
+                <a href="#map">Map</a>
+              </li>
+              <li>
+                <a href="#history">History</a>
+              </li>
+            </ul>
+          </div>
+          <div class="uk-navbar-right kohoutek-totop">
+            <ul class="uk-navbar-nav">
+              <li>
+                <a href="" title="to the top" uk-totop uk-scroll></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div id="mobile-menu" uk-offcanvas>
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <ul class="uk-nav uk-nav-default">
+              <li>
+                <a href="#scores" class="kohoutek-mobile-illuminate">Scores</a>
+              </li>
+              <li>
+                <a href="#map">Map</a>
+              </li>
+              <li>
+                <a href="#history">History</a>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="under-the-sea">
+      <div class="overlay">
+        <div id="scores" class="uk-section uk-height-viewport">
+          <div class="uk-container uk-flex uk-flex-center">
+            <div class="uk-width-1-2 uk-width-1-3@m uk-margin-medium-bottom">
+              <img src="https://kohoutek.co.uk/static/img/badge.png" alt="the kohoutek 2021 badge">
+            </div>
+          </div>
+          <div class="uk-container">
+            <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@s uk-grid-match uk-text-center uk-grid" uk-grid="">
+              <div class="first-place">
+                <div class="uk-background-primary uk-padding-small uk-light uk-flex uk-flex-column uk-flex-around">
+                  <h1 class="uk-margin-small-bottom uk-heading-medium">🥇</h1>
+                  <div>
+                    <h3 class="uk-margin-small-top uk-margin-small-bottom">1240 Murtal</h3>
+                    <h4 class="uk-margin-remove">Luís Vaz de Camões</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div class="uk-flex-first@s second-place uk-first-column">
+                <div class="uk-background-secondary uk-padding-small uk-light uk-flex uk-flex-column uk-flex-around">
+                  <h1 class="uk-margin-small-bottom uk-heading-medium">🥈</h1>
+                  <div>
+                    <h3 class="uk-margin-small-top uk-margin-small-bottom">1st stoke gifford Scout group </h3>
+                    <h4 class="uk-margin-remove">OSR Team One </h4>
+                  </div>
+                </div>
+              </div>
+
+              <div class="third-place">
+                <div class="uk-background-secondary uk-padding-small uk-light mt-4 uk-flex uk-flex-column uk-flex-around">
+                  <h1 class="uk-margin-small-bottom uk-heading-medium">🥉</h1>
+                  <div>
+                    <h3 class="uk-margin-small-top uk-margin-small-bottom">1st wick guides</h3>
+                    <h4 class="uk-margin-remove">Tash team</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="uk-container">
+            <div class="uk-grid-collapse uk-background-default uk-grid" uk-grid="">
+              <div class="uk-width-1-1 uk-padding uk-padding-remove-bottom uk-first-column">
+                <p>
+                  Thank you to everyone that took part in this year's online event - if you'd like to leave us some feedback (or suggest a theme for next year) we have an <a href="https://forms.gle/XxLXsCr4jpH84t138" target="_blank" rel="nofollow noreferrer">online feedback form</a>.
+                </p>
+              </div>
+              <div class="uk-width-1-1 uk-width-1-2@l uk-padding uk-grid-margin uk-first-column">
+                <h3>All Teams</h3>
+                <p class="uk-text-meta">We had 156 teams from 54 different groups take part in Kohoutek 2021, with 716 total participants!</p>
+                <table class="uk-table uk-table-small uk-table-middle uk-table-striped">
+
+                  <tbody><tr>
+                    <td>1</td>
+                    <td>
+                      1240 Murtal<br>
+                      <span class="uk-text-small uk-text-bold">Luís Vaz de Camões</span>
+                    </td>
+                    <td>186</td>
+                  </tr>
+
+                  <tr>
+                    <td>2</td>
+                    <td>
+                      1st stoke gifford Scout group <br>
+                      <span class="uk-text-small uk-text-bold">OSR Team One </span>
+                    </td>
+                    <td>185</td>
+                  </tr>
+
+                  <tr>
+                    <td>3</td>
+                    <td>
+                      1st wick guides<br>
+                      <span class="uk-text-small uk-text-bold">Tash team</span>
+                    </td>
+                    <td>177</td>
+                  </tr>
+
+                  <tr>
+                    <td>4</td>
+                    <td>
+                      40th Kingswood Guides <br>
+                      <span class="uk-text-small uk-text-bold">Crazy about Cats</span>
+                    </td>
+                    <td>176</td>
+                  </tr>
+
+                  <tr>
+                    <td>5</td>
+                    <td>
+                      Cavagnal<br>
+                      <span class="uk-text-small uk-text-bold">Cavagnal Scout Troop</span>
+                    </td>
+                    <td>171</td>
+                  </tr>
+
+                  <tr>
+                    <td>6</td>
+                    <td>
+                      1st Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Pheonix </span>
+                    </td>
+                    <td>160</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1240 Murtal<br>
+                      <span class="uk-text-small uk-text-bold">Padeira de Aljubarrota</span>
+                    </td>
+                    <td>160</td>
+                  </tr>
+
+                  <tr>
+                    <td>8</td>
+                    <td>
+                      96th whitmore scouts<br>
+                      <span class="uk-text-small uk-text-bold">96th whitmore scouts</span>
+                    </td>
+                    <td>159</td>
+                  </tr>
+
+                  <tr>
+                    <td>9</td>
+                    <td>
+                      1st Tutbury <br>
+                      <span class="uk-text-small uk-text-bold">1st Tutbury Scouts</span>
+                    </td>
+                    <td>157</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      93rd Bristol (St Albans) Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>157</td>
+                  </tr>
+
+                  <tr>
+                    <td>11</td>
+                    <td>
+                      4th Weybridge<br>
+                      <span class="uk-text-small uk-text-bold">The Savage Cabbages</span>
+                    </td>
+                    <td>155</td>
+                  </tr>
+
+                  <tr>
+                    <td>12</td>
+                    <td>
+                      1st Frampton Cotterell (Zion United Church)<br>
+                      <span class="uk-text-small uk-text-bold">1st Frampton Troop 1 Team 2</span>
+                    </td>
+                    <td>153</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Simply Chunky</span>
+                    </td>
+                    <td>153</td>
+                  </tr>
+
+                  <tr>
+                    <td>14</td>
+                    <td>
+                      1st Frampton Cotterell (Zion United Church)<br>
+                      <span class="uk-text-small uk-text-bold">1st Frampton Troop 1 Team 1</span>
+                    </td>
+                    <td>152</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Frampton Cotterell (Zion United Church)<br>
+                      <span class="uk-text-small uk-text-bold">1st Frampton Troop 1 Team 3</span>
+                    </td>
+                    <td>152</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      40th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>152</td>
+                  </tr>
+
+                  <tr>
+                    <td>17</td>
+                    <td>
+                      40th Kingswood Guides <br>
+                      <span class="uk-text-small uk-text-bold">Devoted to Dogs</span>
+                    </td>
+                    <td>151</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      10th Haywards Heath<br>
+                      <span class="uk-text-small uk-text-bold">Hive</span>
+                    </td>
+                    <td>151</td>
+                  </tr>
+
+                  <tr>
+                    <td>19</td>
+                    <td>
+                      4th Yate Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team A</span>
+                    </td>
+                    <td>150</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">RavenPuffs</span>
+                    </td>
+                    <td>150</td>
+                  </tr>
+
+                  <tr>
+                    <td>21</td>
+                    <td>
+                      93rd Bristol (St Albans) Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>149</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Grammarley</span>
+                    </td>
+                    <td>149</td>
+                  </tr>
+
+                  <tr>
+                    <td>23</td>
+                    <td>
+                      10th Haywards Heath<br>
+                      <span class="uk-text-small uk-text-bold">ANT</span>
+                    </td>
+                    <td>147</td>
+                  </tr>
+
+                  <tr>
+                    <td>24</td>
+                    <td>
+                      1st Weybridge (Brooklands Own)<br>
+                      <span class="uk-text-small uk-text-bold">Tim's team</span>
+                    </td>
+                    <td>145</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      4th Weybridge<br>
+                      <span class="uk-text-small uk-text-bold">The Yeeters</span>
+                    </td>
+                    <td>145</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Buckfastleigh<br>
+                      <span class="uk-text-small uk-text-bold">Fox</span>
+                    </td>
+                    <td>145</td>
+                  </tr>
+
+                  <tr>
+                    <td>27</td>
+                    <td>
+                      44th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Lorna’s team</span>
+                    </td>
+                    <td>144</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      77th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">FridB</span>
+                    </td>
+                    <td>144</td>
+                  </tr>
+
+                  <tr>
+                    <td>29</td>
+                    <td>
+                      6th Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Fire-breathing Rubber Duckies</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st North Devon<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Weybridge (Brooklands Own)<br>
+                      <span class="uk-text-small uk-text-bold">Sonny's team</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Portishead Guides<br>
+                      <span class="uk-text-small uk-text-bold">1st Portishead Guides - Team 1</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Rothienorman <br>
+                      <span class="uk-text-small uk-text-bold">The Lads</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      4th Weybridge<br>
+                      <span class="uk-text-small uk-text-bold">The Interceptors</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Firebreathing Rubber Duckies</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>36</td>
+                    <td>
+                      Trinity Fammau<br>
+                      <span class="uk-text-small uk-text-bold">TRINITY FAMMAU 1</span>
+                    </td>
+                    <td>142</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      4th Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">4th Worle Guides</span>
+                    </td>
+                    <td>142</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Winterbourne Down and Buryside<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>142</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      17th Eastville Park Methodist (Bristol)<br>
+                      <span class="uk-text-small uk-text-bold">Sing-a-long Guides</span>
+                    </td>
+                    <td>142</td>
+                  </tr>
+
+                  <tr>
+                    <td>40</td>
+                    <td>
+                      3rd Locking Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>141</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      3rd Locking Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>141</td>
+                  </tr>
+
+                  <tr>
+                    <td>42</td>
+                    <td>
+                      1st Crayford<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>140</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      6th Fulwood<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>140</td>
+                  </tr>
+
+                  <tr>
+                    <td>44</td>
+                    <td>
+                      1st North Worle <br>
+                      <span class="uk-text-small uk-text-bold">1st North Worle Team 1</span>
+                    </td>
+                    <td>139</td>
+                  </tr>
+
+                  <tr>
+                    <td>45</td>
+                    <td>
+                      1st Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Dragon</span>
+                    </td>
+                    <td>138</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      3rd Locking Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>138</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st North Worle <br>
+                      <span class="uk-text-small uk-text-bold">1st North Worle Team 3</span>
+                    </td>
+                    <td>138</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      93rd Bristol (St Albans) Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>138</td>
+                  </tr>
+
+                  <tr>
+                    <td>49</td>
+                    <td>
+                      4th Yate Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team B</span>
+                    </td>
+                    <td>136</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Pafer</span>
+                    </td>
+                    <td>136</td>
+                  </tr>
+
+                  <tr>
+                    <td>51</td>
+                    <td>
+                      10th Haywards Heath<br>
+                      <span class="uk-text-small uk-text-bold">Easter</span>
+                    </td>
+                    <td>135</td>
+                  </tr>
+
+                  <tr>
+                    <td>52</td>
+                    <td>
+                      1st North Devon<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>134</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Weybridge (Brooklands Own)<br>
+                      <span class="uk-text-small uk-text-bold">Ollie's team</span>
+                    </td>
+                    <td>134</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      4th Weybridge<br>
+                      <span class="uk-text-small uk-text-bold">The Easter Eggs</span>
+                    </td>
+                    <td>134</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Electric Ellcon</span>
+                    </td>
+                    <td>134</td>
+                  </tr>
+
+                  <tr>
+                    <td>56</td>
+                    <td>
+                      3rd Garforth Guides<br>
+                      <span class="uk-text-small uk-text-bold">Gillian’s Team</span>
+                    </td>
+                    <td>133</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      Oatlands<br>
+                      <span class="uk-text-small uk-text-bold">Jude's team</span>
+                    </td>
+                    <td>133</td>
+                  </tr>
+
+                  <tr>
+                    <td>58</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">dooraarr</span>
+                    </td>
+                    <td>132</td>
+                  </tr>
+
+                  <tr>
+                    <td>59</td>
+                    <td>
+                      6th Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Pitiful Penguins</span>
+                    </td>
+                    <td>131</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Buckfastleigh<br>
+                      <span class="uk-text-small uk-text-bold">Eagle</span>
+                    </td>
+                    <td>131</td>
+                  </tr>
+
+                  <tr>
+                    <td>61</td>
+                    <td>
+                      Trinity Fammau<br>
+                      <span class="uk-text-small uk-text-bold">TRINITY FAMMAU 2</span>
+                    </td>
+                    <td>130</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      10th Haywards Heath<br>
+                      <span class="uk-text-small uk-text-bold">Best</span>
+                    </td>
+                    <td>130</td>
+                  </tr>
+
+                  <tr>
+                    <td>63</td>
+                    <td>
+                      28th Croydon<br>
+                      <span class="uk-text-small uk-text-bold">Brilliant (Ben)</span>
+                    </td>
+                    <td>129</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Rothienorman <br>
+                      <span class="uk-text-small uk-text-bold">TheLassies</span>
+                    </td>
+                    <td>129</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Kestrel</span>
+                    </td>
+                    <td>129</td>
+                  </tr>
+
+                  <tr>
+                    <td>66</td>
+                    <td>
+                      40th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>127</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      4th Yate Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team C</span>
+                    </td>
+                    <td>127</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Full Stop</span>
+                    </td>
+                    <td>127</td>
+                  </tr>
+
+                  <tr>
+                    <td>69</td>
+                    <td>
+                      3rd Garforth Guides<br>
+                      <span class="uk-text-small uk-text-bold">Chelsea’s Team</span>
+                    </td>
+                    <td>125</td>
+                  </tr>
+
+                  <tr>
+                    <td>70</td>
+                    <td>
+                      Oatlands<br>
+                      <span class="uk-text-small uk-text-bold">Tom's team</span>
+                    </td>
+                    <td>124</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      3rd Macclesfield Upton Priory<br>
+                      <span class="uk-text-small uk-text-bold">3rd Macc - Salamander</span>
+                    </td>
+                    <td>124</td>
+                  </tr>
+
+                  <tr>
+                    <td>72</td>
+                    <td>
+                      Oatlands<br>
+                      <span class="uk-text-small uk-text-bold">Isaac's team</span>
+                    </td>
+                    <td>123</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Portishead Guides<br>
+                      <span class="uk-text-small uk-text-bold">1st Portishead Guides - Team 2</span>
+                    </td>
+                    <td>123</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Astwood Bank<br>
+                      <span class="uk-text-small uk-text-bold">Sally's team</span>
+                    </td>
+                    <td>123</td>
+                  </tr>
+
+                  <tr>
+                    <td>75</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">5 Gold Rings</span>
+                    </td>
+                    <td>122</td>
+                  </tr>
+
+                  <tr>
+                    <td>76</td>
+                    <td>
+                      1st royal forest Wednesday scouts <br>
+                      <span class="uk-text-small uk-text-bold">Wed 1RF 1</span>
+                    </td>
+                    <td>121</td>
+                  </tr>
+
+                  <tr>
+                    <td>77</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Falcon</span>
+                    </td>
+                    <td>120</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Raven</span>
+                    </td>
+                    <td>120</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Portishead<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>120</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Astwood Bank<br>
+                      <span class="uk-text-small uk-text-bold">Joe's team</span>
+                    </td>
+                    <td>120</td>
+                  </tr>
+
+                  <tr>
+                    <td>81</td>
+                    <td>
+                      3rd Garforth Guides<br>
+                      <span class="uk-text-small uk-text-bold">Jenny’s Team</span>
+                    </td>
+                    <td>119</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      68th Toronto Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>119</td>
+                  </tr>
+
+                  <tr>
+                    <td>83</td>
+                    <td>
+                      1st royal forest Wednesday scouts <br>
+                      <span class="uk-text-small uk-text-bold">Wed 1RF 2</span>
+                    </td>
+                    <td>118</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Winterbourne Down and Buryside<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>118</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st wick guides<br>
+                      <span class="uk-text-small uk-text-bold">Rosie's Rules</span>
+                    </td>
+                    <td>118</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Astwood Bank<br>
+                      <span class="uk-text-small uk-text-bold">Adam's team</span>
+                    </td>
+                    <td>118</td>
+                  </tr>
+
+                  <tr>
+                    <td>87</td>
+                    <td>
+                      Oatlands<br>
+                      <span class="uk-text-small uk-text-bold">Josh's team</span>
+                    </td>
+                    <td>117</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      28th Croydon<br>
+                      <span class="uk-text-small uk-text-bold">Awesome (Claire)</span>
+                    </td>
+                    <td>117</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      28th Croydon<br>
+                      <span class="uk-text-small uk-text-bold">Clever (Ben)</span>
+                    </td>
+                    <td>117</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Glascote St Georges <br>
+                      <span class="uk-text-small uk-text-bold">Glascote Scouts</span>
+                    </td>
+                    <td>117</td>
+                  </tr>
+
+                  <tr>
+                    <td>91</td>
+                    <td>
+                      3rd Garforth Guides<br>
+                      <span class="uk-text-small uk-text-bold">Sue’s Team</span>
+                    </td>
+                    <td>116</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1240 Murtal<br>
+                      <span class="uk-text-small uk-text-bold">BP</span>
+                    </td>
+                    <td>116</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      135th Derby (Broadway Baptist)<br>
+                      <span class="uk-text-small uk-text-bold">Otter</span>
+                    </td>
+                    <td>116</td>
+                  </tr>
+
+                  <tr>
+                    <td>94</td>
+                    <td>
+                      40th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>115</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Astwood Bank<br>
+                      <span class="uk-text-small uk-text-bold">Hannah's team</span>
+                    </td>
+                    <td>115</td>
+                  </tr>
+
+                  <tr>
+                    <td>96</td>
+                    <td>
+                      1st North Worle <br>
+                      <span class="uk-text-small uk-text-bold">1st North Worle Team 2</span>
+                    </td>
+                    <td>114</td>
+                  </tr>
+
+                  <tr>
+                    <td>97</td>
+                    <td>
+                      25th Kingswood Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>113</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      3rd Macclesfield Upton Priory<br>
+                      <span class="uk-text-small uk-text-bold">3rd Macc St George's</span>
+                    </td>
+                    <td>113</td>
+                  </tr>
+
+                  <tr>
+                    <td>99</td>
+                    <td>
+                      1st royal forest Wednesday scouts <br>
+                      <span class="uk-text-small uk-text-bold">Wed 1RF 3</span>
+                    </td>
+                    <td>112</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      227th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>112</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Kingfisher</span>
+                    </td>
+                    <td>112</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      10th Haywards Heath<br>
+                      <span class="uk-text-small uk-text-bold">Choc Dinosaurs</span>
+                    </td>
+                    <td>112</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      77th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">Thursday</span>
+                    </td>
+                    <td>112</td>
+                  </tr>
+
+                  <tr>
+                    <td>104</td>
+                    <td>
+                      1st Buckfastleigh<br>
+                      <span class="uk-text-small uk-text-bold">Panther</span>
+                    </td>
+                    <td>111</td>
+                  </tr>
+
+                  <tr>
+                    <td>105</td>
+                    <td>
+                      1st North Worle <br>
+                      <span class="uk-text-small uk-text-bold">1st North Worle Team 4</span>
+                    </td>
+                    <td>110</td>
+                  </tr>
+
+                  <tr>
+                    <td>106</td>
+                    <td>
+                      54th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>108</td>
+                  </tr>
+
+                  <tr>
+                    <td>107</td>
+                    <td>
+                      Trinity Fammau<br>
+                      <span class="uk-text-small uk-text-bold">TRINITY FAMMAU 3</span>
+                    </td>
+                    <td>106</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">The Craft Cats</span>
+                    </td>
+                    <td>106</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      44th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Amy’s team</span>
+                    </td>
+                    <td>106</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Portishead<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>106</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Glascote St Georges <br>
+                      <span class="uk-text-small uk-text-bold">Glascote 2</span>
+                    </td>
+                    <td>106</td>
+                  </tr>
+
+                  <tr>
+                    <td>112</td>
+                    <td>
+                      1st Loughborough<br>
+                      <span class="uk-text-small uk-text-bold">Kate's Switched on team</span>
+                    </td>
+                    <td>105</td>
+                  </tr>
+
+                  <tr>
+                    <td>113</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Eagle</span>
+                    </td>
+                    <td>104</td>
+                  </tr>
+
+                  <tr>
+                    <td>114</td>
+                    <td>
+                      77th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">FridA</span>
+                    </td>
+                    <td>103</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Portishead<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>103</td>
+                  </tr>
+
+                  <tr>
+                    <td>116</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">Minus Points</span>
+                    </td>
+                    <td>102</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st North Devon<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>102</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st North Devon<br>
+                      <span class="uk-text-small uk-text-bold">Team 4</span>
+                    </td>
+                    <td>102</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      54th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>102</td>
+                  </tr>
+
+                  <tr>
+                    <td>120</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">The Famous Five</span>
+                    </td>
+                    <td>100</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">We're winning because we're awesome</span>
+                    </td>
+                    <td>100</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      227th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>100</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Royal Forest<br>
+                      <span class="uk-text-small uk-text-bold">Foxes</span>
+                    </td>
+                    <td>100</td>
+                  </tr>
+
+                  <tr>
+                    <td>124</td>
+                    <td>
+                      20th Oldham Uppermill Methodist<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>99</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Hawk</span>
+                    </td>
+                    <td>99</td>
+                  </tr>
+
+                  <tr>
+                    <td>126</td>
+                    <td>
+                      3rd Macclesfield Upton Priory<br>
+                      <span class="uk-text-small uk-text-bold">3rd Macc - Phoenix</span>
+                    </td>
+                    <td>98</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      135th Derby (Broadway Baptist)<br>
+                      <span class="uk-text-small uk-text-bold">Wolf</span>
+                    </td>
+                    <td>98</td>
+                  </tr>
+
+                  <tr>
+                    <td>128</td>
+                    <td>
+                      1st Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Unicorn</span>
+                    </td>
+                    <td>97</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Venus D</span>
+                    </td>
+                    <td>97</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Jupiter D</span>
+                    </td>
+                    <td>97</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      Oatlands<br>
+                      <span class="uk-text-small uk-text-bold">Lucy's team</span>
+                    </td>
+                    <td>97</td>
+                  </tr>
+
+                  <tr>
+                    <td>132</td>
+                    <td>
+                      25th Kingswood Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>96</td>
+                  </tr>
+
+                  <tr>
+                    <td>133</td>
+                    <td>
+                      1st Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Mermaid</span>
+                    </td>
+                    <td>95</td>
+                  </tr>
+
+                  <tr>
+                    <td>134</td>
+                    <td>
+                      25th Kingswood Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>94</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      9th (St Mary's) Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>94</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Gilded Goat</span>
+                    </td>
+                    <td>94</td>
+                  </tr>
+
+                  <tr>
+                    <td>137</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Venus A</span>
+                    </td>
+                    <td>92</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Venus B</span>
+                    </td>
+                    <td>92</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Jupiter B</span>
+                    </td>
+                    <td>92</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Jupiter C</span>
+                    </td>
+                    <td>92</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      10th Haywards Heath<br>
+                      <span class="uk-text-small uk-text-bold">JLM</span>
+                    </td>
+                    <td>92</td>
+                  </tr>
+
+                  <tr>
+                    <td>142</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Axolotl Superior</span>
+                    </td>
+                    <td>90</td>
+                  </tr>
+
+                  <tr>
+                    <td>143</td>
+                    <td>
+                      54th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>89</td>
+                  </tr>
+
+                  <tr>
+                    <td>144</td>
+                    <td>
+                      3rd Garforth Guides<br>
+                      <span class="uk-text-small uk-text-bold">Becky’s Team</span>
+                    </td>
+                    <td>88</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      3rd Garforth Guides<br>
+                      <span class="uk-text-small uk-text-bold">Lisa’s Team</span>
+                    </td>
+                    <td>88</td>
+                  </tr>
+
+                  <tr>
+                    <td>146</td>
+                    <td>
+                      3rd Macclesfield Upton Priory<br>
+                      <span class="uk-text-small uk-text-bold">1st Gawsworth St James'</span>
+                    </td>
+                    <td>87</td>
+                  </tr>
+
+                  <tr>
+                    <td>147</td>
+                    <td>
+                      1st Winterbourne Guides<br>
+                      <span class="uk-text-small uk-text-bold">FJCR</span>
+                    </td>
+                    <td>86</td>
+                  </tr>
+
+                  <tr>
+                    <td>148</td>
+                    <td>
+                      1st Royal Forest<br>
+                      <span class="uk-text-small uk-text-bold">Seals</span>
+                    </td>
+                    <td>81</td>
+                  </tr>
+
+                  <tr>
+                    <td>149</td>
+                    <td>
+                      9th (St Mary's) Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>78</td>
+                  </tr>
+
+                  <tr>
+                    <td>150</td>
+                    <td>
+                      3rd Macclesfield Upton Priory<br>
+                      <span class="uk-text-small uk-text-bold">Toppers - 15th Macc</span>
+                    </td>
+                    <td>75</td>
+                  </tr>
+
+                  <tr>
+                    <td>151</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Venus C</span>
+                    </td>
+                    <td>74</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Royal Forest<br>
+                      <span class="uk-text-small uk-text-bold">Wolves</span>
+                    </td>
+                    <td>74</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Winterbourne Guides<br>
+                      <span class="uk-text-small uk-text-bold">HEA</span>
+                    </td>
+                    <td>74</td>
+                  </tr>
+
+                  <tr>
+                    <td>154</td>
+                    <td>
+                      1st Loughborough<br>
+                      <span class="uk-text-small uk-text-bold">George's sleepy team</span>
+                    </td>
+                    <td>73</td>
+                  </tr>
+
+                  <tr>
+                    <td>155</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Jupiter A</span>
+                    </td>
+                    <td>70</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      135th Derby (Broadway Baptist)<br>
+                      <span class="uk-text-small uk-text-bold">Fox</span>
+                    </td>
+                    <td>70</td>
+                  </tr>
+
+                </tbody></table>
+              </div>
+              <div class="uk-width-1-1 uk-width-1-2@l uk-padding uk-grid-margin">
+                <h3>Kohoutek Trophy</h3>
+                <p class="uk-text-meta">The Kohoutek trophy is open to teams from Avon, Bristol and South Gloucestershire, and Somerset North counties (85 teams).</p>
+                <table class="uk-table uk-table-small uk-table-middle uk-table-striped">
+
+                  <tbody><tr>
+                    <td>1</td>
+                    <td>
+                      1st stoke gifford Scout group <br>
+                      <span class="uk-text-small uk-text-bold">OSR Team One </span>
+                    </td>
+                    <td>185</td>
+                  </tr>
+
+                  <tr>
+                    <td>2</td>
+                    <td>
+                      1st wick guides<br>
+                      <span class="uk-text-small uk-text-bold">Tash team</span>
+                    </td>
+                    <td>177</td>
+                  </tr>
+
+                  <tr>
+                    <td>3</td>
+                    <td>
+                      40th Kingswood Guides <br>
+                      <span class="uk-text-small uk-text-bold">Crazy about Cats</span>
+                    </td>
+                    <td>176</td>
+                  </tr>
+
+                  <tr>
+                    <td>4</td>
+                    <td>
+                      1st Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Pheonix </span>
+                    </td>
+                    <td>160</td>
+                  </tr>
+
+                  <tr>
+                    <td>5</td>
+                    <td>
+                      93rd Bristol (St Albans) Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>157</td>
+                  </tr>
+
+                  <tr>
+                    <td>6</td>
+                    <td>
+                      1st Frampton Cotterell (Zion United Church)<br>
+                      <span class="uk-text-small uk-text-bold">1st Frampton Troop 1 Team 2</span>
+                    </td>
+                    <td>153</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Simply Chunky</span>
+                    </td>
+                    <td>153</td>
+                  </tr>
+
+                  <tr>
+                    <td>8</td>
+                    <td>
+                      1st Frampton Cotterell (Zion United Church)<br>
+                      <span class="uk-text-small uk-text-bold">1st Frampton Troop 1 Team 1</span>
+                    </td>
+                    <td>152</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Frampton Cotterell (Zion United Church)<br>
+                      <span class="uk-text-small uk-text-bold">1st Frampton Troop 1 Team 3</span>
+                    </td>
+                    <td>152</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      40th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>152</td>
+                  </tr>
+
+                  <tr>
+                    <td>11</td>
+                    <td>
+                      40th Kingswood Guides <br>
+                      <span class="uk-text-small uk-text-bold">Devoted to Dogs</span>
+                    </td>
+                    <td>151</td>
+                  </tr>
+
+                  <tr>
+                    <td>12</td>
+                    <td>
+                      4th Yate Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team A</span>
+                    </td>
+                    <td>150</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">RavenPuffs</span>
+                    </td>
+                    <td>150</td>
+                  </tr>
+
+                  <tr>
+                    <td>14</td>
+                    <td>
+                      93rd Bristol (St Albans) Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>149</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Grammarley</span>
+                    </td>
+                    <td>149</td>
+                  </tr>
+
+                  <tr>
+                    <td>16</td>
+                    <td>
+                      44th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Lorna’s team</span>
+                    </td>
+                    <td>144</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      77th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">FridB</span>
+                    </td>
+                    <td>144</td>
+                  </tr>
+
+                  <tr>
+                    <td>18</td>
+                    <td>
+                      6th Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Fire-breathing Rubber Duckies</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Portishead Guides<br>
+                      <span class="uk-text-small uk-text-bold">1st Portishead Guides - Team 1</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Firebreathing Rubber Duckies</span>
+                    </td>
+                    <td>143</td>
+                  </tr>
+
+                  <tr>
+                    <td>21</td>
+                    <td>
+                      4th Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">4th Worle Guides</span>
+                    </td>
+                    <td>142</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Winterbourne Down and Buryside<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>142</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      17th Eastville Park Methodist (Bristol)<br>
+                      <span class="uk-text-small uk-text-bold">Sing-a-long Guides</span>
+                    </td>
+                    <td>142</td>
+                  </tr>
+
+                  <tr>
+                    <td>24</td>
+                    <td>
+                      3rd Locking Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>141</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      3rd Locking Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>141</td>
+                  </tr>
+
+                  <tr>
+                    <td>26</td>
+                    <td>
+                      1st North Worle <br>
+                      <span class="uk-text-small uk-text-bold">1st North Worle Team 1</span>
+                    </td>
+                    <td>139</td>
+                  </tr>
+
+                  <tr>
+                    <td>27</td>
+                    <td>
+                      1st Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Dragon</span>
+                    </td>
+                    <td>138</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      3rd Locking Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>138</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st North Worle <br>
+                      <span class="uk-text-small uk-text-bold">1st North Worle Team 3</span>
+                    </td>
+                    <td>138</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      93rd Bristol (St Albans) Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>138</td>
+                  </tr>
+
+                  <tr>
+                    <td>31</td>
+                    <td>
+                      4th Yate Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team B</span>
+                    </td>
+                    <td>136</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Pafer</span>
+                    </td>
+                    <td>136</td>
+                  </tr>
+
+                  <tr>
+                    <td>33</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Electric Ellcon</span>
+                    </td>
+                    <td>134</td>
+                  </tr>
+
+                  <tr>
+                    <td>34</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">dooraarr</span>
+                    </td>
+                    <td>132</td>
+                  </tr>
+
+                  <tr>
+                    <td>35</td>
+                    <td>
+                      6th Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Pitiful Penguins</span>
+                    </td>
+                    <td>131</td>
+                  </tr>
+
+                  <tr>
+                    <td>36</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Kestrel</span>
+                    </td>
+                    <td>129</td>
+                  </tr>
+
+                  <tr>
+                    <td>37</td>
+                    <td>
+                      40th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>127</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      4th Yate Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team C</span>
+                    </td>
+                    <td>127</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Full Stop</span>
+                    </td>
+                    <td>127</td>
+                  </tr>
+
+                  <tr>
+                    <td>40</td>
+                    <td>
+                      1st Portishead Guides<br>
+                      <span class="uk-text-small uk-text-bold">1st Portishead Guides - Team 2</span>
+                    </td>
+                    <td>123</td>
+                  </tr>
+
+                  <tr>
+                    <td>41</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">5 Gold Rings</span>
+                    </td>
+                    <td>122</td>
+                  </tr>
+
+                  <tr>
+                    <td>42</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Falcon</span>
+                    </td>
+                    <td>120</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Raven</span>
+                    </td>
+                    <td>120</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Portishead<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>120</td>
+                  </tr>
+
+                  <tr>
+                    <td>45</td>
+                    <td>
+                      1st Winterbourne Down and Buryside<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>118</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st wick guides<br>
+                      <span class="uk-text-small uk-text-bold">Rosie's Rules</span>
+                    </td>
+                    <td>118</td>
+                  </tr>
+
+                  <tr>
+                    <td>47</td>
+                    <td>
+                      40th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>115</td>
+                  </tr>
+
+                  <tr>
+                    <td>48</td>
+                    <td>
+                      1st North Worle <br>
+                      <span class="uk-text-small uk-text-bold">1st North Worle Team 2</span>
+                    </td>
+                    <td>114</td>
+                  </tr>
+
+                  <tr>
+                    <td>49</td>
+                    <td>
+                      25th Kingswood Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>113</td>
+                  </tr>
+
+                  <tr>
+                    <td>50</td>
+                    <td>
+                      227th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>112</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Kingfisher</span>
+                    </td>
+                    <td>112</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      77th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">Thursday</span>
+                    </td>
+                    <td>112</td>
+                  </tr>
+
+                  <tr>
+                    <td>53</td>
+                    <td>
+                      1st North Worle <br>
+                      <span class="uk-text-small uk-text-bold">1st North Worle Team 4</span>
+                    </td>
+                    <td>110</td>
+                  </tr>
+
+                  <tr>
+                    <td>54</td>
+                    <td>
+                      54th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>108</td>
+                  </tr>
+
+                  <tr>
+                    <td>55</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">The Craft Cats</span>
+                    </td>
+                    <td>106</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      44th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Amy’s team</span>
+                    </td>
+                    <td>106</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Portishead<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>106</td>
+                  </tr>
+
+                  <tr>
+                    <td>58</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Eagle</span>
+                    </td>
+                    <td>104</td>
+                  </tr>
+
+                  <tr>
+                    <td>59</td>
+                    <td>
+                      77th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">FridA</span>
+                    </td>
+                    <td>103</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Portishead<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>103</td>
+                  </tr>
+
+                  <tr>
+                    <td>61</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">Minus Points</span>
+                    </td>
+                    <td>102</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      54th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>102</td>
+                  </tr>
+
+                  <tr>
+                    <td>63</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">The Famous Five</span>
+                    </td>
+                    <td>100</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      61st St Peter's Guides<br>
+                      <span class="uk-text-small uk-text-bold">We're winning because we're awesome</span>
+                    </td>
+                    <td>100</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      227th Bristol<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>100</td>
+                  </tr>
+
+                  <tr>
+                    <td>66</td>
+                    <td>
+                      1st Backwell<br>
+                      <span class="uk-text-small uk-text-bold">Hawk</span>
+                    </td>
+                    <td>99</td>
+                  </tr>
+
+                  <tr>
+                    <td>67</td>
+                    <td>
+                      1st Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Unicorn</span>
+                    </td>
+                    <td>97</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Venus D</span>
+                    </td>
+                    <td>97</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Jupiter D</span>
+                    </td>
+                    <td>97</td>
+                  </tr>
+
+                  <tr>
+                    <td>70</td>
+                    <td>
+                      25th Kingswood Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 3</span>
+                    </td>
+                    <td>96</td>
+                  </tr>
+
+                  <tr>
+                    <td>71</td>
+                    <td>
+                      1st Worle Guides<br>
+                      <span class="uk-text-small uk-text-bold">Mermaid</span>
+                    </td>
+                    <td>95</td>
+                  </tr>
+
+                  <tr>
+                    <td>72</td>
+                    <td>
+                      25th Kingswood Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>94</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      9th (St Mary's) Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 1</span>
+                    </td>
+                    <td>94</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Gilded Goat</span>
+                    </td>
+                    <td>94</td>
+                  </tr>
+
+                  <tr>
+                    <td>75</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Venus A</span>
+                    </td>
+                    <td>92</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Venus B</span>
+                    </td>
+                    <td>92</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Jupiter B</span>
+                    </td>
+                    <td>92</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Jupiter C</span>
+                    </td>
+                    <td>92</td>
+                  </tr>
+
+                  <tr>
+                    <td>79</td>
+                    <td>
+                      63rd Bristol Scout Group<br>
+                      <span class="uk-text-small uk-text-bold">Axolotl Superior</span>
+                    </td>
+                    <td>90</td>
+                  </tr>
+
+                  <tr>
+                    <td>80</td>
+                    <td>
+                      54th Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>89</td>
+                  </tr>
+
+                  <tr>
+                    <td>81</td>
+                    <td>
+                      1st Winterbourne Guides<br>
+                      <span class="uk-text-small uk-text-bold">FJCR</span>
+                    </td>
+                    <td>86</td>
+                  </tr>
+
+                  <tr>
+                    <td>82</td>
+                    <td>
+                      9th (St Mary's) Bristol Guides<br>
+                      <span class="uk-text-small uk-text-bold">Team 2</span>
+                    </td>
+                    <td>78</td>
+                  </tr>
+
+                  <tr>
+                    <td>83</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Venus C</span>
+                    </td>
+                    <td>74</td>
+                  </tr>
+
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      1st Winterbourne Guides<br>
+                      <span class="uk-text-small uk-text-bold">HEA</span>
+                    </td>
+                    <td>74</td>
+                  </tr>
+
+                  <tr>
+                    <td>85</td>
+                    <td>
+                      229th Bristol (St Aldhelms)<br>
+                      <span class="uk-text-small uk-text-bold">229th Bristol Jupiter A</span>
+                    </td>
+                    <td>70</td>
+                  </tr>
+
+                </tbody></table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="map" style="padding-top: 60px;">
+          <div class="uk-inline uk-width-1-1">
+            <div id="map-container" class="uk-width-1-1" uk-height-viewport="offset-bottom: 60px"></div>
+            <div class="uk-overlay uk-position-top uk-text-center">
+              <h3 class="uk-inline uk-padding-small uk-background-default">43 groups told us where they were from!</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="history" class="uk-section uk-section-secondary uk-height-viewport avoid-sticky-nav">
+      <div class="uk-container uk-container-small">
+        <h1 class="uk-text-center uk-margin-remove-bottom">Kohoutek History</h1>
+        <p>
+          <em>Kohoutek, Kahoutek, Cahoutek, Cohoutek - one event, many spellings!</em>
+        </p>
+        <p>
+          Kohoutek was originally held in 1973 by a group of University of Bristol Students, for local Scout Troops and Guide Units, based off a similar event held by Scouts in Cheshire. It was named after <a href="https://www.history.nasa.gov/SP-404/ch4.htm" target="_blank" rel="nofollow noopener">Comet Kohoutek</a>, which was first sighted in March of that year. Over the years themes for the event have ranged from Jurassic Park (1997) to Wild West (2020)!
+        </p>
+        <p>
+          The event aims to provide a fun environment for Scouts and Guides to improve their teamwork and problem solving skills. Teams of about five meet at Woodhouse Park to complete a series of themed activity bases over the course of the day, competing for the coveted Kohoutek Trophy.
+        </p>
+        <p>
+           There was a short hiatus in the event when the University of Bristol Guides and Scouts (UOBGAS) society closed in the early 2000s, but the rebirth of the society saw the event being brought back in 2017. 2019 saw us celebrating the 35th Kohoutek event, with Kohoutek hosting more than 300 young people!
+        </p>
+        <h4>Coverage</h4>
+        <p>2019 - Epigram (University of Bristol Students' newspaper): <a href="https://epigram.org.uk/2019/03/18/kohoutek-2019/" target="_blank" rel="nofollow noopener"><em>Student Scouts and Guides organise mammoth event for local children named after the Kohoutek comet</em></a>.</p>
+
+        <p>2020 - Avon Scout Radio: <a href="https://www.facebook.com/media/set/?vanity=avonscoutradio&amp;set=a.1765261640277612" target="_blank" rel="nofollow noopener">Event photos</a> and live broadcast.</p>
+      </div>
+    </div>
+
+    <div id="footer" class="uk-section uk-section-muted uk-section-small">
+      <div class="uk-container uk-container-small uk-text-center">
+        <p class="uk-text-small">
+          Kohoutek is organised by students at the University of Bristol, with support from the <a href="https://www.facebook.com/UoBGaS" target="_blank" rel="noreferrer noopener">University of Bristol Guides and Scouts (UOBGAS)</a> society, part of the <a href="https://ssago.org/" target="_blank" rel="noreferrer noopener">Student Scout and Guide Organisation (SSAGO)</a>.
+        </p>
+        <p class="uk-text-small">
+          © Kohoutek Competition 2021
+        </p>
+      </div>
+    </div>
+
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia29ob3V0ZWtjb21wZXRpdGlvbiIsImEiOiJja2phdmJkOGE3ZW80MnJsYjBoaXFlNzBpIn0.XG8PpU2A8RSL9TKMkVPLjw';
+
+    var map = new mapboxgl.Map({
+    container: 'map-container',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    pinchWithRotate: false,
+    trackResize: true,
+    scrollZoom: false,
+    });
+
+    map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+
+    var markers = new Array()
+    var popupOptions = {closeButton: false, focusAfterOpen: false, width: "auto", className: "map-popup"};
+
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.0088440653047996, 53.54474350643372])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">20th Oldham Uppermill Methodist</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-122.33417026110928, 49.04388148674383])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Abbotsford  (1st Abbotsford )</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-3.0080981584552546, 51.329434407785044])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Worle Guides</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.2206547447307514, 51.750039501609564])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">Stroud Valley</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-0.09178119018122288, 53.57098342096995])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">11th Grimsby</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.767456365040175, 51.48678717941968])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Portishead (Glenny Troop)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-4.054042952962277, 51.07621182531449])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st North Devon</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.608466182440509, 51.490822510074366])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">227th Bristol</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.3017941827687025, 52.960570849297255])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">96th whitmore scouts (96th whitmore scouts)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.5887367784048365, 51.47936556376098])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">40th Bristol Guides</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.0119467226766403, 52.327327588997804])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Astwood Bank (1st Astwood Bank Scouts)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.606773468963837, 51.4717905918024])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">93rd Bristol (St Albans) Guides</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.494971179652083, 57.43277211171912])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Rothienorman  (1st Rothienorman Scouts)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.5592678421890014, 51.47227967683153])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">17th Eastville Park Methodist (Bristol)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.6082422527855442, 51.490526495565376])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">44th Bristol Guides</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-0.4401721954336608, 51.37047454142149])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">Oatlands</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-1.1601742564907909, 51.609768770454195])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Brightwell cum Sotwell</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-0.06775591517279622, 51.378066600939036])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">28th Croydon (Scafell)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-3.1885838346795197, 53.17121776547066])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">Trinity Fammau</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-74.12389245919996, 45.442331917904])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">Cavagnal (Cavagnal Scout Troop)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.997000606801066, 56.45754648967332])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">31st A Dundee Guides</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.916016072034097, 51.262810085856756])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">6th Worle Guides</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-1.4132262200328398, 53.79790917835285])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">3rd Garforth Guides</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.611118146178171, 51.46443298172312])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">77th Bristol</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-0.0665106448738868, 51.3788880537019])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">28th Croydon (Snowdon)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.6185999115710104, 51.43831195341846])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">229th Bristol (St Aldhelms) (Jupiter Troop)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-1.2049935034993098, 52.77475217610797])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Loughborough</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-0.4557839610134806, 51.372498335262804])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Weybridge (Brooklands Own) (1st Weybridge (Brooklands Own))</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.5569866936581604, 51.76537906828585])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Royal Forest (Monday Scouts)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.777250191493124, 51.4797993384808])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Portishead Guides</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.9093294731303274, 51.365134315153654])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st North Worle </h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-9.35621999180924, 38.69165113638928])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1240 Murtal (Padeira)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-9.356047922804976, 38.69163255515855])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1240 Murtal (B.P.)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-9.360847337055787, 38.70078417221916])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1240 Murtal (Camões)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-0.4465823868464156, 51.36732677311542])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">4th Weybridge (4th Weybridge Scouts)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.9395892663106906, 51.355045796418125])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">4th Worle Guides</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.507709466249935, 51.520628686467774])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Winterbourne Down and Buryside</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.745916492369105, 51.41442636269045])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Backwell (Tuesday Troop)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-0.18792037311212084, 50.99857322752888])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">10th Haywards Heath (Whirlwind Scouts)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-1.4912814385211277, 52.93585401830214])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">135th Derby (Broadway Baptist)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-79.49138982096487, 43.669662306768174])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">68th Toronto Scout Group</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.601824146528088, 51.45744370536448])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">1st Testington (group for testing only)</h4></div>"))
+      .addTo(map))
+
+    markers.push(new mapboxgl.Marker({color: "#0077b6"})
+      .setLngLat([-2.1330861414658955, 53.257427576642414])
+      .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">3rd Macclesfield Upton Priory</h4></div>"))
+      .addTo(map))
+
+
+    var bounds = new mapboxgl.LngLatBounds()
+    markers.forEach((marker) => bounds.extend(marker.getLngLat()));
+
+    map.on('load', function() {
+      map.resize().fitBounds(bounds, {padding: {top: 100, bottom: 100, left: 200, right: 200}});
+    });
+    </script>
+  </body>
+</html>
