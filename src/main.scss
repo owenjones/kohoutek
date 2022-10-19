@@ -74,20 +74,20 @@ form label.uk-width-1-1 {
   cursor: pointer;
 }
 
-#under-the-sea {
+#theme-background {
   background-image: url('../img/bg.jpg');
   background-position: bottom center;
 }
 
 @media screen and (max-width: 823px) {
-  #under-the-sea {
+  #theme-background {
     background-attachment: scroll;
   }
 
 }
 
 @media screen and (min-width: 824px) {
-  #under-the-sea {
+  #theme-background {
     background-size: cover;
     background-attachment: fixed;
   }
