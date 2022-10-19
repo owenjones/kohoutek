@@ -1,5 +1,13 @@
 {
   "dependencies": {
-    "uikit": "^3.5.9"
+    "uikit": "^3.15.10"
+  },
+  "devDependencies": {
+    "css-minify": "^2.0.0"
+  },
+  "scripts": {
+    "compile": "sass --no-source-map src/main.scss static/css/main.css",
+    "minify": "css-minify -f static/css/main.css -o static/css",
+    "build": "npm run compile && npm run minify"
   }
 }
