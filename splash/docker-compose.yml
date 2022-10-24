@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  kohoutek:
+    image: nginx:alpine
+    container_name: kohoutek
+    restart: unless-stopped
+    volumes:
+      - ./kohoutek.conf:/etc/nginx/conf.d/kohoutek.conf
+      - ./html:/data:ro
+    networks:
+      - traefik
+    environment:
+      - NGINX_HOST=kohoutek.co.uk
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kohoutek.rule=Host(`kohoutek.co.uk`)"
+      - "traefik.http.routers.kohoutek.middlewares=kohoutek"
+      - "traefik.http.middlewares.kohoutek.compress=true"
+      - "traefik.http.services.kohoutek.loadBalancer.server.port=80"
+
+networks:
+  traefik:
+    external: true
