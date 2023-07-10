@@ -1,15 +1,14 @@
 <div id="sign-up" class="uk-section uk-section-primary uk-height-viewport avoid-sticky-nav uk-preserve-color">
   <div class="uk-container uk-container-xsmall">
     <div class="uk-light">
-      <h1 class="uk-text-center">Sign up for Kohoutek 2021</h1>
+      <h1 class="uk-text-center">Sign up for Kohoutek</h1>
       <p>
-        For 2021, Kohoutek is open to any Scout Troops or Guide Units that wish to enter, with no limit to the number of teams you can have.
+        Kohoutek is open to Scouts in <strong>Avon</strong> County, and Guides in <strong>Bristol and South
+          Gloucestershire</strong> or
+        <strong>Somerset North</strong> Counties.
       </p>
       <p>
-        Only Scouts in <strong>Avon</strong> County, and Guides in <strong>Bristol and South Gloucestershire</strong> or <strong>Somerset North</strong> Counties, will be eligible for the Kohoutek trophy however.
-      </p>
-      <p>
-        Each Unit/Troop only needs to sign up once for Kohoutek 2021 - we'll collect the scores for all your teams in one go after you complete the activities.
+        Each Unit/Troop only needs to sign up once for Kohoutek, you can then enter your teams (up to three initially).
       </p>
     </div>
 
@@ -19,10 +18,12 @@
         <h3 class="uk-card-title">Are you a member of Scouting or Guiding?</h3>
         <fieldset class="uk-fieldset">
           <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-              <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="organisation" value="scouting" id="scout-toggle" required> Scouting</label>
+            <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="organisation" value="scouting"
+                id="scout-toggle" required> Scouting</label>
           </div>
           <div class="uk-grid-small uk-child-width-auto uk-grid">
-              <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="organisation" value="guiding" id="guide-toggle" required> Guiding</label>
+            <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="organisation" value="guiding"
+                id="guide-toggle" required> Guiding</label>
           </div>
         </fieldset>
       </div>
@@ -34,14 +35,14 @@
             <label class="uk-form-label">County</label>
             <div class="uk-form-controls uk-form-controls-text">
               <div class="uk-grid-small uk-child-width-auto uk-grid">
-                  <label class="uk-width-1-1">
-                    <input class="uk-radio" type="radio" name="county" value="avon" id="avon-county-toggle"> Avon
-                  </label>
+                <label class="uk-width-1-1">
+                  <input class="uk-radio" type="radio" name="county" value="avon" id="avon-county-toggle"> Avon
+                </label>
               </div>
               <div class="uk-grid-small uk-child-width-auto uk-grid">
-                  <label class="uk-width-1-1">
-                    <input class="uk-radio" type="radio" name="county" value="other" id="other-scout-county-toggle"> Other
-                  </label>
+                <label class="uk-width-1-1">
+                  <input class="uk-radio" type="radio" name="county" value="other" id="other-scout-county-toggle"> Other
+                </label>
               </div>
             </div>
           </div>
@@ -49,37 +50,38 @@
           <div id="avon-district" class="uk-margin" hidden>
             <label class="uk-form-label">District</label>
             <div class="uk-form-controls uk-form-controls-text">
-              {% for district in avon %}
+              {#{% for district in avon %}
               <div class="uk-grid-small uk-child-width-auto uk-grid">
-                  <label class="uk-width-1-1">
-                    <input class="uk-radio" type="radio" name="district" value="{{ district.id }}"> {{ district.name }}
-                  </label>
+                <label class="uk-width-1-1">
+                  <input class="uk-radio" type="radio" name="district" value="{{ district.id }}"> {{ district.name }}
+                </label>
               </div>
-              {% endfor %}
+              {% endfor %}#}
             </div>
           </div>
 
           <div id="other-district" class="uk-margin" hidden>
             <label class="uk-form-label">District</label>
             <div class="uk-form-controls">
-                <input class="uk-input uk-width-1-1" type="text" name="district-name" placeholder="District name" />
+              <input class="uk-input uk-width-1-1" type="text" name="district-name" placeholder="District name" />
             </div>
           </div>
 
           <div id="scout-group" class="uk-margin" hidden>
             <label class="uk-form-label">Group</label>
             <div class="uk-form-controls">
-                <input class="uk-input uk-width-1-1" type="text" name="group-name" placeholder="Group name" />
+              <input class="uk-input uk-width-1-1" type="text" name="group-name" placeholder="Group name" />
             </div>
           </div>
 
           <div id="scout-troop" hidden>
             <p class="uk-text-small">
-              If you're signing up to Kohoutek as an individual Troop (where your Group has multiple), please give your Troop's name.
+              If you're signing up to Kohoutek as an individual Troop (where your Group has multiple), please give your
+              Troop's name.
             </p>
             <label class="uk-form-label">Troop</label>
             <div class="uk-form-controls">
-                <input class="uk-input uk-width-1-1" type="text" name="troop-name" placeholder="Troop name" />
+              <input class="uk-input uk-width-1-1" type="text" name="troop-name" placeholder="Troop name" />
             </div>
           </div>
         </fieldset>
@@ -92,13 +94,16 @@
             <label class="uk-form-label">County</label>
             <div class="uk-form-controls uk-form-controls-text">
               <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                  <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="bsg" id="bsg-county-toggle"> Bristol and South Gloucestershire</label>
+                <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="bsg"
+                    id="bsg-county-toggle"> Bristol and South Gloucestershire</label>
               </div>
               <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                  <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="sn" id="sn-county-toggle"> Somerset North</label>
+                <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="sn"
+                    id="sn-county-toggle"> Somerset North</label>
               </div>
               <div class="uk-grid-small uk-child-width-auto uk-grid">
-                  <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="other" id="other-guide-county-toggle"> Other</label>
+                <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="other"
+                    id="other-guide-county-toggle"> Other</label>
               </div>
             </div>
           </div>
@@ -106,41 +111,40 @@
           <div id="bsg-division" class="uk-margin" hidden>
             <label class="uk-form-label">Division</label>
             <div class="uk-form-controls uk-form-controls-text">
-              {% for district in bsg %}
+              {#{% for district in bsg %}
               <div class="uk-grid-small uk-child-width-auto uk-grid">
-                  <label class="uk-width-1-1">
-                    <input class="uk-radio" type="radio" name="district" value="{{ district.id }}"> {{ district.name }}
-                  </label>
+                <label class="uk-width-1-1">
+                  <input class="uk-radio" type="radio" name="district" value="{{ district.id }}"> {{ district.name }}
+                </label>
               </div>
-              {% endfor %}
+              {% endfor %}#}
             </div>
           </div>
 
           <div id="sn-division" class="uk-margin" hidden>
             <label class="uk-form-label">Division</label>
             <div class="uk-form-controls uk-form-controls-text">
-              <!-- SN Divisions -->
-              {% for district in sn %}
+              {#{% for district in sn %}
               <div class="uk-grid-small uk-child-width-auto uk-grid">
-                  <label class="uk-width-1-1">
-                    <input class="uk-radio" type="radio" name="district" value="{{ district.id }}"> {{ district.name }}
-                  </label>
+                <label class="uk-width-1-1">
+                  <input class="uk-radio" type="radio" name="district" value="{{ district.id }}"> {{ district.name }}
+                </label>
               </div>
-              {% endfor %}
+              {% endfor %}#}
             </div>
           </div>
 
           <div id="other-division" class="uk-margin" hidden>
             <label class="uk-form-label">Division</label>
             <div class="uk-form-controls uk-form-controls-text">
-                <input class="uk-input uk-width-1-1" type="text" name="division-name" placeholder="Division name" />
+              <input class="uk-input uk-width-1-1" type="text" name="division-name" placeholder="Division name" />
             </div>
           </div>
 
           <div id="guide-unit" hidden>
             <label class="uk-form-label">Unit</label>
             <div class="uk-form-controls">
-                <input class="uk-input uk-width-1-1" type="text" name="unit-name" placeholder="Unit name" />
+              <input class="uk-input uk-width-1-1" type="text" name="unit-name" placeholder="Unit name" />
             </div>
           </div>
         </fieldset>
@@ -152,21 +156,23 @@
           <div class="uk-margin">
             <label class="uk-form-label">Your name</label>
             <div class="uk-form-controls">
-                <input class="uk-input uk-width-1-1" type="text" name="contact-name" placeholder="Name" required />
+              <input class="uk-input uk-width-1-1" type="text" name="contact-name" placeholder="Name" required />
             </div>
           </div>
 
           <div class="uk-margin">
             <label class="uk-form-label">Your email</label>
             <div class="uk-form-controls">
-                <input class="uk-input uk-width-1-1" type="email" name="contact-email" placeholder="Email address" required />
+              <input class="uk-input uk-width-1-1" type="email" name="contact-email" placeholder="Email address"
+                required />
             </div>
           </div>
 
           <div class="uk-margin">
             <label class="uk-form-label">Confirm email</label>
             <div class="uk-form-controls">
-                <input class="uk-input uk-width-1-1" type="email" name="confirm-email" placeholder="Confirm email address" required />
+              <input class="uk-input uk-width-1-1" type="email" name="confirm-email" placeholder="Confirm email address"
+                required />
             </div>
           </div>
         </fieldset>
@@ -176,11 +182,15 @@
         <h3 class="uk-card-title">Almost done!</h3>
         <fieldset class="uk-fieldset uk-form-horizontal">
           <div class="uk-margin">
-            <label class="uk-width-1-1"><input class="uk-checkbox" type="checkbox" name="rules" value="accepted" required> I have read the Kohoutek 2021 <a href="#about" uk-scroll="offset: 40;">entry information</a>, and agree to follow the <a href="#rules" uk-scroll="offset: 85;">competition rules</a>.</label>
+            <label class="uk-width-1-1"><input class="uk-checkbox" type="checkbox" name="rules" value="accepted"
+                required> I have read the Kohoutek <a href="#about" uk-scroll="offset: 40;">entry information</a>,
+              and agree to follow the <a href="#rules" uk-scroll="offset: 85;">competition rules</a>.</label>
           </div>
 
-          <button id="signup-submit" class="uk-button uk-button-primary uk-button-large uk-width-1-1" type="submit">Submit Entry</button>
-          <button id="signup-processing" class="uk-button uk-button-primary uk-button-large uk-width-1-1" uk-spinner hidden></button>
+          <button id="signup-submit" class="uk-button uk-button-primary uk-button-large uk-width-1-1"
+            type="submit">Submit Entry</button>
+          <button id="signup-processing" class="uk-button uk-button-primary uk-button-large uk-width-1-1" uk-spinner
+            hidden></button>
         </fieldset>
         <div id="submit-error" class="uk-alert uk-alert-danger" hidden>
           <p>
@@ -188,10 +198,13 @@
           </p>
         </div>
         <p class="uk-text-small">
-          Submitted information will be kept in order to manage your entry to Kohoutek 2021, and will be removed following the event. Some anonymised data may be retained in order to help us better advertise the event in the future.
+          Submitted information will be kept in order to manage your entry to Kohoutek, and will be removed
+          following the event. Some anonymised data may be retained in order to help us better advertise the event in
+          the future.
         </p>
         <p class="uk-text-small">
-          If you would like to alter or remove this information at any point, or have any questions about how we use or store this data, please get in touch with us at contact@kohoutek.co.uk.
+          If you would like to alter or remove this information at any point, or have any questions about how we use or
+          store this data, please get in touch with us at contact@kohoutek.co.uk.
         </p>
       </div>
     </form>
@@ -199,13 +212,16 @@
     <div id="complete-card" class="uk-card uk-card-default uk-card-body" hidden>
       <h3 class="uk-card-title">Sign up complete</h3>
       <p>
-        Your sign up for Kohoutek 2021 has been successfully received!
+        Your sign up for Kohoutek has been successfully received!
       </p>
       <p>
-        We've sent you a confirmation email with some further information - please have a read, and click the verification link so we know you've received it (your sign up won't be complete until you do!) - make sure to check your spam folder just in case.
+        We've sent you a confirmation email with some further information - please have a read, and click the
+        verification link so we know you've received it (your sign up won't be complete until you do!) - make sure to
+        check your spam folder just in case.
       </p>
       <p class="uk-text-small">
-        If our confirmation email doesn't make it to you, please get in touch with us at contact@kohoutek.co.uk so we can make sure you receive one.
+        If our confirmation email doesn't make it to you, please get in touch with us at contact@kohoutek.co.uk so we
+        can make sure you receive one.
       </p>
     </div>
   </div>
