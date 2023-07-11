@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  portal:
+    build:
+      context: .
+    container_name: kohoutek_portal
+    restart: unless-stopped
+    networks:
+      - traefik
+      - mysql
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kohoutek_portal.rule=Host(`kohoutek.co.uk`)"
+      - "traefik.http.routers.kohoutek_portal.middlewares=kohoutek_portal"
+      - "traefik.http.middlewares.kohoutek_portal.compress=true"
+      - "traefik.http.services.kohoutek_portal.loadBalancer.server.port=80"
+
+  static:
+    image: nginx:alpine
+    container_name: kohoutek_static
+    restart: unless-stopped
+    volumes:
+      - ./kohoutek.conf:/etc/nginx/conf.d/kohoutek.conf
+      - ./src/static:/data:ro
+    networks:
+      - traefik
+    environment:
+      - NGINX_HOST=kohoutek.co.uk
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kohoutek_static.rule=Host(`kohoutek.co.uk`) && Path(`/static`)"
+      - "traefik.http.routers.kohoutek_static.middlewares=kohoutek_static"
+      - "traefik.http.middlewares.kohoutek_static.compress=true"
+      - "traefik.http.services.kohoutek_static.loadBalancer.server.port=80"
+
+networks:
+  traefik:
+    external: true
+  mysql:
+    external: true
