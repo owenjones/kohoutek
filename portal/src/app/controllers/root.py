@@ -8,42 +8,11 @@ blueprint = Blueprint("root", __name__)
 
 @blueprint.route("/")
 def index():
-    teams = (
-        Team.query.filter(Team.submitted == True).order_by(Team.rawScore.desc()).all()
-    )
-
-    groups = (
-        db.session.execute(
-            "SELECT COUNT(DISTINCT `entry`.`id`) AS `total` FROM `entry` JOIN `team` ON `entry`.`id` = `team`.`entry_id` WHERE `team`.`submitted` = 1"
-        )
-        .first()
-        .total
-    )
-
-    participants = (
-        db.session.execute(
-            "SELECT SUM(`team`.`members`) AS `total` FROM `team` WHERE `team`.`submitted` = 1"
-        )
-        .first()
-        .total
-    )
-
-    trophy = db.session.execute(
-        "SELECT * FROM `team` JOIN `entry` ON `entry`.`id` = `team`.`entry_id` WHERE `entry`.`county` != 'other' AND `team`.`submitted` = 1 ORDER BY `team`.`rawScore` DESC"
-    ).fetchall()
-
-    locations = Matchmake.query.all()
-    center = f"[{ current_app.config['MAP']['default_lon']}, { current_app.config['MAP']['default_lat']}]"
-
     return render_template(
-        "root/index.jinja",
-        teams=teams,
-        total_entered=groups,
-        total_participants=participants,
-        trophy=trophy,
-        locations=locations,
-        center=center,
-        mapbox_key=current_app.config["MAP"]["mapbox_key"],
+        "root/index.html",
+        avon=County.avon,
+        bsg=County.bsg,
+        sn=County.sn,
     )
 
 
@@ -55,8 +24,6 @@ def signupRedirect():
 
 @blueprint.route("/sign-up", methods=["POST"])
 def processSignup():
-    return ("Signups for Kohoutek 2021 are now closed", 422)
-
     if ("organisation" not in request.form) or (
         request.form["organisation"] not in ["scouting", "guiding"]
     ):
@@ -68,54 +35,21 @@ def processSignup():
         "avon",
         "bsg",
         "sn",
-        "other",
     ]:
         return ("You need to select which County you're in", 422)
 
     county = County(request.form["county"])
 
-    if (
-        county in [County.avon, County.bsg, County.sn]
-        and ("district" not in request.form or request.form["district"] == "")
-    ) or (
-        county == County.other
-        and (
-            (
-                organisation == Organisation.scouting
-                and (
-                    "district-name" not in request.form
-                    or request.form["district-name"] == ""
-                )
-            )
-            or (
-                organisation == Organisation.guiding
-                and (
-                    "division-name" not in request.form
-                    or request.form["division-name"] == ""
-                )
-            )
-        )
+    if county in [County.avon, County.bsg, County.sn] and (
+        "district" not in request.form or request.form["district"] == ""
     ):
         return ("You need to select your District/Division, or enter it's name", 422)
 
-    if county in [County.avon, County.bsg, County.sn]:
-        district = District.query.filter_by(id=request.form["district"]).first()
-        if district.county != county:
-            return (
-                "You need to select a District/Division that's in your chosen County",
-                422,
-            )
-
-        else:
-            district_id = district.id
-            district_name = None
-
-    else:
-        district_id = None
-        district_name = (
-            request.form["district-name"]
-            if organisation == Organisation.scouting
-            else request.form["division-name"]
+    district = District.query.filter_by(id=request.form["district"]).first()
+    if district.county != county:
+        return (
+            "You need to select a District/Division that's in your chosen County",
+            422,
         )
 
     if organisation == Organisation.scouting and (
@@ -171,8 +105,7 @@ def processSignup():
             contact_email=contact_email,
             organisation=organisation,
             county=county,
-            district_id=district_id,
-            district_name=district_name,
+            district_id=district.id,
             group_name=group_name,
             troop_name=troop_name,
         )
