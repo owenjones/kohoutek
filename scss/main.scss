@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap');
 
-$new-blue: #0077b6;
-$global-primary-background: $new-blue;
-$global-link-color: $new-blue;
-$global-link-hover-color: lighten($new-blue, 10%);
-$form-radio-checked-focus-background: lighten($new-blue, 10%);
+$theme-color: darken(#009933, 5%);
+$global-primary-background: $theme-color;
+$global-link-color: $theme-color;
+$global-link-hover-color: lighten($theme-color, 10%);
+$form-radio-checked-focus-background: lighten($theme-color, 10%);
 
 $global-secondary-background: darken(#031927, 2%);
 $global-muted-background: #fcfcfc;
@@ -34,9 +34,9 @@ $base-heading-font-weight: 700;
 $navbar-nav-item-font-family: $font-space-grotesk;
 $navbar-nav-item-height: 60px;
 
-@import "../node_modules/uikit/src/scss/variables-theme.scss";
-@import "../node_modules/uikit/src/scss/mixins-theme.scss";
-@import "../node_modules/uikit/src/scss/uikit-theme.scss";
+@import "./node_modules/uikit/src/scss/variables-theme.scss";
+@import "./node_modules/uikit/src/scss/mixins-theme.scss";
+@import "./node_modules/uikit/src/scss/uikit-theme.scss";
 
 body {
   overscroll-behavior: none;
@@ -97,11 +97,12 @@ form label.uk-width-1-1 {
   background: rgba(0, 0, 0, 0.2);
 }
 
-#kohoutek-badge {
-  max-height: 75vh;
-  max-width: 75vw;
-  margin-top: 45vh;
+#kohoutek-badge-holder {
+  max-height: 70vh;
+  max-width: 70vw;
+  margin-top: 50vh;
   transform: translate(0, -50%);
+  cursor: pointer;
 }
 
 .kohoutek-frontactive {
@@ -112,7 +113,8 @@ form label.uk-width-1-1 {
   }
 }
 
-.kohoutek-frontactive .kohoutek-illuminate, .kohoutek-mobile-illuminate {
+.kohoutek-frontactive .kohoutek-illuminate,
+.kohoutek-mobile-illuminate {
   color: $global-link-hover-color !important;
   font-weight: 700;
 }

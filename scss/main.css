@@ -35,7 +35,7 @@ body {
  */
 a,
 .uk-link {
-  color: #0077b6;
+  color: #00802b;
   text-decoration: none;
   cursor: pointer;
 }
@@ -43,7 +43,7 @@ a,
 a:hover,
 .uk-link:hover,
 .uk-link-toggle:hover .uk-link {
-  color: #0098e9;
+  color: #00b33c;
   text-decoration: underline;
 }
 
@@ -508,7 +508,7 @@ a.uk-link-heading,
 a.uk-link-heading:hover,
 .uk-link-heading a:hover,
 .uk-link-toggle:hover .uk-link-heading {
-  color: #0077b6;
+  color: #00802b;
   text-decoration: none;
 }
 
@@ -857,7 +857,7 @@ a.uk-link-reset,
 }
 
 .uk-list-primary > ::before {
-  color: #0077b6 !important;
+  color: #00802b !important;
 }
 
 .uk-list-secondary > ::before {
@@ -1153,17 +1153,17 @@ a.uk-link-reset,
 /* Phone landscape and smaller */
 @media (max-width: 959px) {
   .uk-table-responsive,
-.uk-table-responsive tbody,
-.uk-table-responsive th,
-.uk-table-responsive td,
-.uk-table-responsive tr {
+  .uk-table-responsive tbody,
+  .uk-table-responsive th,
+  .uk-table-responsive td,
+  .uk-table-responsive tr {
     display: block;
   }
   .uk-table-responsive thead {
     display: none;
   }
   .uk-table-responsive th,
-.uk-table-responsive td {
+  .uk-table-responsive td {
     width: auto !important;
     max-width: none !important;
     min-width: 0 !important;
@@ -1171,17 +1171,17 @@ a.uk-link-reset,
     white-space: normal !important;
   }
   .uk-table-responsive th:not(:first-child):not(.uk-table-link),
-.uk-table-responsive td:not(:first-child):not(.uk-table-link),
-.uk-table-responsive .uk-table-link:not(:first-child) > a {
+  .uk-table-responsive td:not(:first-child):not(.uk-table-link),
+  .uk-table-responsive .uk-table-link:not(:first-child) > a {
     padding-top: 5px !important;
   }
   .uk-table-responsive th:not(:last-child):not(.uk-table-link),
-.uk-table-responsive td:not(:last-child):not(.uk-table-link),
-.uk-table-responsive .uk-table-link:not(:last-child) > a {
+  .uk-table-responsive td:not(:last-child):not(.uk-table-link),
+  .uk-table-responsive .uk-table-link:not(:last-child) > a {
     padding-bottom: 5px !important;
   }
   .uk-table-justify.uk-table-responsive th,
-.uk-table-justify.uk-table-responsive td {
+  .uk-table-justify.uk-table-responsive td {
     padding-left: 0;
     padding-right: 0;
   }
@@ -1552,7 +1552,7 @@ button.uk-icon:not(:disabled) {
 }
 
 /* Input, select and textarea
- * Allowed: `text`, `password`, `datetime`, `datetime-local`, `date`,  `month`,
+ * Allowed: `text`, `password`, `datetime-local`, `date`,  `month`,
             `time`, `week`, `number`, `email`, `url`, `search`, `tel`, `color`
  * Disallowed: `range`, `radio`, `checkbox`, `file`, `submit`, `reset` and `image`
  ========================================================================== */
@@ -1631,7 +1631,7 @@ button.uk-icon:not(:disabled) {
   outline: none;
   background-color: #fff;
   color: #666;
-  border-color: #0077b6;
+  border-color: #00802b;
 }
 
 /* Disabled */
@@ -1859,7 +1859,7 @@ select.uk-form-width-xsmall {
 .uk-checkbox:focus {
   background-color: rgba(0, 0, 0, 0);
   outline: none;
-  border-color: #0077b6;
+  border-color: #00802b;
 }
 
 /*
@@ -1868,7 +1868,7 @@ select.uk-form-width-xsmall {
 .uk-radio:checked,
 .uk-checkbox:checked,
 .uk-checkbox:indeterminate {
-  background-color: #0077b6;
+  background-color: #00802b;
   border-color: transparent;
 }
 
@@ -1876,7 +1876,7 @@ select.uk-form-width-xsmall {
 .uk-radio:checked:focus,
 .uk-checkbox:checked:focus,
 .uk-checkbox:indeterminate:focus {
-  background-color: #0098e9;
+  background-color: #00b33c;
 }
 
 /*
@@ -2184,21 +2184,21 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-button-primary {
-  background-color: #0077b6;
+  background-color: #00802b;
   color: #fff;
   border: 1px solid transparent;
 }
 
 /* Hover */
 .uk-button-primary:hover {
-  background-color: #00669d;
+  background-color: #006622;
   color: #fff;
 }
 
 /* OnClick + Active */
 .uk-button-primary:active,
 .uk-button-primary.uk-active {
-  background-color: #005683;
+  background-color: #004d1a;
   color: #fff;
 }
 
@@ -2295,7 +2295,7 @@ select.uk-form-width-xsmall {
   bottom: 0;
   left: 0;
   right: 100%;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid currentColor;
   transition: right 0.3s ease-out;
 }
 
@@ -2374,6 +2374,7 @@ select.uk-form-width-xsmall {
  * Workaround: Just use a `button` or `input` element as button
  */
 .uk-button-group .uk-button:hover,
+.uk-button-group .uk-button:focus,
 .uk-button-group .uk-button:active,
 .uk-button-group .uk-button.uk-active {
   position: relative;
@@ -2425,12 +2426,12 @@ select.uk-form-width-xsmall {
  *    https://bugzilla.mozilla.org/show_bug.cgi?id=662351
  */
 .uk-progress::-webkit-progress-value {
-  background-color: #0077b6;
+  background-color: #00802b;
   transition: width 0.6s ease;
 }
 
 .uk-progress::-moz-progress-bar {
-  background-color: #0077b6;
+  background-color: #00802b;
   /* 1 */
   transition: width 0.6s ease;
 }
@@ -2530,7 +2531,7 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-section-primary {
-  background: #0077b6;
+  background: #00802b;
 }
 
 /*
@@ -2631,34 +2632,34 @@ select.uk-form-width-xsmall {
 /* Phone landscape and bigger */
 @media (min-width: 640px) {
   .uk-container-expand-left.uk-container-xsmall,
-.uk-container-expand-right.uk-container-xsmall {
+  .uk-container-expand-right.uk-container-xsmall {
     max-width: calc(50% + (750px / 2) - 30px);
   }
   .uk-container-expand-left.uk-container-small,
-.uk-container-expand-right.uk-container-small {
+  .uk-container-expand-right.uk-container-small {
     max-width: calc(50% + (900px / 2) - 30px);
   }
 }
 /* Tablet landscape and bigger */
 @media (min-width: 960px) {
   .uk-container-expand-left,
-.uk-container-expand-right {
+  .uk-container-expand-right {
     max-width: calc(50% + (1200px / 2) - 40px);
   }
   .uk-container-expand-left.uk-container-xsmall,
-.uk-container-expand-right.uk-container-xsmall {
+  .uk-container-expand-right.uk-container-xsmall {
     max-width: calc(50% + (750px / 2) - 40px);
   }
   .uk-container-expand-left.uk-container-small,
-.uk-container-expand-right.uk-container-small {
+  .uk-container-expand-right.uk-container-small {
     max-width: calc(50% + (900px / 2) - 40px);
   }
   .uk-container-expand-left.uk-container-large,
-.uk-container-expand-right.uk-container-large {
+  .uk-container-expand-right.uk-container-large {
     max-width: calc(50% + (1400px / 2) - 40px);
   }
   .uk-container-expand-left.uk-container-xlarge,
-.uk-container-expand-right.uk-container-xlarge {
+  .uk-container-expand-right.uk-container-xlarge {
     max-width: calc(50% + (1600px / 2) - 40px);
   }
 }
@@ -2684,7 +2685,7 @@ select.uk-form-width-xsmall {
 /* Phone landscape and bigger */
 @media (min-width: 640px) {
   .uk-container-item-padding-remove-left,
-.uk-container-item-padding-remove-right {
+  .uk-container-item-padding-remove-right {
     width: calc(100% + 30px);
   }
   .uk-container-item-padding-remove-left {
@@ -2697,7 +2698,7 @@ select.uk-form-width-xsmall {
 /* Tablet landscape and bigger */
 @media (min-width: 960px) {
   .uk-container-item-padding-remove-left,
-.uk-container-item-padding-remove-right {
+  .uk-container-item-padding-remove-right {
     width: calc(100% + 40px);
   }
   .uk-container-item-padding-remove-left {
@@ -2811,7 +2812,7 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-tile-primary {
-  background-color: #0077b6;
+  background-color: #00802b;
 }
 
 /*
@@ -2899,7 +2900,7 @@ select.uk-form-width-xsmall {
   height: 22px;
   padding: 0 10px;
   /* 3 */
-  background: #0077b6;
+  background: #00802b;
   color: #fff;
   font-size: 0.875rem;
   /* 4 */
@@ -2958,7 +2959,7 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-card-primary {
-  background-color: #0077b6;
+  background-color: #00802b;
   color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -2968,7 +2969,7 @@ select.uk-form-width-xsmall {
 }
 
 .uk-card-primary.uk-card-hover:hover {
-  background-color: #0077b6;
+  background-color: #00802b;
   box-shadow: 0 14px 25px rgba(0, 0, 0, 0.16);
 }
 
@@ -3014,7 +3015,7 @@ select.uk-form-width-xsmall {
 /* Desktop and bigger */
 @media (min-width: 1200px) {
   .uk-card-large.uk-card-body,
-.uk-card-large .uk-card-body {
+  .uk-card-large .uk-card-body {
     padding: 70px 70px;
   }
   .uk-card-large .uk-card-header {
@@ -3059,8 +3060,8 @@ select.uk-form-width-xsmall {
     margin-bottom: -25px;
   }
   .uk-card-body > .uk-nav-default > li > a,
-.uk-card-body > .uk-nav-default .uk-nav-header,
-.uk-card-body > .uk-nav-default .uk-nav-divider {
+  .uk-card-body > .uk-nav-default .uk-nav-header,
+  .uk-card-body > .uk-nav-default .uk-nav-divider {
     padding-left: 40px;
     padding-right: 40px;
   }
@@ -3104,8 +3105,8 @@ select.uk-form-width-xsmall {
     margin: 0;
   }
   .uk-card-large > .uk-nav-default > li > a,
-.uk-card-large > .uk-nav-default .uk-nav-header,
-.uk-card-large > .uk-nav-default .uk-nav-divider {
+  .uk-card-large > .uk-nav-default .uk-nav-header,
+  .uk-card-large > .uk-nav-default .uk-nav-divider {
     padding-left: 0;
     padding-right: 0;
   }
@@ -3357,7 +3358,7 @@ select.uk-form-width-xsmall {
   border-radius: 500px;
   vertical-align: middle;
   /* 1 */
-  background: #0077b6;
+  background: #00802b;
   color: #fff !important;
   font-size: 11px;
   /* 2 */
@@ -3380,7 +3381,7 @@ select.uk-form-width-xsmall {
 .uk-label {
   display: inline-block;
   padding: 0 10px;
-  background: #0077b6;
+  background: #00802b;
   line-height: 1.5;
   font-size: 0.875rem;
   color: #fff;
@@ -3720,7 +3721,7 @@ select.uk-form-width-xsmall {
 /* Focus */
 .uk-search-default .uk-search-input:focus {
   background-color: rgba(0, 0, 0, 0);
-  border-color: #0077b6;
+  border-color: #00802b;
 }
 
 /*
@@ -3900,137 +3901,35 @@ select.uk-form-width-xsmall {
   width: 100% !important;
 }
 
-/* ========================================================================
-   Component: Dropdown
+/* Parent icon
  ========================================================================== */
-/*
- * 1. Hide by default
- * 2. Set position
- * 3. Set a default width
- * 4. Style
- */
-.uk-dropdown {
-  /* 1 */
-  display: none;
-  /* 2 */
-  position: absolute;
-  z-index: 1020;
-  --uk-position-offset: 10px;
-  --uk-position-viewport-offset: 15px;
-  /* 3 */
-  box-sizing: border-box;
-  min-width: 200px;
-  /* 4 */
-  padding: 25px;
-  background: #fff;
-  color: #666;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+.uk-drop-parent-icon {
+  margin-left: 0.25em;
+  transition: transform 0.3s ease-out;
 }
 
-/* Show */
-.uk-dropdown.uk-open {
-  display: block;
-}
-
-/*
- * Remove margin from the last-child
- */
-.uk-dropdown > :last-child {
-  margin-bottom: 0;
-}
-
-/* Size modifier
- ========================================================================== */
-.uk-dropdown-large {
-  padding: 40px;
-}
-
-/* Nav
- * Adopts `uk-nav`
- ========================================================================== */
-.uk-dropdown-nav {
-  font-size: 0.875rem;
-}
-
-/*
- * Items
- */
-.uk-dropdown-nav > li > a {
-  color: #999;
-}
-
-/* Hover + Active */
-.uk-dropdown-nav > li > a:hover,
-.uk-dropdown-nav > li.uk-active > a {
-  color: #666;
-}
-
-/*
- * Subtitle
- */
-.uk-dropdown-nav .uk-nav-subtitle {
-  font-size: 12px;
-}
-
-/*
- * Header
- */
-.uk-dropdown-nav .uk-nav-header {
-  color: #333;
-}
-
-/*
- * Divider
- */
-.uk-dropdown-nav .uk-nav-divider {
-  border-top: 1px solid #e5e5e5;
-}
-
-/*
- * Sublists
- */
-.uk-dropdown-nav .uk-nav-sub a {
-  color: #999;
-}
-
-.uk-dropdown-nav .uk-nav-sub a:hover,
-.uk-dropdown-nav .uk-nav-sub li.uk-active > a {
-  color: #666;
-}
-
-/* Grid modifiers
- ========================================================================== */
-.uk-dropdown-stack .uk-dropdown-grid > * {
-  width: 100% !important;
+[aria-expanded=true] > .uk-drop-parent-icon {
+  transform: rotateX(180deg);
 }
 
 /* ========================================================================
    Component: Dropbar
  ========================================================================== */
 /*
- * 1. Hide by default
- * 2. Set position
- * 3. Style
+ * Adopts `uk-drop`
+ * 1. Reset drop
+ * 2. Style
  */
 .uk-dropbar {
   --uk-position-offset: 0;
   --uk-position-shift-offset: 0;
   --uk-position-viewport-offset: 0;
   /* 1 */
-  display: none;
+  width: auto;
   /* 2 */
-  position: absolute;
-  z-index: 1020;
-  /* 3 */
-  box-sizing: border-box;
   padding: 25px 15px 25px 15px;
   background: #fff;
   color: #666;
-}
-
-/* Show */
-.uk-dropbar.uk-open {
-  display: block;
 }
 
 /*
@@ -4054,6 +3953,10 @@ select.uk-form-width-xsmall {
     padding-right: 40px;
   }
 }
+.uk-dropbar :focus-visible {
+  outline-color: #333 !important;
+}
+
 /* Size modifier
  ========================================================================== */
 .uk-dropbar-large {
@@ -4080,6 +3983,25 @@ select.uk-form-width-xsmall {
 }
 
 /* ========================================================================
+   Component: Dropnav
+ ========================================================================== */
+/*
+ * 1. Position
+ * 2. Reset dropbar
+ * 3. Width
+ */
+.uk-dropnav-dropbar {
+  /* 1 */
+  position: absolute;
+  z-index: 980;
+  /* 2 */
+  padding: 0;
+  /* 3 */
+  left: 0;
+  right: 0;
+}
+
+/* ========================================================================
    Component: Modal
  ========================================================================== */
 /*
@@ -4102,7 +4024,6 @@ select.uk-form-width-xsmall {
   z-index: 1010;
   /* 3 */
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   /* 4 */
   padding: 15px 15px;
   /* 5 */
@@ -4308,10 +4229,16 @@ select.uk-form-width-xsmall {
 .uk-modal-close-full {
   top: 0;
   right: 0;
-  padding: 20px;
+  padding: 10px;
   background: #fff;
 }
 
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-modal-close-full {
+    padding: 20px;
+  }
+}
 /* ========================================================================
    Component: Slideshow
  ========================================================================== */
@@ -4459,12 +4386,16 @@ select.uk-form-width-xsmall {
  ========================================================================== */
 /*
  * 1. Create position context so it's t the same like when fixed.
+ * 2. Create stacking context already when not sticky to have the same context
+*     for position set to `sticky` and `relative`
  * 2. More robust if padding and border are used and the sticky height is transitioned
  */
 .uk-sticky {
   /* 1 */
   position: relative;
   /* 2 */
+  z-index: 980;
+  /* 3 */
   box-sizing: border-box;
 }
 
@@ -4472,7 +4403,6 @@ select.uk-form-width-xsmall {
  * 1. Force new layer to resolve frame rate issues on devices with lower frame rates
  */
 .uk-sticky-fixed {
-  z-index: 980;
   margin: 0 !important;
   /* 1 */
   -webkit-backface-visibility: hidden;
@@ -4544,7 +4474,6 @@ select.uk-form-width-xsmall {
   background: #02131e;
   /* 3 */
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Phone landscape and bigger */
@@ -4705,10 +4634,13 @@ select.uk-form-width-xsmall {
 /*
  * Prevent horizontal scrollbar when the content is slide-out
  * Has to be on the `html` element too to make it work on the `body`
+ * 1. `clip` is needed for `position: sticky` elements to keep their position
  */
 .uk-offcanvas-page,
 .uk-offcanvas-container {
   overflow-x: hidden;
+  /* 1 */
+  overflow-x: clip;
 }
 
 /* Container
@@ -4901,7 +4833,7 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-notification-message-primary {
-  color: #0077b6;
+  color: #00802b;
 }
 
 /*
@@ -5120,8 +5052,8 @@ select.uk-form-width-xsmall {
   }
   /* Vertical */
   .uk-grid + .uk-grid,
-.uk-grid > .uk-grid-margin,
-* + .uk-grid-margin {
+  .uk-grid > .uk-grid-margin,
+  * + .uk-grid-margin {
     margin-top: 40px;
   }
 }
@@ -5198,19 +5130,19 @@ select.uk-form-width-xsmall {
 @media (min-width: 1200px) {
   /* Horizontal */
   .uk-grid-large,
-.uk-grid-column-large {
+  .uk-grid-column-large {
     margin-left: -70px;
   }
   .uk-grid-large > *,
-.uk-grid-column-large > * {
+  .uk-grid-column-large > * {
     padding-left: 70px;
   }
   /* Vertical */
   .uk-grid + .uk-grid-large,
-.uk-grid + .uk-grid-row-large,
-.uk-grid-large > .uk-grid-margin,
-.uk-grid-row-large > .uk-grid-margin,
-* + .uk-grid-margin-large {
+  .uk-grid + .uk-grid-row-large,
+  .uk-grid-large > .uk-grid-margin,
+  .uk-grid-row-large > .uk-grid-margin,
+  * + .uk-grid-margin-large {
     margin-top: 70px;
   }
 }
@@ -5424,20 +5356,20 @@ select.uk-form-width-xsmall {
 @media (min-width: 1200px) {
   /* Horizontal */
   .uk-grid-divider.uk-grid-large,
-.uk-grid-divider.uk-grid-column-large {
+  .uk-grid-divider.uk-grid-column-large {
     margin-left: -140px;
   }
   .uk-grid-divider.uk-grid-large > *,
-.uk-grid-divider.uk-grid-column-large > * {
+  .uk-grid-divider.uk-grid-column-large > * {
     padding-left: 140px;
   }
   .uk-grid-divider.uk-grid-large > :not(.uk-first-column)::before,
-.uk-grid-divider.uk-grid-column-large > :not(.uk-first-column)::before {
+  .uk-grid-divider.uk-grid-column-large > :not(.uk-first-column)::before {
     left: 70px;
   }
   /* Vertical */
   .uk-grid-divider.uk-grid-large.uk-grid-stack > .uk-grid-margin,
-.uk-grid-divider.uk-grid-row-large.uk-grid-stack > .uk-grid-margin {
+  .uk-grid-divider.uk-grid-row-large.uk-grid-stack > .uk-grid-margin {
     margin-top: 140px;
   }
   .uk-grid-divider.uk-grid-large.uk-grid-stack > .uk-grid-margin::before {
@@ -5539,10 +5471,11 @@ ul.uk-nav-sub {
  ========================================================================== */
 .uk-nav-parent-icon {
   margin-left: auto;
+  transition: transform 0.3s ease-out;
 }
 
-.uk-nav > li > a[aria-expanded=true] .uk-nav-parent-icon {
-  transform: rotate(180deg);
+.uk-nav > li.uk-open > a .uk-nav-parent-icon {
+  transform: rotateX(180deg);
 }
 
 /* Header
@@ -5799,7 +5732,7 @@ ul.uk-nav-sub {
 
 /* Parent icon  */
 .uk-nav-center .uk-nav-parent-icon {
-  margin-left: 4px;
+  margin-left: 0.25em;
 }
 
 /* Style modifier
@@ -5841,7 +5774,7 @@ ul.uk-nav-sub {
 .uk-navbar-right,
 [class*=uk-navbar-center] {
   display: flex;
-  gap: 30px;
+  gap: 15px;
   /* 1 */
   align-items: center;
 }
@@ -5885,11 +5818,11 @@ ul.uk-nav-sub {
 }
 
 .uk-navbar-center-left {
-  right: calc(100% + 30px);
+  right: calc(100% + 15px);
 }
 
 .uk-navbar-center-right {
-  left: calc(100% + 30px);
+  left: calc(100% + 15px);
 }
 
 [class*=uk-navbar-center-] {
@@ -5904,7 +5837,7 @@ ul.uk-nav-sub {
  */
 .uk-navbar-nav {
   display: flex;
-  gap: 30px;
+  gap: 15px;
   /* 1 */
   margin: 0;
   padding: 0;
@@ -5982,10 +5915,11 @@ ul.uk-nav-sub {
  ========================================================================== */
 .uk-navbar-parent-icon {
   margin-left: 4px;
+  transition: transform 0.3s ease-out;
 }
 
 .uk-navbar-nav > li > a[aria-expanded=true] .uk-navbar-parent-icon {
-  transform: rotate(180deg);
+  transform: rotateX(180deg);
 }
 
 /* Item
@@ -6042,34 +5976,21 @@ ul.uk-nav-sub {
 /* Dropdown
  ========================================================================== */
 /*
- * Adopts `uk-dropdown`
- * 1. Hide by default
- * 2. Set position
- * 3. Set a default width
- * 4. Style
+ * Adopts `uk-drop`
+ * 1. Set a default width
+ * 2. Style
  */
 .uk-navbar-dropdown {
-  /* 1 */
-  display: none;
-  /* 2 */
-  position: absolute;
-  z-index: 1020;
   --uk-position-offset: 15px;
   --uk-position-shift-offset: 0;
   --uk-position-viewport-offset: 15px;
-  /* 3 */
-  box-sizing: border-box;
+  /* 1 */
   width: 200px;
-  /* 4 */
+  /* 2 */
   padding: 25px;
   background: #fff;
   color: #666;
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Show */
-.uk-navbar-dropdown.uk-open {
-  display: block;
 }
 
 /*
@@ -6079,45 +6000,44 @@ ul.uk-nav-sub {
   margin-bottom: 0;
 }
 
+.uk-navbar-dropdown :focus-visible {
+  outline-color: #333 !important;
+}
+
 /*
  * Grid
  * Adopts `uk-grid`
  */
 /* Gutter Horizontal */
-.uk-navbar-dropdown-grid {
+.uk-navbar-dropdown .uk-drop-grid {
   margin-left: -30px;
 }
 
-.uk-navbar-dropdown-grid > * {
+.uk-navbar-dropdown .uk-drop-grid > * {
   padding-left: 30px;
 }
 
 /* Gutter Vertical */
-.uk-navbar-dropdown-grid > .uk-grid-margin {
+.uk-navbar-dropdown .uk-drop-grid > .uk-grid-margin {
   margin-top: 30px;
-}
-
-/* Stack */
-.uk-navbar-dropdown-stack .uk-navbar-dropdown-grid > * {
-  width: 100% !important;
 }
 
 /*
  * Width modifier
  */
-.uk-navbar-dropdown-width-2:not(.uk-navbar-dropdown-stack) {
+.uk-navbar-dropdown-width-2:not(.uk-drop-stack) {
   width: 400px;
 }
 
-.uk-navbar-dropdown-width-3:not(.uk-navbar-dropdown-stack) {
+.uk-navbar-dropdown-width-3:not(.uk-drop-stack) {
   width: 600px;
 }
 
-.uk-navbar-dropdown-width-4:not(.uk-navbar-dropdown-stack) {
+.uk-navbar-dropdown-width-4:not(.uk-drop-stack) {
   width: 800px;
 }
 
-.uk-navbar-dropdown-width-5:not(.uk-navbar-dropdown-stack) {
+.uk-navbar-dropdown-width-5:not(.uk-drop-stack) {
   width: 1000px;
 }
 
@@ -6229,19 +6149,28 @@ ul.uk-nav-sub {
 /* Dropbar
  ========================================================================== */
 /*
- * 1. Reset dropbar
- * 2. Width
+ * Adopts `uk-dropnav-dropbar`
  */
-.uk-navbar-dropbar {
-  /* 1 */
-  display: block !important;
-  z-index: 980;
-  padding: 0;
-  /* 2 */
-  left: 0;
-  right: 0;
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-navbar-left,
+  .uk-navbar-right,
+  [class*=uk-navbar-center] {
+    gap: 30px;
+  }
+  .uk-navbar-center-left {
+    right: calc(100% + 30px);
+  }
+  .uk-navbar-center-right {
+    left: calc(100% + 30px);
+  }
 }
-
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-navbar-nav {
+    gap: 30px;
+  }
+}
 /* ========================================================================
    Component: Subnav
  ========================================================================== */
@@ -6368,7 +6297,7 @@ ul.uk-nav-sub {
 
 /* Active */
 .uk-subnav-pill > .uk-active > a {
-  background-color: #0077b6;
+  background-color: #00802b;
   color: #fff;
 }
 
@@ -6574,7 +6503,7 @@ ul.uk-nav-sub {
 /* Active */
 .uk-tab > .uk-active > a {
   color: #333;
-  border-color: #0077b6;
+  border-color: #00802b;
 }
 
 /* Disabled */
@@ -6826,18 +6755,18 @@ ul.uk-nav-sub {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.4);
-  transition: background-color 0.1s ease-in-out;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4));
+  transition: opacity 0.1s ease-in-out;
 }
 
 /* Hover */
 .uk-thumbnav > * > :hover::after {
-  background-color: transparent;
+  opacity: 0;
 }
 
 /* Active */
 .uk-thumbnav > .uk-active > *::after {
-  background-color: transparent;
+  opacity: 0;
 }
 
 /* Modifier: 'uk-thumbnav-vertical'
@@ -6947,6 +6876,134 @@ ul.uk-nav-sub {
 }
 
 /* ========================================================================
+   Component: Dropdown
+ ========================================================================== */
+/*
+ * Adopts `uk-drop`
+ * 1. Reset drop and let text expand the width instead of wrapping
+ * 2. Set a default width
+ * 3. Style
+ */
+.uk-dropdown {
+  --uk-position-offset: 10px;
+  --uk-position-viewport-offset: 15px;
+  /* 1 */
+  width: auto;
+  /* 2 */
+  min-width: 200px;
+  /* 3 */
+  padding: 25px;
+  background: #fff;
+  color: #666;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+/*
+ * Remove margin from the last-child
+ */
+.uk-dropdown > :last-child {
+  margin-bottom: 0;
+}
+
+.uk-dropdown :focus-visible {
+  outline-color: #333 !important;
+}
+
+/* Size modifier
+ ========================================================================== */
+.uk-dropdown-large {
+  padding: 40px;
+}
+
+/* Dropbar modifier
+ ========================================================================== */
+/*
+ * 1. Reset dropdown width to prevent to early shifting
+ * 2. Reset style
+ * 3. Padding
+ */
+.uk-dropdown-dropbar {
+  /* 1 */
+  width: auto;
+  /* 2 */
+  background: transparent;
+  /* 3 */
+  padding: 5px 0 25px 0;
+  --uk-position-viewport-offset: 15px;
+  box-shadow: none;
+}
+
+/* Phone landscape and bigger */
+@media (min-width: 640px) {
+  .uk-dropdown-dropbar {
+    --uk-position-viewport-offset: 30px;
+  }
+}
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-dropdown-dropbar {
+    --uk-position-viewport-offset: 40px;
+  }
+}
+.uk-dropdown-dropbar-large {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* Nav
+ * Adopts `uk-nav`
+ ========================================================================== */
+.uk-dropdown-nav {
+  font-size: 0.875rem;
+}
+
+/*
+ * Items
+ */
+.uk-dropdown-nav > li > a {
+  color: #999;
+}
+
+/* Hover + Active */
+.uk-dropdown-nav > li > a:hover,
+.uk-dropdown-nav > li.uk-active > a {
+  color: #666;
+}
+
+/*
+ * Subtitle
+ */
+.uk-dropdown-nav .uk-nav-subtitle {
+  font-size: 12px;
+}
+
+/*
+ * Header
+ */
+.uk-dropdown-nav .uk-nav-header {
+  color: #333;
+}
+
+/*
+ * Divider
+ */
+.uk-dropdown-nav .uk-nav-divider {
+  border-top: 1px solid #e5e5e5;
+}
+
+/*
+ * Sublists
+ */
+.uk-dropdown-nav .uk-nav-sub a {
+  color: #999;
+}
+
+.uk-dropdown-nav .uk-nav-sub a:hover,
+.uk-dropdown-nav .uk-nav-sub li.uk-active > a {
+  color: #666;
+}
+
+/* ========================================================================
    Component: Lightbox
  ========================================================================== */
 /*
@@ -6991,10 +7048,6 @@ ul.uk-nav-sub {
 /*
  * Focus
  */
-.uk-lightbox :focus {
-  outline-color: rgba(255, 255, 255, 0.7);
-}
-
 .uk-lightbox :focus-visible {
   outline-color: rgba(255, 255, 255, 0.7);
 }
@@ -8057,10 +8110,10 @@ ul.uk-nav-sub {
   line-height: 1.4;
   color: #999;
 }
-.uk-text-meta a {
+.uk-text-meta > a {
   color: #999;
 }
-.uk-text-meta a:hover {
+.uk-text-meta > a:hover {
   color: #666;
   text-decoration: none;
 }
@@ -8141,7 +8194,7 @@ ul.uk-nav-sub {
 }
 
 .uk-text-primary {
-  color: #0077b6 !important;
+  color: #00802b !important;
 }
 
 .uk-text-secondary {
@@ -8176,7 +8229,8 @@ ul.uk-nav-sub {
   /* 3 */
   display: inline-block;
   /* 4 */
-  background-color: #0077b6;
+  background-color: #00802b;
+  background-image: linear-gradient(90deg, #00802b 0%, spin(#00802b, 40%) 100%);
 }
 
 /* Alignment modifiers
@@ -8503,7 +8557,7 @@ iframe[data-uk-cover] {
 }
 
 .uk-background-primary {
-  background-color: #0077b6;
+  background-color: #00802b;
 }
 
 .uk-background-secondary {
@@ -8762,15 +8816,15 @@ iframe[data-uk-cover] {
     float: right;
   }
   .uk-align-left,
-.uk-align-left\@s,
-.uk-align-left\@m,
-.uk-align-left\@l {
+  .uk-align-left\@s,
+  .uk-align-left\@m,
+  .uk-align-left\@l {
     margin-right: 40px;
   }
   .uk-align-right,
-.uk-align-right\@s,
-.uk-align-right\@m,
-.uk-align-right\@l {
+  .uk-align-right\@s,
+  .uk-align-right\@m,
+  .uk-align-right\@l {
     margin-left: 40px;
   }
 }
@@ -8837,7 +8891,6 @@ iframe[data-uk-cover] {
   padding: 10px;
   border: 1px solid #e5e5e5;
   overflow: auto;
-  -webkit-overflow-scrolling: touch;
   resize: both;
 }
 
@@ -8890,7 +8943,6 @@ iframe[data-uk-cover] {
  */
 .uk-overflow-auto {
   overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .uk-overflow-auto > :last-child {
@@ -9042,7 +9094,7 @@ iframe[data-uk-cover] {
   object-fit: scale-down;
 }
 
-/* 
+/*
  * Position
  */
 .uk-object-top-left {
@@ -9196,7 +9248,7 @@ iframe[data-uk-cover] {
 /* 2 */
 @-moz-document url-prefix() {
   .uk-dropcap::first-letter,
-.uk-dropcap > p:first-of-type::first-letter {
+  .uk-dropcap > p:first-of-type::first-letter {
     margin-top: 1.1%;
   }
 }
@@ -10453,23 +10505,43 @@ iframe[data-uk-cover] {
 /* Based on the State of the Parent Element
  ========================================================================== */
 /*
- * Can't use `display: none` nor `visibility: hidden` because both are not focusable.
+ * Mind that `display: none`, `visibility: hidden` and `opacity: 0`
+ * remove the element from the accessibility tree and that
+ * `display: none` and `visibility: hidden` are not focusable.
+ *
  * The target stays visible if any element within receives focus through keyboard.
  */
 /*
- * Discard space when hidden.
+ * Remove space when hidden.
+ * 1. Remove from document flow.
+ * 2. Hide element and shrink its dimension. Can't use zero dimensions together
+ *    with `overflow: hidden` it would remove it from the accessibility tree.
+ * 3. Hide the single rendered pixel.
+ * 4. Prevent text wrapping caused by `width: 1px` because it has side effects on vocalisation
+ *    by screen readers and the visual tracking indicator of other assistive technologies.
  */
+.uk-hidden-visually:not(:focus):not(:active):not(:focus-within),
 .uk-visible-toggle:not(:hover):not(:focus) .uk-hidden-hover:not(:focus-within) {
+  /* 1 */
   position: absolute !important;
-  width: 0 !important;
-  height: 0 !important;
+  /* 2 */
+  width: 1px !important;
+  height: 1px !important;
   padding: 0 !important;
+  border: 0 !important;
   margin: 0 !important;
   overflow: hidden !important;
+  /* 3 */
+  clip-path: inset(50%) !important;
+  /* 4 */
+  white-space: nowrap !important;
 }
 
 /*
  * Keep space when hidden.
+ * Hide element without shrinking its dimension.
+ * Unfortunately, can't use `clip-path: inset(50%)` because hover won't work
+ * if the element is positioned outside of the toggle box.
  */
 .uk-visible-toggle:not(:hover):not(:focus) .uk-invisible-hover:not(:focus-within) {
   opacity: 0 !important;
@@ -10566,7 +10638,7 @@ iframe[data-uk-cover] {
 .uk-overlay-primary :not(pre) > samp,
 .uk-offcanvas-bar :not(pre) > samp {
   color: rgba(255, 255, 255, 0.85);
-  background: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .uk-light em, .uk-section-primary:not(.uk-preserve-color) em, .uk-section-secondary:not(.uk-preserve-color) em, .uk-tile-primary:not(.uk-preserve-color) em, .uk-tile-secondary:not(.uk-preserve-color) em, .uk-card-primary.uk-card-body em, .uk-card-primary > :not([class*=uk-card-media]) em, .uk-card-secondary.uk-card-body em, .uk-card-secondary > :not([class*=uk-card-media]) em, .uk-overlay-primary em, .uk-offcanvas-bar em {
   color: #fff;
@@ -10692,9 +10764,6 @@ iframe[data-uk-cover] {
 }
 .uk-light hr, .uk-section-primary:not(.uk-preserve-color) hr, .uk-section-secondary:not(.uk-preserve-color) hr, .uk-tile-primary:not(.uk-preserve-color) hr, .uk-tile-secondary:not(.uk-preserve-color) hr, .uk-card-primary.uk-card-body hr, .uk-card-primary > :not([class*=uk-card-media]) hr, .uk-card-secondary.uk-card-body hr, .uk-card-secondary > :not([class*=uk-card-media]) hr, .uk-overlay-primary hr, .uk-offcanvas-bar hr, .uk-light .uk-hr, .uk-section-primary:not(.uk-preserve-color) .uk-hr, .uk-section-secondary:not(.uk-preserve-color) .uk-hr, .uk-tile-primary:not(.uk-preserve-color) .uk-hr, .uk-tile-secondary:not(.uk-preserve-color) .uk-hr, .uk-card-primary.uk-card-body .uk-hr, .uk-card-primary > :not([class*=uk-card-media]) .uk-hr, .uk-card-secondary.uk-card-body .uk-hr, .uk-card-secondary > :not([class*=uk-card-media]) .uk-hr, .uk-overlay-primary .uk-hr, .uk-offcanvas-bar .uk-hr {
   border-top-color: rgba(255, 255, 255, 0.2);
-}
-.uk-light :focus, .uk-section-primary:not(.uk-preserve-color) :focus, .uk-section-secondary:not(.uk-preserve-color) :focus, .uk-tile-primary:not(.uk-preserve-color) :focus, .uk-tile-secondary:not(.uk-preserve-color) :focus, .uk-card-primary.uk-card-body :focus, .uk-card-primary > :not([class*=uk-card-media]) :focus, .uk-card-secondary.uk-card-body :focus, .uk-card-secondary > :not([class*=uk-card-media]) :focus, .uk-overlay-primary :focus, .uk-offcanvas-bar :focus {
-  outline-color: #fff;
 }
 .uk-light :focus-visible, .uk-section-primary:not(.uk-preserve-color) :focus-visible, .uk-section-secondary:not(.uk-preserve-color) :focus-visible, .uk-tile-primary:not(.uk-preserve-color) :focus-visible, .uk-tile-secondary:not(.uk-preserve-color) :focus-visible, .uk-card-primary.uk-card-body :focus-visible, .uk-card-primary > :not([class*=uk-card-media]) :focus-visible, .uk-card-secondary.uk-card-body :focus-visible, .uk-card-secondary > :not([class*=uk-card-media]) :focus-visible, .uk-overlay-primary :focus-visible, .uk-offcanvas-bar :focus-visible {
   outline-color: #fff;
@@ -11020,7 +11089,7 @@ iframe[data-uk-cover] {
 .uk-overlay-primary .uk-checkbox:indeterminate,
 .uk-offcanvas-bar .uk-checkbox:indeterminate {
   background-color: #fff;
-  border-color: rgba(255, 255, 255, 0.85);
+  border-color: #fff;
 }
 .uk-light .uk-radio:checked:focus, .uk-section-primary:not(.uk-preserve-color) .uk-radio:checked:focus, .uk-section-secondary:not(.uk-preserve-color) .uk-radio:checked:focus, .uk-tile-primary:not(.uk-preserve-color) .uk-radio:checked:focus, .uk-tile-secondary:not(.uk-preserve-color) .uk-radio:checked:focus, .uk-card-primary.uk-card-body .uk-radio:checked:focus, .uk-card-primary > :not([class*=uk-card-media]) .uk-radio:checked:focus, .uk-card-secondary.uk-card-body .uk-radio:checked:focus, .uk-card-secondary > :not([class*=uk-card-media]) .uk-radio:checked:focus, .uk-overlay-primary .uk-radio:checked:focus, .uk-offcanvas-bar .uk-radio:checked:focus,
 .uk-light .uk-checkbox:checked:focus,
@@ -11508,19 +11577,19 @@ iframe[data-uk-cover] {
  ========================================================================== */
 @media print {
   *,
-*::before,
-*::after {
+  *::before,
+  *::after {
     background: transparent !important;
     color: black !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
   a,
-a:visited {
+  a:visited {
     text-decoration: underline;
   }
   pre,
-blockquote {
+  blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
@@ -11528,7 +11597,7 @@ blockquote {
     display: table-header-group;
   }
   tr,
-img {
+  img {
     page-break-inside: avoid;
   }
   img {
@@ -11538,13 +11607,13 @@ img {
     margin: 0.5cm;
   }
   p,
-h2,
-h3 {
+  h2,
+  h3 {
     orphans: 3;
     widows: 3;
   }
   h2,
-h3 {
+  h3 {
     page-break-after: avoid;
   }
 }
@@ -11604,19 +11673,21 @@ form label.uk-width-1-1 {
   background: rgba(0, 0, 0, 0.2);
 }
 
-#kohoutek-badge {
-  max-height: 75vh;
-  max-width: 75vw;
-  margin-top: 45vh;
+#kohoutek-badge-holder {
+  max-height: 70vh;
+  max-width: 70vw;
+  margin-top: 50vh;
   transform: translate(0, -50%);
+  cursor: pointer;
 }
 
 .kohoutek-frontactive .kohoutek-totop svg {
   display: none;
 }
 
-.kohoutek-frontactive .kohoutek-illuminate, .kohoutek-mobile-illuminate {
-  color: #0098e9 !important;
+.kohoutek-frontactive .kohoutek-illuminate,
+.kohoutek-mobile-illuminate {
+  color: #00b33c !important;
   font-weight: 700;
 }
 
