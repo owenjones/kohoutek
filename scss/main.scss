@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap');
 
-$theme-color: darken(#009933, 5%);
+$theme-color: darken(#009933, 8%);
 $global-primary-background: $theme-color;
 $global-link-color: $theme-color;
-$global-link-hover-color: lighten($theme-color, 10%);
-$form-radio-checked-focus-background: lighten($theme-color, 10%);
+$global-link-hover-color: $theme-color;
+$form-radio-checked-focus-background: $theme-color;
 
 $global-secondary-background: darken(#031927, 2%);
 $global-muted-background: #fcfcfc;
@@ -115,7 +115,7 @@ form label.uk-width-1-1 {
 
 .kohoutek-frontactive .kohoutek-illuminate,
 .kohoutek-mobile-illuminate {
-  color: $global-link-hover-color !important;
+  color: lighten($theme-color, 18%) !important;
   font-weight: 700;
 }
 
