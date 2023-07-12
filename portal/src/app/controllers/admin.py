@@ -35,7 +35,7 @@ def index():
     scouts = Entry.query.filter_by(organisation=Organisation.scouting).all()
     guides = Entry.query.filter_by(organisation=Organisation.guiding).all()
     return render_template(
-        "admin/index.jinja",
+        "admin/index.html",
         districts=districts,
         total_entries=entries,
         scout_entries=scouts,
@@ -54,7 +54,7 @@ def listEntries(status):
     else:
         entries = Entry.query
 
-    return render_template("admin/entries.jinja", entries=entries)
+    return render_template("admin/entries.html", entries=entries)
 
 
 @blueprint.route("/entries/map")
@@ -65,7 +65,7 @@ def mapEntries():
     center = f"[{ current_app.config['MAP']['default_lon']}, { current_app.config['MAP']['default_lat']}]"
 
     return render_template(
-        "admin/entries_map.jinja",
+        "admin/entries_map.html",
         matches=matches,
         center=center,
         mapbox_key=current_app.config["MAP"]["mapbox_key"],
@@ -76,14 +76,14 @@ def mapEntries():
 @needs_admin
 def entry(id):
     entry = Entry.query.get_or_404(id)
-    return render_template("admin/entry/view.jinja", entry=entry)
+    return render_template("admin/entry/view.html", entry=entry)
 
 
 @blueprint.route("/entry/<int:id>/contact", methods=["GET"])
 @needs_admin
 def contactEntry(id):
     entry = Entry.query.get_or_404(id)
-    return render_template("admin/entry/contact.jinja", entry=entry)
+    return render_template("admin/entry/contact.html", entry=entry)
 
 
 @blueprint.route("/entry/<int:id>/contact", methods=["POST"])
@@ -97,7 +97,7 @@ def contactEntryProcess(id):
 @needs_admin
 def cancelEntry(id):
     entry = Entry.query.get_or_404(id)
-    return render_template("admin/entry/cancel.jinja", entry=entry)
+    return render_template("admin/entry/cancel.html", entry=entry)
 
 
 @blueprint.route("/entry/<int:id>/cancel", methods=["POST"])
@@ -128,7 +128,7 @@ def cancelEntryProcess(id):
 @needs_admin
 def resendLink(id):
     entry = Entry.query.get_or_404(id)
-    return render_template("admin/entry/resend-link.jinja", entry=entry)
+    return render_template("admin/entry/resend-link.html", entry=entry)
 
 
 @blueprint.route("/entry/<int:id>/resend-link", methods=["POST"])
@@ -149,7 +149,7 @@ def resendLinkProcess(id):
 @needs_admin
 def listEntryOrders(id):
     entry = Entry.query.get_or_404(id)
-    return render_template("admin/entry/orders.jinja", entry=entry)
+    return render_template("admin/entry/orders.html", entry=entry)
 
 
 # Order Routes
@@ -168,21 +168,21 @@ def listOrders(status):
     else:
         orders = Order.query
 
-    return render_template("admin/orders.jinja", orders=orders)
+    return render_template("admin/orders.html", orders=orders)
 
 
 @blueprint.route("/order/<int:id>")
 @needs_admin
 def order(id):
     order = Order.query.get_or_404(id)
-    return render_template("admin/order/view.jinja", order=order)
+    return render_template("admin/order/view.html", order=order)
 
 
 @blueprint.route("/order/<int:id>/payment")
 @needs_admin
 def recordPayment(id):
     order = Order.query.get_or_404(id)
-    return render_template("admin/order/record_payment.jinja", order=order)
+    return render_template("admin/order/record_payment.html", order=order)
 
 
 @blueprint.route("/order/<int:id>/payment", methods=["POST"])
@@ -216,21 +216,21 @@ def recordPaymentProcess(id):
     order.save()
 
     flash("Payment data saved", "success")
-    return render_template("admin/order/record_payment.jinja", order=order)
+    return render_template("admin/order/record_payment.html", order=order)
 
 
 @blueprint.route("/order/<int:id>/dispatch")
 @needs_admin
 def dispatchOrder(id):
     order = Order.query.get_or_404(id)
-    return render_template("admin/order/dispatch.jinja", order=order)
+    return render_template("admin/order/dispatch.html", order=order)
 
 
 @blueprint.route("/order/<int:id>/dispatch/info")
 @needs_admin
 def dispatchOrderInfo(id):
     order = Order.query.get_or_404(id)
-    return render_template("admin/order/dispatch.jinja", order=order)
+    return render_template("admin/order/dispatch.html", order=order)
 
 
 @blueprint.route("/order/<int:id>/dispatch", methods=["POST"])
@@ -243,14 +243,14 @@ def dispatchOrderProcess(id):
     order.save()
 
     flash("Marked as dispatched", "success")
-    return render_template("admin/order/dispatch.jinja", order=order)
+    return render_template("admin/order/dispatch.html", order=order)
 
 
 @blueprint.route("/order/<int:id>/cancel")
 @needs_admin
 def cancelOrder(id):
     order = Order.query.get_or_404(id)
-    return render_template("admin/order/cancel.jinja", order=order)
+    return render_template("admin/order/cancel.html", order=order)
 
 
 @blueprint.route("/order/<int:id>/cancel", methods=["POST"])
@@ -280,4 +280,4 @@ def scores():
     teams = (
         Team.query.filter(Team.submitted == True).order_by(Team.rawScore.desc()).all()
     )
-    return render_template("admin/scores.jinja", teams=teams)
+    return render_template("admin/scores.html", teams=teams)

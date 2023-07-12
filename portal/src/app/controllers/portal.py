@@ -25,10 +25,10 @@ def index():
     if current_user.is_authenticated and current_user.hasPermission(Permission.TEAM):
         entry = current_user.entry
         orders = entry.orders
-        return render_template("portal/index.jinja", entry=entry, orders=orders)
+        return render_template("portal/index.html", entry=entry, orders=orders)
 
     else:
-        response = make_response(render_template("portal/need-login.jinja"))
+        response = make_response(render_template("portal/need-login.html"))
         response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
         response.headers["Pragma"] = "no-cache"
         return response
@@ -66,7 +66,7 @@ def logout():
 
 @blueprint.route("/resend-link", methods=["GET"])
 def resendLink():
-    return render_template("portal/resend-link.jinja")
+    return render_template("portal/resend-link.html")
 
 
 @blueprint.route("/resend-link", methods=["POST"])
@@ -82,11 +82,11 @@ def resendLinkProcess():
         "If an entry with this email exists, the team portal link has been resent",
         "success",
     )
-    return render_template("portal/resend-link.jinja")
+    return render_template("portal/resend-link.html")
 
 
 @blueprint.route("/activities")
 @needs_team
 def downloadActivities():
     match = current_user.entry.match or False
-    return render_template("portal/download-activities.jinja", matchPrompt=(not match))
+    return render_template("portal/download-activities.html", matchPrompt=(not match))
