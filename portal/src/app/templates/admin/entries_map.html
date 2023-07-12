@@ -1,4 +1,4 @@
-{% extends "admin/template.jinja" %}
+{% extends "admin/template.html" %}
 {% block headjs %}
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
@@ -6,45 +6,47 @@
 {% block body %}
 <div class="uk-section uk-section-default uk-section-xsmall">
   <div>
-    <div class="uk-width-1-1 uk-text-center"><p>{{ matches|count }} entries have given a location</p></div>
+    <div class="uk-width-1-1 uk-text-center">
+      <p>{{ matches|count }} entries have given a location</p>
+    </div>
     <div id="map" class="uk-width-1-1" style="height: 750px;"></div>
   </div>
 </div>
 {% endblock %}
 {% block bodyjs %}
 <script>
-mapboxgl.accessToken = '{{ mapbox_key }}';
+  mapboxgl.accessToken = '{{ mapbox_key }}';
 
-var map = new mapboxgl.Map({
-container: 'map',
-style: 'mapbox://styles/mapbox/streets-v11',
-pinchWithRotate: false,
-trackResize: true,
-{% if matches|count == 0 %}
-center: {{ center }},
-zoom: 4,
-{% endif %}
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    pinchWithRotate: false,
+    trackResize: true,
+{% if matches | count == 0 %}
+  center: { { center } },
+  zoom: 4,
+    {% endif %}
 });
 
-var markers = new Array()
-var popupOptions = {closeButton: false, focusAfterOpen: false, width: "auto", className: "map-popup"};
+  var markers = new Array()
+  var popupOptions = { closeButton: false, focusAfterOpen: false, width: "auto", className: "map-popup" };
 
-{% for m in matches %}
-markers.push(new mapboxgl.Marker({color: "#0077b6"})
-  .setLngLat({{ m.lngLat }})
-  .setPopup(new mapboxgl.Popup(popupOptions)
-  .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">{{ m.entry.name }}</h4></div>"))
-  .addTo(map));
-{% endfor %}
+  {% for m in matches %}
+  markers.push(new mapboxgl.Marker({ color: "#0077b6" })
+    .setLngLat({{ m.lngLat }})
+    .setPopup(new mapboxgl.Popup(popupOptions)
+      .setHTML("<div class=\"uk-padding-small uk-text-center\"><h4 class=\"uk-margin-remove-bottom\">{{ m.entry.name }}</h4></div>"))
+    .addTo(map));
+  {% endfor %}
 
-{% if matches|count > 0 %}
-var bounds = new mapboxgl.LngLatBounds()
-markers.forEach((marker) => bounds.extend(marker.getLngLat()))
-{% endif %}
+  {% if matches | count > 0 %}
+  var bounds = new mapboxgl.LngLatBounds()
+  markers.forEach((marker) => bounds.extend(marker.getLngLat()))
+  {% endif %}
 
-map.on('load', function() {
-  map.resize();
-  map.fitBounds(bounds, {padding: 80});
-});
+  map.on('load', function () {
+    map.resize();
+    map.fitBounds(bounds, { padding: 80 });
+  });
 </script>
 {% endblock %}

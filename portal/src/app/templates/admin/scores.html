@@ -1,8 +1,8 @@
-{% extends "admin/template.jinja" %}
+{% extends "admin/template.html" %}
 {% block body %}
 <div class="uk-section uk-section-default uk-section-xsmall">
   <div class="uk-container uk-container-xlarge">
-    {% include "portal/components/alerts.jinja" %}
+    {% include "portal/components/alerts.html" %}
 
     <table class="uk-table uk-table-responsive uk-table-striped uk-table-middle">
       <thead>
@@ -37,13 +37,13 @@
               <div uk-drop="mode: hover; pos: left; delay-hide: 150;">
                 <div class="uk-card uk-card-small uk-card-body uk-card-default">
                   <ul class="uk-list">
-                  {% for score in team.scores %}
+                    {% for score in team.scores %}
                     <li><strong>{{ score.activity.name }}</strong> - {{ score.score }}</li>
-                  {% endfor %}
+                    {% endfor %}
                   </ul>
                 </div>
               </div>
-            </td>
+          </td>
           <td>{{ team.weightedScore }}</td>
           <td>{% if team.entry.eligable %}<span class="uk-text-success" uk-icon="star"></span>{% endif %}</td>
         </tr>

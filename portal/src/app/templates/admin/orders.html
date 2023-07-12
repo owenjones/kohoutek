@@ -1,8 +1,8 @@
-{% extends "admin/template.jinja" %}
+{% extends "admin/template.html" %}
 {% block body %}
 <div class="uk-section uk-section-default uk-section-xsmall">
   <div class="uk-container uk-container-xlarge">
-    {% include "portal/components/alerts.jinja" %}
+    {% include "portal/components/alerts.html" %}
 
     <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
       <div class="uk-navbar-center">
@@ -31,7 +31,8 @@
         {% for order in orders %}
         <tr>
           <td class="uk-text-small uk-table-link">
-            <a href="{{ url_for('admin.order', id=order.id)}}">{{ order.code }}</a></td>
+            <a href="{{ url_for('admin.order', id=order.id)}}">{{ order.code }}</a>
+          </td>
           </td>
           <td>
             <div class="uk-inline">
@@ -39,9 +40,9 @@
               <div uk-drop="mode: hover; pos: right; delay-hide: 150;">
                 <div class="uk-card uk-card-small uk-card-body uk-card-default">
                   <ul class="uk-list">
-                  {% for item in order.items %}
+                    {% for item in order.items %}
                     <li><strong>{{ item.item.name }}</strong> - {{ item.quantity }}</li>
-                  {% endfor %}
+                    {% endfor %}
                   </ul>
                 </div>
               </div>

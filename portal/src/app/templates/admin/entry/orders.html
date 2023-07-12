@@ -1,4 +1,4 @@
-{% extends "admin/entry/frame.jinja" %}
+{% extends "admin/entry/frame.html" %}
 {% block module %}
 <div class="uk-card uk-card-default uk-card-body uk-width-1-1">
   <table class="uk-table uk-table-responsive uk-table-middle uk-table-divider">
@@ -14,7 +14,8 @@
       {% for order in entry.orders %}
       <tr>
         <td class="uk-text-small uk-table-link">
-          <a href="{{ url_for('admin.order', id=order.id)}}">{{ order.code }}</a></td>
+          <a href="{{ url_for('admin.order', id=order.id)}}">{{ order.code }}</a>
+        </td>
         </td>
         <td>{{ order.quantity }}</td>
         <td>{{ "£{:,.2f}".format(order.total) }}</td>
