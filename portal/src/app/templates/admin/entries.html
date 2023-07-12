@@ -1,8 +1,8 @@
-{% extends "admin/template.jinja" %}
+{% extends "admin/template.html" %}
 {% block body %}
 <div class="uk-section uk-section-default uk-section-xsmall">
   <div class="uk-container uk-container-xlarge">
-    {% include "portal/components/alerts.jinja" %}
+    {% include "portal/components/alerts.html" %}
 
     <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
       <div class="uk-navbar-center">
@@ -35,7 +35,8 @@
           <td>{{ entry.district }}</td>
           <td>{{ entry.county_name }}</td>
           <td>{{ entry.organisation_name }}</td>
-          <td>{% if entry.verified %}<span class="uk-text-success" uk-icon="check"></span>{% else %}<span class="uk-text-danger" uk-icon="close"></span>{% endif %}</td>
+          <td>{% if entry.verified %}<span class="uk-text-success" uk-icon="check"></span>{% else %}<span
+              class="uk-text-danger" uk-icon="close"></span>{% endif %}</td>
         </tr>
         {% endfor %}
       </tbody>

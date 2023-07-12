@@ -1,4 +1,4 @@
-{% extends "portal/template.jinja" %}
+{% extends "portal/template.html" %}
 {% block body %}
 <div class="uk-section uk-section-primary uk-section-xsmall uk-text-center">
   <h2>Kohoutek Team Portal</h2>
@@ -8,7 +8,7 @@
     <div class="uk-flex uk-flex-stretch" uk-grid>
       <div class="uk-width-1-1 uk-text-center">
         <h1>{{ entry.name }}</h1>
-        {% include "portal/components/alerts.jinja" %}
+        {% include "portal/components/alerts.html" %}
       </div>
       <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
         <div>
@@ -17,7 +17,8 @@
               <h4>Activities</h4>
               <p>Download the Kohoutek activity pack</p>
             </div>
-            <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('portal.downloadActivities') }}">Activities</a></div>
+            <div><a class="uk-button uk-button-default uk-button-large"
+                href="{{ url_for('portal.downloadActivities') }}">Activities</a></div>
           </div>
         </div>
 
@@ -27,7 +28,8 @@
               <h4>Badges</h4>
               <p>Order badges for your team</p>
             </div>
-            <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('orders.placeOrder') }}">Order Badges</a></div>
+            <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('orders.placeOrder') }}">Order
+                Badges</a></div>
           </div>
         </div>
 
@@ -39,9 +41,11 @@
             </div>
             <div>
               {% if not entry.match %}
-              <a class="uk-button uk-button-default uk-button-large" href="{{ url_for('matchmake.details') }}">Add Details</a>
+              <a class="uk-button uk-button-default uk-button-large" href="{{ url_for('matchmake.details') }}">Add
+                Details</a>
               {% else %}
-              <a class="uk-button uk-button-default uk-button-large" href="{{ url_for('matchmake.index') }}">Matchmake</a>
+              <a class="uk-button uk-button-default uk-button-large"
+                href="{{ url_for('matchmake.index') }}">Matchmake</a>
               {% endif %}
             </div>
           </div>
@@ -56,7 +60,8 @@
               </p>
             </div>
             <div>
-              <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('scoring.index') }}">Enter Scores</a></div>
+              <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('scoring.index') }}">Enter
+                  Scores</a></div>
             </div>
           </div>
         </div>
@@ -109,7 +114,8 @@
           </tbody>
         </table>
         <p class="uk-margin uk-text-small">
-          If you need to get in touch with the Kohoutek planning team for any reason we can be reached at <a href="mailto:contact@kohoutek.co.uk">contact@kohoutek.co.uk</a>.
+          If you need to get in touch with the Kohoutek planning team for any reason we can be reached at <a
+            href="mailto:contact@kohoutek.co.uk">contact@kohoutek.co.uk</a>.
         </p>
         <hr class="uk-divider-icon uk-hidden@l" />
       </div>
@@ -117,7 +123,7 @@
       <div class="uk-width-1-2@m">
         <h3 class="uk-text-center uk-text-left@m">Badge Orders</h3>
         <div>
-          {% include "portal/orders/partials/order_list.jinja" %}
+          {% include "portal/orders/partials/order_list.html" %}
           {% if orders|count == 0 %}
           <p>You don't have any badge orders yet, place an order using the button above.</p>
           {% endif %}
@@ -129,10 +135,14 @@
 <div class="uk-section uk-section-primary uk-section-small">
   <div class="uk-container uk-container-small uk-text-center">
     <p class="uk-text-small">
-      Kohoutek is organised by students at the University of Bristol, with support from the <a href="https://www.facebook.com/UoBGaS" target="_blank" rel="noreferrer noopener">University of Bristol Guides and Scouts (UOBGAS)</a> society, part of the <a href="https://ssago.org" target="_blank" rel="noreferrer noopener">Student Scout and Guide Organisation (SSAGO)</a>.
+      Kohoutek is organised by students at the University of Bristol, with support from the <a
+        href="https://www.facebook.com/UoBGaS" target="_blank" rel="noreferrer noopener">University of Bristol Guides
+        and Scouts (UOBGAS)</a> society, part of the <a href="https://ssago.org" target="_blank"
+        rel="noreferrer noopener">Student Scout and Guide Organisation (SSAGO)</a>.
     </p>
     <p class="uk-text-small">
-      More information about the organisation and history of the event can be found on the <a href="{{ url_for('root.index') }}#about">home page</a>.
+      More information about the organisation and history of the event can be found on the <a
+        href="{{ url_for('root.index') }}#about">home page</a>.
     </p>
   </div>
 </div>

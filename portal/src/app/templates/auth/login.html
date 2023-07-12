@@ -1,4 +1,4 @@
-{% extends "auth/template.jinja" %}
+{% extends "auth/template.html" %}
 {% block body %}
 <div class="uk-card uk-card-default uk-position-center">
   <div class="uk-card-body">
@@ -20,16 +20,16 @@
 
       {% with messages = get_flashed_messages(with_categories=True) %}
       {% if messages %}
-        {% for type, message in messages %}
-        <div class="uk-alert uk-alert-{{ type }} uk-text-center">
-          {{ message }}
-        </div>
-        {% endfor %}
+      {% for type, message in messages %}
+      <div class="uk-alert uk-alert-{{ type }} uk-text-center">
+        {{ message }}
+      </div>
+      {% endfor %}
       {% endif %}
       {% endwith %}
       <button type="submit" class="uk-button uk-button-default uk-button-large uk-width-1-1">Login</button>
-      </div>
-    </form>
   </div>
+  </form>
+</div>
 </div>
 {% endblock %}

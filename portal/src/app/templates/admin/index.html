@@ -1,4 +1,4 @@
-{% extends "admin/template.jinja" %}
+{% extends "admin/template.html" %}
 {% block headjs %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" defer></script>
 {% endblock %}
@@ -7,7 +7,7 @@
   <div class="uk-container uk-container-medium">
     <div class="uk-flex uk-flex-stretch" uk-grid>
       <div class="uk-width-1-1">
-        {% include "portal/components/alerts.jinja" %}
+        {% include "portal/components/alerts.html" %}
       </div>
       <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
         <div>
@@ -44,28 +44,28 @@
   <div class="uk-container uk-container-medium">
     <canvas id="location-graph" width="600" height="200"></canvas>
     <script>
-    document.body.onload = function() {
-      var ctx = document.getElementById('location-graph').getContext('2d');
-      var myChart = new Chart(ctx, {
+      document.body.onload = function () {
+        var ctx = document.getElementById('location-graph').getContext('2d');
+        var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-              labels: [{% for d in districts %}'{{ d.name }}',{% endfor %}],
-              datasets: [{
-                  label: '# of Entries',
-                  data: [{% for d in districts %}'{{ d.entries|count }}',{% endfor %}],
-                  backgroundColor: '#0077b6',
-                  borderWidth: 1
+            labels: [{% for d in districts %}'{{ d.name }}',{% endfor %}],
+      datasets: [{
+        label: '# of Entries',
+        data: [{% for d in districts %}'{{ d.entries|count }}', {% endfor %}],
+        backgroundColor: '#0077b6',
+          borderWidth: 1
               }]
           },
-          options: {
-              scales: {
-                  yAxes: [{
-                      ticks: {
-                          beginAtZero: true
-                      }
-                  }]
-              }
-          }
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
       });
     }
     </script>

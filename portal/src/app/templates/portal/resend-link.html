@@ -1,4 +1,4 @@
-{% extends "portal/template.jinja" %}
+{% extends "portal/template.html" %}
 {% block background %}secondary{% endblock %}
 {% block body %}
 <div class="uk-position-center">
@@ -6,10 +6,12 @@
     <div class="uk-card-body">
       <h4 class="uk-card-title">Resend Team Portal Link</h4>
       <p>
-        We can resend your team portal link if you're unable to find it - please enter the email address you originally used when you signed up for Kohoutek 2021 below.
+        We can resend your team portal link if you're unable to find it - please enter the email address you originally
+        used when you signed up for Kohoutek 2021 below.
       </p>
       <p>
-        If you can't remember the email address you used please get in touch with us at <a href="mailto:contact@kohoutek.co.uk">contact@kohoutek.co.uk</a>.
+        If you can't remember the email address you used please get in touch with us at <a
+          href="mailto:contact@kohoutek.co.uk">contact@kohoutek.co.uk</a>.
       </p>
       <form method="POST" action="{{ url_for('portal.resendLinkProcess') }}" class="uk-form-stacked">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -22,11 +24,11 @@
 
         {% with messages = get_flashed_messages(with_categories=True) %}
         {% if messages %}
-          {% for type, message in messages %}
-          <div class="uk-alert uk-alert-{{ type }} uk-text-center">
-            {{ message }}
-          </div>
-          {% endfor %}
+        {% for type, message in messages %}
+        <div class="uk-alert uk-alert-{{ type }} uk-text-center">
+          {{ message }}
+        </div>
+        {% endfor %}
         {% endif %}
         {% endwith %}
 
