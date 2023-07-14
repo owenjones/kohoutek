@@ -7,6 +7,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from app import db
+from app.models import User, Role
+from app.utils import randomKey
+
 
 def init(app):
     with app.app_context():
@@ -30,13 +34,9 @@ if __name__ == "__main__":
 
     app = create_app(os.getenv("ENVIRONMENT"))
 
+    from add_tables import addTables
     from add_districts import addDistricts
-    from add_items import addItems
-    from add_postage_options import addPostageOptions
-    from add_activities import addActivities
 
     init(app)
+    addTables(app)
     addDistricts(app)
-    addItems(app)
-    addPostageOptions(app)
-    addActivities(app)

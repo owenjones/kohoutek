@@ -8,11 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app import db
-from app.models import User, Role, Organisation, County, District
-from app.utils import randomKey
-
-from add_items import addItems
-from add_postage_options import addPostageOptions
+from app.models import County, District
 
 
 def addDistricts(app):
@@ -64,4 +60,4 @@ if __name__ == "__main__":
     from app import create_app
 
     app = create_app(os.getenv("ENVIRONMENT"))
-    addDistrict(app)
+    addDistricts(app)
