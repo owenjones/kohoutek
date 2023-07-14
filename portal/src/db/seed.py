@@ -34,9 +34,7 @@ if __name__ == "__main__":
 
     app = create_app(os.getenv("ENVIRONMENT"))
 
-    from add_tables import addTables
     from add_districts import addDistricts
 
     init(app)
-    addTables(app)
     addDistricts(app)
