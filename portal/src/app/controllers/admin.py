@@ -10,9 +10,8 @@ from flask import (
     request,
     abort,
 )
-from flask_login import current_user, login_user, logout_user
 
-from app import limiter, db
+from app import db
 from app.models import (
     Entry,
     Organisation,
@@ -55,21 +54,6 @@ def listEntries(status):
         entries = Entry.query
 
     return render_template("admin/entries.html", entries=entries)
-
-
-@blueprint.route("/entries/map")
-@needs_admin
-def mapEntries():
-    matches = Matchmake.query.all()
-
-    center = f"[{ current_app.config['MAP']['default_lon']}, { current_app.config['MAP']['default_lat']}]"
-
-    return render_template(
-        "admin/entries_map.html",
-        matches=matches,
-        center=center,
-        mapbox_key=current_app.config["MAP"]["mapbox_key"],
-    )
 
 
 @blueprint.route("/entry/<int:id>")
@@ -143,141 +127,3 @@ def resendLinkProcess(id):
         flash(f"Something went wrong resending the link - { r.text }", "danger")
 
     return redirect(url_for("admin.entry", id=id))
-
-
-@blueprint.route("/entry/<int:id>/entries")
-@needs_admin
-def listEntryOrders(id):
-    entry = Entry.query.get_or_404(id)
-    return render_template("admin/entry/orders.html", entry=entry)
-
-
-# Order Routes
-@blueprint.route("/orders", defaults={"status": False})
-@blueprint.route("/orders/<string:status>")
-@needs_admin
-def listOrders(status):
-    if status:
-        try:
-            status = OrderStatus(status)
-            orders = Order.query.filter(Order.status == status)
-
-        except ValueError:
-            abort(404)
-
-    else:
-        orders = Order.query
-
-    return render_template("admin/orders.html", orders=orders)
-
-
-@blueprint.route("/order/<int:id>")
-@needs_admin
-def order(id):
-    order = Order.query.get_or_404(id)
-    return render_template("admin/order/view.html", order=order)
-
-
-@blueprint.route("/order/<int:id>/payment")
-@needs_admin
-def recordPayment(id):
-    order = Order.query.get_or_404(id)
-    return render_template("admin/order/record_payment.html", order=order)
-
-
-@blueprint.route("/order/<int:id>/payment", methods=["POST"])
-@needs_admin
-def recordPaymentProcess(id):
-    order = Order.query.get_or_404(request.form.get("id"))
-
-    order.payment.method = request.form.get("method")
-    order.payment.reference = request.form.get("reference")
-
-    status = request.form.get("status")
-    order.payment.status = status
-
-    if status == "received":
-        order.status = "complete"
-        order.payment.markReceived()
-
-    elif status in ["new", "error"]:
-        order.status = "incomplete"
-
-    elif status == "pending":
-        order.status = "payment_pending"
-
-    amount = request.form.get("amount")
-    order.payment.amount = float(amount) if amount != "" else 0
-
-    date = request.form.get("received_date")
-    date = date if date != "" else "2000-01-01"
-    order.payment.received_at = datetime.strptime(date, "%Y-%m-%d")
-
-    order.save()
-
-    flash("Payment data saved", "success")
-    return render_template("admin/order/record_payment.html", order=order)
-
-
-@blueprint.route("/order/<int:id>/dispatch")
-@needs_admin
-def dispatchOrder(id):
-    order = Order.query.get_or_404(id)
-    return render_template("admin/order/dispatch.html", order=order)
-
-
-@blueprint.route("/order/<int:id>/dispatch/info")
-@needs_admin
-def dispatchOrderInfo(id):
-    order = Order.query.get_or_404(id)
-    return render_template("admin/order/dispatch.html", order=order)
-
-
-@blueprint.route("/order/<int:id>/dispatch", methods=["POST"])
-@needs_admin
-def dispatchOrderProcess(id):
-    order = Order.query.get_or_404(request.form.get("id"))
-
-    order.status = "dispatched"
-    order.markDispatched()
-    order.save()
-
-    flash("Marked as dispatched", "success")
-    return render_template("admin/order/dispatch.html", order=order)
-
-
-@blueprint.route("/order/<int:id>/cancel")
-@needs_admin
-def cancelOrder(id):
-    order = Order.query.get_or_404(id)
-    return render_template("admin/order/cancel.html", order=order)
-
-
-@blueprint.route("/order/<int:id>/cancel", methods=["POST"])
-@needs_admin
-def cancelOrderProcess(id):
-    order = Order.query.get_or_404(request.form.get("id"))
-    if request.form.get("code").lower() == order.code.lower():
-        db.session.delete(order)
-        db.session.commit()
-
-        flash("Order has been cancelled", "success")
-        return redirect(url_for("admin.listOrders"))
-
-    else:
-        flash(
-            "Incorrect order code (are you sure you know what you're doing?).",
-            "warning",
-        )
-
-        return redirect(url_for("admin.cancelOrder", id=id))
-
-
-# Score Routes
-@blueprint.route("/scores")
-@needs_admin
-def scores():
-    teams = (
-        Team.query.filter(Team.submitted == True).order_by(Team.rawScore.desc()).all()
-    )
-    return render_template("admin/scores.html", teams=teams)
