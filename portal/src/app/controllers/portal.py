@@ -1,7 +1,5 @@
 import time
-import math
 
-import stripe
 from flask import (
     Blueprint,
     render_template,
@@ -13,7 +11,6 @@ from flask import (
 )
 from flask_login import current_user, login_user, logout_user
 
-from app import db, limiter
 from app.models import Entry, Permission
 from app.utils.auth import needs_team
 

@@ -7,7 +7,7 @@ from flask import (
     redirect,
     url_for,
 )
-from flask_login import current_user, login_required, login_user, logout_user
+from flask_login import current_user, login_user, logout_user
 
 from app import login_manager, limiter
 from app.models import User, Permission
