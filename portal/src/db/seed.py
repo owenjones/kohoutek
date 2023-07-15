@@ -28,6 +28,8 @@ def init(app):
 
         app.logger.info(f"...root user added, key: { rkey }")
 
+        db.session.commit()
+
 
 if __name__ == "__main__":
     from app import create_app
