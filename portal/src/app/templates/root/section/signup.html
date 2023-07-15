@@ -3,12 +3,19 @@
     <div class="uk-light">
       <h1 class="uk-text-center">Sign up for Kohoutek</h1>
       <p>
-        Kohoutek is open to Scouts in <strong>Avon</strong> County, and Guides in <strong>Bristol and South
-          Gloucestershire</strong> or
-        <strong>Somerset North</strong> Counties.
+        Kohoutek is open to Scouts in <a href="https://avonscouts.org.uk/" target="_blank"
+          rel="noreferrer nofollow">Avon</a> County, and Guides in <a href="https://www.girlguidingbsg.org.uk/"
+          target="_blank" rel="noreferrer nofollow">Bristol and South
+          Gloucestershire</a> or
+        <a href="https://girlguidingsomersetnorth.org.uk/" target="_blank" rel="noreferrer nofollow">Somerset North</a>
+        Counties.
       </p>
       <p>
-        Each Unit/Troop only needs to sign up once for Kohoutek, you can then enter your teams (up to three initially).
+        Please read the entry information and rules below before signing up.
+      </p>
+      <p>
+        Each group only needs to sign up for Kohoutek once, you can then enter multiple teams. Groups can enter up to
+        two teams initially, with additional teams being offered to groups in the new year.
       </p>
     </div>
 
@@ -31,53 +38,31 @@
       <div id="scout-card" class="uk-card uk-card-default uk-card-body uk-margin" hidden>
         <h3 class="uk-card-title">About your Group</h3>
         <fieldset class="uk-fieldset uk-form-horizontal">
-          <div id="scout-county">
-            <label class="uk-form-label">County</label>
-            <div class="uk-form-controls uk-form-controls-text">
-              <div class="uk-grid-small uk-child-width-auto uk-grid">
-                <label class="uk-width-1-1">
-                  <input class="uk-radio" type="radio" name="county" value="avon" id="avon-county-toggle"> Avon
-                </label>
-              </div>
-              <div class="uk-grid-small uk-child-width-auto uk-grid">
-                <label class="uk-width-1-1">
-                  <input class="uk-radio" type="radio" name="county" value="other" id="other-scout-county-toggle"> Other
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div id="avon-district" class="uk-margin" hidden>
+          <div id="scout-district" class="uk-margin">
             <label class="uk-form-label">District</label>
             <div class="uk-form-controls uk-form-controls-text">
-              {#{% for district in avon %}
+              {% for district in avon %}
               <div class="uk-grid-small uk-child-width-auto uk-grid">
                 <label class="uk-width-1-1">
                   <input class="uk-radio" type="radio" name="district" value="{{ district.id }}"> {{ district.name }}
                 </label>
               </div>
-              {% endfor %}#}
+              {% endfor %}
             </div>
           </div>
 
-          <div id="other-district" class="uk-margin" hidden>
-            <label class="uk-form-label">District</label>
-            <div class="uk-form-controls">
-              <input class="uk-input uk-width-1-1" type="text" name="district-name" placeholder="District name" />
-            </div>
-          </div>
-
-          <div id="scout-group" class="uk-margin" hidden>
+          <div id="scout-group" class="uk-margin">
             <label class="uk-form-label">Group</label>
             <div class="uk-form-controls">
               <input class="uk-input uk-width-1-1" type="text" name="group-name" placeholder="Group name" />
             </div>
           </div>
 
-          <div id="scout-troop" hidden>
+          <div id="scout-troop">
             <p class="uk-text-small">
-              If you're signing up to Kohoutek as an individual Troop (where your Group has multiple), please give your
-              Troop's name.
+              If you're signing up to Kohoutek as an individual troop (where your Group has multiple troops), please
+              give your
+              troop's name.
             </p>
             <label class="uk-form-label">Troop</label>
             <div class="uk-form-controls">
@@ -93,17 +78,13 @@
           <div id="guide-county">
             <label class="uk-form-label">County</label>
             <div class="uk-form-controls uk-form-controls-text">
-              <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+              <div class="uk-grid-small uk-child-width-auto uk-grid">
                 <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="bsg"
                     id="bsg-county-toggle"> Bristol and South Gloucestershire</label>
               </div>
-              <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+              <div class="uk-grid-small uk-child-width-auto uk-grid">
                 <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="sn"
                     id="sn-county-toggle"> Somerset North</label>
-              </div>
-              <div class="uk-grid-small uk-child-width-auto uk-grid">
-                <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="other"
-                    id="other-guide-county-toggle"> Other</label>
               </div>
             </div>
           </div>
@@ -111,26 +92,26 @@
           <div id="bsg-division" class="uk-margin" hidden>
             <label class="uk-form-label">Division</label>
             <div class="uk-form-controls uk-form-controls-text">
-              {#{% for district in bsg %}
+              {% for district in bsg %}
               <div class="uk-grid-small uk-child-width-auto uk-grid">
                 <label class="uk-width-1-1">
                   <input class="uk-radio" type="radio" name="district" value="{{ district.id }}"> {{ district.name }}
                 </label>
               </div>
-              {% endfor %}#}
+              {% endfor %}
             </div>
           </div>
 
           <div id="sn-division" class="uk-margin" hidden>
             <label class="uk-form-label">Division</label>
             <div class="uk-form-controls uk-form-controls-text">
-              {#{% for district in sn %}
+              {% for district in sn %}
               <div class="uk-grid-small uk-child-width-auto uk-grid">
                 <label class="uk-width-1-1">
                   <input class="uk-radio" type="radio" name="district" value="{{ district.id }}"> {{ district.name }}
                 </label>
               </div>
-              {% endfor %}#}
+              {% endfor %}
             </div>
           </div>
 
@@ -216,7 +197,7 @@
       </p>
       <p>
         We've sent you a confirmation email with some further information - please have a read, and click the
-        verification link so we know you've received it (your sign up won't be complete until you do!) - make sure to
+        verification link so we know you've received it (your sign up won't be complete until you do) - make sure to
         check your spam folder just in case.
       </p>
       <p class="uk-text-small">

@@ -1,7 +1,7 @@
-from flask import Blueprint, current_app, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for
 
 from app import db
-from app.models import Entry, Organisation, County, District, Team, Matchmake
+from app.models import Entry, Organisation, County, District
 
 blueprint = Blueprint("root", __name__)
 
@@ -10,9 +10,9 @@ blueprint = Blueprint("root", __name__)
 def index():
     return render_template(
         "root/index.html",
-        avon=County.avon,
-        bsg=County.bsg,
-        sn=County.sn,
+        avon=District.query.filter_by(county=County.avon).all(),
+        bsg=District.query.filter_by(county=County.bsg).all(),
+        sn=District.query.filter_by(county=County.sn).all(),
     )
 
 
@@ -31,18 +31,24 @@ def processSignup():
 
     organisation = Organisation(request.form["organisation"])
 
-    if "county" not in request.form or request.form["county"] not in [
-        "avon",
-        "bsg",
-        "sn",
-    ]:
+    if organisation == Organisation.guiding and (
+        "county" not in request.form
+        or request.form["county"]
+        not in [
+            "avon",
+            "bsg",
+            "sn",
+        ]
+    ):
         return ("You need to select which County you're in", 422)
 
-    county = County(request.form["county"])
+    county = (
+        County(request.form["county"])
+        if organisation == Organisation.guiding
+        else County.avon
+    )
 
-    if county in [County.avon, County.bsg, County.sn] and (
-        "district" not in request.form or request.form["district"] == ""
-    ):
+    if "district" not in request.form or request.form["district"] == "":
         return ("You need to select your District/Division, or enter it's name", 422)
 
     district = District.query.filter_by(id=request.form["district"]).first()
@@ -91,7 +97,10 @@ def processSignup():
     existing_signup = Entry.query.filter_by(contact_email=contact_email).first()
 
     if existing_signup:
-        return ("This email address has already been used to sign up a group", 422)
+        return (
+            "This email address has already been used to sign up a group. If you need to add additional teams please login in to the portal using the link emailed to you.",
+            422,
+        )
 
     if "rules" not in request.form or request.form["rules"] != "accepted":
         return (
@@ -113,7 +122,7 @@ def processSignup():
         db.session.add(e)
         db.session.commit()
 
-        e.sendConfirmationEmail()
+        # e.sendConfirmationEmail() # not while testing!
 
         return ("OK", 200)
 
