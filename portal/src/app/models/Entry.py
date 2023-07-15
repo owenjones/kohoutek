@@ -1,6 +1,6 @@
 from enum import Enum
 
-from flask import url_for, flash
+from flask import current_app as app, url_for
 
 from app import db
 from app.models import User, Role
@@ -64,7 +64,7 @@ class Entry(db.Model):
     def sendConfirmationEmail(self):
         send = sendmail(
             self.contact_email,
-            "Kohoutek 2021 Entry",
+            "Kohoutek Entry",
             "signup-confirmation",
             confirmation_link=self.portal_link(),
         )
@@ -82,7 +82,7 @@ class Entry(db.Model):
         if not silent:
             send = sendmail(
                 self.contact_email,
-                "Kohoutek 2021 - Entry Cancelled",
+                "Kohoutek Entry Cancelled",
                 "entry-cancelled",
                 entry_name=self.name,
             )
@@ -103,7 +103,8 @@ class Entry(db.Model):
 
     @property
     def code(self):
-        return f"K21-{self.id}"
+        code = app.config["CODE_PREFIX"]
+        return f"{code}-{self.id}"
 
     @property
     def name(self):
@@ -137,7 +138,6 @@ class Entry(db.Model):
             County.avon: "Avon",
             County.bsg: "Bristol and South Gloucestershire",
             County.sn: "Somerset North",
-            County.other: "Other",
         }
 
         return map[self.county] if self.county in map else None
@@ -150,7 +150,3 @@ class Entry(db.Model):
         }
 
         return map[self.organisation] if self.organisation in map else None
-
-    @property
-    def eligable(self):
-        return self.county != County.other

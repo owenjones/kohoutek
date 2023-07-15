@@ -24,6 +24,8 @@ class Config:
     ROOT_KEY = os.getenv("ROOT_KEY", randomKey(12))
     SECRET_KEY = os.getenv("SECRET_KEY", randomString(25))
 
+    CODE_PREFIX = os.getenv("CODE_PREFIX", "K")
+
     STRIPE = {
         "publishable_key": os.getenv("STRIPE_PUBLISHABLE_KEY"),
         "secret_key": os.getenv("STRIPE_SECRET_KEY"),
