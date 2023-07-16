@@ -3,29 +3,35 @@
 {% extends "mail/template.jinja" %}
 {% block title %}Entry Confirmation{% endblock %}
 {% block preview %}
-Your Kohoutek 2021 entry has been submitted. Please visit the team portal to confirm your entry. From the team portal you can download the Kohoutek 2021 activities once they're released, buy event badges for your teams, and submit your scores once your teams have completed.
+Your Kohoutek entry has been submitted. Please visit the team portal to confirm your entry. From the team portal you can
+sign up your teams to the event.
 {% endblock %}
 {% block body %}
 <tr>
-  <td style="padding: 40px 40px 30px 40px; font-family: 'Rubik', sans-serif; font-size: 18px; line-height: 28px; color: #666; font-weight: 400;">
+  <td
+    style="padding: 40px 40px 30px 40px; font-family: 'Rubik', sans-serif; font-size: 18px; line-height: 28px; color: #666; font-weight: 400;">
     {{ header.title('Entry Submitted') }}
-    <p style="margin: 0;">Your Kohoutek 2021 entry has been submitted. Please use the following link to visit the team portal and confirm your entry.</p>
+    <p style="margin: 0;">Your Kohoutek entry has been submitted. Please use the following link to visit the team portal
+      and confirm your entry.</p>
   </td>
 </tr>
 {{ button.button("Team Portal", confirmation_link) }}
 <tr>
-  <td style="padding: 15px 40px 40px 40px; font-family: 'Rubik', sans-serif; font-size: 18px; line-height: 28px; color: #666; font-weight: 400;">
+  <td
+    style="padding: 15px 40px 40px 40px; font-family: 'Rubik', sans-serif; font-size: 18px; line-height: 28px; color: #666; font-weight: 400;">
     <p>
-      You can use this link to return to the team portal at any time, where you can download the Kohoutek 2021 activities once they're released, buy event badges for your teams, and submit your scores once your teams have completed.
+      You can use this link to return to the team portal at any time, where you can sign up your teams to the event.
     </p>
     <p style="margin: 0">
-      This link is unique to your teams so please don't forward on this email or share it. Make sure you save this email in a safe place so you can find the link again.
+      This link is unique to your teams so please don't forward on this email or share it. Make sure you save this email
+      in a safe place so you can find the link again.
     </p>
   </td>
 </tr>
 {% endblock %}
 {% block footer %}
 <p>
-  You've received this email as you signed up to take part in Kohoutek 2021. If you no longer wish to receive these emails please contact us at <strong>contact@kohoutek.co.uk</strong> so we can remove your group's competition entry.
+  You've received this email as you signed up to take part in Kohoutek. If you no longer wish to receive these emails
+  please contact us at <strong>contact@kohoutek.co.uk</strong> so we can remove your group's competition entry.
 </p>
 {% endblock %}
