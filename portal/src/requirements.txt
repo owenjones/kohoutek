@@ -19,7 +19,6 @@ Jinja2==3.0.0
 limits==1.5.1
 MarkupSafe==2.0.0
 mysqlclient==2.0.1
-pycountry==20.7.3
 python-dotenv==0.13.0
 requests==2.25.0
 six==1.15.0
