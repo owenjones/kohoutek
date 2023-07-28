@@ -10,15 +10,14 @@
         <h1>{{ entry.name }}</h1>
         {% include "portal/components/alerts.html" %}
       </div>
-      <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
+      {#<div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
         <div>
           <div class="uk-background-primary uk-light uk-padding uk-flex uk-flex-column uk-flex-between">
             <div>
               <h4>Activities</h4>
               <p>Download the Kohoutek activity pack</p>
             </div>
-            <div><a class="uk-button uk-button-default uk-button-large"
-                href="{{ url_for('portal.downloadActivities') }}">Activities</a></div>
+            <div><a class="uk-button uk-button-default uk-button-large" href="">Activities</a></div>
           </div>
         </div>
 
@@ -28,7 +27,7 @@
               <h4>Badges</h4>
               <p>Order badges for your team</p>
             </div>
-            <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('orders.placeOrder') }}">Order
+            <div><a class="uk-button uk-button-default uk-button-large" href="">Order
                 Badges</a></div>
           </div>
         </div>
@@ -41,11 +40,10 @@
             </div>
             <div>
               {% if not entry.match %}
-              <a class="uk-button uk-button-default uk-button-large" href="{{ url_for('matchmake.details') }}">Add
+              <a class="uk-button uk-button-default uk-button-large" href="">Add
                 Details</a>
               {% else %}
-              <a class="uk-button uk-button-default uk-button-large"
-                href="{{ url_for('matchmake.index') }}">Matchmake</a>
+              <a class="uk-button uk-button-default uk-button-large" href="">Matchmake</a>
               {% endif %}
             </div>
           </div>
@@ -60,12 +58,12 @@
               </p>
             </div>
             <div>
-              <div><a class="uk-button uk-button-default uk-button-large" href="{{ url_for('scoring.index') }}">Enter
+              <div><a class="uk-button uk-button-default uk-button-large" href="">Enter
                   Scores</a></div>
             </div>
           </div>
         </div>
-      </div>
+      </div>#}
 
       <div class="uk-width-1-2@m">
         <h3 class="uk-text-center uk-text-left@m">Your Entry</h3>
@@ -121,12 +119,9 @@
       </div>
 
       <div class="uk-width-1-2@m">
-        <h3 class="uk-text-center uk-text-left@m">Badge Orders</h3>
+        <h3 class="uk-text-center uk-text-left@m"></h3>
         <div>
-          {% include "portal/orders/partials/order_list.html" %}
-          {% if orders|count == 0 %}
-          <p>You don't have any badge orders yet, place an order using the button above.</p>
-          {% endif %}
+
         </div>
       </div>
     </div>

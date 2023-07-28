@@ -21,8 +21,7 @@ blueprint = Blueprint("portal", __name__, url_prefix="/portal")
 def index():
     if current_user.is_authenticated and current_user.hasPermission(Permission.TEAM):
         entry = current_user.entry
-        orders = entry.orders
-        return render_template("portal/index.html", entry=entry, orders=orders)
+        return render_template("portal/index.html", entry=entry)
 
     else:
         response = make_response(render_template("portal/need-login.html"))
@@ -80,10 +79,3 @@ def resendLinkProcess():
         "success",
     )
     return render_template("portal/resend-link.html")
-
-
-@blueprint.route("/activities")
-@needs_team
-def downloadActivities():
-    match = current_user.entry.match or False
-    return render_template("portal/download-activities.html", matchPrompt=(not match))
