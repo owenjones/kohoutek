@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('group');
             $table->string('troop')->nullable();
-            $table->foreignId('district_id')->constrained();
+            $table->foreignId('district_id');
             $table->string('auth_token');
             $table->string('contact_name');
             $table->string('contact_email');
