@@ -37,6 +37,6 @@ class Entry extends Model
 
   public function entryReceived(): void
   {
-    Mail::to($this->contact_email)->queue(new EntryReceived($this));
+    // Mail::to($this->contact_email)->queue(new EntryReceived($this));
   }
 }
