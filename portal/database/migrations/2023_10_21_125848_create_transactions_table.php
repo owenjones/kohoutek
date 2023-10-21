@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('debit');
             $table->integer('credit');
-            $table->foreignId('entry_id')->constrained();
+            $table->foreignId('entry_id')->nullable()->constrained()->nullOnDelete();
+            $table->text('description');
             $table->timestamps();
         });
     }
