@@ -28,12 +28,12 @@
                 <h3 class="uk-card-title">Are you a member of Scouting or Guiding?</h3>
                 <fieldset class="uk-fieldset">
                     <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                        <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="organisation"
-                                value="scouting" id="scout-toggle" required> Scouting</label>
+                        <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="county" value="avon"
+                                id="scout-toggle" required> Scouting</label>
                     </div>
                     <div class="uk-grid-small uk-child-width-auto uk-grid">
                         <label class="uk-width-1-1"><input class="uk-radio" type="radio" name="organisation"
-                                value="guiding" id="guide-toggle" required> Guiding</label>
+                                value="guiding" id="guide-toggle"> Guiding</label>
                     </div>
                 </fieldset>
             </div>
@@ -44,21 +44,24 @@
                     <div id="scout-district" class="uk-margin">
                         <label class="uk-form-label">District</label>
                         <div class="uk-form-controls uk-form-controls-text">
-                            {{-- {% for district in avon %}
-                            <div class="uk-grid-small uk-child-width-auto uk-grid">
-                                <label class="uk-width-1-1">
-                                    <input class="uk-radio" type="radio" name="district" value="{{ district . id }}">
-                                    {{ district . name }}
-                                </label>
-                            </div>
-                            {% endfor %} --}}
+                            @if ($avon)
+                                @foreach ($avon->districts()->get() as $district)
+                                    <div class="uk-grid-small uk-child-width-auto uk-grid">
+                                        <label class="uk-width-1-1">
+                                            <input class="uk-radio" type="radio" name="district"
+                                                value="{{ $district->id }}">
+                                            {{ $district->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
 
                     <div id="scout-group" class="uk-margin">
                         <label class="uk-form-label">Group</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input uk-width-1-1" type="text" name="group-name"
+                            <input class="uk-input uk-width-1-1" type="text" name="group"
                                 placeholder="Group name" />
                         </div>
                     </div>
@@ -72,7 +75,7 @@
                         </p>
                         <label class="uk-form-label">Troop</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input uk-width-1-1" type="text" name="troop-name"
+                            <input class="uk-input uk-width-1-1" type="text" name="troop"
                                 placeholder="Troop name" />
                         </div>
                     </div>
@@ -99,43 +102,41 @@
                     <div id="bsg-division" class="uk-margin" hidden>
                         <label class="uk-form-label">Division</label>
                         <div class="uk-form-controls uk-form-controls-text">
-                            {{-- {% for district in bsg %}
-                            <div class="uk-grid-small uk-child-width-auto uk-grid">
-                                <label class="uk-width-1-1">
-                                    <input class="uk-radio" type="radio" name="district" value="{{ district . id }}">
-                                    {{ district . name }}
-                                </label>
-                            </div>
-                            {% endfor %} --}}
+                            @if ($bsg)
+                                @foreach ($bsg->districts()->get() as $division)
+                                    <div class="uk-grid-small uk-child-width-auto uk-grid">
+                                        <label class="uk-width-1-1">
+                                            <input class="uk-radio" type="radio" name="district"
+                                                value="{{ $division->id }}">
+                                            {{ $division->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
 
                     <div id="sn-division" class="uk-margin" hidden>
                         <label class="uk-form-label">Division</label>
                         <div class="uk-form-controls uk-form-controls-text">
-                            {{-- {% for district in sn %}
-                            <div class="uk-grid-small uk-child-width-auto uk-grid">
-                                <label class="uk-width-1-1">
-                                    <input class="uk-radio" type="radio" name="district" value="{{ district . id }}">
-                                    {{ district . name }}
-                                </label>
-                            </div>
-                            {% endfor %} --}}
-                        </div>
-                    </div>
-
-                    <div id="other-division" class="uk-margin" hidden>
-                        <label class="uk-form-label">Division</label>
-                        <div class="uk-form-controls uk-form-controls-text">
-                            <input class="uk-input uk-width-1-1" type="text" name="division-name"
-                                placeholder="Division name" />
+                            @if ($sn)
+                                @foreach ($sn->districts()->get() as $division)
+                                    <div class="uk-grid-small uk-child-width-auto uk-grid">
+                                        <label class="uk-width-1-1">
+                                            <input class="uk-radio" type="radio" name="district"
+                                                value="{{ $division->id }}">
+                                            {{ $division->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
 
                     <div id="guide-unit" hidden>
                         <label class="uk-form-label">Unit</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input uk-width-1-1" type="text" name="unit-name"
+                            <input class="uk-input uk-width-1-1" type="text" name="unit"
                                 placeholder="Unit name" />
                         </div>
                     </div>
@@ -176,7 +177,7 @@
                 <fieldset class="uk-fieldset uk-form-horizontal">
                     <div class="uk-margin">
                         <label class="uk-width-1-1"><input class="uk-checkbox" type="checkbox" name="rules"
-                                value="accepted" required> I have read the Kohoutek <a href="#about"
+                                value="yes" required> I have read the Kohoutek <a href="#about"
                                 uk-scroll="offset: 40;">entry information</a>,
                             and agree to follow the <a href="#rules" uk-scroll="offset: 85;">competition
                                 rules</a>.</label>
