@@ -14,9 +14,14 @@ class RootController extends Controller
     public function receive_signup(Request $request)
     {
       $validated = $request->validate([
-        'group.name' => 'required|max:3',
+        'county' => 'required',
+        'district' => 'required',
+        'group' => 'required|max:255',
+        'name' => 'required|max:255',
+        'email' => 'required|confirmed|email',
+        'rules' => 'required'
       ]);
 
-      return response(200);
+      return "Accepted";
     }
 }

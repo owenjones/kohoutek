@@ -148,15 +148,15 @@
                     <div class="uk-margin">
                         <label class="uk-form-label">Your name</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input uk-width-1-1" type="text" name="contact-name"
-                                placeholder="Name" required />
+                            <input class="uk-input uk-width-1-1" type="text" name="name" placeholder="Name"
+                                required />
                         </div>
                     </div>
 
                     <div class="uk-margin">
                         <label class="uk-form-label">Your email</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input uk-width-1-1" type="email" name="contact-email"
+                            <input class="uk-input uk-width-1-1" type="email" name="email"
                                 placeholder="Email address" required />
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                     <div class="uk-margin">
                         <label class="uk-form-label">Confirm email</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input uk-width-1-1" type="email" name="confirm-email"
+                            <input class="uk-input uk-width-1-1" type="email" name="email_confirmation"
                                 placeholder="Confirm email address" required />
                         </div>
                     </div>
