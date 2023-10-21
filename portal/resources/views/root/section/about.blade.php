@@ -12,8 +12,8 @@
                 </p>
                 <p>
                     The 2024 event <strong>Welcome to the Jungle!</strong> will be taking place on
-                    <strong>XXXXXX</strong> at
-                    <strong>XXXXXX</strong>.
+                    <strong>Saturday 16<sup>th</sup> March 2024</strong> at <strong>Camerton Community Hall, Bath, BA2
+                        0NL</strong>.
                 </p>
                 <hr class="uk-divider-icon uk-hidden@l" />
             </div>
@@ -21,30 +21,17 @@
                 <h2>How does it work?</h2>
             </div>
             <div class="uk-width-3-5@l">
-                <!-- <p>
-
-        </p>
-        <p>
-
-        </p>
-        <p>
-
-        </p> -->
-                <!-- <hr class="uk-divider-icon uk-hidden@l" /> -->
                 <h3 id="rules">Rules</h3>
                 <p>
                     This is a competition after all!
                 </p>
                 <ol class="uk-list uk-list-decimal uk-text-small">
                     <li>
-                        The competition is open to all Scouts and Guides, however only Guides within Bristol and South
-                        Gloucestershire, and Somerset North Counties; and Scouts within Avon County will be eligible for
-                        the
-                        Kohoutek Trophy.
+                        The competition is open to Guides within Bristol and South Gloucestershire, and Somerset North
+                        Counties; and Scouts within Avon County
                     </li>
                     <li>
-                        Groups/Units/Troops must split their young people into teams of maximum five, who will attempt
-                        the
+                        Groups/Units/Troops must split their young people into teams of six, who will attempt the
                         activities together.
                     </li>
                     <li>
@@ -55,22 +42,21 @@
                     <li>
                         Final decisions on the awarding of trophies are at the organisers' discretion.
                     </li>
+                    <li>
+                        <strong>TODO: dig out pre-covid set of rules</strong>
+                    </li>
                 </ol>
                 <hr class="uk-divider-icon uk-hidden@l" />
             </div>
             <div class="uk-width-2-5@l">
                 <h3>Key Dates</h3>
                 <dl class="uk-description-list uk-description-list-divider">
-                    <dt>December 2020</dt>
-                    <dd>Registration for Kohoutek 2021 opens!</dd>
-                    <dt>February 14<sup>th</sup> 2021</dt>
-                    <dd>Activity packs published and made available to groups.</dd>
-                    <dt>March 2021</dt>
-                    <dd>In teams attempt four of our Under the Sea activities, and send in your scores.</dd>
-                    <dt>April 5<sup>th</sup> 2021</dt>
-                    <dd>Deadline for submitting your Kohoutek 2021 scores.</dd>
-                    <dt>April 12<sup>th</sup> 2021</dt>
-                    <dd>Scores published and trophies awarded.</dd>
+                    <dt>December 2023</dt>
+                    <dd>Registration for Kohoutek 2024 opens</dd>
+
+                    <dt>16<sup>th</sup> March 2024</dt>
+                    <dd>Welcome to the Jungle!</dd>
+
                 </dl>
                 <hr class="uk-divider-icon uk-hidden@l" />
                 <h3>Badges?</h3>
