@@ -1,12 +1,19 @@
 <x-mail::message>
-# Introduction
+    # Kohoutek Entry Received
 
-The body of your message.
+    Your Kohoutek entry has been received!
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
+    <x-mail::panel>
+        Follow the link below to access the Kohoutek Portal for the first time and verify your entry.
+    </x-mail::panel>
 
-Thanks,<br>
-{{ config('app.name') }}
+    <x-mail::button :url="$login_url" color="success">
+        Login to Kohoutek Portal
+    </x-mail::button>
+
+    This link gives access to the Kohoutek Portal and is unique to your entry, please don't share it outside your
+    Group/Unit.
+
+    Thanks,<br>
+    {{ config('app.name') }}
 </x-mail::message>
