@@ -19,7 +19,7 @@ class RootController extends Controller
         'group' => 'required|max:255',
         'name' => 'required|max:255',
         'email' => 'required|confirmed|email',
-        'rules' => 'required'
+        'rules' => 'required|accepted'
       ]);
 
       return "Accepted";
