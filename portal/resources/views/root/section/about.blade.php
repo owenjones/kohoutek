@@ -21,39 +21,17 @@
                 <h2>How does it work?</h2>
             </div>
             <div class="uk-width-3-5@l">
-                <!-- <p>
-
-        </p>
-        <p>
-
-        </p>
-        <p>
-
-        </p> -->
-                <!-- <hr class="uk-divider-icon uk-hidden@l" /> -->
                 <h3 id="rules">Rules</h3>
                 <p>
                     This is a competition after all!
                 </p>
                 <ol class="uk-list uk-list-decimal uk-text-small">
                     <li>
-                        The competition is open to all Scouts and Guides, however only Guides within Bristol and South
-                        Gloucestershire, and Somerset North Counties; and Scouts within Avon County will be eligible for
-                        the
-                        Kohoutek Trophy.
+                        The competition is open to Guides within Bristol and South Gloucestershire, and Somerset North
+                        Counties; and Scouts within Avon County.
                     </li>
                     <li>
-                        Groups/Units/Troops must split their young people into teams of maximum five, who will attempt
-                        the
-                        activities together.
-                    </li>
-                    <li>
-                        Teams should attempt the activities as explained in the activity pack, following any time limits
-                        or
-                        constraints given. Scores submitted should be an accurate reflection of how the team performed.
-                    </li>
-                    <li>
-                        Final decisions on the awarding of trophies are at the organisers' discretion.
+                        <strong>TODO: dig out old rules from pre-covid events</strong>
                     </li>
                 </ol>
                 <hr class="uk-divider-icon uk-hidden@l" />
@@ -61,16 +39,11 @@
             <div class="uk-width-2-5@l">
                 <h3>Key Dates</h3>
                 <dl class="uk-description-list uk-description-list-divider">
-                    <dt>December 2020</dt>
-                    <dd>Registration for Kohoutek 2021 opens!</dd>
-                    <dt>February 14<sup>th</sup> 2021</dt>
-                    <dd>Activity packs published and made available to groups.</dd>
-                    <dt>March 2021</dt>
-                    <dd>In teams attempt four of our Under the Sea activities, and send in your scores.</dd>
-                    <dt>April 5<sup>th</sup> 2021</dt>
-                    <dd>Deadline for submitting your Kohoutek 2021 scores.</dd>
-                    <dt>April 12<sup>th</sup> 2021</dt>
-                    <dd>Scores published and trophies awarded.</dd>
+                    <dt>December 2023</dt>
+                    <dd>Registration for Kohoutek 2024 opens</dd>
+
+                    <dt>16<sup>th</sup> March 2024</dt>
+                    <dd>Kohoutek 2024</dd>
                 </dl>
                 <hr class="uk-divider-icon uk-hidden@l" />
                 <h3>Badges?</h3>
