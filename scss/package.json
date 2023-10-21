@@ -7,7 +7,7 @@
   },
   "scripts": {
     "compile": "sass --no-source-map main.scss main.css",
-    "minify": "css-minify -f main.css -o ../splash/html/static -o ../portal/resources/css",
+    "minify": "css-minify -f main.css -o ../splash/html/static -o ../portal/public/css",
     "build": "npm run compile && npm run minify"
   }
 }
