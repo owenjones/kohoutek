@@ -58,7 +58,7 @@ class RootController extends Controller
         $troop = false;
       }
 
-      Entry::create([
+      $entry = Entry::create([
         'district_id' => $request->district,
         'group' => $group,
         'troop' => $troop,
@@ -66,6 +66,8 @@ class RootController extends Controller
         'contact_email' => $request->email,
         'auth_token' => Str::random(255)
       ]);
+
+      $entry->entryReceived();
 
       return "OK";
     }
