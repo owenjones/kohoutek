@@ -9,6 +9,8 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+use App\Models\Entry;
+
 class EntryReceived extends Mailable
 {
     use Queueable, SerializesModels;
@@ -40,6 +42,9 @@ class EntryReceived extends Mailable
     {
         return new Content(
             markdown: 'emails.entry.received',
+            with: [
+              'login_url' => route("root.index")
+            ]
         );
     }
 
