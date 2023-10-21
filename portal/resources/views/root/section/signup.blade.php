@@ -15,14 +15,15 @@
                 Please read the entry information and rules below before signing up.
             </p>
             <p>
-                Each group only needs to sign up for Kohoutek once, you can then enter multiple teams. Groups can enter
-                up to
-                two teams initially, with additional teams being offered to groups in the new year.
+                Each group only needs to sign up for Kohoutek once, you can then enter multiple teams.</p>
+            <p>
+                Groups can enter up to two teams initially, with additional teams being offered to groups in the new
+                year.
             </p>
         </div>
 
-        <form id="sign-up-form" method="POST" action="{{ url('root.processSignup') }}">
-            <input type="hidden" name="csrf_token" value="" />
+        <form id="sign-up-form" method="POST" action="{{ route('root.sign-up-post') }}">
+            @csrf
             <div class="uk-card uk-card-default uk-card-body">
                 <h3 class="uk-card-title">Are you a member of Scouting or Guiding?</h3>
                 <fieldset class="uk-fieldset">
@@ -43,14 +44,14 @@
                     <div id="scout-district" class="uk-margin">
                         <label class="uk-form-label">District</label>
                         <div class="uk-form-controls uk-form-controls-text">
-                            {% for district in avon %}
+                            {{-- {% for district in avon %}
                             <div class="uk-grid-small uk-child-width-auto uk-grid">
                                 <label class="uk-width-1-1">
                                     <input class="uk-radio" type="radio" name="district" value="{{ district . id }}">
                                     {{ district . name }}
                                 </label>
                             </div>
-                            {% endfor %}
+                            {% endfor %} --}}
                         </div>
                     </div>
 
@@ -98,28 +99,28 @@
                     <div id="bsg-division" class="uk-margin" hidden>
                         <label class="uk-form-label">Division</label>
                         <div class="uk-form-controls uk-form-controls-text">
-                            {% for district in bsg %}
+                            {{-- {% for district in bsg %}
                             <div class="uk-grid-small uk-child-width-auto uk-grid">
                                 <label class="uk-width-1-1">
                                     <input class="uk-radio" type="radio" name="district" value="{{ district . id }}">
                                     {{ district . name }}
                                 </label>
                             </div>
-                            {% endfor %}
+                            {% endfor %} --}}
                         </div>
                     </div>
 
                     <div id="sn-division" class="uk-margin" hidden>
                         <label class="uk-form-label">Division</label>
                         <div class="uk-form-controls uk-form-controls-text">
-                            {% for district in sn %}
+                            {{-- {% for district in sn %}
                             <div class="uk-grid-small uk-child-width-auto uk-grid">
                                 <label class="uk-width-1-1">
-                                    <input class="uk-radio" type="radio" name="district"
-                                        value="{{ district . id }}"> {{ district . name }}
+                                    <input class="uk-radio" type="radio" name="district" value="{{ district . id }}">
+                                    {{ district . name }}
                                 </label>
                             </div>
-                            {% endfor %}
+                            {% endfor %} --}}
                         </div>
                     </div>
 

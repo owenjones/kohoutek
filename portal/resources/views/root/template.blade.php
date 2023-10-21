@@ -13,6 +13,7 @@
     <script src="{{ asset('js/uikit.min.js') }}" defer></script>
     <script src="{{ asset('js/uikit-icons.min.js') }}" defer></script>
     <script src="{{ asset('js/sign-up.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
     @yield('headjs')
     <title>Kohoutek</title>
 </head>

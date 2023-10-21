@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\RootController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [RootController::class, 'index'])->name('root.index');
+Route::get('/sign-up', function (Request $request) {
+  return Redirect::route('root.index');
 });
+Route::post('/sign-up', [RootController::class, 'receive_signup'])->name('root.sign-up-post');
