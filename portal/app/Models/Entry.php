@@ -20,9 +20,9 @@ class Entry extends Model
     'auth_token'
   ];
 
-  public function district(): BelongsTo
+  public function district(): District
   {
-    return $this->belongsTo(District::class);
+    return $this->belongsTo(District::class)->first();
   }
 
   public function teams(): HasMany

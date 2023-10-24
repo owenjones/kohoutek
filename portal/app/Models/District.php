@@ -13,9 +13,9 @@ class District extends Model
   ];
   public $timestamps = false;
 
-  public function county(): BelongsTo
+  public function county(): County
   {
-    return $this->belongsTo(County::class);
+    return $this->belongsTo(County::class)->first();
   }
 
   public function entries(): HasMany
