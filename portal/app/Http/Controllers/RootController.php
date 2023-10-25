@@ -19,7 +19,7 @@ class RootController extends Controller
       ]);
     }
 
-    public function receive_signup(Request $request)
+    public function signup(Request $request)
     {
       Validator::make($request->all(), [
         'district' => ['required', 'exists:districts,id'],
