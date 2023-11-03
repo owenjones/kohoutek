@@ -3,33 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Entry;
 
 class PortalController extends Controller
 {
 
-  public function needLogin()
+  public function login($id, $token)
   {
-
+    $entry = Entry::find($id);
+    
+    if($entry == NULL || $entry->auth_token != $token)
+    {
+      return redirect(route('portal.need-login'));
+    } 
+    else 
+    {
+      // Auth::guard('entry')->login($entry);
+      return redirect()->route('portal');
+    }
   }
 
-  public function login()
+  public function resendLink(Request $request)
   {
-    # when login link followed
-    # check ID and auth token
-    # check if not verified - verify
-    # force login and redirect
-  }
-
-  public function resendKey()
-  {
-
-  }
-
-  public function resendKeyPost(Request $request)
-  {
-
+    return view('portal.auth.resend-link');
   }
 
   public function index()
