@@ -15,20 +15,20 @@ Route::prefix('portal')->group(function () {
   # Protected routes
   // Route::middleware(['entry'])->group(function () {
     Route::controller(PortalController::class)->group(function () {
-      Route::get('/', [PortalController::class, 'index']);
+      Route::get('/', 'index')->name('portal');
     });
   // });
 
   # Unprotected routes - info & resending access link
   Route::controller(PortalController::class)->group(function () {
     Route::get('/login', 'needLogin')->name('portal.need-login');
-    Route::get('/login/{id}_{key}', 'login')->name('portal.login');
-    Route::match(['get', 'post'], '/resend', 'resendKey')->name('portal.resend-key');
+    Route::get('/login/{id}_{token}', 'login')->name('portal.login');
+    Route::match(['get', 'post'], '/resend', 'resendLink')->name('portal.resend-link');
   });
 });
 
 Route::prefix('admin')->group(function () {
-  Route::middleware(['auth'])->group(function () {
+  Route::middleware(['admin'])->group(function () {
     Route::controller(AdminController::class)->group(function () {
       Route::get('/', 'index')->name('admin.index');
     });
