@@ -12,8 +12,7 @@
     <title>Kohoutek Team Portal</title>
 </head>
 
-<body id="portal"
-    class="uk-height-viewport uk-background-@if (false) {{ $background }} @else secondary @endif">
+<body id="portal" class="uk-height-viewport uk-background-@yield('background', 'secondary')">
     @yield('body')
     @yield('bodyjs')
 </body>
