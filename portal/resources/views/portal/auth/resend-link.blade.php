@@ -19,15 +19,7 @@
                         </div>
                     </div>
 
-                    {{-- {% with messages = get_flashed_messages(with_categories=True) %}
-                    {% if messages %}
-                    {% for type, message in messages %}
-                    <div class="uk-alert uk-alert-{{ type }} uk-text-center">
-                        {{ message }}
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-                    {% endwith %} --}}
+                    @include('portal.components.alerts')
 
                     <div class="uk-margin">
                         <button type="submit" class="uk-button uk-button-primary uk-button-large">
