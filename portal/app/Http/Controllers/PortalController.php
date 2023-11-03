@@ -27,7 +27,26 @@ class PortalController extends Controller
 
   public function resendLink(Request $request)
   {
-    return view('portal.auth.resend-link');
+    $submitted = false;
+    session()->forget('alert');
+
+    if($request->isMethod('POST'))
+    {
+      $validated = $request->validate(['email' => ['required', 'email']]);
+
+      $entry = Entry::where('contact_email', $validated['email'])->get();
+      if($entry)
+      {
+        // TODO: make email & send it
+      }
+
+      session()->flash('alert', [
+        'primary' => 'If an entry with this contact emails exists a new portal link has been sent to it.'
+      ]);
+      $submitted = true;
+    }
+
+    return view('portal.auth.resend-link', ['submitted' => $submitted]);
   }
 
   public function index()
