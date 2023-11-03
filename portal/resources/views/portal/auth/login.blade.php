@@ -13,7 +13,7 @@
                         rel="nofollow noreferrer">clearing your cookies</a> before following the link again.
                 </p>
                 <p>
-                    We can <a href="{{ route('portal.resend-link') }}">resend your team portal link</a> if you can't find it
+                    We can <a href="{{ route('portal.resend') }}">resend your team portal link</a> if you can't find it
                     (but please look first, we have to pay if we send too many emails!).
                 </p>
                 <p>

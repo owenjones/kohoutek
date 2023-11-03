@@ -11,7 +11,7 @@
                 </p>
                 @include('portal.components.alerts')
                 @if (!$submitted)
-                    <form method="POST" action="{{ route('portal.resend-link') }}" class="uk-form-stacked">
+                    <form method="POST" action="{{ route('portal.resend') }}" class="uk-form-stacked">
                         @csrf
                         <div class="uk-margin">
                             <div class="uk-form-controls uk-inline">

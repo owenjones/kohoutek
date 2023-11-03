@@ -16,7 +16,7 @@ class PortalController extends Controller
     
     if($entry == NULL || $entry->auth_token != $token)
     {
-      return redirect(route('portal.need-login'));
+      return redirect(route('portal.login'));
     } 
     else 
     {
@@ -25,7 +25,7 @@ class PortalController extends Controller
     }
   }
 
-  public function resendLink(Request $request)
+  public function resend(Request $request)
   {
     $submitted = false;
     session()->forget('alert');
@@ -46,7 +46,7 @@ class PortalController extends Controller
       $submitted = true;
     }
 
-    return view('portal.auth.resend-link', ['submitted' => $submitted]);
+    return view('portal.auth.resend', ['submitted' => $submitted]);
   }
 
   public function index()
