@@ -14,13 +14,13 @@
     <script src="{{ asset('js/uikit-icons.min.js') }}" defer></script>
     <script src="{{ asset('js/sign-up.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
-    @yield('headjs')
+    @stack('head-js')
     <title>Kohoutek</title>
 </head>
 
 <body class="uk-background-secondary">
     @yield('body')
-    @yield('bodyjs')
+    @stack('body-js')
 </body>
 
 </html>

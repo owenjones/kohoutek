@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="{{ asset('css/main.min.css') }}" />
     <script src="{{ asset('js/uikit.min.js') }}" defer></script>
     <script src="{{ asset('js/uikit-icons.min.js') }}" defer></script>
-    @yield('headjs')
+    @stack('head-js')
     <title>Kohoutek Team Portal</title>
 </head>
 
 <body id="portal" class="uk-height-viewport uk-background-@yield('background', 'secondary')">
     @yield('body')
-    @yield('bodyjs')
+    @stack('body-js')
 </body>
 
 </html>
