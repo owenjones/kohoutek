@@ -74,4 +74,25 @@ class AdminController extends Controller
   {
     return view('admin.entry.view', ['entry' => Entry::findOrFail($id) ]);
   }
+
+  public function cancelEntry(Request $request, $id)
+  {
+    $entry = Entry::findOrFail($id);
+
+    if($request->isMethod('POST'))
+    {
+      $validated = $request->validate([
+        'id' => 'required|exists:entries',
+        'verify_id' => 'required|same:id'
+      ]);
+
+      print($request->input('silent'));
+      $entry->cancel($request->input('silent'));
+
+      session()->flash('alert', ['success' => 'Entry cancelled']);
+      return redirect()->route('admin.entries');
+    }
+    
+    return view('admin.entry.cancel', ['entry' => $entry]);
+  }
 }

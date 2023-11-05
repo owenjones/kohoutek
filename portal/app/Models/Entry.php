@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-use App\Mail\{EntryReceived, EntryVerified, ResendLink};
+use App\Mail\{EntryCancelled, EntryReceived, EntryVerified, ResendLink};
 
 class Entry extends Authenticatable
 {
@@ -80,5 +80,15 @@ class Entry extends Authenticatable
   public function resendLoginLink()
   {
     Mail::to($this->contact_email)->queue(new ResendLink($this));
+  }
+
+  public function cancel($silent = false)
+  {
+    if(!$silent)
+    {
+      Mail::to($this->contact_email)->queue(new EntryCancelled($this));
+    }
+    
+    $this->delete();
   }
 }
