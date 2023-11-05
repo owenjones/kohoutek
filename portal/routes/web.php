@@ -34,6 +34,7 @@ Route::prefix('admin')->group(function () {
   Route::middleware(['auth:admin'])->group(function () {
     Route::controller(AdminController::class)->group(function () {
       Route::get('/', 'index')->name('admin.index');
+      Route::get('/logout', 'logout')->name('admin.logout');
     });
   });
 
