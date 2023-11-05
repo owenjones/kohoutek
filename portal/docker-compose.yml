@@ -22,6 +22,7 @@ services:
     networks:
       - sail
       - mysql
+      - mailpit
     depends_on:
       - redis
       - memcached
@@ -46,10 +47,13 @@ services:
       - '${FORWARD_MEMCACHED_PORT:-11211}:11211'
     networks:
       - sail
+
 networks:
   sail:
     driver: bridge
   mysql:
+    external: true
+  mailpit:
     external: true
 volumes:
   sail-redis:
