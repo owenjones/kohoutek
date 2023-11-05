@@ -1,4 +1,4 @@
-@extends('auth.template')
+@extends('admin.auth.template')
 @section('body')
   <div class="uk-card uk-card-default uk-position-center">
     <div class="uk-card-body">

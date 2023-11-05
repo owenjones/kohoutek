@@ -29,7 +29,7 @@ class AdminController extends Controller
       ])->onlyInput('email');
     }
 
-    return view('auth.login');
+    return view('admin.auth.login');
   }
 
   public function logout()
