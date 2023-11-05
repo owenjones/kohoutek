@@ -4,7 +4,7 @@
 Hello {{ $contact_name }}, your Kohoutek entry for {{ $group }} has been received!
 
 <x-mail::panel>
-Follow the link below to access the Kohoutek Portal for the first time and verify your entry.
+Please follow the link below to access the Kohoutek Portal for the first time and verify your entry
 </x-mail::panel>
 
 <x-mail::button :url="$login_url" color="success">
