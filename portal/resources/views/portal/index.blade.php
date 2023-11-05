@@ -75,7 +75,7 @@
           <table class="uk-table uk-table-resonsive uk-table-middle uk-table-striped">
             <tbody>
               <tr>
-                <td>{{ $entry->contact_name }}</td>
+                <td>{{ $entry->login_link }}</td>
               </tr>
               <tr>
                 <td>{{ $entry->contact_email }}</td>

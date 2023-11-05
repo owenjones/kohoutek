@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Mail;
@@ -47,12 +48,14 @@ class Entry extends Authenticatable
     Mail::to($this->contact_email)->queue(new EntryVerified($this));
   }
 
-  public function getLoginLink()
+  protected function loginLink(): Attribute
   {
-    return route('portal.login', [
-      'id' => $this->id,
-      'token' => $this->auth_token,
-    ]);
+    return Attribute::make(
+      get: fn () => route('portal.login', [
+        'id' => $this->id,
+        'token' => $this->auth_token,
+      ])
+    );
   }
 
   public function resendLoginLink()
