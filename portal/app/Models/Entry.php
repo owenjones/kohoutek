@@ -27,6 +27,7 @@ class Entry extends Authenticatable
     return Str::random(30);
   }
 
+  # Relationships
   public function district(): District
   {
     return $this->belongsTo(District::class)->first();
@@ -37,6 +38,25 @@ class Entry extends Authenticatable
     return $this->hasMany(Team::class);
   }
 
+  # Attributes
+  protected function loginLink(): Attribute
+  {
+    return Attribute::make(
+      get: fn () => route('portal.login', [
+        'id' => $this->id,
+        'token' => $this->auth_token,
+      ])
+    );
+  }
+
+  protected function code(): Attribute
+  {
+    return Attribute::make(
+      get: fn () => "K-" . (string)($this->id + 1)
+    );
+  }
+
+  # Events
   public function updateBalance(): integer
   {
     
@@ -52,16 +72,6 @@ class Entry extends Authenticatable
     $this->verified = true;
     $this->save();
     Mail::to($this->contact_email)->queue(new EntryVerified($this));
-  }
-
-  protected function loginLink(): Attribute
-  {
-    return Attribute::make(
-      get: fn () => route('portal.login', [
-        'id' => $this->id,
-        'token' => $this->auth_token,
-      ])
-    );
   }
 
   public function resendLoginLink()
