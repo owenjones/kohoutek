@@ -23,7 +23,9 @@ class PortalController extends Controller
     {
       $request->session()->regenerate();
       Auth::guard('entry')->login($entry);
-      $entry->verify();
+      if(!$request->query('noverify', false)) {
+        $entry->verify();
+      }
       return redirect()->route('portal');
     }
   }
