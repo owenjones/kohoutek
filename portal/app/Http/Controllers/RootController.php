@@ -67,7 +67,10 @@ class RootController extends Controller
         'auth_token' => Entry::generateToken()
       ]);
 
-      $team = Team::create();
+      $team = Team::create([
+        'name' => $entry->name,
+        'entry_id' => $entry->id
+      ]);
 
       $entry->received();
       return "OK";
