@@ -13,11 +13,12 @@ Route::controller(RootController::class)->group(function () {
 
 Route::prefix('portal')->group(function () {
   # Protected routes
-  // Route::middleware(['entry'])->group(function () {
+  Route::middleware(['auth:entry'])->group(function () {
     Route::controller(PortalController::class)->group(function () {
       Route::get('/', 'index')->name('portal');
+      Route::get('/logout', 'logout')->name('portal.logout');
     });
-  // });
+  });
 
   # Unprotected routes - info & resending access link
   Route::controller(PortalController::class)->group(function () {
@@ -30,7 +31,7 @@ Route::prefix('portal')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
-  Route::middleware(['admin'])->group(function () {
+  Route::middleware(['auth:admin'])->group(function () {
     Route::controller(AdminController::class)->group(function () {
       Route::get('/', 'index')->name('admin.index');
     });

@@ -21,9 +21,16 @@ class PortalController extends Controller
     } 
     else 
     {
-      // Auth::guard('entry')->login($entry);
+      $entry->verify();
+      Auth::guard('entry')->login($entry);
       return redirect()->route('portal');
     }
+  }
+
+  public function logout()
+  {
+    Auth::guard('entry')->logout();
+    return redirect()->route('root.index');
   }
 
   public function resend(Request $request)
@@ -52,7 +59,7 @@ class PortalController extends Controller
 
   public function index()
   {
-    $entry = Entry::first(); # for testing - just grab first in db
+    $entry = Auth::guard('entry')->user();
 
     return view('portal.index', [
       'entry' => $entry

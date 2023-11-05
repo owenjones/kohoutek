@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Mail\EntryReceived;
 
-class Entry extends Model
+class Entry extends Authenticatable
 {
   protected $fillable = [
     'district_id',
@@ -32,5 +33,11 @@ class Entry extends Model
   public function updateBalance(): integer
   {
     
+  }
+
+  public function verify()
+  {
+    $this->verified = true;
+    $this->save();
   }
 }
