@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -10,7 +13,20 @@ class AdminController extends Controller
   {
     if($request->isMethod('POST'))
     {
-      // do login
+      $validated = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required'
+      ]);
+
+      if(Auth::guard('admin')->attempt($validated))
+      {
+        $request->session()->regenerate();
+        return redirect()->intended('admin.index');
+      }
+
+      return back()->withErrors([
+        'email' => 'These credentials do not match our records',
+      ])->onlyInput('email');
     }
 
     return view('auth.login');

@@ -6,15 +6,15 @@
       <form method="POST" action="{{ route('admin.login') }}" class="uk-form-stacked">
         @csrf
         <div class="uk-margin">
-          <div class="uk-form-controls uk-inline">
+          <div class="uk-form-controls uk-inline uk-width-1-1">
             <span class="uk-form-icon" uk-icon="icon: user"></span>
-            <input required class="uk-input uk-form-large" id="username" name="username" type="text"
-              value="{{ old('username') }}" />
+            <input required class="uk-input uk-form-large" id="email" name="email" type="email"
+              value="{{ old('email') }}" />
           </div>
         </div>
 
         <div class="uk-margin">
-          <div class="uk-form-controls uk-inline">
+          <div class="uk-form-controls uk-inline uk-width-1-1">
             <span class="uk-form-icon" uk-icon="icon: lock"></span>
             <input required class="uk-input uk-form-large" id="password" name="password" type="password" />
           </div>
