@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Auth, Mail};
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Entry;
 use App\Mail\ResendLink;
@@ -46,7 +46,7 @@ class PortalController extends Controller
       $entry = Entry::where('contact_email', $validated['email'])->first();
       if($entry)
       {
-        Mail::to($entry->contact_email)->queue(new ResendLink($entry));
+        $entry->resendLoginLink();
       }
 
       session()->flash('alert', [

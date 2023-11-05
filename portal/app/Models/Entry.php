@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Mail;
 
-use App\Mail\EntryVerified;
+use App\Mail\{EntryReceived, EntryVerified, ResendLink};
 
 class Entry extends Authenticatable
 {
@@ -35,10 +35,28 @@ class Entry extends Authenticatable
     
   }
 
+  public function received()
+  {
+    Mail::to($this->contact_email)->queue(new EntryReceived($this));
+  }
+
   public function verify()
   {
     $this->verified = true;
     $this->save();
     Mail::to($this->contact_email)->queue(new EntryVerified($this));
+  }
+
+  public function getLoginLink()
+  {
+    return route('portal.login', [
+      'id' => $this->id,
+      'token' => $this->auth_token,
+    ]);
+  }
+
+  public function resendLoginLink()
+  {
+    Mail::to($this->contact_email)->queue(new ResendLink($this));
   }
 }
