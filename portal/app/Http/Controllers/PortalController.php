@@ -11,7 +11,7 @@ use App\Mail\ResendLink;
 class PortalController extends Controller
 {
 
-  public function login($id, $token)
+  public function login(Request $request, $id, $token)
   {
     $entry = Entry::find($id);
     
@@ -21,8 +21,9 @@ class PortalController extends Controller
     } 
     else 
     {
-      $entry->verify();
+      $request->session()->regenerate();
       Auth::guard('entry')->login($entry);
+      $entry->verify();
       return redirect()->route('portal');
     }
   }
