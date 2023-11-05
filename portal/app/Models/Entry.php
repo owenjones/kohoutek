@@ -49,6 +49,13 @@ class Entry extends Authenticatable
     );
   }
 
+  protected function name(): Attribute
+  {
+    return Attribute::make(
+      get: fn () => ($this->troop) ? $this->group . " (" . $this->troop . ")" : $this->group
+    );
+  }
+
   # Events
   public function updateBalance(): integer
   {
