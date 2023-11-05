@@ -58,8 +58,20 @@ class AdminController extends Controller
     ]);
   }
 
-  public function entries()
+  public function entries($filter = false)
   {
-    return view('admin.entries', ['entries' => Entry::all()]);
+    $entries = Entry::all();
+    if($filter) {
+      $entries = $entries->reject(function (Entry $entry) use ($filter) {
+        return ($filter == "verified") ? !$entry->verified : $entry->verified;
+      });
+    }
+
+    return view('admin.entries', ['entries' => $entries]);
+  }
+
+  public function viewEntry($id)
+  {
+    return view('admin.entry.view', ['entry' => Entry::findOrFail($id) ]);
   }
 }

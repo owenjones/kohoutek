@@ -8,38 +8,42 @@
           <tbody>
             <tr>
               <th class="uk-table-shrink">Entry ID</th>
-              <td>{{ entry . code }}</td>
+              <td>{{ $entry->id }}</td>
             </tr>
-            {% if entry.hasTroop() %}
+            @if ($entry->troop)
+              <tr>
+                <th>Troop</th>
+                <td>{{ $entry->troop }}</td>
+              </tr>
+            @endif
             <tr>
-              <th>Troop</th>
-              <td>{{ entry . troop_name }}</td>
+              <th>Group/Unit</th>
+              <td>{{ $entry->group }}</td>
             </tr>
-            {% endif %}
             <tr>
-              <th>{{ entry . group_label }}</th>
-              <td>{{ entry . group_name }}</td>
-            </tr>
-            <tr>
-              <th>{{ entry . district_label }}</td>
-              <td>{{ entry . district }}</td>
+              <th>District/Division</td>
+              <td>{{ $entry->district()->name }}</td>
             </tr>
             <tr>
               <th>County</th>
-              <td>{{ entry . county_name }}</td>
+              <td>{{ $entry->district()->county()->name }}</td>
             </tr>
             <tr>
               <th>Organisation</th>
-              <td>{{ entry . organisation_name }}</td>
+              <td>{{ $entry->district()->county()->type }}</td>
             </tr>
             <tr>
               <th>Signed Up</th>
-              <td>{{ entry . created_at }}</td>
+              <td>{{ $entry->created_at }}</td>
             </tr>
             <tr>
               <th>Verified</th>
-              <td>{% if entry.verified %}<span class="uk-text-success" uk-icon="check"></span>{% else %}<span
-                  class="uk-text-danger" uk-icon="close"></span>{% endif %}</td>
+              <td>
+                @if ($entry->validated)
+                <span class="uk-text-success" uk-icon="check"></span>@else<span class="uk-text-danger"
+                    uk-icon="close"></span>
+                @endif
+              </td>
             </tr>
           </tbody>
         </table>
@@ -51,18 +55,18 @@
           <tbody>
             <tr>
               <th class="uk-table-shrink">Name</th>
-              <td>{{ entry . contact_name }}</td>
+              <td>{{ $entry->contact_name }}</td>
             </tr>
             <tr>
               <th>Contact Email</th>
-              <td>{{ entry . contact_email }}</td>
+              <td>{{ $entry->contact_email }}</td>
             </tr>
           </tbody>
         </table>
 
         <h3>Portal Link</h3>
         <p>
-          <input class="uk-input" type="text" value="{{ entry . portal_link() }}?noverify" disabled></input>
+          <input class="uk-input" type="text" value="{{ $entry->login_link }}?noverify=true" disabled></input>
         </p>
       </div>
     </div>
