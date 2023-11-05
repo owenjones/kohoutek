@@ -4,11 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png')}}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.min.css')}}" />
-  <script src="{{ url_for('static', filename='js/uikit.min.js')}}" defer></script>
-  <script src="{{ url_for('static', filename='js/uikit-icons.min.js')}}" defer></script>
-  {% block headjs %}{% endblock %}
+  <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}" />
+  <link rel="stylesheet" href="{{ asset('css/main.min.css') }}" />
+  <script src="{{ asset('js/uikit.min.js') }}" defer></script>
+  <script src="{{ asset('js/uikit-icons.min.js') }}" defer></script>
+  @stack('head-js')
   <title>Kohoutek Admin</title>
 </head>
 
@@ -22,15 +22,17 @@
     <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
       <div class="uk-navbar-center">
         <ul class="uk-navbar-nav uk-flex uk-flex-wrap">
-          <li><a href="{{ url_for('admin.index') }}">Home</a></li>
-          <li><a href="{{ url_for('admin.listEntries') }}">Entries</a></li>
-          <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+          <li><a href="{{ route('admin.index') }}">Home</a></li>
+          <li><a href="{{ route('admin.entries') }}">Entries</a></li>
+          <li><a href="{{ route('admin.index') }}">Scores</a></li>
+          <li><a href="{{ route('admin.index') }}">Users</a></li>
+          <li><a href="{{ route('admin.logout') }}">Logout</a></li>
         </ul>
       </div>
     </nav>
   </div>
-  {% block body %}{% endblock %}
-  {% block bodyjs %}{% endblock %}
+  @yield('body')
+  @stack('body-js')
 </body>
 
 </html>
