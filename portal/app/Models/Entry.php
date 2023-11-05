@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Mail;
 
-use App\Mail\EntryReceived;
+use App\Mail\EntryVerified;
 
 class Entry extends Authenticatable
 {
@@ -39,5 +39,6 @@ class Entry extends Authenticatable
   {
     $this->verified = true;
     $this->save();
+    Mail::to($this->contact_email)->queue(new EntryVerified($this));
   }
 }
