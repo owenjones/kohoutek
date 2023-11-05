@@ -44,7 +44,7 @@ class EntryReceived extends Mailable
             markdown: 'emails.entry.received',
             with: [
               'contact_name' => $this->entry->contact_name,
-              'group' => $this->entry->group,
+              'group' => $this->entry->name,
               'login_url' => $this->entry->login_link,
             ]
         );
