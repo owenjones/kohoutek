@@ -69,9 +69,12 @@ class Entry extends Authenticatable
 
   public function verify()
   {
-    $this->verified = true;
-    $this->save();
-    Mail::to($this->contact_email)->queue(new EntryVerified($this));
+    if(!$this->verified)
+    {
+      $this->verified = true;
+      $this->save();
+      Mail::to($this->contact_email)->queue(new EntryVerified($this));
+    }
   }
 
   public function resendLoginLink()
