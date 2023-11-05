@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\{Mail, Validator};
 use Illuminate\Support\Str;
 
 use App\Models\{County, Entry};
+use App\Mail\EntryReceived;
 
 class RootController extends Controller
 {
@@ -67,7 +68,7 @@ class RootController extends Controller
         'auth_token' => Str::random(255)
       ]);
 
-      $entry->entryReceived();
+      Mail::to($entry->contact_email)->queue(new EntryReceived($entry));
 
       return "OK";
     }

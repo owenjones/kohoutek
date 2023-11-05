@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Models\Entry;
 
-class EntryReceived extends Mailable
+class ResendLink extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,8 +19,8 @@ class EntryReceived extends Mailable
      * Create a new message instance.
      */
     public function __construct(
-      public Entry $entry,
-      )
+      public Entry $entry
+    )
     {
         //
     }
@@ -31,7 +31,7 @@ class EntryReceived extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Kohoutek - Entry Received',
+            subject: 'Kohoutek - Portal Link',
         );
     }
 
@@ -41,7 +41,7 @@ class EntryReceived extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.entry.received',
+            markdown: 'emails.entry.resend',
             with: [
               'login_url' => route('portal.login', [
                 'id' => $this->entry->id,

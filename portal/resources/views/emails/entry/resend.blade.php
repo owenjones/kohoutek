@@ -1,11 +1,7 @@
 <x-mail::message>
-# Entry Received
+# Kohoutek Portal Link
 
-Your Kohoutek entry has been received!
-
-<x-mail::panel>
-Follow the link below to access the Kohoutek Portal for the first time and verify your entry.
-</x-mail::panel>
+Your Kohoutek portal link is below.
 
 <x-mail::button :url="$login_url" color="success">
 Login to Kohoutek Portal
