@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\User;
+use App\Models\{District, Entry, User};
 
 class AdminController extends Controller
 {
@@ -40,6 +40,26 @@ class AdminController extends Controller
 
   public function index()
   {
+    $districts = District::all();
 
+    $entries = Entry::all();
+    $scouts = $entries->reject(function (Entry $entry) { 
+      return $entry->district()->county()->code == "bsg" || $entry->district()->county()->code == "sn";
+    });
+    $guides = $entries->reject(function (Entry $entry) { 
+      return $entry->district()->county()->code == "avon";
+    });
+
+    return view('admin.index', [
+      'districts' => $districts,
+      'entries' => count($entries),
+      'scouts' => count($scouts),
+      'guides' => count($guides),
+    ]);
+  }
+
+  public function entries()
+  {
+    return view('admin.entries', ['entries' => Entry::all()]);
   }
 }

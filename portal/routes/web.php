@@ -35,6 +35,11 @@ Route::prefix('admin')->group(function () {
     Route::controller(AdminController::class)->group(function () {
       Route::get('/', 'index')->name('admin.index');
       Route::get('/logout', 'logout')->name('admin.logout');
+      Route::get('/entries', 'entries')->name('admin.entries');
+      Route::get('/entry/{id}', 'viewEntry')->name('admin.entry');
+      Route::match(['get', 'post'], '/entry/{id}/contact', 'viewEntry')->name('admin.entry-contact');
+      Route::match(['get', 'post'], '/entry/{id}/resend', 'viewEntry')->name('admin.entry-resend');
+      Route::match(['get', 'post'], '/entry/{id}/cancel', 'viewEntry')->name('admin.entry-cancel');
     });
   });
 
