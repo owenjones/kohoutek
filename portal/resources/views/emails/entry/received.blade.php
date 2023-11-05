@@ -1,7 +1,7 @@
 <x-mail::message>
 # Entry Received
 
-Your Kohoutek entry has been received!
+Hello {{ $contact_name }}, your Kohoutek entry for {{ $group }} has been received!
 
 <x-mail::panel>
 Follow the link below to access the Kohoutek Portal for the first time and verify your entry.
@@ -16,4 +16,6 @@ Group/Unit.
 
 Thanks,<br>
 Team Kohoutek
+
+<small>If you're unable to click the link above, copy and paste it into your browser:<br /><em>{{ $login_url }}</em></small>
 </x-mail::message>

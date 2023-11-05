@@ -1,7 +1,7 @@
 <x-mail::message>
 # Kohoutek Portal Link
 
-Your Kohoutek portal link is below.
+Hello {{ $contact_name }}, your Kohoutek portal link for {{ $group }} is below.
 
 <x-mail::button :url="$login_url" color="success">
 Login to Kohoutek Portal
@@ -12,4 +12,6 @@ Group/Unit.
 
 Thanks,<br>
 Team Kohoutek
+
+<small>If you're unable to click the link above, copy and paste it into your browser:<br /><em>{{ $login_url }}</em></small>
 </x-mail::message>

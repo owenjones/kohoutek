@@ -43,6 +43,8 @@ class ResendLink extends Mailable
         return new Content(
             markdown: 'emails.entry.resend',
             with: [
+              'contact_name' => $this->entry->contact_name,
+              'group' => $this->entry->group,
               'login_url' => route('portal.login', [
                 'id' => $this->entry->id,
                 'token' => $this->entry->auth_token,
