@@ -21,7 +21,7 @@ class AdminController extends Controller
       if(Auth::guard('admin')->attempt($validated))
       {
         $request->session()->regenerate();
-        return redirect()->intended('admin.index');
+        return redirect()->route('admin.index');
       }
 
       return back()->withErrors([
