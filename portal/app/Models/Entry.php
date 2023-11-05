@@ -49,13 +49,6 @@ class Entry extends Authenticatable
     );
   }
 
-  protected function code(): Attribute
-  {
-    return Attribute::make(
-      get: fn () => "K-" . (string)($this->id + 1)
-    );
-  }
-
   # Events
   public function updateBalance(): integer
   {

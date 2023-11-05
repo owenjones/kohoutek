@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\{County, Entry};
+use App\Models\{County, Entry, Team};
 use App\Mail\EntryReceived;
 
 class RootController extends Controller
@@ -66,6 +66,8 @@ class RootController extends Controller
         'contact_email' => $request->email,
         'auth_token' => Entry::generateToken()
       ]);
+
+      $team = Team::create();
 
       $entry->received();
       return "OK";
