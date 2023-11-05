@@ -24,7 +24,7 @@ Route::prefix('portal')->group(function () {
     Route::get('/login', function() {
       return view('portal.auth.login');
     })->name('portal.login');
-    Route::get('/login/{id}_{token}', 'login');
+    Route::get('/login/{id}_{token}', 'login')->name('portal.login');
     Route::match(['get', 'post'], '/resend', 'resend')->name('portal.resend');
   });
 });
