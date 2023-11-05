@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 use App\Models\{County, Entry};
 use App\Mail\EntryReceived;
@@ -65,7 +64,7 @@ class RootController extends Controller
         'troop' => $troop,
         'contact_name' => $request->name,
         'contact_email' => $request->email,
-        'auth_token' => Str::random(255)
+        'auth_token' => Entry::generateToken()
       ]);
 
       $entry->received();

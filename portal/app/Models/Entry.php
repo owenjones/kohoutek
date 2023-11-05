@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 use App\Mail\{EntryReceived, EntryVerified, ResendLink};
 
@@ -20,6 +21,11 @@ class Entry extends Authenticatable
     'contact_email',
     'auth_token'
   ];
+
+  protected static function generateToken()
+  {
+    return Str::random(30);
+  }
 
   public function district(): District
   {
