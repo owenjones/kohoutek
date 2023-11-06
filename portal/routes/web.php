@@ -17,6 +17,8 @@ Route::prefix('portal')->group(function () {
     Route::controller(PortalController::class)->group(function () {
       Route::get('/', 'index')->name('portal');
       Route::get('/logout', 'logout')->name('portal.logout');
+
+      Route::get('/teams', 'teams')->name('portal.teams');
     });
   });
 
@@ -35,10 +37,11 @@ Route::prefix('admin')->group(function () {
     Route::controller(AdminController::class)->group(function () {
       Route::get('/', 'index')->name('admin.index');
       Route::get('/logout', 'logout')->name('admin.logout');
+
       Route::get('/entries/{filter?}', 'entries')->name('admin.entries');
       Route::get('/entry/{id}', 'viewEntry')->name('admin.entry');
-      Route::match(['get', 'post'], '/entry/{id}/contact', 'viewEntry')->name('admin.entry-contact');
-      Route::match(['get', 'post'], '/entry/{id}/resend', 'viewEntry')->name('admin.entry-resend');
+      Route::match(['get', 'post'], '/entry/{id}/contact', 'contactEntry')->name('admin.entry-contact');
+      Route::match(['get', 'post'], '/entry/{id}/resend', 'resendEntryLink')->name('admin.entry-resend');
       Route::match(['get', 'post'], '/entry/{id}/cancel', 'cancelEntry')->name('admin.entry-cancel');
     });
   });

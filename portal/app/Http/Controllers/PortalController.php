@@ -17,7 +17,7 @@ class PortalController extends Controller
     
     if($entry == NULL || $entry->auth_token != $token)
     {
-      return redirect(route('portal.login'));
+      return redirect(route('portal.need-login'));
     } 
     else 
     {
@@ -65,6 +65,15 @@ class PortalController extends Controller
     $entry = Auth::guard('entry')->user();
 
     return view('portal.index', [
+      'entry' => $entry
+    ]);
+  }
+
+  public function teams()
+  {
+    $entry = Auth::guard('entry')->user();
+
+    return view('portal.teams', [
       'entry' => $entry
     ]);
   }
