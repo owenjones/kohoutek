@@ -1,4 +1,4 @@
-@extends('portal.template')
+@extends('portal.auth.template')
 @section('body')
   <div class="uk-position-center">
     <div class="uk-card uk-card-default uk-width-1-2@m uk-margin-auto">
