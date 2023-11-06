@@ -48,7 +48,7 @@
           rel="noreferrer noopener">Student Scout and Guide Organisation (SSAGO)</a>.
       </p>
       <p class="uk-text-small">
-        More information about the organisation and history of the event can be found on the <a href="#about">home
+        More information about the organisation and history of the event can be found on the <a href="/#about">home
           page</a>.
       </p>
     </div>
