@@ -67,7 +67,7 @@ class AdminController extends Controller
       });
     }
 
-    return view('admin.entries', ['entries' => $entries]);
+    return view('admin.entry.list', ['entries' => $entries]);
   }
 
   public function viewEntry($id)
