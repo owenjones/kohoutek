@@ -39,7 +39,7 @@
             <tr>
               <th>Verified</th>
               <td>
-                @if ($entry->validated)
+                @if ($entry->verified)
                 <span class="uk-text-success" uk-icon="check"></span>@else<span class="uk-text-danger"
                     uk-icon="close"></span>
                 @endif
