@@ -42,6 +42,7 @@ Route::prefix('admin')->group(function () {
       Route::get('/entry/{id}', 'viewEntry')->name('admin.entry');
       Route::match(['get', 'post'], '/entry/{id}/contact', 'contactEntry')->name('admin.entry-contact');
       Route::match(['get', 'post'], '/entry/{id}/resend', 'resendEntryLink')->name('admin.entry-resend');
+      Route::match(['get', 'post'], '/entry/{id}/chase', 'chaseEntryVerification')->name('admin.entry-chase');
       Route::match(['get', 'post'], '/entry/{id}/cancel', 'cancelEntry')->name('admin.entry-cancel');
     });
   });
