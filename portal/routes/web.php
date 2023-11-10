@@ -40,6 +40,8 @@ Route::prefix('admin')->group(function () {
 
       Route::get('/entries/{filter?}', 'entries')->name('admin.entries');
       Route::get('/entry/{id}', 'viewEntry')->name('admin.entry');
+      Route::get('/entry/{id}/teams', 'viewEntryTeams')->name('admin.entry-teams');
+      Route::get('/entry/{id}/payments', 'viewEntryPayments')->name('admin.entry-payments');
       Route::match(['get', 'post'], '/entry/{id}/contact', 'contactEntry')->name('admin.entry-contact');
       Route::match(['get', 'post'], '/entry/{id}/resend', 'resendEntryLink')->name('admin.entry-resend');
       Route::match(['get', 'post'], '/entry/{id}/chase', 'chaseEntryVerification')->name('admin.entry-chase');

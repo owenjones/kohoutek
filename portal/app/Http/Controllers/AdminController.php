@@ -76,6 +76,16 @@ class AdminController extends Controller
     return view('admin.entry.view', ['entry' => Entry::findOrFail($id) ]);
   }
 
+  public function viewEntryTeams($id)
+  {
+    return view('admin.entry.teams', ['entry' => Entry::findOrFail($id) ]);
+  }
+
+  public function viewEntryPayments($id)
+  {
+    return view('admin.entry.payments', ['entry' => Entry::findOrFail($id) ]);
+  }
+
   public function contactEntry(Request $request, $id)
   {
     $entry = Entry::findOrFail($id);

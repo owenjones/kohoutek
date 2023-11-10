@@ -7,11 +7,13 @@
           <h1>{{ $entry->name }}</h1>
           @include('components.alerts')
         </div>
-        <div class="uk-card uk-card-secondary uk-card-body uk-width-1-5@m uk-text-right">
+        <div class="uk-card uk-card-secondary uk-card-body uk-width-1-5@m">
           <h4 class="uk-card-title">Actions</h4>
           <ul class="uk-nav uk-nav-default" uk-nav>
             <li><a href="{{ route('admin.entry', ['id' => $entry->id]) }}">Entry Information</a></li>
-            <li><a href="{{ route('admin.entry-contact', ['id' => $entry->id]) }}">Send Email</a></li>
+            <li><a href="{{ route('admin.entry-teams', ['id' => $entry->id]) }}">Teams</a></li>
+            <li><a href="{{ route('admin.entry-payments', ['id' => $entry->id]) }}">Payments</a></li>
+            <li><a href="{{ route('admin.entry-contact', ['id' => $entry->id]) }}">Contact Entry</a></li>
             <li><a href="{{ route('admin.entry-resend', ['id' => $entry->id]) }}">Resend Portal Link</a></li>
             <li><a href="{{ route('admin.entry-cancel', ['id' => $entry->id]) }}">Cancel Entry</a></li>
           </ul>
