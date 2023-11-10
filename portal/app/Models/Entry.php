@@ -69,7 +69,7 @@ class Entry extends Authenticatable
 
   public function verify()
   {
-    if(!$this->verified)
+    if($this->verified == false)
     {
       $this->verified = true;
       $this->save();
