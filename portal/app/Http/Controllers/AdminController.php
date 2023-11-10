@@ -122,11 +122,15 @@ class AdminController extends Controller
     {
       $validated = $request->validate([
         'id' => 'required|exists:entries',
-        'verify_id' => 'required|same:id'
+        'verify' => 'required'
       ]);
 
-      $entry->cancel($request->input('silent'));
+      $verification_string = "Cancel Entry " . $entry->id;
+      if($validated["verify"] != $verification_string) {
+        return back()->withErrors(['verify' => 'The entered verification string is incorrect']);
+      }
 
+      $entry->cancel($request->input('silent'));
       session()->flash('alert', ['success' => 'Entry cancelled']);
       return redirect()->route('admin.entries');
     }
