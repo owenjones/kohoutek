@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-use App\Mail\{EntryCancelled, EntryReceived, EntryVerified, ResendLink};
+use App\Mail\{EntryCancelled, EntryChase, EntryReceived, EntryVerified, ResendLink};
 
 class Entry extends Authenticatable
 {
@@ -90,5 +90,13 @@ class Entry extends Authenticatable
     }
     
     $this->delete();
+  }
+
+  public function chase()
+  {
+    if($this->verified == false)
+    {
+      Mail::to($this->contact_email)->queue(new EntryChase($this));
+    }
   }
 }

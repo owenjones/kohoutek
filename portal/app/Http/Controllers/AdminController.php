@@ -126,7 +126,26 @@ class AdminController extends Controller
 
   public function chaseEntryVerification(Request $request, $id)
   {
-    return view('admin.entry.chase', ['entry' => Entry::findOrFail($id)]);
+    $entry = Entry::findOrFail($id);
+
+    if($entry->verified)
+    {
+      session()->flash('alert', ['warning' => 'This entry has already been validated']);
+      return redirect()->route('admin.entry', ['id' => $entry->id]);
+    }
+
+    if($request->isMethod('POST'))
+    {
+      $validated = $request->validate([
+        'id' => 'required|exists:entries',
+      ]);
+
+      $entry->chase();
+      session()->flash('alert', ['success' => 'A verification chaser email was sent to the entry']);
+      return redirect()->route('admin.entry-chase', ['id' => $entry->id]);
+    }
+
+    return view('admin.entry.chase', ['entry' => $entry]);
   }
 
   public function cancelEntry(Request $request, $id)
