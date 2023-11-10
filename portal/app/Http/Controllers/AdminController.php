@@ -124,6 +124,11 @@ class AdminController extends Controller
     return view('admin.entry.link', ['entry' => $entry]);
   }
 
+  public function chaseEntryVerification(Request $request, $id)
+  {
+    return view('admin.entry.chase', ['entry' => Entry::findOrFail($id)]);
+  }
+
   public function cancelEntry(Request $request, $id)
   {
     $entry = Entry::findOrFail($id);
