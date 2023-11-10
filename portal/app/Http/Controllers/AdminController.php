@@ -75,6 +75,24 @@ class AdminController extends Controller
     return view('admin.entry.view', ['entry' => Entry::findOrFail($id) ]);
   }
 
+  public function resendEntryLink(Request $request, $id)
+  {
+    $entry = Entry::findOrFail($id);
+
+    if($request->isMethod('POST'))
+    {
+      $validated = $request->validate([
+        'id' => 'required|exists:entries',
+      ]);
+
+      $entry->resendLoginLink();
+      session()->flash('alert', ['success' => 'The portal link was resent to the entry']);
+      return redirect()->route('admin.entry', ['id' => $entry->id]);
+    }
+
+    return view('admin.entry.link', ['entry' => $entry]);
+  }
+
   public function cancelEntry(Request $request, $id)
   {
     $entry = Entry::findOrFail($id);
