@@ -104,7 +104,6 @@ class AdminController extends Controller
         'verify_id' => 'required|same:id'
       ]);
 
-      print($request->input('silent'));
       $entry->cancel($request->input('silent'));
 
       session()->flash('alert', ['success' => 'Entry cancelled']);
