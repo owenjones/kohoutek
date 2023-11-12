@@ -1,64 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, Mail};
 
-use App\Models\{District, Entry, User};
+use App\Http\Controllers\Controller;
+use App\Models\Entry;
 use App\Mail\EntryContact;
 
-class AdminController extends Controller
+class EntryController extends Controller
 {
-  public function login(Request $request)
-  {
-    if($request->isMethod('POST'))
-    {
-      $validated = $request->validate([
-        'email' => 'required|email',
-        'password' => 'required'
-      ]);
-
-      if(Auth::guard('admin')->attempt($validated))
-      {
-        $request->session()->regenerate();
-        return redirect()->route('admin.index');
-      }
-
-      return back()->withErrors([
-        'email' => 'These credentials do not match our records',
-      ])->onlyInput('email');
-    }
-
-    return view('admin.auth.login');
-  }
-
-  public function logout()
-  {
-    Auth::guard('admin')->logout();
-    return redirect()->route('admin.login');
-  }
-
-  public function index()
-  {
-    $districts = District::all();
-
-    $entries = Entry::all();
-    $scouts = $entries->reject(function (Entry $entry) { 
-      return $entry->district()->county()->code == "bsg" || $entry->district()->county()->code == "sn";
-    });
-    $guides = $entries->reject(function (Entry $entry) { 
-      return $entry->district()->county()->code == "avon";
-    });
-
-    return view('admin.index', [
-      'districts' => $districts,
-      'entries' => $entries->count(),
-      'scouts' => $scouts->count(),
-      'guides' => $guides->count(),
-    ]);
-  }
-
   public function entries($filter = false)
   {
     $entries = Entry::all();

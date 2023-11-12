@@ -1,7 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AdminController, PortalController, RootController};
+
+use App\Http\Controllers\{
+  PortalController,
+  RootController
+};
+
+use App\Http\Controllers\Admin\{
+  AuthController,
+  EntryController,
+  RootController as AdminRootController
+};
 
 Route::controller(RootController::class)->group(function () {
   Route::get('/', 'index')->name('root.index');
@@ -33,11 +43,17 @@ Route::prefix('portal')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
-  Route::middleware(['auth:admin'])->group(function () {
-    Route::controller(AdminController::class)->group(function () {
-      Route::get('/', 'index')->name('admin.index');
-      Route::get('/logout', 'logout')->name('admin.logout');
+  Route::controller(AuthController::class)->group(function () {
+    Route::match(['get', 'post'], '/login', 'login')->name('admin.login');
+    Route::get('/logout', 'logout')->middleware(['auth:admin'])->name('admin.logout');
+  });
 
+  Route::middleware(['auth:admin'])->group(function () {
+    Route::controller(AdminRootController::class)->group(function () {
+      Route::get('/', 'index')->name('admin.index');
+    });
+      
+    Route::controller(EntryController::class)->group(function () {
       Route::get('/entries/{filter?}', 'entries')->name('admin.entries');
       Route::get('/entry/{id}', 'viewEntry')->name('admin.entry');
       Route::get('/entry/{id}/teams', 'viewEntryTeams')->name('admin.entry-teams');
@@ -48,6 +64,4 @@ Route::prefix('admin')->group(function () {
       Route::match(['get', 'post'], '/entry/{id}/cancel', 'cancelEntry')->name('admin.entry-cancel');
     });
   });
-
-  Route::match(['get', 'post'], '/login', [AdminController::class, 'login'])->name('admin.login');
 });
