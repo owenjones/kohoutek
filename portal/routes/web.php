@@ -52,14 +52,14 @@ Route::prefix('admin')->group(function () {
     });
       
     Route::controller(EntryController::class)->group(function () {
-      Route::get('/entries/{filter?}', 'entries')->name('admin.entries');
-      Route::get('/entry/{id}', 'viewEntry')->name('admin.entry');
-      Route::get('/entry/{id}/teams', 'viewEntryTeams')->name('admin.entry-teams');
-      Route::get('/entry/{id}/payments', 'viewEntryPayments')->name('admin.entry-payments');
-      Route::match(['get', 'post'], '/entry/{id}/contact', 'contactEntry')->name('admin.entry-contact');
-      Route::match(['get', 'post'], '/entry/{id}/resend', 'resendEntryLink')->name('admin.entry-resend');
-      Route::match(['get', 'post'], '/entry/{id}/chase', 'chaseEntryVerification')->name('admin.entry-chase');
-      Route::match(['get', 'post'], '/entry/{id}/cancel', 'cancelEntry')->name('admin.entry-cancel');
+      Route::get('/entries/{filter?}', 'index')->name('admin.entries');
+      Route::get('/entry/{id}', 'view')->name('admin.entry.view');
+      Route::get('/entry/{id}/teams', 'teams')->name('admin.entry.teams');
+      Route::get('/entry/{id}/payments', 'payments')->name('admin.entry.payments');
+      Route::match(['get', 'post'], '/entry/{id}/contact', 'contact')->name('admin.entry.contact');
+      Route::match(['get', 'post'], '/entry/{id}/resend', 'resend')->name('admin.entry.resend');
+      Route::match(['get', 'post'], '/entry/{id}/chase', 'chase')->name('admin.entry.chase');
+      Route::match(['get', 'post'], '/entry/{id}/cancel', 'cancel')->name('admin.entry.cancel');
     });
 
     Route::controller(UserController::class)->group(function () {

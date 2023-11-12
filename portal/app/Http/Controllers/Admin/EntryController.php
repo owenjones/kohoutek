@@ -11,7 +11,7 @@ use App\Mail\EntryContact;
 
 class EntryController extends Controller
 {
-  public function entries($filter = false)
+  public function index($filter = false)
   {
     $entries = Entry::all();
     if($filter) {
@@ -23,22 +23,22 @@ class EntryController extends Controller
     return view('admin.entry.list', ['entries' => $entries]);
   }
 
-  public function viewEntry($id)
+  public function view($id)
   {
     return view('admin.entry.view', ['entry' => Entry::findOrFail($id) ]);
   }
 
-  public function viewEntryTeams($id)
+  public function teams($id)
   {
     return view('admin.entry.teams', ['entry' => Entry::findOrFail($id) ]);
   }
 
-  public function viewEntryPayments($id)
+  public function payments($id)
   {
     return view('admin.entry.payments', ['entry' => Entry::findOrFail($id) ]);
   }
 
-  public function contactEntry(Request $request, $id)
+  public function contact(Request $request, $id)
   {
     $entry = Entry::findOrFail($id);
 
@@ -52,13 +52,13 @@ class EntryController extends Controller
 
       Mail::to($entry->contact_email)->queue(new EntryContact($entry, $validated["subject"], $validated["message"]));
       session()->flash('alert', ['success' => 'The message was sent to the entry']);
-      return redirect()->route('admin.entry-contact', ['id' => $entry->id]);
+      return redirect()->route('admin.entry.view', ['id' => $entry->id]);
     }
 
     return view('admin.entry.contact', ['entry' => $entry]);
   }
 
-  public function resendEntryLink(Request $request, $id)
+  public function resend(Request $request, $id)
   {
     $entry = Entry::findOrFail($id);
 
@@ -70,20 +70,20 @@ class EntryController extends Controller
 
       $entry->resendLoginLink();
       session()->flash('alert', ['success' => 'The portal link was resent to the entry']);
-      return redirect()->route('admin.entry', ['id' => $entry->id]);
+      return redirect()->route('admin.entry.view', ['id' => $entry->id]);
     }
 
     return view('admin.entry.link', ['entry' => $entry]);
   }
 
-  public function chaseEntryVerification(Request $request, $id)
+  public function chase(Request $request, $id)
   {
     $entry = Entry::findOrFail($id);
 
     if($entry->verified)
     {
       session()->flash('alert', ['warning' => 'This entry has already been validated']);
-      return redirect()->route('admin.entry', ['id' => $entry->id]);
+      return redirect()->route('admin.entry.view', ['id' => $entry->id]);
     }
 
     if($request->isMethod('POST'))
@@ -94,13 +94,13 @@ class EntryController extends Controller
 
       $entry->chase();
       session()->flash('alert', ['success' => 'A verification chaser email was sent to the entry']);
-      return redirect()->route('admin.entry-chase', ['id' => $entry->id]);
+      return redirect()->route('admin.entry.view', ['id' => $entry->id]);
     }
 
     return view('admin.entry.chase', ['entry' => $entry]);
   }
 
-  public function cancelEntry(Request $request, $id)
+  public function cancel(Request $request, $id)
   {
     $entry = Entry::findOrFail($id);
 

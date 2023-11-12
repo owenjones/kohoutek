@@ -44,7 +44,7 @@
                 @else
                   <span class="uk-text-danger uk-margin-right" uk-icon="close"></span>
                   <a class="uk-button uk-button-default"
-                    href="{{ route('admin.entry-chase', ['id' => $entry->id]) }}">Chase</a>
+                    href="{{ route('admin.entry.chase', ['id' => $entry->id]) }}">Chase</a>
                 @endif
               </td>
             </tr>
@@ -67,14 +67,14 @@
           </tbody>
         </table>
         <p><a class="uk-button uk-button-default"
-            href="{{ route('admin.entry-contact', ['id' => $entry->id]) }}">Contact</a></p>
+            href="{{ route('admin.entry.contact', ['id' => $entry->id]) }}">Contact</a></p>
 
         <h3>Portal Link</h3>
         <p>
           <input class="uk-input" type="text" value="{{ $entry->login_link }}?noverify=true" disabled></input>
         </p>
         <p>
-          <a class="uk-button uk-button-default" href="{{ route('admin.entry-resend', ['id' => $entry->id]) }}">Resend
+          <a class="uk-button uk-button-default" href="{{ route('admin.entry.resend', ['id' => $entry->id]) }}">Resend
             Link</a>
         </p>
       </div>

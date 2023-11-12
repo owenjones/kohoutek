@@ -2,7 +2,7 @@
 @section('module')
   <div class="uk-card uk-card-default uk-card-body uk-width-1-1">
     <h4 class="uk-card-title">Contact Entry</h4>
-    <form method="POST" action="{{ route('admin.entry-contact', ['id' => $entry->id]) }}">
+    <form method="POST" action="{{ route('admin.entry.contact', ['id' => $entry->id]) }}">
       @csrf
       <input type="hidden" name="id" value="{{ $entry->id }}" />
 

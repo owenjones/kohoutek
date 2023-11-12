@@ -6,7 +6,7 @@
     <p>If you're absolutely certain this is what you want to do, enter <strong>Cancel Entry {{ $entry->id }}</strong>
       below.
     </p>
-    <form method="POST" action="{{ route('admin.entry-cancel', ['id' => $entry->id]) }}">
+    <form method="POST" action="{{ route('admin.entry.cancel', ['id' => $entry->id]) }}">
       @csrf
       <input type="hidden" name="id" value="{{ $entry->id }}" />
       <input type="text" name="verify" class="uk-input uk-form-large" placeholder="Cancel..." value="" required />

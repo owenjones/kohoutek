@@ -29,7 +29,7 @@
           @foreach ($entries as $entry)
             <tr>
               <td class="uk-text-small uk-table-link">
-                <a href="{{ route('admin.entry', ['id' => $entry->id]) }}">{{ $entry->id }}</a>
+                <a href="{{ route('admin.entry.view', ['id' => $entry->id]) }}">{{ $entry->id }}</a>
               </td>
               <td>{{ $entry->name }}</td>
               <td>{{ $entry->district()->name }}</td>
