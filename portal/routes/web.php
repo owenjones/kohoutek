@@ -22,17 +22,14 @@ Route::controller(RootController::class)->group(function () {
 });
 
 Route::prefix('portal')->group(function () {
-  # Protected routes
   Route::middleware(['auth:entry'])->group(function () {
     Route::controller(PortalController::class)->group(function () {
       Route::get('/', 'index')->name('portal');
       Route::get('/logout', 'logout')->name('portal.logout');
-
       Route::get('/teams', 'teams')->name('portal.teams');
     });
   });
 
-  # Unprotected routes - info & resending access link
   Route::controller(PortalController::class)->group(function () {
     Route::get('/login', function() {
       return view('portal.auth.login');
