@@ -25,7 +25,7 @@
           <li><a href="{{ route('admin.index') }}">Home</a></li>
           <li><a href="{{ route('admin.entries') }}">Entries</a></li>
           <li><a href="{{ route('admin.index') }}">Scores</a></li>
-          <li><a href="{{ route('admin.index') }}">Users</a></li>
+          <li><a href="{{ route('admin.users') }}">Users</a></li>
           <li><a href="{{ route('admin.logout') }}">Logout</a></li>
         </ul>
       </div>

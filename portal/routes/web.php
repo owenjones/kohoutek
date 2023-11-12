@@ -4,13 +4,14 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
   PortalController,
-  RootController
+  RootController,
 };
 
 use App\Http\Controllers\Admin\{
   AuthController,
   EntryController,
-  RootController as AdminRootController
+  RootController as AdminRootController,
+  UserController,
 };
 
 Route::controller(RootController::class)->group(function () {
@@ -59,6 +60,14 @@ Route::prefix('admin')->group(function () {
       Route::match(['get', 'post'], '/entry/{id}/resend', 'resendEntryLink')->name('admin.entry-resend');
       Route::match(['get', 'post'], '/entry/{id}/chase', 'chaseEntryVerification')->name('admin.entry-chase');
       Route::match(['get', 'post'], '/entry/{id}/cancel', 'cancelEntry')->name('admin.entry-cancel');
+    });
+
+    Route::controller(UserController::class)->group(function () {
+      Route::get('/users', 'index')->name('admin.users');
+      Route::get('/user/{id}', 'view')->name('admin.user.view');
+      Route::post('/user/add', 'add')->name('admin.user.add');
+      Route::match(['get', 'post'], '/user/{id}/modify', 'modify')->name('admin.user.modify');
+      Route::match(['get', 'post'], '/user/{id}/delete', 'delete')->name('admin.user.delete');
     });
   });
 });
