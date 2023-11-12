@@ -53,9 +53,9 @@ class AdminController extends Controller
 
     return view('admin.index', [
       'districts' => $districts,
-      'entries' => count($entries),
-      'scouts' => count($scouts),
-      'guides' => count($guides),
+      'entries' => $entries->count(),
+      'scouts' => $scouts->count(),
+      'guides' => $guides->count(),
     ]);
   }
 
