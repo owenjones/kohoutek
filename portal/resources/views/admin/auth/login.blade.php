@@ -3,6 +3,8 @@
   <div class="uk-card uk-card-default uk-position-center">
     <div class="uk-card-body">
       <h4 class="uk-card-title uk-text-center">Team Kohoutek Login</h4>
+      @include('components.alerts')
+
       <form method="POST" action="{{ route('admin.login') }}" class="uk-form-stacked">
         @csrf
         <div class="uk-margin">

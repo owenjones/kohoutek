@@ -43,6 +43,7 @@ Route::prefix('portal')->group(function () {
 Route::prefix('admin')->group(function () {
   Route::controller(AuthController::class)->group(function () {
     Route::match(['get', 'post'], '/login', 'login')->name('admin.login');
+    Route::match(['get', 'post'], '/login/set/{token}', 'setPassword')->name('admin.login.set-password');
     Route::get('/logout', 'logout')->middleware(['auth:admin'])->name('admin.logout');
   });
 
@@ -64,10 +65,9 @@ Route::prefix('admin')->group(function () {
 
     Route::controller(UserController::class)->group(function () {
       Route::get('/users', 'index')->name('admin.users');
-      Route::get('/user/{id}', 'view')->name('admin.user.view');
       Route::post('/user/add', 'add')->name('admin.user.add');
-      Route::match(['get', 'post'], '/user/{id}/modify', 'modify')->name('admin.user.modify');
       Route::match(['get', 'post'], '/user/{id}/delete', 'delete')->name('admin.user.delete');
+      Route::post('/user/{id}/password-reset', 'passwordReset')->name('admin.user.password-reset');
     });
   });
 });
