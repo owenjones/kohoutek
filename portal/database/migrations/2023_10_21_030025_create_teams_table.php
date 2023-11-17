@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('base_score')->default(0);
             $table->integer('teamwork_score')->default(0);
+            $table->boolean('payment_received')->default(false);
             $table->foreignId('entry_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
