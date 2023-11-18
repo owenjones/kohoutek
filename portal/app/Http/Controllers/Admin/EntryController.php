@@ -58,7 +58,12 @@ class EntryController extends Controller
     ]);
 
     $payment = Payment::create($validated);
-    Team::whereIn('id', $request->input('team'))->update(['payment_received' => true]);
+
+    if($request->input('team'))
+    {
+      Team::whereIn('id', $request->input('team'))->update(['payment_received' => true]);
+    }
+
     Mail::to($entry->contact_email)->queue(new PaymentReceived($entry, $payment));
     session()->flash('alert', ['success' => 'Payment recorded']);
     return redirect()->route('admin.entry.payments', ['id' => $entry->id]);
