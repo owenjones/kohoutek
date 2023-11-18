@@ -40,6 +40,38 @@ class EntryController extends Controller
     return view('admin.entry.teams', ['entry' => Entry::findOrFail($id) ]);
   }
 
+  public function addTeam(Request $request, $id)
+  {
+    $entry = Entry::findOrFail($id);
+
+    Team::create([
+      'name' => $entry->name,
+      'entry_id' => $entry->id
+    ]);
+
+    return redirect()->route('admin.entry.teams', ['id' => $entry->id]);
+  }
+
+  public function deleteTeam(Request $request, $id)
+  {
+    $entry = Entry::findOrFail($id);
+    $team = Team::find($request->input('team_id'));
+    $team->delete();
+
+    return redirect()->route('admin.entry.teams', ['id' => $entry->id]);
+  }
+
+  public function markTeamPaid(Request $request, $id)
+  {
+    $entry = Entry::findOrFail($id);
+
+    $team = Team::find($request->input('team_id'));
+    $team->payment_received = true;
+    $team->save();
+
+    return redirect()->route('admin.entry.teams', ['id' => $entry->id]);
+  }
+
   public function payments(Request $request, $id)
   {
     return view('admin.entry.payments', ['entry' => Entry::findOrFail($id)]);

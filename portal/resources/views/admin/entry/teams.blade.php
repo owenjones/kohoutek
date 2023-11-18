@@ -7,6 +7,7 @@
         <th class="uk-table-shrink">Code</th>
         <th class="uk-table-expand">Name</th>
         <th class="uk-table-shrink">Payment Received</th>
+        <th></th>
       </thead>
       <tbody>
         @foreach ($entry->teams as $team)
@@ -20,12 +21,29 @@
                 <span class="uk-text-danger" uk-icon="close"></span>
               @endif
             </td>
+            <td class="uk-text-right uk-table-shrink">
+              <form method="post" action="{{ route('admin.entry.teams.mark-paid', ['id' => $entry->id]) }}">
+                @csrf
+                <input type="hidden" name="team_id" value="{{ $team->id }}" />
+                <input type="submit" class="uk-button uk-button-default uk-button-small" value="Mark paid" />
+              </form>
+            </td>
+            <td class="uk-text-right uk-table-shrink">
+              <form method="post" action="{{ route('admin.entry.teams.delete', ['id' => $entry->id]) }}">
+                @csrf
+                <input type="hidden" name="team_id" value="{{ $team->id }}" />
+                <input type="submit" class="uk-button uk-button-danger uk-button-small" value="Delete" />
+              </form>
+            </td>
           </tr>
         @endforeach
       </tbody>
     </table>
 
     <h5>Add New Team</h5>
-    <p>Form to add a new team to the entry</p>
+    <form method="post" action="{{ route('admin.entry.teams.add', ['id' => $entry->id]) }}">
+      @csrf
+      <input type="submit" class="uk-button uk-button-default" value="Add new team" />
+    </form>
   </div>
 @endsection

@@ -56,6 +56,9 @@ Route::prefix('admin')->group(function () {
       Route::get('/entries/{filter?}', 'index')->name('admin.entries');
       Route::get('/entry/{id}', 'view')->name('admin.entry.view');
       Route::get('/entry/{id}/teams', 'teams')->name('admin.entry.teams');
+      Route::post('/entry/{id}/teams/add', 'addTeam')->name('admin.entry.teams.add');
+      Route::post('/entry/{id}/teams/delete', 'deleteTeam')->name('admin.entry.teams.delete');
+      Route::post('/entry/{id}/teams/mark-paid', 'markTeamPaid')->name('admin.entry.teams.mark-paid');
       Route::get('/entry/{id}/payments', 'payments')->name('admin.entry.payments');
       Route::post('/entry/{id}/payments/record', 'recordPayment')->name('admin.entry.payments.record');
       Route::match(['get', 'post'], '/entry/{id}/contact', 'contact')->name('admin.entry.contact');
