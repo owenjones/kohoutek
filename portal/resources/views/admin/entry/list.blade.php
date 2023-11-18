@@ -1,7 +1,7 @@
 @extends('admin.template')
 @section('body')
   <div class="uk-section uk-section-default uk-section-xsmall">
-    <div class="uk-container uk-container-xlarge">
+    <div class="uk-container">
       @include('components.alerts')
 
       <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
