@@ -6,8 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, Mail};
 
 use App\Http\Controllers\Controller;
-use App\Models\Entry;
-use App\Mail\EntryContact;
+use App\Models\{
+  Entry,
+  Payment,
+  Team,
+};
+use App\Mail\{
+  EntryContact,
+  PaymentReceived,
+};
 
 class EntryController extends Controller
 {
@@ -33,9 +40,28 @@ class EntryController extends Controller
     return view('admin.entry.teams', ['entry' => Entry::findOrFail($id) ]);
   }
 
-  public function payments($id)
+  public function payments(Request $request, $id)
   {
-    return view('admin.entry.payments', ['entry' => Entry::findOrFail($id) ]);
+    return view('admin.entry.payments', ['entry' => Entry::findOrFail($id)]);
+  }
+
+  public function recordPayment(Request $request, $id)
+  {
+    $entry = Entry::findOrFail($id);
+
+    $validated = $request->validate([
+      'reference' => 'string|nullable',
+      'type' => 'required', # TODO: faff with enums to make this solid
+      'amount_pounds' => 'required|integer',
+      'amount_pence' => 'required|integer',
+      'entry_id' => 'required|exists:entries,id'
+    ]);
+
+    $payment = Payment::create($validated);
+    Team::whereIn('id', $request->input('team'))->update(['payment_received' => true]);
+    Mail::to($entry->contact_email)->queue(new PaymentReceived($entry, $payment));
+    session()->flash('alert', ['success' => 'Payment recorded']);
+    return redirect()->route('admin.entry.payments', ['id' => $entry->id]);
   }
 
   public function contact(Request $request, $id)

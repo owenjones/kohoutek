@@ -57,6 +57,7 @@ Route::prefix('admin')->group(function () {
       Route::get('/entry/{id}', 'view')->name('admin.entry.view');
       Route::get('/entry/{id}/teams', 'teams')->name('admin.entry.teams');
       Route::get('/entry/{id}/payments', 'payments')->name('admin.entry.payments');
+      Route::post('/entry/{id}/payments/record', 'recordPayment')->name('admin.entry.payments.record');
       Route::match(['get', 'post'], '/entry/{id}/contact', 'contact')->name('admin.entry.contact');
       Route::match(['get', 'post'], '/entry/{id}/resend', 'resend')->name('admin.entry.resend');
       Route::match(['get', 'post'], '/entry/{id}/chase', 'chase')->name('admin.entry.chase');

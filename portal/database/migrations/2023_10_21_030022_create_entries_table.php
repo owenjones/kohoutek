@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('contact_name');
             $table->string('contact_email');
             $table->boolean('verified')->default(false);
-            $table->integer('balance')->default(0);
             $table->text('notes')->nullable();
             $table->timestamps();
         });

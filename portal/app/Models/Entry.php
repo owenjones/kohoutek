@@ -9,7 +9,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-use App\Mail\{EntryCancelled, EntryChase, EntryReceived, EntryVerified, ResendLink};
+use App\Mail\{
+  EntryCancelled,
+  EntryChase,
+  EntryReceived,
+  EntryVerified,
+  ResendLink,
+};
 
 class Entry extends Authenticatable
 {
@@ -38,6 +44,11 @@ class Entry extends Authenticatable
     return $this->hasMany(Team::class);
   }
 
+  public function payments(): HasMany
+  {
+    return $this->hasMany(Payment::class);
+  }
+
   # Attributes
   protected function loginLink(): Attribute
   {
@@ -57,11 +68,6 @@ class Entry extends Authenticatable
   }
 
   # Events
-  public function updateBalance(): integer
-  {
-    
-  }
-
   public function received()
   {
     Mail::to($this->contact_email)->queue(new EntryReceived($this));
