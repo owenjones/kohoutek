@@ -154,4 +154,18 @@ class EntryController extends Controller
     
     return view('admin.entry.cancel', ['entry' => $entry]);
   }
+
+  public function notes(Request $request, $id)
+  {
+    $entry = Entry::findOrFail($id);
+
+    if($request->isMethod('POST'))
+    {
+      $entry->notes = $request->input('notes');
+      $entry->save();
+      session()->flash('alert', ['success' => 'Notes updated']);
+    }
+
+    return view('admin.entry.notes', ['entry' => $entry]);
+  }
 }

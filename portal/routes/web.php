@@ -62,6 +62,7 @@ Route::prefix('admin')->group(function () {
       Route::match(['get', 'post'], '/entry/{id}/resend', 'resend')->name('admin.entry.resend');
       Route::match(['get', 'post'], '/entry/{id}/chase', 'chase')->name('admin.entry.chase');
       Route::match(['get', 'post'], '/entry/{id}/cancel', 'cancel')->name('admin.entry.cancel');
+      Route::match(['get', 'post'], '/entry/{id}/notes', 'notes')->name('admin.entry.notes');
     });
 
     Route::controller(UserController::class)->group(function () {

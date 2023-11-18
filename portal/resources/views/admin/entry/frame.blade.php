@@ -16,6 +16,7 @@
             <li><a href="{{ route('admin.entry.contact', ['id' => $entry->id]) }}">Contact Entry</a></li>
             <li><a href="{{ route('admin.entry.resend', ['id' => $entry->id]) }}">Resend Portal Link</a></li>
             <li><a href="{{ route('admin.entry.cancel', ['id' => $entry->id]) }}">Cancel Entry</a></li>
+            <li><a href="{{ route('admin.entry.notes', ['id' => $entry->id]) }}">Notes</a></li>
           </ul>
         </div>
         <div class="uk-width-4-5@m uk-grid-item-match">
