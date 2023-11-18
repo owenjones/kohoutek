@@ -1,7 +1,9 @@
 <x-mail::message>
 # Kohoutek Portal Link
 
-Hello {{ $contact_name }}, your Kohoutek portal link for {{ $group }} is below.
+Hello {{ $contact_name }},
+
+Your Kohoutek portal link for {{ $group }} is below.
 
 <x-mail::button :url="$login_url" color="success">
 Login to Kohoutek Portal
