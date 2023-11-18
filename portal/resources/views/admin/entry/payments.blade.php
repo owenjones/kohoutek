@@ -41,11 +41,11 @@
           <div class="uk-margin">
             <label class="uk-form-label">Payment Type</label>
             <select class="uk-select" name="type">
-              <option value="BACS">BACS</option>
-              <option value="cash">Cash</option>
-              <option value="cheque">Cheque</option>
-              <option value="online">Online</option>
-              <option value="other">Other</option>
+              <option value="BACS" @selected(old('type') == 'BACS')>BACS</option>
+              <option value="cash" @selected(old('type') == 'cash')>Cash</option>
+              <option value="cheque" @selected(old('type') == 'cheque')>Cheque</option>
+              <option value="online" @selected(old('type') == 'online')>Online</option>
+              <option value="other" @selected(old('type') == 'other')>Other</option>
             </select>
           </div>
 
@@ -54,20 +54,24 @@
             <div class="uk-form-controls uk-inline uk-width-1-1">
               <span>£</span>
               <input required class="uk-input uk-form-width-xsmall" name="amount_pounds" type="text"
-                value="{{ old('amount_pounds') }}" />
+                value="{{ old('amount_pounds', 0) }}" />
               <span>.</span>
               <input required class="uk-input uk-form-width-xsmall" name="amount_pence" type="text"
-                value="{{ old('amount_pence') }}" />
+                value="{{ old('amount_pence', 0) }}" />
             </div>
           </div>
 
           <div class="uk-margin">
-            <label class="uk-form-label">Pays For</label>
+            <label class="uk-form-label">Pays for:</label>
             <div class="uk-form-controls uk-inline uk-width-1-1">
               @foreach ($entry->teams as $team)
-                <label><input type="checkbox" class="uk-checkbox uk-margin-small-right" name="team[]"
-                    value="{{ $team->id }}" />
-                  {{ $team->code }}</label>
+                <div>
+                  <label>
+                    <input type="checkbox" class="uk-checkbox uk-margin-small-right"
+                      name="team[]"value="{{ $team->id }}" />
+                    {{ $team->code }}
+                  </label>
+                </div>
               @endforeach
             </div>
           </div>
