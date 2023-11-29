@@ -26,7 +26,7 @@ class EntryController extends Controller
     }
     else
     {
-      $entries = Entry::paginate(1);
+      $entries = Entry::paginate(10);
     }
 
     return view('admin.entry.list', ['entries' => $entries]);
