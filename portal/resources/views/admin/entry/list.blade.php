@@ -2,6 +2,7 @@
 @section('body')
   <div class="uk-section uk-section-default uk-section-xsmall">
     <div class="uk-container">
+      <h2>Entries</h2>
       @include('components.alerts')
 
       <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
