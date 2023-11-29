@@ -17,7 +17,7 @@
       <p>
         Each group only needs to sign up for Kohoutek once, you can then enter multiple teams.</p>
       <p>
-        Groups can enter up to two teams initially, with additional teams being offered to groups in the new
+        Groups can enter up to {{ $teamsAllowed }} initially, with additional teams being offered to groups in the new
         year.
       </p>
     </div>

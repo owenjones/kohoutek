@@ -18,6 +18,7 @@ class RootController extends Controller
         'sn' => County::where('code', 'sn')->first(),
         'signupsOpen' => settings()->get('signup_open', false),
         'spacesAvailable' => (Team::count() < settings()->get('max_teams')),
+        'teamsAllowed' => (settings()->get('max_group_teams') > 1) ? ($num . " teams") : ("1 team"),
       ]);
     }
 
