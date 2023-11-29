@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Models\{District, Entry};
+use App\Models\{District, Entry, Team};
 
 class RootController extends Controller
 {
@@ -26,6 +26,7 @@ class RootController extends Controller
       'entries' => $entries->count(),
       'scouts' => $scouts->count(),
       'guides' => $guides->count(),
+      'teams' => Team::count(),
     ]);
   }
 }

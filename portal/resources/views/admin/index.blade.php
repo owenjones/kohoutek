@@ -10,11 +10,12 @@
           {{-- {% include "portal/components/alerts.html" %} --}}
         </div>
         <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
+
           <div>
             <div class="uk-background-primary uk-light uk-padding-small">
-              <h2>{{ $entries }}</h2>
+              <h2>{{ $teams }}</h2>
               <p class="uk-margin-remove-bottom">
-                <strong>Total Entries</strong>
+                <strong>Teams</strong>
               </p>
             </div>
           </div>
@@ -36,6 +37,16 @@
               </p>
             </div>
           </div>
+
+          <div>
+            <div class="uk-background-secondary uk-light uk-padding-small">
+              <h2>{{ $entries }}</h2>
+              <p class="uk-margin-remove-bottom">
+                <strong>Total Entries</strong>
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
