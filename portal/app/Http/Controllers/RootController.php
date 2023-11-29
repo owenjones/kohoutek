@@ -4,21 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 use App\Models\{County, Entry, Team};
 use App\Mail\EntryReceived;
+
+use Rmunate\Utilities\SpellNumber;
 
 class RootController extends Controller
 {
     public function index()
     {
+      $teams = SpellNumber::value(settings()->get('max_group_teams'))->toLetters() . " " . Str::plural('team', settings()->get('max_group_teams'));
+
       return view('root.index', [
         'avon' => County::where('code', 'avon')->first(),
         'bsg' => County::where('code', 'bsg')->first(),
         'sn' => County::where('code', 'sn')->first(),
         'signupsOpen' => settings()->get('signup_open', false),
         'spacesAvailable' => (Team::count() < settings()->get('max_teams')),
-        'teamsAllowed' => (settings()->get('max_group_teams') > 1) ? ($num . " teams") : ("1 team"),
+        'teamsAllowed' => $teams,
       ]);
     }
 

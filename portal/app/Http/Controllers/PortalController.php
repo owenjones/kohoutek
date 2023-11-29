@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 use App\Models\{Entry, Team, Update};
 use App\Mail\ResendLink;
+
+use Rmunate\Utilities\SpellNumber;
 
 class PortalController extends Controller
 {
@@ -73,10 +76,12 @@ class PortalController extends Controller
   {
     $entry = Auth::guard('entry')->user();
     $canAddTeam = (count($entry->teams) < settings()->get('max_group_teams')) && (Team::count() < settings()->get('max_teams'));
+    $teams = SpellNumber::value(settings()->get('max_group_teams'))->toLetters() . " " . Str::plural('team', settings()->get('max_group_teams'));
 
     return view('portal.teams', [
       'entry' => $entry,
       'canAddTeam' => $canAddTeam,
+      'teams' => $teams
     ]);
   }
 
