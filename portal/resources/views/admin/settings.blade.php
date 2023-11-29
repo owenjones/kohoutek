@@ -1,7 +1,7 @@
 @extends('admin.template')
 @section('body')
   <div class="uk-section uk-section-default uk-section-xsmall">
-    <div class="uk-container uk-container-medium">
+    <div class="uk-container">
       <div class="uk-flex uk-flex-stretch" uk-grid>
         <div class="uk-width-1-1">
           <h2>Settings</h2>

@@ -4,7 +4,7 @@
 @endpush
 @section('body')
   <div class="uk-section uk-section-default uk-section-xsmall">
-    <div class="uk-container uk-container-medium">
+    <div class="uk-container">
       <div class="uk-flex uk-flex-stretch" uk-grid>
         <div class="uk-width-1-1">
           @include('components.alerts')
@@ -52,7 +52,7 @@
     </div>
   </div>
   <div class="uk-section uk-section-default uk-section-xsmall">
-    <div class="uk-container uk-container-medium">
+    <div class="uk-container">
       <canvas id="location-graph" width="600" height="200"></canvas>
       <script>
         document.body.onload = function() {

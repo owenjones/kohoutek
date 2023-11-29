@@ -29,7 +29,7 @@
     </nav>
   </div>
   <div class="uk-section uk-section-default uk-section-small">
-    <div class="uk-container uk-container-medium">
+    <div class="uk-container uk-container-small">
       <div class="uk-flex uk-flex-stretch" uk-grid>
         <div class="uk-width-1-1 uk-text-center">
           @include('components.alerts')
