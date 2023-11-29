@@ -12,7 +12,7 @@
   <title>Kohoutek Admin</title>
 </head>
 
-<body id="portal" class="uk-height-viewport uk-background-default">
+<body id="portal" class="uk-height-viewport uk-background-secondary">
   <div class="uk-section uk-section-secondary uk-section-xsmall">
     <div class="uk-container uk-container-small uk-text-center">
       <h2>Kohoutek Admin</h2>
@@ -32,7 +32,18 @@
       </div>
     </nav>
   </div>
-  @yield('body')
+
+  <div class="uk-section uk-section-default">
+    @yield('body')
+  </div>
+
+  <div class="uk-section uk-section-secondary uk-section-xsmall">
+    <div class="uk-container uk-container-small uk-text-center">
+      <p class="uk-text-small">
+        &copy Kohoutek Competition {{ settings()->get('year') }}
+      </p>
+    </div>
+  </div>
   @stack('body-js')
 </body>
 
