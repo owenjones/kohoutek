@@ -24,7 +24,6 @@
         <ul class="uk-navbar-nav uk-flex uk-flex-wrap">
           <li><a href="{{ route('admin.index') }}">Home</a></li>
           <li><a href="{{ route('admin.entries') }}">Entries</a></li>
-          <li><a href="{{ route('admin.index') }}">Scores</a></li>
           <li><a href="{{ route('admin.users') }}">Users</a></li>
           <li><a href="{{ route('admin.settings') }}">Settings</a></li>
           <li><a href="{{ route('admin.logout') }}">Logout</a></li>
