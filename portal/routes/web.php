@@ -28,6 +28,7 @@ Route::prefix('portal')->group(function () {
       Route::get('/', 'index')->name('portal');
       Route::get('/logout', 'logout')->name('portal.logout');
       Route::get('/teams', 'teams')->name('portal.teams');
+      // Route::post('/team/add', 'addTeam')->name('portal.team.add');
       Route::match(['get', 'post'], '/team/{id}/rename', 'renameTeam')->name('portal.team.rename');
     });
   });

@@ -78,6 +78,18 @@ class PortalController extends Controller
     ]);
   }
 
+  public function addTeam()
+  {
+    $entry = Auth::guard('entry')->user();
+
+    Team::create([
+      'name' => $entry->name,
+      'entry_id' => $entry->id
+    ]);
+
+    return redirect()->route('portal.teams');
+  }
+
   public function renameTeam(Request $request, $id)
   {
     $team = Team::find($id);
