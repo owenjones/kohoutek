@@ -16,7 +16,8 @@
               <div class="uk-grid">
                 <div class="uk-width-2-3">{{ $team->name }}</div>
                 <div class="uk-width-1-3 uk-text-right">
-                  <a href="" class="uk-button uk-button-primary uk-button-small">Change name</a>
+                  <a href="{{ route('portal.team.rename', ['id' => $team->id]) }}"
+                    class="uk-button uk-button-primary uk-button-small">Change name</a>
                 </div>
               </div>
             </td>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\Entry;
+use App\Models\{Entry, Team};
 use App\Mail\ResendLink;
 
 class PortalController extends Controller
@@ -76,5 +76,29 @@ class PortalController extends Controller
     return view('portal.teams', [
       'entry' => $entry
     ]);
+  }
+
+  public function renameTeam(Request $request, $id)
+  {
+    $team = Team::find($id);
+    if(!isset($team) || $team->entry()->id != Auth::guard('entry')->user()->id)
+    {
+      abort(403);
+    }
+
+    if($request->isMethod('POST'))
+    {
+      $validated = $request->validate([
+        'name' => 'required|max:255|unique:teams'
+      ]);
+
+      $team->name = $validated["name"];
+      $team->save();
+
+      session()->flash('alert', ['success' => 'Your team was renamed']);
+      return redirect()->route('portal.teams');
+    }
+
+    return view('portal.team.rename', ['entry' => $team->entry(), 'team' => $team]);
   }
 }
