@@ -7,7 +7,7 @@
     <div class="uk-container uk-container-medium">
       <div class="uk-flex uk-flex-stretch" uk-grid>
         <div class="uk-width-1-1">
-          {{-- {% include "portal/components/alerts.html" %} --}}
+          @include('components.alerts')
         </div>
         <div class="uk-width-1-1 uk-grid-collapse uk-child-width-expand@m uk-grid-match uk-text-center" uk-grid>
 
