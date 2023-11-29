@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\{
   EntryController,
   RootController as AdminRootController,
   UserController,
+  SettingsController,
 };
 
 Route::controller(RootController::class)->group(function () {
@@ -76,5 +77,7 @@ Route::prefix('admin')->group(function () {
       Route::match(['get', 'post'], '/user/{id}/delete', 'delete')->name('admin.user.delete');
       Route::post('/user/{id}/password-reset', 'passwordReset')->name('admin.user.password-reset');
     });
+
+    Route::match(['get', 'post'], '/settings', [SettingsController::class, 'index'])->name('admin.settings');
   });
 });
