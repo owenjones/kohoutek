@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\{Entry, Team};
+use App\Models\{Entry, Team, Update};
 use App\Mail\ResendLink;
 
 class PortalController extends Controller
@@ -121,5 +121,16 @@ class PortalController extends Controller
     }
 
     return view('portal.team.rename', ['entry' => $team->entry(), 'team' => $team]);
+  }
+
+  public function updates()
+  {
+    $entry = Auth::guard('entry')->user();
+    $updates = Update::orderBy('created_at', 'desc')->simplePaginate(10);
+
+    return view('portal.updates', [
+      'entry' => $entry,
+      'updates' => $updates,
+    ]);
   }
 }

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\{
   RootController as AdminRootController,
   UserController,
   SettingsController,
+  UpdateController,
 };
 
 Route::controller(RootController::class)->group(function () {
@@ -31,6 +32,7 @@ Route::prefix('portal')->group(function () {
       Route::get('/teams', 'teams')->name('portal.teams');
       Route::post('/team/add', 'addTeam')->name('portal.team.add');
       Route::match(['get', 'post'], '/team/{id}/rename', 'renameTeam')->name('portal.team.rename');
+      Route::get('/updates', 'updates')->name('portal.updates');
     });
   });
 
@@ -70,6 +72,9 @@ Route::prefix('admin')->group(function () {
       Route::match(['get', 'post'], '/entry/{id}/cancel', 'cancel')->name('admin.entry.cancel');
       Route::match(['get', 'post'], '/entry/{id}/notes', 'notes')->name('admin.entry.notes');
     });
+
+    Route::get('/updates', [UpdateController::class, 'index'])->name('admin.updates');
+    Route::match(['get', 'post'], '/update/add', [UpdateController::class, 'new'])->name('admin.update.new');
 
     Route::controller(UserController::class)->group(function () {
       Route::get('/users', 'index')->name('admin.users');

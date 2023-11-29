@@ -22,7 +22,7 @@
         <ul class="uk-navbar-nav uk-flex uk-flex-wrap">
           <li><a href="{{ route('portal') }}">Home</a></li>
           <li><a href="{{ route('portal.teams') }}">Teams</a></li>
-          <li><a href="{{ route('portal') }}">Updates</a></li>
+          <li><a href="{{ route('portal.updates') }}">Updates</a></li>
           <li><a href="{{ route('portal.logout') }}">Logout</a></li>
         </ul>
       </div>
