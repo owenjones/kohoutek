@@ -15,9 +15,12 @@ class SettingsController extends Controller
         'year' => 'required|integer',
         'max_teams' => 'required|integer|min:0',
         'max_group_teams' => 'required|integer|min:0',
+        'signup_open' => 'sometimes|string',
         'initial_teams' => 'required|integer|min:1',
       ]);
       
+      $validated['signup_open'] = isset($validated['signup_open']);
+
       settings()->set($validated);
       session()->flash('alert', ['success' => 'Settings updated']);
     }

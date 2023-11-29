@@ -32,6 +32,13 @@
                   value="{{ old('max_group_teams', settings()->get('max_group_teams')) }}" required />
               </div>
 
+              <h3>Sign up</h3>
+              <label class="uk-form-label">Sign up form open</label>
+              <div class="uk-form-controls uk-form-controls-text">
+                <input type="checkbox" name="signup_open" class="uk-checkbox uk-margin" value="true"
+                  @checked(old('signup_open', settings()->get('signup_open', false))) />
+              </div>
+
               <label class="uk-form-label">Initial teams</label>
               <div class="uk-form-controls">
                 <input type="text" name="initial_teams" class="uk-input uk-margin"

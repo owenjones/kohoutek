@@ -15,7 +15,9 @@ class RootController extends Controller
       return view('root.index', [
         'avon' => County::where('code', 'avon')->first(),
         'bsg' => County::where('code', 'bsg')->first(),
-        'sn' => County::where('code', 'sn')->first()
+        'sn' => County::where('code', 'sn')->first(),
+        'signupsOpen' => settings()->get('signup_open', false),
+        'spacesAvailable' => (Team::count() < settings()->get('max_teams')),
       ]);
     }
 
@@ -67,10 +69,13 @@ class RootController extends Controller
         'auth_token' => Entry::generateToken()
       ]);
 
-      $team = Team::create([
-        'name' => $entry->name,
-        'entry_id' => $entry->id
-      ]);
+      for($i = 0; $i < settings()->get('initial_teams', 0); $i++)
+      {
+        Team::create([
+          'name' => $entry->name,
+          'entry_id' => $entry->id
+        ]);
+      }
 
       $entry->received();
       return "OK";
