@@ -37,9 +37,11 @@
       Words about one team, or button to add another.
     </p>
 
-    {{-- <form method="post" action="{{ route('portal.team.add') }}">
-      @csrf
-      <input type="submit" class="uk-button uk-button-default" value="Add new team" />
-    </form> --}}
+    @if ($canAddTeam)
+      <form method="post" action="{{ route('portal.team.add') }}">
+        @csrf
+        <input type="submit" class="uk-button uk-button-default" value="Add new team" />
+      </form>
+    @endif
   </div>
 @endsection

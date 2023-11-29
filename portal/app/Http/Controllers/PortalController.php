@@ -73,8 +73,13 @@ class PortalController extends Controller
   {
     $entry = Auth::guard('entry')->user();
 
+    settings()->set('test', 'goodbye123');
+
+    $canAddTeam = (count($entry->teams) < settings()->get('max_group_teams')) && (Team::count() < settings()->get('max_teams'));
+
     return view('portal.teams', [
-      'entry' => $entry
+      'entry' => $entry,
+      'canAddTeam' => $canAddTeam,
     ]);
   }
 
@@ -82,10 +87,17 @@ class PortalController extends Controller
   {
     $entry = Auth::guard('entry')->user();
 
-    Team::create([
-      'name' => $entry->name,
-      'entry_id' => $entry->id
-    ]);
+    if((count($entry->teams) < settings()->get('max_group_teams')) && (Team::count() < settings()->get('max_teams')))
+    {
+      Team::create([
+        'name' => $entry->name,
+        'entry_id' => $entry->id
+      ]);
+    }
+    else
+    {
+      session()->flash('alert', ['danger' => 'Maximum number of teams has been reached']);
+    }
 
     return redirect()->route('portal.teams');
   }
