@@ -34,7 +34,8 @@
     </table>
 
     <p class="uk-margin uk-text-small">
-      Words about one team, or button to add another.
+      Groups can currently enter up to {{ settings()->get('max_group_teams', 0) }} teams in the competition, this limit
+      will be raised in the run up to the event if team spaces remain.
     </p>
 
     @if ($canAddTeam)

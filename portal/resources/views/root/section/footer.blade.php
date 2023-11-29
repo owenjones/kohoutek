@@ -7,7 +7,7 @@
         rel="noreferrer noopener">Student Scout and Guide Organisation (SSAGO)</a>.
     </p>
     <p class="uk-text-small">
-      &copy Kohoutek Competition 2024
+      &copy Kohoutek Competition {{ settings()->get('year') }}
     </p>
   </div>
 </div>
