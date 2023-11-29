@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:title" content="Kohoutek" />
+  <meta property="og:title" content="Kohoutek {{ settings()->get('year') }}" />
   <meta property="og:description"
     content="Kohoutek is a competition and activity day for Scouts in Avon County, and Guides in Bristol and South Gloucestershire, and Somerset North counties, organised by students and alumni from the University of Bristol Guides and Scouts society (UOBGAS)." />
   <meta property="og:image" content="{{ asset('img/og.jpg') }}" />
@@ -15,7 +15,7 @@
   <script src="{{ asset('js/sign-up.js') }}" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
   @stack('head-js')
-  <title>Kohoutek</title>
+  <title>Kohoutek {{ settings()->get('year') }}</title>
 </head>
 
 <body class="uk-background-secondary">
