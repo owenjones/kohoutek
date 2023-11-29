@@ -72,9 +72,6 @@ class PortalController extends Controller
   public function teams()
   {
     $entry = Auth::guard('entry')->user();
-
-    settings()->set('test', 'goodbye123');
-
     $canAddTeam = (count($entry->teams) < settings()->get('max_group_teams')) && (Team::count() < settings()->get('max_teams'));
 
     return view('portal.teams', [
