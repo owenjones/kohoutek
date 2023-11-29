@@ -46,6 +46,7 @@
           @endforeach
         </tbody>
       </table>
+      {{ $entries->links('components.paginator') }}
     </div>
   </div>
 @endsection

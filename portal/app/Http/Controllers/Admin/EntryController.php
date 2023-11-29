@@ -20,11 +20,13 @@ class EntryController extends Controller
 {
   public function index($filter = false)
   {
-    $entries = Entry::all();
-    if($filter) {
-      $entries = $entries->reject(function (Entry $entry) use ($filter) {
-        return ($filter == "verified") ? !$entry->verified : $entry->verified;
-      });
+    if($filter)
+    {
+      $entries = Entry::where('verified', ($filter == "verified"))->paginate(10);
+    }
+    else
+    {
+      $entries = Entry::paginate(1);
     }
 
     return view('admin.entry.list', ['entries' => $entries]);
