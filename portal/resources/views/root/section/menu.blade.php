@@ -2,7 +2,7 @@
   <div
     uk-sticky="animation: uk-animation-fade; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light kohoutek-frontactive; top: 100vh;">
     <nav class="uk-navbar-container" uk-navbar>
-      <div class="uk-navbar-left uk-hidden@s">
+      <div class="uk-navbar-left uk-margin-left uk-hidden@s">
         <button class="uk-navbar-toggle" uk-toggle="target: #mobile-menu" type="button" uk-navbar-toggle-icon></button>
       </div>
       <div class="uk-navbar-center uk-visible@s">
@@ -39,10 +39,10 @@
           <a href="#home">Home</a>
         </li>
         <li>
-          <a href="#sign-up" class="kohoutek-mobile-illuminate">Sign Up</a>
+          <a href="#about">About</a>
         </li>
         <li>
-          <a href="#about">About</a>
+          <a href="#sign-up" class="kohoutek-mobile-illuminate">Sign Up</a>
         </li>
         <li>
           <a href="#history">History</a>
