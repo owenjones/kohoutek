@@ -9,8 +9,8 @@
           Guides and Scouts society (UOBGAS).
         </p>
         <p>
-          Teams of five will take part in 20 themed bases, scoring points based on how well they attempt
-          these, and how they work together as a team. The team which scores the most challenge points overall will win
+          Teams of five will take part in 20 themed bases, scoring points depending on how well they attempt
+          these and how they work together as a team. The team which scores the most challenge points overall will win
           the <strong>Kohoutek Trophy</strong>, and the team which worked together best the <strong>Teamwork
             Spoon</strong>.
         </p>
@@ -18,7 +18,7 @@
           The 2024 event <strong>Welcome to the Jungle!</strong> will be taking place on
           <strong>Saturday 16<sup>th</sup> March 2024</strong> at
           <strong><a href="https://maps.app.goo.gl/NbBBZDJQMLDfoiVu9" target="_blank" rel="nofollow noreferrer">Camerton
-              Community Hall</a></strong>.
+              Community Hall</a>, near Bath</strong>.
         </p>
         <hr class="uk-divider-icon uk-hidden@l" />
       </div>
