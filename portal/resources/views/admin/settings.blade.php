@@ -7,7 +7,7 @@
           <h2>Settings</h2>
           @include('components.alerts')
         </div>
-        <div class="uk-width-1-2">
+        <div class="uk-width-1-1 uk-width-1-2@m">
           <form method="post" action="{{ route('admin.settings') }}">
             @csrf
 
