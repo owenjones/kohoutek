@@ -62,7 +62,7 @@
         <hr class="uk-divider-icon uk-hidden@l" />
       </div>
       <div class="uk-width-2-5@l">
-        <h3>Key Dates</h3>
+        <h3>Key dates</h3>
         <dl class="uk-description-list uk-description-list-divider">
           <dt>1<sup>st</sup> December 2023</dt>
           <dd>Registration for Kohoutek 2024 opens</dd>
