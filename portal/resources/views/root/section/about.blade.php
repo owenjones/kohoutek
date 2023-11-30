@@ -56,7 +56,7 @@
 
         <h3>Entry cost</h3>
         <p>
-          Entry to the competition is £{{ settings()->get('payment_fee') }} a team, which includes a badge for each
+          Entry to the competition is £{{ settings()->get('payment_fee') }} per team, which includes a badge for each
           participant (and leader).
         </p>
 
