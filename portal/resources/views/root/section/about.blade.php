@@ -11,7 +11,8 @@
         <p>
           Teams of five will take part in 20 themed bases, scoring points based on how well they attempt
           these, and how they work together as a team. The team which scores the most challenge points overall will win
-          the <em>Kohoutek Trophy</em>, and the team which worked together best the <em>Teamwork Spoon</em>.
+          the <strong>Kohoutek Trophy</strong>, and the team which worked together best the <strong>Teamwork
+            Spoon</strong>.
         </p>
         <p>
           The 2024 event <strong>Welcome to the Jungle!</strong> will be taking place on
