@@ -28,8 +28,9 @@
       <div class="uk-width-3-5@l">
         <h3>Registration</h3>
         <p>
-          Groups/Units wishing to take part need to register using the sign up form above, which will allocate them a
-          team. Each Group/Unit can initially enter one team, we will allow additional teams in the new year on a
+          Groups wishing to take part need to register using the sign up form above, which will allocate them a
+          team. Each group can initially enter one team. If space allows groups will be able additional teams in the new
+          year on a
           first-come first-served basis, if spaces allow.
         </p>
 
