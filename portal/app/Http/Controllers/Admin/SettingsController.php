@@ -17,6 +17,7 @@ class SettingsController extends Controller
         'max_group_teams' => 'required|integer|min:0',
         'signup_open' => 'sometimes|string',
         'initial_teams' => 'required|integer|min:1',
+        'payment_fee' => 'required',
         'payment_account_name' => 'required',
         'payment_sort_code' => 'required',
         'payment_account_number' => 'required',

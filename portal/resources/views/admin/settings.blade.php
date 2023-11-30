@@ -46,6 +46,12 @@
               </div>
 
               <h3>Payments</h3>
+              <label class="uk-form-label">Team fee</label>
+              <div class="uk-form-controls">
+                <input type="text" name="payment_fee" class="uk-input uk-margin"
+                  value="{{ old('payment_fee', settings()->get('payment_fee')) }}" required />
+              </div>
+
               <label class="uk-form-label">Account name</label>
               <div class="uk-form-controls">
                 <input type="text" name="payment_account_name" class="uk-input uk-margin"

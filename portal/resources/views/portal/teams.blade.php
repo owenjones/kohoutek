@@ -52,9 +52,8 @@
   <div class="uk-width-1-1 uk-width-1-2@m">
     <h4>Team payment</h4>
     <p class="uk-margin uk-text-small">
-      Please make your team payments (£30 per team) before 1<sup>st</sup> February to the Kohoutek Competition account
-      using
-      the following details:
+      Please make your team payments (£{{ settings()->get('payment_fee') }} per team) before 1<sup>st</sup> February to
+      the Kohoutek Competition account using the following details:
 
     <dl class="uk-description-list">
       <dt>Account Name</dt>

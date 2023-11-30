@@ -23,9 +23,14 @@
       </div>
       <div class="uk-width-3-5@l">
         <h3>Entry Cost</h3>
-        <p>Entry to the competition is £35 a team, which includes a badge for each participant (and leader).</p>
-        <p>Payment is due two weeks after signing up or adding a team, or by 4<sup>th</sup> March 2024, which ever comes
-          first.</p>
+        <p>
+          Entry to the competition is £{{ settings()->get('payment_fee') }} a team, which includes a badge for each
+          participant (and leader).
+        </p>
+        <p>
+          Payment is due two weeks after signing up or adding a team, or by 4<sup>th</sup> March 2024, which ever comes
+          first.
+        </p>
 
         <h3 id="rules">Rules</h3>
         <p>
