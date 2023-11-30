@@ -48,7 +48,7 @@
             teams).
           </li>
           <li>
-            Tea/coffee/biscuits for leaders will be provided!
+            Tea/coffee/biscuits for leaders will be provided (but you'll need to bring a mug!).
           </li>
         </ul>
         </p>
