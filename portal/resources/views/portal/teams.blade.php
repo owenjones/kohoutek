@@ -2,7 +2,7 @@
 @section('body')
   <div class="uk-width-1-1">
     <h3 class="uk-text-center uk-text-left@m">Teams</h3>
-    <table class="uk-table uk-table-resonsive uk-table-middle uk-table-striped">
+    <table class="uk-table uk-table-middle uk-table-striped">
       <thead>
         <th class="uk-table-shrink">Code</th>
         <th class="uk-table-expand">Name</th>

@@ -32,7 +32,7 @@
 
   <div class="uk-width-1-2@m">
     <h3 class="uk-text-center uk-text-left@m">Contact Information</h3>
-    <table class="uk-table uk-table-resonsive uk-table-middle uk-table-striped">
+    <table class="uk-table uk-table-responsive uk-table-middle uk-table-striped">
       <tbody>
         <tr>
           <th class="uk-table-shrink">Name</th>
