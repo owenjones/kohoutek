@@ -2,7 +2,7 @@ version: "3"
 
 services:
   kohoutek:
-    image: nginx:alpine
+    image: nginx
     container_name: kohoutek
     restart: unless-stopped
     volumes:
@@ -14,6 +14,7 @@ services:
       - NGINX_HOST=kohoutek.co.uk
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
       - "traefik.http.routers.kohoutek.rule=Host(`kohoutek.co.uk`)"
       - "traefik.http.routers.kohoutek.middlewares=kohoutek"
       - "traefik.http.middlewares.kohoutek.compress=true"
