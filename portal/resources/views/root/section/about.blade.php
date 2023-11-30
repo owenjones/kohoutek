@@ -18,7 +18,7 @@
           The 2024 event <strong>Welcome to the Jungle!</strong> will be taking place on
           <strong>Saturday 16<sup>th</sup> March 2024</strong> at
           <strong><a href="https://maps.app.goo.gl/NbBBZDJQMLDfoiVu9" target="_blank" rel="nofollow noreferrer">Camerton
-              Community Hall</a>, near Bath</strong>.
+              Community Hall</a></strong>, near Bath.
         </p>
         <hr class="uk-divider-icon uk-hidden@l" />
       </div>
