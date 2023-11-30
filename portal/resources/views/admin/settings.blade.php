@@ -44,6 +44,31 @@
                 <input type="text" name="initial_teams" class="uk-input uk-margin"
                   value="{{ old('initial_teams', settings()->get('initial_teams')) }}" required />
               </div>
+
+              <h3>Payments</h3>
+              <label class="uk-form-label">Account name</label>
+              <div class="uk-form-controls">
+                <input type="text" name="payment_account_name" class="uk-input uk-margin"
+                  value="{{ old('payment_account_name', settings()->get('payment_account_name')) }}" required />
+              </div>
+
+              <label class="uk-form-label">Account sort code</label>
+              <div class="uk-form-controls">
+                <input type="text" name="payment_sort_code" class="uk-input uk-margin"
+                  value="{{ old('payment_sort_code', settings()->get('payment_sort_code')) }}" required />
+              </div>
+
+              <label class="uk-form-label">Account number</label>
+              <div class="uk-form-controls">
+                <input type="text" name="payment_account_number" class="uk-input uk-margin"
+                  value="{{ old('payment_account_number', settings()->get('payment_account_number')) }}" required />
+              </div>
+
+              <label class="uk-form-label">Reference prefix</label>
+              <div class="uk-form-controls">
+                <input type="text" name="payment_prefix" class="uk-input uk-margin"
+                  value="{{ old('payment_prefix', settings()->get('payment_prefix')) }}" required />
+              </div>
             </fieldset>
 
             @include('components.form-errors')

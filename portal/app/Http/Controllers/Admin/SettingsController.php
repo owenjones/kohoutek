@@ -17,6 +17,10 @@ class SettingsController extends Controller
         'max_group_teams' => 'required|integer|min:0',
         'signup_open' => 'sometimes|string',
         'initial_teams' => 'required|integer|min:1',
+        'payment_account_name' => 'required',
+        'payment_sort_code' => 'required',
+        'payment_account_number' => 'required',
+        'payment_prefix' => 'required',
       ]);
       
       $validated['signup_open'] = isset($validated['signup_open']);

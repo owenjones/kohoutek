@@ -1,6 +1,6 @@
 @extends('portal.template')
 @section('body')
-  <div class="uk-width-1-1@m">
+  <div class="uk-width-1-1">
     <h3 class="uk-text-center uk-text-left@m">Teams</h3>
     <table class="uk-table uk-table-resonsive uk-table-middle uk-table-striped">
       <thead>
@@ -32,7 +32,10 @@
         @endforeach
       </tbody>
     </table>
+  </div>
 
+  <div class="uk-width-1-1 uk-width-1-2@m">
+    <h4>Add more teams</h4>
     <p class="uk-margin uk-text-small">
       Groups can currently enter up to {{ $teams }} in
       the competition, this limit will be raised in the new year if sufficient team spaces remain.
@@ -44,5 +47,28 @@
         <input type="submit" class="uk-button uk-button-default" value="Add new team" />
       </form>
     @endif
+  </div>
+
+  <div class="uk-width-1-1 uk-width-1-2@m">
+    <h4>Team payment</h4>
+    <p class="uk-margin uk-text-small">
+      Please make your team payments (£30 per team) before 1<sup>st</sup> February to the Kohoutek Competition account
+      using
+      the following details:
+
+    <dl class="uk-description-list">
+      <dt>Account Name</dt>
+      <dd>{{ settings()->get('payment_account_name') }}</dd>
+
+      <dt>Sort Code</dt>
+      <dd>{{ settings()->get('payment_sort_code') }}</dd>
+
+      <dt>Account Number</dt>
+      <dd>{{ settings()->get('payment_account_number') }}</dd>
+
+      <dt>Reference</dt>
+      <dd>{{ settings()->get('payment_prefix') }}-{{ $entry->id }}</dd>
+    </dl>
+    </p>
   </div>
 @endsection
