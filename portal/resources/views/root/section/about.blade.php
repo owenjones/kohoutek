@@ -1,14 +1,12 @@
 <div id="about" class="uk-section uk-section-default uk-height-viewport avoid-sticky-nav">
   <div class="uk-container uk-container-small">
-    <h1 class="uk-text-center">Kohoutek 2024</h1>
+    <h1 class="uk-text-center">Kohoutek {{ settings()->get('year') }}</h1>
     <div class="uk-flex uk-flex-stretch" uk-grid>
       <div>
         <p>
           Kohoutek is a competition and activity day for Scouts in Avon County, and Guides in Bristol and
-          South
-          Gloucestershire, and Somerset North counties, organised by students from the University of Bristol
-          Guides and
-          Scouts society (UOBGAS).
+          South Gloucestershire, and Somerset North counties, organised by students from the University of Bristol
+          Guides and Scouts society (UOBGAS).
         </p>
         <p>
           Teams of five will take part in 20 themed bases, scoring points based on how well they attempt
