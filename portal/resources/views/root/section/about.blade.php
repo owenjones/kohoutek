@@ -5,7 +5,8 @@
       <div>
         <p>
           Kohoutek is a competition and activity day for Scouts in Avon County, and Guides in Bristol and
-          South Gloucestershire, and Somerset North counties, organised by students from the University of Bristol
+          South Gloucestershire, and Somerset North counties, organised by students and alumni from the University of
+          Bristol
           Guides and Scouts society (UOBGAS).
         </p>
         <p>
