@@ -33,6 +33,7 @@ var submitLock = false;
 
 document.body.onload = function () {
   scoutToggle.onclick = function () {
+    guideToggle.checked = false;
     scoutCard.removeAttribute("hidden");
     guideCard.setAttribute("hidden", true);
     contactCard.removeAttribute("hidden");
@@ -41,6 +42,7 @@ document.body.onload = function () {
   };
 
   guideToggle.onclick = function () {
+    scoutToggle.checked = false;
     scoutCard.setAttribute("hidden", true);
     guideCard.removeAttribute("hidden");
     contactCard.setAttribute("hidden", true);
@@ -70,45 +72,6 @@ document.body.onload = function () {
     submitCard.removeAttribute("hidden");
     guideCounty.classList.add("uk-margin");
   };
-
-  // form.onsubmit = function (ev) {
-  //   if (!submitLock) {
-  //     submitLock = true;
-  //     ev.preventDefault();
-  //     submitButton.setAttribute("hidden", true);
-  //     submitSpinner.removeAttribute("hidden");
-  //     submitError.setAttribute("hidden", true);
-
-  //     fetch(form.action, {
-  //       method: form.method,
-  //       body: new FormData(form)
-  //     })
-  //       .then(res => {
-  //         if (res.status == 200) {
-  //           form.setAttribute("hidden", true);
-  //           complete.removeAttribute("hidden");
-  //           complete.scrollIntoView({
-  //             behaviour: "smooth",
-  //             block: "center"
-  //           });
-  //         } else if (res.status == 422) {
-  //           res.text().then(text => {
-  //             submitSpinner.setAttribute("hidden", true);
-  //             submitButton.removeAttribute("hidden");
-  //             submitError.innerText = text;
-  //             submitError.removeAttribute("hidden");
-  //             submitError.scrollIntoView({
-  //               behaviour: "smooth",
-  //               block: "center"
-  //             });
-  //             submitLock = false;
-  //           })
-  //         } else if (res.status == 400) {
-  //           console.log("Probably a CSRF error?")
-  //         }
-  //       })
-  //   }
-  // }
 
   form.onsubmit = async function (ev) {
     ev.preventDefault();

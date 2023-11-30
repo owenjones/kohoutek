@@ -1,7 +1,7 @@
 <div id="sign-up" class="uk-section uk-section-primary uk-height-viewport avoid-sticky-nav uk-preserve-color">
   <div class="uk-container uk-container-xsmall">
     <div class="uk-light">
-      <h1 class="uk-text-center">Sign up for Kohoutek {{ settings()->get('year') }}</h1>
+      <h1 class="uk-text-center">Sign up for Kohoutek</h1>
       <p>
         Kohoutek is open to Scouts in <a href="https://avonscouts.org.uk/" target="_blank"
           rel="noreferrer nofollow">Avon</a> County, and Guides in <a href="https://www.girlguidingbsg.org.uk/"
@@ -15,9 +15,7 @@
         Please read the entry information and rules below before signing up.
       </p>
       <p>
-        Each group only needs to sign up for Kohoutek once, you can then enter multiple teams.</p>
-      <p>
-        Groups can enter up to {{ $teamsAllowed }} initially, with additional teams being offered to groups in the new
+        Groups can enter {{ $teamsAllowed }} initially, with additional teams being offered to groups in the new
         year.
       </p>
     </div>
