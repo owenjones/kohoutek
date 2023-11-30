@@ -10,7 +10,6 @@ services:
       - 'host.docker.internal:host-gateway'
     ports:
       - '${APP_PORT:-80}:80'
-      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     environment:
       WWWUSER: '${WWWUSER}'
       LARAVEL_SAIL: 1
@@ -20,20 +19,21 @@ services:
     volumes:
       - '.:/var/www/html'
     networks:
-      - sail
+      - kohoutek
       - mysql
       - mailpit
     depends_on:
       - redis
       - memcached
+
   redis:
     image: 'redis:alpine'
     ports:
       - '${FORWARD_REDIS_PORT:-6379}:6379'
     volumes:
-      - 'sail-redis:/data'
+      - 'kohoutek-redis:/data'
     networks:
-      - sail
+      - kohoutek
     healthcheck:
       test:
         - CMD
@@ -41,20 +41,22 @@ services:
         - ping
       retries: 3
       timeout: 5s
+
   memcached:
     image: 'memcached:alpine'
     ports:
       - '${FORWARD_MEMCACHED_PORT:-11211}:11211'
     networks:
-      - sail
+      - kohoutek
 
 networks:
-  sail:
+  kohoutek:
     driver: bridge
   mysql:
     external: true
   mailpit:
     external: true
+
 volumes:
-  sail-redis:
+  kohoutek-redis:
     driver: local
