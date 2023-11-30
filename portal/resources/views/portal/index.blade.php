@@ -5,8 +5,8 @@
     <table class="uk-table uk-table-responsive uk-table-middle uk-table-striped">
       <tbody>
         <tr>
-          <th class="uk-table-shrink">Entry ID</th>
-          <td>{{ $entry->id }}</td>
+          <th>Group/Unit</th>
+          <td>{{ $entry->group }}</td>
         </tr>
         @if ($entry->troop)
           <tr>
@@ -14,10 +14,6 @@
             <td>{{ $entry->troop }}</td>
           </tr>
         @endif
-        <tr>
-          <th>Group/Unit</th>
-          <td>{{ $entry->group }}</td>
-        </tr>
         <tr>
           <th>District/Division</td>
           <td>{{ $entry->district()->name }}</td>
