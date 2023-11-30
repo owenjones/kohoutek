@@ -3,6 +3,7 @@
 @section('body')
   @include('root.section.menu')
   @include('root.section.home')
+  @include('root.section.about')
 
   @if ($signupsOpen)
     @if ($spacesAvailable)
@@ -14,7 +15,6 @@
     @include('root.section.signup-closed')
   @endif
 
-  @include('root.section.about')
   @include('root.section.history')
   @include('root.section.footer')
 @endsection

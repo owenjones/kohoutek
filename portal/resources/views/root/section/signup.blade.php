@@ -12,11 +12,11 @@
         Counties.
       </p>
       <p>
-        Please read the entry information and rules below before signing up.
+        Please read the <a href="#about">entry information</a> and <a href="#rules">rules</a> above before signing up.
       </p>
       <p>
         Groups can enter {{ $teamsAllowed }} initially, with additional teams being offered to groups in the new
-        year.
+        year first-come first-served if spaces remain.
       </p>
     </div>
 
