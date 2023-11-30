@@ -3,7 +3,7 @@
   <div class="uk-width-1-1@m">
     <h2 class="uk-text-center uk-text-left@m">Updates</h2>
     @if ($updates->count() < 1)
-      <p>We haven't sent any updates to teams yet, when we do a copy of them will appear here as well.</p>
+      <p>We haven't sent any updates to teams yet. When we do, a copy of them will appear here as well.</p>
     @endif
     @foreach ($updates as $update)
       <div class="uk-margin" uk-grid>
