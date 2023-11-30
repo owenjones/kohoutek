@@ -15,7 +15,7 @@ class RootController extends Controller
 {
     public function index()
     {
-      $teams = SpellNumber::value(settings()->get('max_group_teams'))->toLetters() . " " . Str::plural('team', settings()->get('max_group_teams'));
+      $teams = SpellNumber::value(settings()->get('max_group_teams', 0))->toLetters() . " " . Str::plural('team', settings()->get('max_group_teams'));
 
       return view('root.index', [
         'avon' => County::where('code', 'avon')->first(),

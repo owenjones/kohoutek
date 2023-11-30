@@ -76,7 +76,7 @@ class PortalController extends Controller
   {
     $entry = Auth::guard('entry')->user();
     $canAddTeam = (count($entry->teams) < settings()->get('max_group_teams')) && (Team::count() < settings()->get('max_teams'));
-    $teams = SpellNumber::value(settings()->get('max_group_teams'))->toLetters() . " " . Str::plural('team', settings()->get('max_group_teams'));
+    $teams = SpellNumber::value(settings()->get('max_group_teams', 0))->toLetters() . " " . Str::plural('team', settings()->get('max_group_teams'));
 
     return view('portal.teams', [
       'entry' => $entry,
