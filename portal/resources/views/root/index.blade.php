@@ -1,5 +1,8 @@
 @extends('root.template')
-
+@push('head-js')
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  {!! htmlScriptTagJsApi() !!}
+@endpush
 @section('body')
   @include('root.section.menu')
   @include('root.section.home')

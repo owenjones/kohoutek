@@ -36,7 +36,8 @@ class RootController extends Controller
         'troop' => ['nullable', 'max:255'],
         'name' => ['required', 'max:255'],
         'email' => ['required', 'max:255', 'confirmed', 'email', 'unique:entries,contact_email'],
-        'rules' => ['required', 'accepted']
+        'rules' => ['required', 'accepted'],
+        recaptchaFieldName() => recaptchaRuleName(),
       ],
       [
         'district.required' => 'You need to select which District/Division you\'re in',
@@ -52,7 +53,8 @@ class RootController extends Controller
         'email.confirmed' => 'You need to confirm your contact email address',
         'email.email' => 'You need to enter a valid contact email address',
         'email.unique' => 'This email address has already been used to sign up for Kohoutek',
-        'rules.accepted' => 'You need to accept the Kohoutek entry information and rules'
+        'rules.accepted' => 'You need to accept the Kohoutek entry information and rules',
+        'recaptcha' => 'You need to prove you\'re not a robot to register'
       ])->validate();
 
       if($request->county == "avon")
