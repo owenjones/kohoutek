@@ -22,6 +22,7 @@
 
     <form id="sign-up-form" method="POST" action="{{ route('root.sign-up-post') }}">
       @csrf
+      {!! RecaptchaV3::field('signup') !!}
       <div class="uk-card uk-card-default uk-card-body">
         <h3 class="uk-card-title">Are you a member of Scouting or Guiding?</h3>
         <fieldset class="uk-fieldset">
@@ -173,8 +174,8 @@
                 rules</a>.</label>
           </div>
 
-          <button id="signup-submit" class="uk-button uk-button-primary uk-button-large uk-width-1-1"
-            type="submit">Submit Entry</button>
+          <input type="submit" id="signup-submit" class="uk-button uk-button-primary uk-button-large uk-width-1-1"
+            value="Submit Entry" />
           <button id="signup-processing" class="uk-button uk-button-primary uk-button-large uk-width-1-1" uk-spinner
             hidden></button>
         </fieldset>

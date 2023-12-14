@@ -1,7 +1,6 @@
 @extends('root.template')
 @push('head-js')
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  {!! htmlScriptTagJsApi() !!}
+  {!! RecaptchaV3::initJs() !!}
 @endpush
 @section('body')
   @include('root.section.menu')
