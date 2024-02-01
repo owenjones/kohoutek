@@ -31,8 +31,7 @@
         <p>
           Groups wishing to take part need to register using the sign up form below, which will allocate them a
           team. Each group can initially enter one team. If space allows groups will be able to enter additional teams
-          in the new
-          year on a first-come first-served basis, if spaces allow.
+          in the new year on a first-come first-served basis.
         </p>
 
         <h3>Information for leaders</h3>
