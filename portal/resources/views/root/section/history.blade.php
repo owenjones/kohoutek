@@ -22,13 +22,13 @@
       us celebrating the 35th Kohoutek event, with Kohoutek hosting more than 300 young people!
     </p>
     <h4>Coverage</h4>
-    <p>2019 - Epigram (University of Bristol Students' newspaper): <a
-        href="https://epigram.org.uk/2019/03/18/kohoutek-2019/" target="_blank" rel="nofollow noopener"><em>Student
+    <p>2019 - Epigram (University of Bristol Students' newspaper): <a href="https://epigram.org.uk/kohoutek-2019/"
+        target="_blank" rel="nofollow noopener"><em>Student
           Scouts and Guides organise mammoth event for local children named after the Kohoutek comet</em></a>.
     </p>
 
-    <p>2020 - Avon Scout Radio: <a
+    {{-- <p>2020 - Avon Scout Radio: <a
         href="https://www.facebook.com/media/set/?vanity=avonscoutradio&set=a.1765261640277612" target="_blank"
-        rel="nofollow noopener">Event photos</a> and live broadcast.</p>
+        rel="nofollow noopener">Event photos</a> and live broadcast.</p> --}}
   </div>
 </div>
