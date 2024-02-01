@@ -10,9 +10,9 @@
           Guides and Scouts society (UOBGAS).
         </p>
         <p>
-          Teams of five will take part in 20 themed bases, scoring points depending on how well they attempt
-          these and how they work together as a team. The team which scores the most challenge points overall will win
-          the <strong>Kohoutek Trophy</strong>, and the team which worked together best the <strong>Teamwork
+          Teams of five take part in 20 themed bases, scoring points depending on how well they attempt
+          these and how they work together as a team. The team which scores the most challenge points overall wins
+          the <strong>Kohoutek Trophy</strong>, and the team which worked together best wins the <strong>Teamwork
             Spoon</strong>.
         </p>
         <p>
@@ -29,10 +29,10 @@
       <div class="uk-width-3-5@l">
         <h3>Registration</h3>
         <p>
-          Groups wishing to take part need to register using the sign up form above, which will allocate them a
-          team. Each group can initially enter one team. If space allows groups will be able additional teams in the new
-          year on a
-          first-come first-served basis, if spaces allow.
+          Groups wishing to take part need to register using the sign up form below, which will allocate them a
+          team. Each group can initially enter one team. If space allows groups will be able to enter additional teams
+          in the new
+          year on a first-come first-served basis, if spaces allow.
         </p>
 
         <h3>Information for leaders</h3>
