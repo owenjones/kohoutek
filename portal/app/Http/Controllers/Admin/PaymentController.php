@@ -27,7 +27,7 @@ class PaymentController extends Controller
   public function outstanding()
   {
     return view('admin.payments.outstanding', [
-      'teams' => Team::where('payment_received', false)->get()
+      'teams' => Team::where('payment_received', false)->orderBy('entry_id')->get()
     ]);
   }
 }
