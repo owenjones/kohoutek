@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\{
   AuthController,
   EntryController,
   RootController as AdminRootController,
+  PaymentController,
   UserController,
   SettingsController,
   UpdateController,
@@ -71,6 +72,11 @@ Route::prefix('admin')->group(function () {
       Route::match(['get', 'post'], '/entry/{id}/chase', 'chase')->name('admin.entry.chase');
       Route::match(['get', 'post'], '/entry/{id}/cancel', 'cancel')->name('admin.entry.cancel');
       Route::match(['get', 'post'], '/entry/{id}/notes', 'notes')->name('admin.entry.notes');
+    });
+
+    Route::controller(PaymentController::class)->group(function () {
+      Route::get('/payments', 'index')->name('admin.payments');
+      Route::get('/payments/outstanding', 'outstanding')->name('admin.payments.outstanding');
     });
 
     Route::get('/updates', [UpdateController::class, 'index'])->name('admin.updates');

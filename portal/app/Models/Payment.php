@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+
+use App\Models\Entry;
 
 class Payment extends Model
 {
@@ -15,12 +18,18 @@ class Payment extends Model
     'entry_id'
   ];
 
+  public function entry(): Entry
+  {
+    return $this->belongsTo(Entry::class)->first();
+  }
+
+
   protected function amount(): Attribute
   {
     return Attribute::make(
       get: function () {
-        $pence = ($this->amount_pence > 0) ? ("." . $this->amount_pence) : "";
-        return "£" . $this->amount_pounds . $pence;
+        $pence = Str::padLeft($this->amount_pence, 2, '0');
+        return "£" . $this->amount_pounds . "." . $pence;
       }
     );
   }
