@@ -14,6 +14,8 @@
         </div>
       </nav>
 
+      <p>There are <strong>{{ count($teams) }}</strong> teams with outstanding payments.</p>
+
       <table class="uk-table uk-table-responsive uk-table-striped uk-table-middle">
         <thead>
           <tr>

@@ -14,6 +14,8 @@
         </div>
       </nav>
 
+      <p><strong>{{ count($payments) }}</strong> payments received.</p>
+
       <table class="uk-table uk-table-responsive uk-table-striped uk-table-middle">
         <thead>
           <tr>
