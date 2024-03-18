@@ -39,7 +39,7 @@
     <div class="uk-width-1-1 uk-width-1-2@l uk-padding">
       <h3>Kohoutek Trophy</h3>
       <p class="uk-text-meta">The Kohoutek Trophy is awarded to the team who scored the highest number of points
-        throughout the day. Points were awarded for each of the 20 activity bases, the quiz, and the overall task
+        throughout the event. Points were awarded for each of the 20 activity bases, the quiz, and the overall task
         (returning an unbroken glowstick at the end of the day)</p>
       <table class="uk-table uk-table-small uk-table-middle uk-table-striped">
         <thead>
@@ -69,7 +69,8 @@
     <div class="uk-width-1-1 uk-width-1-2@l uk-padding">
       <h3>Teamwork Spoon</h3>
       <p class="uk-text-meta">The Teamwork Spoon is awarded to the team who scored the highest number of teamwork
-        points, based on how well the team worked together during the day. The spoon is a replica of the original
+        points (awarded based on how well the team worked together during the day). The spoon is a replica of the
+        original
         Kohoutek trophy first awarded in 1973</p>
       <table class="uk-table uk-table-small uk-table-middle uk-table-striped">
         <thead>
