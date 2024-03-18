@@ -1,11 +1,11 @@
 @extends('root.template')
-@push('head-js')
+{{-- @push('head-js')
   {!! RecaptchaV3::initJs() !!}
-@endpush
+@endpush --}}
 @section('body')
   @include('root.section.menu')
   @include('root.section.home')
-  @include('root.section.about')
+  {{-- @include('root.section.about')
 
   @if ($signupsOpen)
     @if ($spacesAvailable)
@@ -15,7 +15,7 @@
     @endif
   @else
     @include('root.section.signup-closed')
-  @endif
+  @endif --}}
 
   @include('root.section.history')
   @include('root.section.footer')

@@ -15,7 +15,10 @@ class RootController extends Controller
 {
     public function index()
     {
-      $teams = SpellNumber::value(settings()->get('max_group_teams', 0))->toLetters() . " " . Str::plural('team', settings()->get('max_group_teams'));
+      $numberAllowed = SpellNumber::value(settings()->get('max_group_teams', 0))->toLetters() . " " . Str::plural('team', settings()->get('max_group_teams'));
+      
+      $trophy = Team::where('base_score', '>', 0)->orderBy('base_score', 'desc')->get();
+      $spoon = Team::where('teamwork_score', '>', 0)->orderBy('teamwork_score', 'desc')->get();
 
       return view('root.index', [
         'avon' => County::where('code', 'avon')->first(),
@@ -23,7 +26,9 @@ class RootController extends Controller
         'sn' => County::where('code', 'sn')->first(),
         'signupsOpen' => settings()->get('signup_open', false),
         'spacesAvailable' => (Team::count() < settings()->get('max_teams')),
-        'teamsAllowed' => $teams,
+        'teamsAllowed' => $numberAllowed,
+        'trophyScores' => $trophy,
+        'spoonScores' => $spoon,
       ]);
     }
 
