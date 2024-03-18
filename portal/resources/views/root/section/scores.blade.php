@@ -4,8 +4,8 @@
       <div class="uk-background-primary uk-padding-small uk-light uk-flex uk-flex-column uk-flex-around">
         <h1 class="uk-margin-small-bottom uk-heading-medium">🥇</h1>
         <div>
-          <h3 class="uk-margin-small-top uk-margin-small-bottom">{{ $trophyScores[0]->name }}</h3>
-          <h4 class="uk-margin-remove">{{ $trophyScores[0]->code }}</h4>
+          <h3 class="uk-margin-small-top uk-margin-small-bottom">{{ $trophyScores[0]->code }}</h3>
+          <h4 class="uk-margin-remove">{{ $trophyScores[0]->name }}</h4>
           <p>{{ $trophyScores[0]->base_score }} points</p>
         </div>
       </div>
@@ -15,8 +15,8 @@
       <div class="uk-background-secondary uk-padding-small uk-light uk-flex uk-flex-column uk-flex-around">
         <h1 class="uk-margin-small-bottom uk-heading-medium">🥈</h1>
         <div>
-          <h3 class="uk-margin-small-top uk-margin-small-bottom">{{ $trophyScores[1]->name }}</h3>
-          <h4 class="uk-margin-remove">{{ $trophyScores[1]->code }}</h4>
+          <h3 class="uk-margin-small-top uk-margin-small-bottom">{{ $trophyScores[1]->code }}</h3>
+          <h4 class="uk-margin-remove">{{ $trophyScores[1]->name }}</h4>
           <p>{{ $trophyScores[1]->base_score }} points</p>
         </div>
       </div>
@@ -26,8 +26,8 @@
       <div class="uk-background-secondary uk-padding-small uk-light mt-4 uk-flex uk-flex-column uk-flex-around">
         <h1 class="uk-margin-small-bottom uk-heading-medium">🥉</h1>
         <div>
-          <h3 class="uk-margin-small-top uk-margin-small-bottom">{{ $trophyScores[2]->name }}</h3>
-          <h4 class="uk-margin-remove">{{ $trophyScores[2]->code }}</h4>
+          <h3 class="uk-margin-small-top uk-margin-small-bottom">{{ $trophyScores[2]->code }}</h3>
+          <h4 class="uk-margin-remove">{{ $trophyScores[2]->name }}</h4>
           <p>{{ $trophyScores[2]->base_score }} points</p>
         </div>
       </div>
