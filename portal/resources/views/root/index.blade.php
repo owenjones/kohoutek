@@ -5,7 +5,7 @@
 @section('body')
   @include('root.section.menu')
   @include('root.section.home')
-  @include('root.section.about')
+  {{-- @include('root.section.about') --}}
 
   {{-- @if ($signupsOpen)
     @if ($spacesAvailable)

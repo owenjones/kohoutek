@@ -13,9 +13,9 @@
           <li>
             <a href="#scores" class="kohoutek-illuminate">Scores</a>
           </li>
-          <li>
+          {{-- <li>
             <a href="#about">About</a>
-          </li>
+          </li> --}}
           {{-- <li>
             <a href="#sign-up">Sign Up</a>
           </li> --}}
@@ -44,9 +44,9 @@
         <li>
           <a href="#scores" class="kohoutek-mobile-illuminate">Scores</a>
         </li>
-        <li>
+        {{-- <li>
           <a href="#about">About</a>
-        </li>
+        </li> --}}
         {{-- <li>
           <a href="#sign-up" class="kohoutek-mobile-illuminate">Sign Up</a>
         </li> --}}
