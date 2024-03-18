@@ -34,7 +34,7 @@
     </div>
   </div>
 </div>
-<div class="uk-container">
+<div class="uk-container uk-container-large">
   <div class="uk-grid-collapse uk-background-default" uk-grid>
     <div class="uk-width-1-1 uk-width-1-2@l uk-padding">
       <h3>Kohoutek Trophy</h3>
@@ -42,21 +42,28 @@
         throughout the day. Points were awarded for each of the 20 activity bases, the quiz, and the overall task
         (returning an unbroken glowstick at the end of the day)</p>
       <table class="uk-table uk-table-small uk-table-middle uk-table-striped">
-        @foreach ($trophyScores as $team)
-          <tr>
-            <td>
-              @if ($loop->index > 0 && $trophyScores[$loop->index - 1]->base_score == $team->base_score)
-                -
-              @else
-                {{ $loop->index + 1 }}
-              @endif
-            </td>
-            <td>
-              {{ $team->name }}<br />
-            </td>
-            <td>{{ $team->base_score }}</td>
-          </tr>
-        @endforeach
+        <thead>
+          <th class="uk-table-shrink">#</th>
+          <th class="uk-table-expand">Team</th>
+          <th class="uk-table-shrink">Points</th>
+        </thead>
+        <tbody>
+          @foreach ($trophyScores as $team)
+            <tr>
+              <td>
+                @if ($loop->index > 0 && $trophyScores[$loop->index - 1]->base_score == $team->base_score)
+                  -
+                @else
+                  {{ $loop->index + 1 }}
+                @endif
+              </td>
+              <td>
+                <strong>{{ $team->code }}</strong><br />{{ $team->name }}
+              </td>
+              <td>{{ $team->base_score }}</td>
+            </tr>
+          @endforeach
+        </tbody>
       </table>
     </div>
     <div class="uk-width-1-1 uk-width-1-2@l uk-padding">
@@ -65,21 +72,28 @@
         points, based on how well the team worked together during the day. The spoon is a replica of the original
         Kohoutek trophy first awarded in 1973</p>
       <table class="uk-table uk-table-small uk-table-middle uk-table-striped">
-        @foreach ($spoonScores as $team)
-          <tr>
-            <td>
-              @if ($loop->index > 0 && $spoonScores[$loop->index - 1]->teamwork_score == $team->teamwork_score)
-                -
-              @else
-                {{ $loop->index + 1 }}
-              @endif
-            </td>
-            <td>
-              {{ $team->name }}<br />
-            </td>
-            <td>{{ $team->teamwork_score }}</td>
-          </tr>
-        @endforeach
+        <thead>
+          <th class="uk-table-shrink">#</th>
+          <th class="uk-table-expand">Team</th>
+          <th class="uk-table-shrink">Points</th>
+        </thead>
+        <tbody>
+          @foreach ($spoonScores as $team)
+            <tr>
+              <td>
+                @if ($loop->index > 0 && $spoonScores[$loop->index - 1]->teamwork_score == $team->teamwork_score)
+                  -
+                @else
+                  {{ $loop->index + 1 }}
+                @endif
+              </td>
+              <td>
+                <strong>{{ $team->code }}</strong><br />{{ $team->name }}
+              </td>
+              <td>{{ $team->teamwork_score }}</td>
+            </tr>
+          @endforeach
+        </tbody>
       </table>
     </div>
   </div>
