@@ -11,14 +11,8 @@
             <a href="#home">Home</a>
           </li>
           <li>
-            <a href="#scores" class="kohoutek-illuminate">Scores</a>
+            <a href="#future" class="kohoutek-illuminate">Future</a>
           </li>
-          {{-- <li>
-            <a href="#about">About</a>
-          </li> --}}
-          {{-- <li>
-            <a href="#sign-up">Sign Up</a>
-          </li> --}}
           <li>
             <a href="#history">History</a>
           </li>
