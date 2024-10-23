@@ -36,7 +36,7 @@
       </p>
       <p>
         <strong>
-          Should any students who are part of the University of Bristol, or University of the West of England affiliated
+          If any students who are part of the University of Bristol, or University of the West of England affiliated
           Student Scout and Guide (SSAGO) clubs wish to take on the event, get in touch and we'll pass on everything we
           can (and probably lend a hand too!) - contact@kohoutek.co.uk
         </strong>
