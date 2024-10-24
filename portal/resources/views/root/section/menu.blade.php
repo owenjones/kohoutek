@@ -36,14 +36,8 @@
           <a href="#home">Home</a>
         </li>
         <li>
-          <a href="#scores" class="kohoutek-mobile-illuminate">Scores</a>
+          <a href="#future" class="kohoutek-mobile-illuminate">Future</a>
         </li>
-        {{-- <li>
-          <a href="#about">About</a>
-        </li> --}}
-        {{-- <li>
-          <a href="#sign-up" class="kohoutek-mobile-illuminate">Sign Up</a>
-        </li> --}}
         <li>
           <a href="#history">History</a>
         </li>
