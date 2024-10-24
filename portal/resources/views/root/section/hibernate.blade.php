@@ -42,11 +42,11 @@
         </strong>
       </p>
       <p class="uk-text-center">
-        <iframe width="560" height="315"
+        <iframe height="375"
           src="https://www.youtube.com/embed/N_dUmDBfp6k?si=Bgobk_ai9CHHU7xn&amp;controls=0&amp;start=82"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          class="uk-responsive uk-width-1-1" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </p>
     </div>
   </div>
